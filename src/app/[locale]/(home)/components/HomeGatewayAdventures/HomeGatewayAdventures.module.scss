@@ -183,8 +183,11 @@
     min-height: 412px;
     padding: 8px;
     border-radius: 16px;
-    background:
-      linear-gradient(180deg, rgba(253, 137, 114, 0.2) 0%, rgba(255, 191, 101, 0.2) 100%),
+    background: linear-gradient(
+        180deg,
+        rgba(253, 137, 114, 0.2) 0%,
+        rgba(255, 191, 101, 0.2) 100%
+      ),
       #efeeea;
 
     @include tablet {
@@ -233,7 +236,11 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.42) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.18) 0%,
+      rgba(0, 0, 0, 0.42) 100%
+    );
   }
 
   &__cardTop {
@@ -321,6 +328,16 @@
     }
   }
 
+  button {
+    justify-content: space-between;
+    span {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+  }
+
   &__cartButton {
     display: flex;
     align-items: center;
@@ -333,13 +350,6 @@
     background: #f25a28;
     color: #f9faf5;
     cursor: pointer;
-
-    span {
-      font-family: var(--font-syne), sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-    }
   }
 
   &__cartArrow {

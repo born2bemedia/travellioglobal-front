@@ -52,7 +52,7 @@ export const CookiePopup = () => {
         .
       </p>
       <div className={styles.buttons}>
-        <Button type="button" variant="blue" onClick={handleAccept}>
+        <Button type="button" variant="orange" onClick={handleAccept}>
           {t("accept", { fallback: "Accept" })}
         </Button>
         <Button type="button" variant="bordered" onClick={handleDecline}>

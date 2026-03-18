@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { useCartStore } from "@/features/cart";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
+import { Button } from "@/shared/ui/kit/button/Button";
 
 import styles from "./HomeGatewayAdventures.module.scss";
 
@@ -318,9 +319,9 @@ export const HomeGatewayAdventures = () => {
                           {tour.price}
                         </p>
 
-                        <button
+                        <Button
                           type="button"
-                          className={styles.home_gateway__cartButton}
+                          variant="orange"
                           onClick={() => handleAddToCart(tour)}
                         >
                           <span>
@@ -332,7 +333,7 @@ export const HomeGatewayAdventures = () => {
                           >
                             ›
                           </span>
-                        </button>
+                        </Button>
                       </div>
                     </article>
                   </div>
