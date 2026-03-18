@@ -15,7 +15,7 @@ export const Button = ({
   target,
 }: {
   children: React.ReactNode;
-  variant: "orange" | "blue" | "bordered" | "black";
+  variant: "orange" | "blue" | "bordered" | "black" | "white";
   url?: string;
   type: "button" | "submit" | "link";
   service?: string;
