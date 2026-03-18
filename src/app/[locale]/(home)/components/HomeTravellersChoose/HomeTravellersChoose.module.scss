@@ -1,0 +1,164 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.home_travellers_choose {
+  padding: 100px 0 0;
+
+  @include tablet {
+    padding-top: 56px;
+  }
+
+  &__banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    min-height: 420px;
+    padding: 32px;
+
+    @include tablet {
+      padding: 28px 24px;
+      min-height: 0;
+    }
+
+    @include mobile {
+      padding: 22px 18px;
+      border-radius: 20px;
+    }
+  }
+
+  &__media,
+  &__overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__media {
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.34) 100%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 435px;
+    gap: 24px;
+    min-height: 356px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 200px;
+
+    @include tablet {
+      gap: 40px;
+    }
+
+    @include mobile {
+      gap: 28px;
+    }
+  }
+
+  &__headline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #f9faf5;
+
+    h2 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 54px;
+      font-weight: 500;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+
+      @include tablet {
+        font-size: 44px;
+      }
+
+      @include mobile {
+        font-size: 34px;
+      }
+    }
+
+    p {
+      max-width: 702px;
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.04;
+
+      @include tablet {
+        font-size: 24px;
+      }
+
+      @include mobile {
+        font-size: 19px;
+      }
+    }
+  }
+
+  &__copy strong {
+    max-width: 255px;
+    color: #fffdf1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.05;
+
+    @include tablet {
+      font-size: 26px;
+    }
+
+    @include mobile {
+      font-size: 22px;
+    }
+  }
+
+  &__highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-self: end;
+
+    @include tablet {
+      align-self: stretch;
+    }
+  }
+
+  &__highlight {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.85);
+
+    @include tablet {
+      padding: 12px 0;
+    }
+
+    p {
+      color: #f9faf5;
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.25;
+
+      @include tablet {
+        font-size: 18px;
+      }
+
+      @include mobile {
+        font-size: 17px;
+      }
+    }
+  }
+}

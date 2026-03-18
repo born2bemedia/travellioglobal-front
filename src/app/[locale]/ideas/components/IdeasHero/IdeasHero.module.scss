@@ -1,0 +1,59 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.ideas_hero {
+  padding: 80px 0;
+  &__content {
+    display: flex;
+    align-items: stretch;
+    gap: var(--opacity-80, 80px);
+    align-self: stretch;
+    @include tablet {
+      flex-direction: column;
+    }
+  }
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    width: 50%;
+    @include tablet {
+      width: 100%;
+    }
+    h1 {
+      color: var(--color-black-solid, #000);
+
+      /* cabinet grotesk/80 */
+      font-family: var(--font-cabinet-grotesk);
+      font-size: 80px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 120%; /* 96px */
+      letter-spacing: var(--letter-spacing--0_5, -0.5px);
+      @include tablet {
+        font-size: 40px;
+      }
+    }
+    p {
+      color: var(--color-black-solid, #000);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%; /* 22.4px */
+      letter-spacing: var(--letter-spacing--0_25, -0.25px);
+    }
+  }
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    @include tablet {
+      width: 100%;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

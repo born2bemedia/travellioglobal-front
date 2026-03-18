@@ -1,0 +1,41 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.button {
+  color: var(--color-blue-8, #000829);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
+  letter-spacing: var(--letter-spacing--0_25, -0.25px);
+  display: flex;
+  padding: 10px 16px 10px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3.12px;
+  background: var(--color-white-solid, #fff);
+  border: 1px solid;
+  @include tablet {
+    font-size: 13px;
+    padding: 10px;
+  }
+  &.white {
+    background: var(--color-white-solid, #fff);
+    color: var(--color-blue-8, #000829);
+    border-color: var(--color-blue-8, #fff);
+  }
+  &.blue {
+    background: #384CE3;
+    color: var(--color-white-solid, #fff);
+    border-color: #384CE3;
+  }
+  &.bordered {
+    background: transparent;
+    color: var(--color-blue-8, #000829);
+    border-color: var(--color-blue-8, #000829);
+  }
+  &.black {
+    background: var(--color-blue-8, #000829);
+    color: var(--color-white-solid, #fff);
+    border-color: var(--color-blue-8, #000829);
+  }
+}

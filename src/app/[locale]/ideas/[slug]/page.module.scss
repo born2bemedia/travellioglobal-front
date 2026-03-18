@@ -1,0 +1,55 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+.postTitle {
+  padding: 40px 0;
+  width: 100%;
+  background: linear-gradient(to bottom, #f1f6fd 0%, #fff 100%);
+  > div {
+    width: 100%;
+  }
+  a {
+    color: var(--color-grey-11, #1c1b1c);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: var(--letter-spacing--0_25, -0.25px);
+    padding: 8px 16px;
+    border-radius: 3.12px;
+    background: var(--color-white-02, rgba(255, 255, 255, 0));
+    box-shadow: 0 0 0 1px rgba(28, 27, 28, 0.3) inset;
+  }
+  h1 {
+    color: var(--color-black-solid, #000);
+    margin-top: 20px;
+    font-family: var(--font-cabinet-grotesk);
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 120%; /* 48px */
+    letter-spacing: var(--letter-spacing--0_25, -0.25px);
+    @include tablet {
+      font-size: 36px;
+    }
+  }
+  &__info {
+    max-width: 800px;
+    @include tablet {
+      max-width: 100%;
+    }
+    p {
+      color: var(--color-black-solid, #000);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: var(--letter-spacing--0_5, -0.5px);
+    }
+  }
+}
+
+.postContent {
+  padding: 80px 0;
+  @include mobile {
+    padding: 40px 0;
+  }
+}

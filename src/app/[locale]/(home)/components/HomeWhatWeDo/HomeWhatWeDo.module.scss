@@ -1,0 +1,134 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.home_what_we_do {
+  padding: 100px 0 0;
+
+  @include tablet {
+    padding-top: 56px;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 32px;
+    align-items: stretch;
+    padding: 32px;
+    border-radius: 24px;
+    background: #eb5e28;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+  }
+
+  &__media {
+    position: relative;
+    min-height: 530px;
+    padding: 24px;
+    border-radius: 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 53%, rgba(0, 0, 0, 0.5) 100%);
+      z-index: 1;
+    }
+
+    @include tablet {
+      min-height: 420px;
+      border-radius: 28px;
+    }
+
+    @include mobile {
+      min-height: 360px;
+      padding: 18px;
+    }
+  }
+
+  &__media_image {
+    position: absolute;
+    inset: 0;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__media_copy {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    color: #fffdf1;
+
+    h2 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 0.95;
+
+      @include desktop {
+        font-size: 46px;
+      }
+
+      @include mobile {
+        font-size: 34px;
+      }
+    }
+
+    p {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1;
+
+      @include mobile {
+        font-size: 24px;
+      }
+    }
+  }
+
+  &__features {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 24px;
+    color: #fffdf1;
+  }
+
+  &__feature {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.72);
+
+    h3 {
+      margin-bottom: 4px;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+
+      @include mobile {
+        font-size: 26px;
+      }
+    }
+
+    p {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.35;
+
+      @include mobile {
+        font-size: 15px;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.thankYou {
+  padding: 80px 0;
+  background: #f1f6fd;
+  @include tablet {
+  }
+  &__image_desktop {
+    @include mobile {
+      display: none;
+    }
+  }
+  &__image_mobile {
+    display: none;
+    @include mobile {
+      display: block;
+    }
+  }
+}

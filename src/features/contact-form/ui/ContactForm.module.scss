@@ -1,0 +1,391 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.contactForm {
+  width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+
+    .formNote {
+      color: rgba(204, 204, 204, 0.3);
+      text-align: center;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      margin-top: -12px;
+    }
+
+    .formGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      width: 100%;
+
+      label {
+        color: #ccc;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+      }
+
+      .required {
+        color: #ff2d30;
+        margin-left: 4px;
+      }
+
+      .optional {
+        color: rgba(204, 204, 204, 0.3);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+      }
+
+      .descriptionPlaceholder {
+        color: rgba(204, 204, 204, 0.3);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+      }
+
+      input,
+      textarea,
+      select {
+        display: flex;
+        height: 38px;
+        padding: 10px 16px;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        transition: border-color 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
+        color: #fff;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        &:focus {
+          outline: none;
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        option {
+          background: #1a1a1a;
+          color: #fff;
+        }
+      }
+
+      select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        padding-right: 40px;
+      }
+
+      .errorInput {
+        border-color: rgba(255, 62, 71, 0.30);
+      }
+
+      .error {
+        color: #ff2d30;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 4px;
+      }
+
+      &.textarea {
+        textarea {
+          min-height: 120px;
+          resize: vertical;
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
+}
+
+.fileUpload {
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &.dragActive {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    svg {
+      width: 48px;
+      height: 48px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  &Info {
+    color: rgba(204, 204, 204, 0.3);
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .removeFile {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #ff2d30;
+    }
+  }
+}
+
+.select {
+  width: 100%;
+  z-index: 1;
+  .select__control {
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    box-shadow: none;
+
+    &:hover {
+      border-color: #faf9f8;
+    }
+
+    &--is-focused {
+      border-color: #4bed7b;
+      box-shadow: none;
+    }
+  }
+
+  .select__value-container {
+    padding: 0 0 0 16px;
+  }
+
+  .select__input-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .select__menu {
+    border-radius: 16px;
+    border: 1px solid #4bed7b;
+    background: var(--White, #fff);
+    box-shadow: 0px 5px 20px 0px rgba(60, 13, 101, 0.07);
+    overflow: hidden;
+    z-index: 1;
+    background-color: #faf9f8;
+  }
+
+  .select__option {
+    z-index: 1;
+    padding: 10px 14px;
+    color: var(--Gray-900, #101828);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    background-color: #faf9f8;
+    cursor: pointer;
+
+    &--is-focused {
+      background-color: #f5f5f5;
+    }
+
+    &--is-selected {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+}
+
+// react-phone-input-2 (dark theme for contact form)
+.phoneInputContainer {
+  width: 100%;
+  font-family: inherit;
+
+  .phoneInput {
+    width: 100% !important;
+  }
+
+  .form-control {
+    width: 100% !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 10px 16px 10px 52px !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: normal;
+    transition: border-color 0.3s ease;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: none;
+    }
+  }
+
+
+}
+
+.phoneInput {
+  padding-left: 40px!important;
+  &.errorInput {
+    border-color: rgba(255, 62, 71, 0.5) !important;
+  }
+}
+
+.contactFormSuccess {
+  background: rgba(4, 2, 19, 0.6);
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__content {
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 507px;
+    max-width: 100%;
+    border: 1px solid #222;
+    background: var(--color-blue-8, #000829);
+    position: relative;
+    img {
+      position: absolute;
+      &.top_left {
+        top: 10px;
+        left: 10px;
+      }
+      &.top_right {
+        top: 10px;
+        right: 10px;
+      }
+      &.bottom_left {
+        bottom: 10px;
+        left: 10px;
+      }
+      &.bottom_right {
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+    h2 {
+      color: #fff;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 110%;
+      text-align: center;
+      @include tablet {
+        font-size: 24px;
+      }
+      span {
+        color: #fff;
+      }
+    }
+    p {
+      color: #fff;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-align: center;
+      margin-bottom: 12px;
+      @include tablet {
+      }
+    }
+  }
+}
+

@@ -1,0 +1,345 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.home_hero {
+  overflow: hidden;
+  background: #fffdf7;
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 88px 0 72px;
+
+    @include tablet {
+      padding: 64px 0 48px;
+    }
+
+    @include tablet {
+      padding: 48px 0 36px;
+    }
+  }
+
+  &__intro {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 903px;
+    text-align: center;
+
+    @include tablet {
+      gap: 18px;
+    }
+
+    @include tablet {
+      gap: 8px;
+    }
+  }
+
+  &__eyebrow {
+    color: #252422;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @include tablet {
+      font-size: 17px;
+    }
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #252422;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+
+    @include tablet {
+      font-size: 68px;
+    }
+
+    @include tablet {
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      gap: 0;
+      padding-bottom: 16px;
+    }
+  }
+
+  &__title_accent {
+    color: #fd8b72;
+
+    @include tablet {
+      color: #eb5e28;
+    }
+  }
+
+  &__description {
+    width: 100%;
+    max-width: 793px;
+    color: #252422;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.35;
+
+    @include tablet {
+      font-size: 17px;
+    }
+
+    @include tablet {
+      font-size: 16px;
+      color: #403d38;
+      text-align: center;
+    }
+  }
+
+  &__gallery {
+    position: relative;
+    width: 100%;
+    min-height: 560px;
+    margin-top: 22px;
+
+    @include tablet {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      min-height: 0;
+      margin-top: 28px;
+    }
+
+    @include tablet {
+      display: block;
+      min-height: 56vw;
+      margin-top: 34px;
+    }
+  }
+
+  &__trail {
+    position: absolute;
+    left: -18%;
+    bottom: -20px;
+    width: 136%;
+    z-index: 0;
+    pointer-events: none;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.9;
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__card {
+    position: absolute;
+    z-index: 1;
+
+    @include tablet {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      max-width: none;
+      min-height: 240px;
+      height: auto;
+    }
+
+    @include tablet {
+      position: absolute;
+      inset: auto;
+      max-width: none;
+      min-height: 0;
+      height: auto;
+    }
+  }
+
+  &__card--cortona {
+    left: 38px;
+    top: 102px;
+    width: 350px;
+    height: 397px;
+
+    .home_hero__card_label {
+      right: -58px;
+      top: 65px;
+
+      @include tablet {
+        left: auto !important;
+        right: -40% !important;
+        top: 14% !important;
+        bottom: auto !important;
+      }
+    }
+
+    @include tablet {
+      left: 0;
+      top: 2.4%;
+      width: 31.8%;
+      height: 64%;
+    }
+  }
+
+  &__card--maldives {
+    left: 223px;
+    top: 220px;
+    width: 341px;
+    height: 341px;
+
+    .home_hero__card_label {
+      right: -58px;
+      bottom: 80px;
+
+      @include tablet {
+        left: -40% !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: 20px !important;
+      }
+    }
+
+    @include tablet {
+      left: 14.7%;
+      top: 37.9%;
+      width: 33.2%;
+      height: 62.1%;
+    }
+  }
+
+  &__card--santorini {
+    right: 110px;
+    top: 228px;
+    width: 392px;
+    height: 392px;
+
+    .home_hero__card_label {
+      left: -16px;
+      top: 100px;
+
+      @include tablet {
+        left: auto !important;
+        top: auto !important;
+        right: -35% !important;
+        bottom: 15% !important;
+      }
+    }
+
+    @include tablet {
+      right: auto;
+      left: 52.1%;
+      top: 30.3%;
+      width: 31.8%;
+      height: 64.9%;
+    }
+  }
+
+  &__card--tetons {
+    right: 0;
+    top: 70px;
+    width: 227px;
+    height: 283px;
+    z-index: 0;
+
+    .home_hero__card_label {
+      left: -26px;
+      top: 10px;
+
+      @include tablet {
+        left: -50% !important;
+        top: 2% !important;
+        right: auto !important;
+        bottom: auto !important;
+      }
+    }
+
+    @include tablet {
+      right: 0;
+      left: auto;
+      top: 0;
+      width: 29.7%;
+      height: 60.7%;
+    }
+  }
+
+  &__card_image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 22px;
+   filter: drop-shadow(0 16px 42px rgba(37, 36, 34, 0.08));
+
+    img {
+      object-fit: cover;
+    }
+
+    @include tablet {
+      border-radius: 14px;
+    }
+  }
+
+  &__card_label {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px 8px 8px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffdf1;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(235, 94, 40, 0.22);
+
+    img {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    span {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    @include tablet {
+      left: 12px !important;
+      right: auto !important;
+      top: 12px !important;
+      bottom: auto !important;
+    }
+
+    @include tablet {
+      padding: 6px 8px 6px 6px;
+      gap: 2px;
+      box-shadow: 0 6px 14px rgba(235, 94, 40, 0.18);
+
+      img {
+        width: 12px;
+        height: 12px;
+      }
+
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}

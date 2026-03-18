@@ -1,0 +1,56 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.empty_cta {
+  padding: 64px 0;
+  @include tablet {
+    padding: 32px 0;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    @include tablet {
+      flex-direction: column;
+    }
+  }
+  &__col {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    @include tablet {
+      width: 100%;
+    }
+    h2 {
+      color: #fff;
+      font-family: Onest;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+    p {
+      color: #ccc;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      margin-bottom: 22px;
+    }
+  }
+  &__image {
+    width: 50%;
+    height: 530px;
+    @include tablet {
+      width: 100%;
+      height: 400px;
+    }
+    video,
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

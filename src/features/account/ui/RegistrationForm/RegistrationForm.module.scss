@@ -1,0 +1,185 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    &_text {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .loginLink {
+    color: #ccc;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  }
+  .formWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    width: 100%;
+
+    label {
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 140%;
+      letter-spacing: -0.25px;
+    }
+
+    .required {
+      color: #ff2d30;
+      margin-left: 4px;
+    }
+
+    input {
+      display: flex;
+      height: 49px;
+      padding: 12px 16px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      transition: border-color 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.05);
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      letter-spacing: -0.5px;
+
+      &:focus {
+        outline: none;
+        border-color: #384ce3;
+      }
+
+      &::placeholder {
+        color: inherit;
+      }
+    }
+
+    .passwordWrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      input {
+        padding-right: 48px;
+        width: 100%;
+      }
+
+      .togglePassword {
+        position: absolute;
+        right: 12px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        transition: color 0.2s ease;
+        width: 24px;
+        height: 24px;
+
+        &:hover {
+          color: #384ce3;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .errorInput {
+      border-color: rgba(255, 62, 71, 0.3);
+    }
+
+    .error {
+      color: #ff2d30;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      margin-top: 4px;
+    }
+  }
+
+  .rootError {
+    color: #ff2d30;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  text-align: center;
+
+  h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #ccc;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  button {
+    width: 100%;
+  }
+}

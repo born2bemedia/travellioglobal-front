@@ -1,0 +1,212 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.home_about_travellio {
+  padding: 100px 0 0;
+  overflow: hidden;
+
+  @include tablet {
+    padding-top: 56px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__intro {
+    position: relative;
+    min-height: 444px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 33px 0;
+
+    @include tablet {
+      min-height: 0;
+      padding: 0;
+    }
+  }
+
+  &__headline {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 822px;
+    text-align: center;
+
+    h2 {
+      display: flex;
+      flex-direction: column;
+      color: #eb5e28;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      line-height: 0.86;
+      letter-spacing: -0.05em;
+
+      @include tablet {
+        font-size: 68px;
+      }
+
+      @include mobile {
+        font-size: 42px;
+        line-height: 0.92;
+      }
+    }
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 522px;
+    color: #47221b;
+    text-align: center;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.35;
+
+    @include tablet {
+      font-size: 17px;
+    }
+
+    @include mobile {
+      font-size: 15px;
+    }
+  }
+
+  &__orbit {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 999px;
+    z-index: 1;
+
+    img {
+      object-fit: cover;
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__orbit--topLeft {
+    left: 0;
+    top: 16px;
+  }
+
+  &__orbit--bottomLeft {
+    left: 123px;
+    top: 244px;
+    width: 150px;
+    height: 200px;
+    border-radius: 500px;
+  }
+
+  &__orbit--topRight {
+    right: 0;
+    top: 0;
+    width: 150px;
+    height: 200px;
+    border-radius: 500px;
+  }
+
+  &__orbit--bottomRight {
+    right: 123px;
+    top: 214px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card,
+  &__arrowCard {
+    position: relative;
+    min-height: 350px;
+    overflow: hidden;
+    border-radius: 50px;
+
+    @include mobile {
+      min-height: 300px;
+      border-radius: 34px;
+    }
+  }
+
+  &__card {
+    img {
+      object-fit: cover;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 25%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+      z-index: 1;
+    }
+  }
+
+  &__card_overlay {
+    position: absolute;
+    inset: auto 24px 24px;
+    z-index: 2;
+    color: #efeeea;
+
+    h3 {
+      margin-bottom: 8px;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 0.95;
+
+      @include mobile {
+        font-size: 34px;
+      }
+    }
+
+    p {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+  }
+
+  &__arrowCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eb5e28;
+    padding: 16px;
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 245px;
+    }
+  }
+}

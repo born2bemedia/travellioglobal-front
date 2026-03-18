@@ -1,0 +1,118 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.cookiePopup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: none; /* hidden by default, shown when .visible */
+  width: 350px;
+  padding: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  z-index: 1000;
+  border-radius: 0;
+  background: #f1f6fd;
+  border: 1px solid #0000001a;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.05);
+
+  max-width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 992px) {
+    right: 16px;
+    bottom: 16px;
+    width: calc(100% - 32px);
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    //background: rgba(75, 237, 123, 0.5);
+    filter: blur(75px);
+  }
+
+  &.visible {
+    display: flex;
+  }
+
+  h2 {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    @media (max-width: 992px) {
+    }
+  }
+
+  p {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-bottom: 12px;
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    @media (max-width: 992px) {
+    }
+
+    button {
+      width: calc(50% - 6px);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 12px 24px;
+      @media (max-width: 992px) {
+        //width: 100%;
+      }
+      &.decline {
+        border-radius: 24px;
+        background: #3b3c3b;
+        display: flex;
+        height: 48px;
+        padding: 0 24px;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      &.accept {
+        border-radius: 24px;
+        background: #4bed7b;
+        display: flex;
+        height: 48px;
+        padding: 0 24px;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.sign_up_hero {
+  padding-top: 80px;
+  background-color: #f1f6fd;
+
+  &__top {
+    margin-bottom: 40px;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__image_desktop {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__image_mobile {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
+  }
+}

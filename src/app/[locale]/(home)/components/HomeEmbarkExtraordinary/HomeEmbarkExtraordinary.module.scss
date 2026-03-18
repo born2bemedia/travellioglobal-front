@@ -1,0 +1,238 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.home_embark_extraordinary {
+  padding: 72px 0 96px;
+
+  @include tablet {
+    padding: 56px 0 72px;
+  }
+
+  @include mobile {
+    padding: 40px 0 56px;
+  }
+}
+
+.home_embark_extraordinary__content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.home_embark_extraordinary__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+
+  h2 {
+    color: #eb5e28;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 0.84;
+    letter-spacing: -0.04em;
+
+    @include tablet {
+      font-size: 72px;
+    }
+
+    @include mobile {
+      font-size: 46px;
+      line-height: 0.92;
+    }
+  }
+}
+
+.home_embark_extraordinary__eyebrow {
+  color: #403d38;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+
+  @include tablet {
+    font-size: 30px;
+  }
+
+  @include mobile {
+    font-size: 24px;
+  }
+}
+
+.home_embark_extraordinary__cards {
+  display: flex;
+  align-items: stretch;
+  gap: 19px;
+  min-width: 0;
+
+  @include tablet {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  @include mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.home_embark_extraordinary__card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 174px;
+  padding: 24px;
+  border-radius: 32px;
+  transition:
+    flex-grow 0.45s ease,
+    flex-basis 0.45s ease,
+    transform 0.3s ease,
+    filter 0.3s ease;
+
+  img {
+    object-fit: cover;
+  }
+
+  @include tablet {
+    flex: 0 0 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+    min-height: 174px;
+    border-radius: 28px;
+  }
+
+  @include mobile {
+    flex: 0 0 132px;
+    min-width: 132px;
+    padding: 18px 16px;
+    border-radius: 24px;
+  }
+}
+
+.home_embark_extraordinary__cardActive {
+  flex: 3 1 0;
+
+  @include tablet {
+    flex: 0 0 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+  }
+
+  @include mobile {
+    flex-basis: 280px;
+    min-width: 280px;
+  }
+}
+
+.home_embark_extraordinary__cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.home_embark_extraordinary__cardCopy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 340px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+  h3,
+  p {
+    color: #f9faf5;
+  }
+
+  h3 {
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.1;
+
+    @include mobile {
+      font-size: 22px;
+    }
+  }
+
+  p {
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+}
+
+.home_embark_extraordinary__cardActive .home_embark_extraordinary__cardCopy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home_embark_extraordinary__arrowCard {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 clamp(112px, 11vw, 144px);
+  min-height: 174px;
+  border: 0;
+  border-radius: 32px;
+  background: #eb5e28;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    opacity: 0.96;
+  }
+
+  img {
+    width: min(112px, 78%);
+    height: auto;
+  }
+
+  @include tablet {
+    flex: 0 0 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+    border-radius: 28px;
+  }
+
+  @include mobile {
+    flex: 0 0 112px;
+    min-width: 112px;
+    border-radius: 24px;
+  }
+}
+
+.home_embark_extraordinary__description {
+  width: 100%;
+  max-width: 563px;
+  margin: 0 auto;
+  color: #403d38;
+  text-align: center;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+
+  @include tablet {
+    font-size: 17px;
+  }
+
+  @include mobile {
+    font-size: 16px;
+  }
+}

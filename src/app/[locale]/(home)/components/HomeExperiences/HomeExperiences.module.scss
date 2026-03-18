@@ -1,0 +1,123 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.home_experiences {
+  padding: 72px 0 96px;
+
+  @include tablet {
+    padding: 56px 0 72px;
+  }
+
+  @include mobile {
+    padding-bottom: 56px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    h2 {
+      color: #eb5e28;
+      text-align: center;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 96px;
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+
+      @include tablet {
+        font-size: 68px;
+      }
+
+      @include mobile {
+        font-size: 42px;
+        line-height: 0.95;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
+    @include tablet {
+      gap: 16px;
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    position: relative;
+    overflow: hidden;
+    min-height: 381px;
+    padding: 24px;
+    border-radius: 32px;
+
+    img {
+      object-fit: cover;
+    }
+
+    @include tablet {
+      min-height: 320px;
+    }
+
+    @include mobile {
+      min-height: 280px;
+      padding: 18px;
+      border-radius: 24px;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.42) 100%);
+  }
+
+  &__cardCopy {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    max-width: 565px;
+    color: #f9faf5;
+
+    h3 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 54px;
+      font-weight: 500;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+
+      @include tablet {
+        font-size: 42px;
+      }
+
+      @include mobile {
+        font-size: 32px;
+      }
+    }
+
+    p {
+      max-width: 370px;
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+
+      @include tablet {
+        font-size: 18px;
+      }
+
+      @include mobile {
+        font-size: 17px;
+      }
+    }
+  }
+}
