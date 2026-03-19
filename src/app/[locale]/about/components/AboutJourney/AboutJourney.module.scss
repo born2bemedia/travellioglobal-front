@@ -1,0 +1,101 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.journey {
+  padding-top: 100px;
+  position: relative;
+  z-index: 1;
+
+  @include tablet {
+    padding-top: 80px;
+  }
+
+  @include mobile {
+    padding-top: 56px;
+  }
+
+  &__card {
+    display: grid;
+    grid-template-columns: minmax(0, 598px) minmax(0, 496px);
+    justify-content: space-between;
+    align-items: end;
+    gap: 32px;
+    padding: 32px;
+    border-radius: 24px;
+    background: #eb5e28;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    @include mobile {
+      padding: 16px;
+    }
+  }
+
+  &__media {
+    position: relative;
+    min-height: 462px;
+    overflow: hidden;
+    border-radius: 32px;
+
+    @include mobile {
+      min-height: 248px;
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 58%,
+      rgba(0, 0, 0, 0.5) 93%
+    );
+  }
+
+  &__title {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    left: 24px;
+    z-index: 1;
+    color: #fffdf1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 0.95;
+    white-space: pre-line;
+
+    @include tablet {
+      font-size: 40px;
+    }
+
+    @include mobile {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.35;
+
+    @include mobile {
+      gap: 16px;
+      font-size: 18px;
+    }
+  }
+}

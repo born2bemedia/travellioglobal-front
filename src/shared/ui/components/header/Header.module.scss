@@ -11,15 +11,14 @@ $ink: #3c2718;
   z-index: 100;
   width: 100%;
   padding: 14px 0;
-  background: rgba(255, 252, 241, 0.92);
-  backdrop-filter: blur(18px);
-  transition:
-    box-shadow 0.3s ease,
-    background-color 0.3s ease;
+  background: rgba(255, 252, 241, 0);
+
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 
   &.scrolled {
     box-shadow: 0 18px 40px rgba(60, 39, 24, 0.12);
-    background: rgba(255, 252, 241, 0.98);
+    background: rgba(255, 252, 241, 0.92);
+    backdrop-filter: blur(18px);
   }
 
   &.open {
@@ -44,7 +43,7 @@ $ink: #3c2718;
       justify-content: space-between;
       gap: 24px;
       @include tablet {
-       align-items: flex-start;
+        align-items: flex-start;
       }
     }
 
@@ -68,9 +67,7 @@ $ink: #3c2718;
         width: 24px;
         height: 24px;
         color: $orange;
-        transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
+        transition: opacity 0.2s ease, transform 0.2s ease;
 
         &:hover {
           opacity: 0.72;
@@ -194,10 +191,7 @@ $ink: #3c2718;
     letter-spacing: -0.02em;
     text-decoration: none;
     white-space: nowrap;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease,
-      transform 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 
     @include desktop {
       padding: 0 7px;
@@ -242,10 +236,8 @@ $ink: #3c2718;
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.02em;
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease;
-      font-family: var(--font-plus-jakarta-sans), sans-serif;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
 
     &:hover {
       opacity: 0.82;
@@ -260,7 +252,7 @@ $ink: #3c2718;
   }
 
   &__utilityChevron {
-    transform: rotate(0) ;
+    transform: rotate(0);
     transform-origin: center;
     transition: transform 0.2s ease;
   }
@@ -280,10 +272,7 @@ $ink: #3c2718;
     visibility: hidden;
     transform: translateY(-8px);
     pointer-events: none;
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease,
-      visibility 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 
     &.open {
       opacity: 1;
@@ -309,9 +298,7 @@ $ink: #3c2718;
     line-height: 1.2;
     text-decoration: none;
     text-align: left;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 
     &:hover {
       background: rgba(235, 94, 40, 0.08);
@@ -349,9 +336,7 @@ $ink: #3c2718;
     letter-spacing: -0.02em;
     text-decoration: none;
     white-space: nowrap;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
+    transition: transform 0.2s ease, background-color 0.2s ease,
       border-color 0.2s ease;
 
     &:hover {
@@ -513,11 +498,9 @@ $ink: #3c2718;
       visibility: hidden;
       pointer-events: none;
       transform: translateX(100%);
-      transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
+      transition: opacity 0.25s ease, transform 0.25s ease,
         visibility 0.25s ease;
-        min-height: 100vh;
+      min-height: 100vh;
     }
 
     &.open {

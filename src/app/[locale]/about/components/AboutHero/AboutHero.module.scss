@@ -1,0 +1,62 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  padding-top: 60px;
+
+  @include tablet {
+    padding-top: 48px;
+  }
+
+  @include mobile {
+    padding-top: 36px;
+  }
+
+  &__decor {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1858 / 1858;
+    pointer-events: none;
+    z-index: 0;
+
+    
+
+    @include tablet {
+      top: -116px;
+      width: min(1200px, 180vw);
+    }
+
+    @include mobile {
+      top: -74px;
+      width: min(712px, 182vw);
+    }
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    color: #eb5e28;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 128px;
+    font-weight: 500;
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    text-align: center;
+
+    @include tablet {
+      font-size: 92px;
+    }
+
+    @include mobile {
+      font-size: 65px;
+      line-height: 0.92;
+    }
+  }
+}

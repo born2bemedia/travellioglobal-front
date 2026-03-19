@@ -1,0 +1,106 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.vision {
+  padding-top: 100px;
+
+  @include tablet {
+    padding-top: 80px;
+  }
+
+  @include mobile {
+    padding-top: 56px;
+  }
+
+  &__card {
+    display: grid;
+    grid-template-columns: minmax(0, 598px) minmax(0, 1fr);
+    gap: 20px;
+    align-items: end;
+    padding: 32px;
+    border: 1px solid #eb5e28;
+    border-radius: 32px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 16px;
+      border-radius: 24px;
+    }
+
+    @include mobile {
+      gap: 16px;
+      padding: 8px;
+    }
+  }
+
+  &__media {
+    position: relative;
+    min-height: 597px;
+    overflow: hidden;
+    border-radius: 32px;
+
+    @include tablet {
+      min-height: 420px;
+      border-radius: 24px;
+    }
+
+    @include mobile {
+      min-height: 228px;
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 597px;
+    color: #eb5e28;
+
+    h2 {
+      text-align: center;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 96px;
+      font-weight: 500;
+      line-height: 0.84;
+    }
+
+    p {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    @include tablet {
+      min-height: 420px;
+
+      h2 {
+        font-size: 64px;
+      }
+
+      p {
+        font-size: 22px;
+      }
+    }
+
+    @include mobile {
+      min-height: 228px;
+      gap: 12px;
+
+      h2 {
+        font-size: 32px;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

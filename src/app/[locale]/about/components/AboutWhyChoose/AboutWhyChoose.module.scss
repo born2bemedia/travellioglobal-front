@@ -1,0 +1,149 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.why {
+  padding-top: 100px;
+
+  @include tablet {
+    padding-top: 80px;
+  }
+
+  @include mobile {
+    padding-top: 56px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+
+    @include mobile {
+      gap: 24px;
+    }
+  }
+
+  &__title {
+    color: #eb5e28;
+    text-align: center;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 0.84;
+
+    @include tablet {
+      font-size: 72px;
+    }
+
+    @include mobile {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__card {
+    position: relative;
+    min-height: 381px;
+    overflow: hidden;
+    padding: 24px;
+    border-radius: 32px;
+
+    @include mobile {
+      min-height: 250px;
+      padding: 16px;
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__imageBooking {
+    object-position: center;
+  }
+
+  &__imageGlobal {
+    object-position: right center;
+  }
+
+  &__imageCurated {
+    object-position: center 40%;
+  }
+
+  &__imageExpert {
+    object-position: center;
+  }
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.42) 17%,
+      rgba(0, 0, 0, 0) 70%
+    );
+
+    @include mobile {
+      background: linear-gradient(
+        186deg,
+        rgba(0, 0, 0, 0) 0.6%,
+        rgba(0, 0, 0, 0.6) 78.7%
+      );
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 565px;
+
+    h3 {
+      color: #f9faf5;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 0.95;
+      white-space: pre-line;
+    }
+
+    p {
+      color: #fffdf1;
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    @include tablet {
+      max-width: 62%;
+
+      h3 {
+        font-size: 42px;
+      }
+    }
+
+    @include mobile {
+      max-width: 100%;
+
+      h3 {
+        font-family: var(--font-plus-jakarta-sans), sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

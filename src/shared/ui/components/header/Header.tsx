@@ -69,7 +69,7 @@ export const Header = () => {
 
   const NAV_ITEMS: readonly HeaderNavItem[] = [
     { key: "home", text: t("home", { fallback: "Home" }), href: "/" },
-    { key: "about", text: t("about", { fallback: "About" }) },
+    { key: "about", text: t("about", { fallback: "About" }), href: "/about" },
     { key: "tours", text: t("tours", { fallback: "Tours" }), href: "/tours" },
     { key: "excursions", text: t("excursions", { fallback: "Excursions" }) },
     { key: "places", text: t("places", { fallback: "Places" }) },
