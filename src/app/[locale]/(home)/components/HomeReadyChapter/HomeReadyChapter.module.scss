@@ -36,16 +36,20 @@
   &__overlay {
     position: absolute;
     inset: 0;
+    border-radius: 32px;
   }
 
   &__background {
+    border-radius: 32px;
     img {
       object-fit: cover;
       object-position: center bottom;
+      border-radius: 32px;
     }
   }
 
   &__overlay {
+    border-radius: 32px;
     background:
       linear-gradient(180deg, rgba(14, 14, 14, 0.16) 0%, rgba(14, 14, 14, 0.06) 35%, rgba(14, 14, 14, 0.42) 100%),
       linear-gradient(1.4deg, rgba(0, 0, 0, 0.5) 24.6%, rgba(0, 0, 0, 0) 50%);

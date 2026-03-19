@@ -70,7 +70,7 @@ export const Header = () => {
   const NAV_ITEMS: readonly HeaderNavItem[] = [
     { key: "home", text: t("home", { fallback: "Home" }), href: "/" },
     { key: "about", text: t("about", { fallback: "About" }) },
-    { key: "tours", text: t("tours", { fallback: "Tours" }) },
+    { key: "tours", text: t("tours", { fallback: "Tours" }), href: "/tours" },
     { key: "excursions", text: t("excursions", { fallback: "Excursions" }) },
     { key: "places", text: t("places", { fallback: "Places" }) },
     { key: "flights", text: t("flights", { fallback: "Flights" }) },
@@ -321,8 +321,8 @@ export const Header = () => {
                   <Image
                     src="/images/logo.svg"
                     alt="travellioglobal"
-                    width={58}
-                    height={12}
+                    width={168}
+                    height={28}
                   />
                   <span className={styles.header__logoText}>Travellio</span>
                 </Link>

@@ -168,7 +168,7 @@ export const Footer = () => {
           <div className={styles.footer__top}>
             <div className={styles.footer__brand}>
               <Link href="/" className={styles.footer__wordmark}>
-                {t("brand", { fallback: "Travellio" })}
+                <Image src="/images/logo_footer.svg" alt="Travellio" width={168} height={28} unoptimized />
               </Link>
 
               <div className={styles.footer__socials}>

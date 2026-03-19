@@ -216,6 +216,16 @@
     "title": "Join Axelvior Today",
     "subtitle": "Register to manage your engagements and unlock exclusive strategic insights. Partner with Axelvior to scale your impact today."
   },
+  "toursPage": {
+    "findDestination": "Find Your Next Destination",
+    "searchPlaceholder": "Search for Your Dream Tour...",
+    "tourCollections": "Tour Collections",
+    "noTours": "No tours found. Try adjusting your filters or search.",
+    "heroTitle": "Tours",
+    "heroSubtitle": "Let's Go Have Some Fun",
+    "heroDesc1": "Pack your bags, we're about to take you on a journey you'll never forget! From hidden gems to iconic landmarks, our tours are crafted to spark excitement and create lasting memories.",
+    "heroDesc2": "Whether you're in it for adventure, relaxation, or cultural discovery, the world is yours to explore. Let's start your adventure now!"
+  },
   "accountNavigation": {
     "my-orders": "My Orders",
     "my-services": "My Services",
@@ -652,6 +662,24 @@
       "item9Title": "10 Strategy Sessions",
       "item9Desc": "In-depth collaboration with our leadership team, including quarterly reviews, to ensure long-term success."
     }
+  },
+  "tours": {
+    "tourAsiaTitle": "Asia",
+    "tourAustraliaPacificTitle": "Australia & the Pacific",
+    "tourCaribbeanTitle": "Caribbean",
+    "tourCentralSouthAmericaTitle": "Central & South America",
+    "tourEuropeTitle": "Europe",
+    "tourMiddleEastAfricaTitle": "Middle East & Africa",
+    "tourNorthAmericaTitle": "North America",
+    "tourSafariAmboseliTitle": "9 Days Safari to Amboseli, Lake Manyara, Ngorongoro, Serengeti and Maasai Mara",
+    "tourIcelandTitle": "Iceland Northern Lights & Volcano Expedition",
+    "tourMoroccoTitle": "Morocco Desert & Atlas Mountains Journey",
+    "tourKenyaTanzaniaTitle": "Ultimate Kenya, Tanzania, and Zanzibar Experience 2024",
+    "tourKenyaWildlifeTitle": "16-Day Kenya and Tanzania Wildlife Adventure",
+    "tourKyotoTeaTitle": "7-Day Tea Craftsmanship Journey Through Kyoto, Uji, and Aizu-Wakamatsu",
+    "tourJapanSakuraTitle": "Japan Spring Sakura Experience",
+    "tourPeruTitle": "Peru Machu Picchu & Sacred Valley Trek",
+    "tourItalyTitle": "Italy Culinary & Wine Discovery Tour"
   },
   "cookiePopup": {
     "title": "Cookie settings",

@@ -1,0 +1,1 @@
+export { ToursContent } from "./ToursContent";
