@@ -1,0 +1,131 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.why {
+  padding-top: 100px;
+  padding-bottom: 40px;
+
+  @include tablet {
+    padding-top: 80px;
+  }
+
+  @include mobile {
+    padding-top: 56px;
+    padding-bottom: 24px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+
+    @include mobile {
+      gap: 32px;
+    }
+  }
+
+  &__title {
+    color: #eb5e28;
+    text-align: center;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 0.84;
+
+    @include tablet {
+      font-size: 68px;
+    }
+
+    @include mobile {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    gap: 20px;
+
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    min-height: 315px;
+    padding: 16px;
+    border-radius: 24px;
+    background: #eb5e28;
+    overflow: hidden;
+
+    @include mobile {
+      min-height: 280px;
+    }
+  }
+
+  &__cardTop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    color: #fffdf1;
+
+    h3 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1;
+
+      @include mobile {
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+    }
+
+    p {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.35;
+
+      @include mobile {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__cardBottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: #fffdf1;
+  }
+
+  &__cardNumber {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.1;
+
+    @include mobile {
+      font-size: 40px;
+      font-weight: 500;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__cardIcon {
+    width: 60px;
+    height: 60px;
+
+    @include mobile {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

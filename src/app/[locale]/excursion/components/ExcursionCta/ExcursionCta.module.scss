@@ -1,0 +1,124 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.cta {
+  padding-top: 60px;
+  padding-bottom: 40px;
+
+  @include tablet {
+    padding-top: 48px;
+  }
+
+  @include mobile {
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+
+    @include mobile {
+      gap: 24px;
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    h2 {
+      max-width: 793px;
+      color: #eb5e28;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 96px;
+      font-weight: 500;
+      line-height: 0.84;
+    }
+
+    @include tablet {
+      h2 {
+        font-size: 68px;
+      }
+    }
+
+    @include mobile {
+      h2 {
+        max-width: 100%;
+        font-size: 32px;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    max-width: 498px;
+    color: #403d38;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    line-height: 1.35;
+
+    p:first-child {
+      font-size: 32px;
+      font-weight: 400;
+
+      @include mobile {
+        font-size: 16px;
+      }
+    }
+
+    p:last-child {
+      font-size: 20px;
+      font-weight: 400;
+
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+
+    @include mobile {
+      max-width: 100%;
+    }
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    gap: 16px;
+    min-height: 56px;
+    padding: 8px 52px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffcf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      background: #ae431b;
+      transform: translateY(-1px);
+    }
+
+    @include mobile {
+      width: 100%;
+      padding-right: 24px;
+      padding-left: 24px;
+      gap: 12px;
+    }
+  }
+}

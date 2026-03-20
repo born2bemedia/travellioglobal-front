@@ -1,0 +1,167 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.explore {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: #f9faf5;
+  border-radius: 40px 40px 0 0;
+  margin-top: -40px;
+  z-index: 1;
+
+  @include mobile {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    border-radius: 32px 32px 0 0;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    @include mobile {
+      gap: 24px;
+    }
+  }
+
+  &__title {
+    color: #eb5e28;
+    text-align: center;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 0.84;
+
+    @include tablet {
+      font-size: 68px;
+    }
+
+    @include mobile {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+
+    @include mobile {
+      gap: 24px;
+    }
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-height: 526px;
+    padding: 32px;
+    border-radius: 24px;
+    border: 1px solid #eb5e28;
+    overflow: hidden;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 126px;
+      min-height: auto;
+    }
+  }
+
+  &__cardBg {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__cardGradient {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(
+      139deg,
+      rgba(0, 0, 0, 0.2) 22.63%,
+      rgba(0, 0, 0, 0) 66.09%
+    );
+  }
+
+  &__regionName {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    color: #fffdf1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1;
+
+    @include tablet {
+      font-size: 48px;
+    }
+
+    @include mobile {
+      font-size: 40px;
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+  }
+
+  &__destinations {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 551px;
+    padding: 16px;
+    border-radius: 24px;
+    background: #eb5e28;
+
+    @include tablet {
+      width: 420px;
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  &__destination {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.25);
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+
+    h4 {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.2;
+
+      @include mobile {
+        font-size: 20px;
+      }
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.35;
+
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  padding-top: 140px;
+  padding-bottom: 80px;
+  min-height: 647px;
+  overflow: hidden;
+
+  @include tablet {
+    min-height: 500px;
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  @include mobile {
+    min-height: auto;
+    padding-top: 180px;
+    padding-bottom: 80px;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+
+    @include tablet {
+      margin-bottom: 48px;
+    }
+
+    @include mobile {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__title {
+    color: #fffdf1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 128px;
+    font-weight: 500;
+    line-height: 0.625;
+    letter-spacing: -0.06em;
+    text-align: center;
+
+    @include tablet {
+      font-size: 92px;
+    }
+
+    @include mobile {
+      font-size: 65px;
+      line-height: 0.615;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+
+    @include tablet {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+  }
+
+  &__subtitle {
+    flex-shrink: 0;
+    max-width: 401px;
+    color: #fffdf1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+
+    @include mobile {
+      max-width: 100%;
+      text-align: center;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 791px;
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.35;
+
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+}

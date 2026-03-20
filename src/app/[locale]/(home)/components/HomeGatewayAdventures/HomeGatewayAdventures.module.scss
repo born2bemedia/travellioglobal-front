@@ -96,8 +96,8 @@
 
   &__navButton {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center!important;
+    justify-content: center!important;
     width: 58px;
     height: 58px;
     border: 1px solid #eb5e28;

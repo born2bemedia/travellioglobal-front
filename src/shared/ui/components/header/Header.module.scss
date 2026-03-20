@@ -515,7 +515,7 @@ $ink: #3c2718;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 16px;
+    padding-right: 0;
     margin-bottom: 16px;
   }
 
@@ -562,7 +562,6 @@ $ink: #3c2718;
     display: flex;
     align-items: center;
     width: 100%;
-    min-height: 40px;
     padding: 12px 8px;
     border: 0;
     border-bottom: 1px solid rgba(255, 253, 241, 0.5);

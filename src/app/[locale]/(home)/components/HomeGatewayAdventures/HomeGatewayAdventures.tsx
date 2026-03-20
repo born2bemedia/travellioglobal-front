@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { useCartStore } from "@/features/cart";
+import { useTourRegionLabels, useTours } from "@/features/tours";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 import { Button } from "@/shared/ui/kit/button/Button";
@@ -20,70 +21,23 @@ const AUTOPLAY_DELAY = 5000;
 export const HomeGatewayAdventures = () => {
   const t = useTranslations("homeGatewayAdventures");
   const addToCart = useCartStore((state) => state.addToCart);
+  const regionLabels = useTourRegionLabels();
+  const allTours = useTours();
   const touchStartX = useRef(0);
 
   const tours = useMemo(
-    () => [
-      {
-        key: "kenyaMain",
-        title: t("tourKenyaMainTitle", {
-          fallback: "Ultimate Kenya, Tanzania, and Zanzibar Experience 2024",
-        }),
-        price: t("tourKenyaMainPrice", { fallback: "€33,100" }),
-        numericPrice: 33100,
-        image: "/images/home/section-gateway/tour-kenya-main.webp",
-        area: t("tourKenyaMainArea", { fallback: "Middle East & Africa" }),
-        rating: t("tourKenyaMainRating", { fallback: "4.5/5" }),
-        alt: t("tourKenyaMainAlt", {
-          fallback: "Kenya and Tanzania safari landscape",
-        }),
-      },
-      {
-        key: "kenyaWildlife",
-        title: t("tourKenyaWildlifeTitle", {
-          fallback: "16-Day Kenya and Tanzania Wildlife Adventure",
-        }),
-        price: t("tourKenyaWildlifePrice", { fallback: "€19,500" }),
-        numericPrice: 19500,
-        image: "/images/home/section-gateway/tour-kenya-wildlife.webp",
-        area: t("tourKenyaWildlifeArea", { fallback: "Middle East & Africa" }),
-        rating: t("tourKenyaWildlifeRating", { fallback: "4.7/5" }),
-        alt: t("tourKenyaWildlifeAlt", {
-          fallback: "Zebras during sunset safari",
-        }),
-      },
-      {
-        key: "kyotoTea",
-        title: t("tourKyotoTeaTitle", {
-          fallback:
-            "7-Day Tea Craftsmanship Journey Through Kyoto, Uji, and Aizu-Wakamatsu",
-        }),
-        price: t("tourKyotoTeaPrice", { fallback: "€5,100" }),
-        numericPrice: 5100,
-        image: "/images/home/section-gateway/tour-kyoto-tea.webp",
-        area: t("tourKyotoTeaArea", { fallback: "Asia" }),
-        rating: t("tourKyotoTeaRating", { fallback: "4.8/5" }),
-        alt: t("tourKyotoTeaAlt", { fallback: "Tea leaves in hand" }),
-      },
-      {
-        key: "safariAdventure",
-        title: t("tourSafariAdventureTitle", {
-          fallback:
-            "9 Days Safari to Amboseli, Lake Manyara, Ngorongoro, Serengeti and Maasai Mara",
-        }),
-        price: t("tourSafariAdventurePrice", { fallback: "€6,500" }),
-        numericPrice: 6500,
-        image: "/images/home/section-gateway/tour-safari.webp",
-        area: t("tourSafariAdventureArea", {
-          fallback: "Middle East & Africa",
-        }),
-        rating: t("tourSafariAdventureRating", { fallback: "4.6/5" }),
-        alt: t("tourSafariAdventureAlt", {
-          fallback: "Safari canyon and sky view",
-        }),
-      },
-    ],
-    [t],
+    () =>
+      allTours.map((tour) => ({
+        key: tour.id,
+        title: tour.title,
+        price: `€${tour.price.toLocaleString("en-IE")}`,
+        numericPrice: tour.price,
+        image: tour.image,
+        area: regionLabels[tour.region],
+        rating: `${tour.rating}/5`,
+        alt: tour.title,
+      })),
+    [allTours, regionLabels],
   );
 
   // Slides: [copy1, copy2, copy3] — three copies of tours.

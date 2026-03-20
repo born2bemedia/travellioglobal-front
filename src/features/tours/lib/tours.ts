@@ -112,7 +112,7 @@ export const useTours = (): Tour[] => {
       price: 21100,
       region: "asia",
       rating: 4.5,
-      image: "/images/tours/tour-sakura.webp",
+      image: "/images/tours/tour-sakura.png",
       popularity: 87,
       createdAt: 3,
     },
