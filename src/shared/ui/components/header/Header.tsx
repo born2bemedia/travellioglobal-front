@@ -16,7 +16,7 @@ import {
 import {
   EmailIcon,
   FacebookIcon,
-  InstagramIcon,
+  LinkedinIcon,
   PhoneIcon,
   XIcon,
 } from "@/shared/ui/icons";
@@ -280,7 +280,7 @@ export const Header = () => {
                   rel="noopener noreferrer"
                   aria-label="Instagram"
                 >
-                  <InstagramIcon />
+                  <LinkedinIcon />
                 </a>
                 <a
                   href={X_URL}

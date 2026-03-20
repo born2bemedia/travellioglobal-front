@@ -14,6 +14,9 @@ import {
   X_URL,
 } from "@/shared/lib/constants/constants";
 
+import { FacebookIcon } from "../../icons/socials/facebook";
+import { LinkedinIcon } from "../../icons/socials/linkedin";
+import { XIcon } from "../../icons/socials/x";
 import styles from "./Footer.module.scss";
 
 import { Link } from "@/i18n/navigation";
@@ -179,12 +182,7 @@ export const Footer = () => {
                   aria-label="Instagram"
                   className={styles.footer__socialLink}
                 >
-                  <Image
-                    src="/images/footer/socials/instagram.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                  />
+                    <LinkedinIcon />
                 </a>
                 <a
                   href={X_URL}
@@ -193,12 +191,7 @@ export const Footer = () => {
                   aria-label="X"
                   className={styles.footer__socialLink}
                 >
-                  <Image
-                    src="/images/footer/socials/x.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                  />
+                  <XIcon />
                 </a>
                 <a
                   href={FACEBOOK_URL}
@@ -207,12 +200,7 @@ export const Footer = () => {
                   aria-label="Facebook"
                   className={styles.footer__socialLink}
                 >
-                  <Image
-                    src="/images/footer/socials/facebook.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                  />
+                  <FacebookIcon />
                 </a>
               </div>
             </div>

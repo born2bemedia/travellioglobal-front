@@ -20,6 +20,8 @@ $footer-line: rgba(249, 250, 245, 0.12);
   background: $footer-bg;
   border-radius: 32px 32px 0 0;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 
   @include tablet {
     margin-top: 72px;
