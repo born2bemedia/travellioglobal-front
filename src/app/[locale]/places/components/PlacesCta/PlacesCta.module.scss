@@ -1,0 +1,97 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.cta {
+  padding-bottom: 103px;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 630px;
+    gap: 48px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    isolation: isolate;
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: center 46%;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.52) 100%);
+  }
+
+  &__copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 16px;
+    max-width: 820px;
+
+    h2 {
+      color: #eb5e28;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+
+  &__text {
+    display: grid;
+    gap: 4px;
+
+    p {
+      color: #252422;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+  }
+
+  @include tablet {
+    padding-bottom: 80px;
+
+    &__inner {
+      min-height: 0;
+      gap: 40px;
+    }
+
+    &__copy h2 {
+      font-size: 44px;
+    }
+
+    &__text p {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    padding-bottom: 72px;
+
+    &__inner {
+      gap: 28px;
+      padding: 16px;
+      border-radius: 20px;
+    }
+
+    &__copy {
+      max-width: none;
+
+      h2 {
+        font-size: 36px;
+      }
+    }
+
+    &__text p {
+      font-size: 16px;
+      line-height: 1.35;
+    }
+  }
+}

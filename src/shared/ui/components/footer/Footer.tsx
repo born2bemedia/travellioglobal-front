@@ -157,12 +157,9 @@ export const Footer = () => {
     },
   ] as const;
 
-  const phoneValue = WEBSITE_PHONE;
-  const registeredAddress =
-    WEBSITE_REGISTERED_ADDRESS ||
-    t("address-placeholder", { fallback: "Address" });
-  const officeAddress =
-    WEBSITE_OFFICE_ADDRESS || t("address-placeholder", { fallback: "Address" });
+  const phoneValue = WEBSITE_PHONE || "";
+  const registeredAddress = WEBSITE_REGISTERED_ADDRESS || "";
+  const officeAddress = WEBSITE_OFFICE_ADDRESS || "";
 
   return (
     <footer className={styles.footer}>
@@ -224,9 +221,7 @@ export const Footer = () => {
               <div className={styles.footer__column}>
                 <h3>{t("stay-connected", { fallback: "Stay Connected" })}</h3>
                 <div className={styles.footer__contacts}>
-                  <p>
-                    {t("company-name", { fallback: "Travellio Limited UK" })}
-                  </p>
+                  <p>Vellio Int Ltd</p>
                   <p>
                     <strong>{t("footer-email", { fallback: "Email" })}:</strong>{" "}
                     <Link href={`mailto:${WEBSITE_EMAIL}`}>
@@ -241,7 +236,7 @@ export const Footer = () => {
                       <Link href={`tel:${phoneValue}`}>{phoneValue}</Link>
                     </p>
                   )}
-                  <p>
+                  <div className={styles.footer__address}>
                     <strong>
                       {t("footer-registered-address", {
                         fallback: "Registered address",
@@ -255,8 +250,8 @@ export const Footer = () => {
                         __html: WEBSITE_REGISTERED_ADDRESS_MAP,
                       }}
                     />
-                  </p>
-                  <p>
+                  </div>
+                  <div className={styles.footer__address}>
                     <strong>
                       {t("footer-office-address", {
                         fallback: "Office address",
@@ -270,7 +265,7 @@ export const Footer = () => {
                         __html: WEBSITE_OFFICE_ADDRESS_MAP,
                       }}
                     />
-                  </p>
+                  </div>
                 </div>
               </div>
 

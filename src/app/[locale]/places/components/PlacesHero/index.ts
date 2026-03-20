@@ -1,0 +1,1 @@
+export { PlacesHero } from "./PlacesHero";

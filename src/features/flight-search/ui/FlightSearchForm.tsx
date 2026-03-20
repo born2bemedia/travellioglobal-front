@@ -11,9 +11,16 @@ import { airports } from "../lib/airports";
 import { getFlightSelectStyles } from "../lib/selectStyles";
 import styles from "./FlightSearchForm.module.scss";
 
-const AVIASALES_SEARCH_URL = "https://search.aviasales.com/flights/";
+const AVIASALES_BASE_URL = "https://www.aviasales.com/search";
 
 const formatDate = (date: Date) => date.toISOString().split("T")[0];
+
+const formatDateDDMM = (dateStr: string) => {
+  const date = new Date(dateStr + "T00:00:00");
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return `${day}${month}`;
+};
 
 const addDays = (date: Date, days: number) => {
   const nextDate = new Date(date);
@@ -63,25 +70,16 @@ export const FlightSearchForm = () => {
 
     if (!origin || !destination) return;
 
-    const searchParams = new URLSearchParams({
-      origin_iata: origin.value,
-      destination_iata: destination.value,
-      depart_date: departDate,
-      return_date: returnDate,
-      adults: String(passengers),
-      children: "0",
-      infants: "0",
-      trip_class: "0",
-      currency: "USD",
-      locale: "en",
-      oneway: "0",
-    });
+    const originCode = origin.value;
+    const destCode = destination.value;
+    const depart = formatDateDDMM(departDate);
+    const ret = formatDateDDMM(returnDate);
 
-    window.open(
-      `${AVIASALES_SEARCH_URL}?${searchParams.toString()}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+    // Aviasales deep link format: /search/{ORIGIN}{DDMM}{DESTINATION}{DDMM}{CLASS}{PASSENGERS}
+    // Y = economy class
+    const url = `${AVIASALES_BASE_URL}/${originCode}${depart}${destCode}${ret}Y${passengers}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const increasePassengers = () =>
@@ -92,6 +90,28 @@ export const FlightSearchForm = () => {
     setGuests((current) => Math.min(current + 1, 8));
   const decreaseGuests = () =>
     setGuests((current) => Math.max(current - 1, 1));
+
+  const handleHotelSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!hotelDestination) return;
+
+    const city = hotelDestination.label.split(",")[0].trim();
+
+    const searchParams = new URLSearchParams({
+      ss: city,
+      checkin: checkIn,
+      checkout: checkOut,
+      group_adults: String(guests),
+      no_rooms: "1",
+    });
+
+    window.open(
+      `https://www.booking.com/searchresults.html?${searchParams.toString()}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
 
   return (
     <div className={styles.search}>
@@ -300,7 +320,7 @@ export const FlightSearchForm = () => {
             </button>
           </form>
         ) : (
-          <div className={styles.search__form}>
+          <form className={styles.search__form} onSubmit={handleHotelSubmit}>
             <div className={styles.search__fields}>
               <div className={styles.search__row}>
                 <div className={styles.search__field}>
@@ -352,6 +372,7 @@ export const FlightSearchForm = () => {
                         fallback: "Check-in date",
                       })}
                       className={styles.search__dateInput}
+                      required
                     />
                   </span>
                 </label>
@@ -376,6 +397,7 @@ export const FlightSearchForm = () => {
                         fallback: "Check-out date",
                       })}
                       className={styles.search__dateInput}
+                      required
                     />
                   </span>
                 </label>
@@ -422,11 +444,7 @@ export const FlightSearchForm = () => {
               </div>
             </div>
 
-            <button
-              type="button"
-              className={`${styles.search__submit} ${styles.search__submitDisabled}`}
-              disabled
-            >
+            <button type="submit" className={styles.search__submit}>
               <Image
                 src="/images/shared/flight-search/search.svg"
                 alt=""
@@ -435,14 +453,7 @@ export const FlightSearchForm = () => {
               />
               <span>{t("searchNow", { fallback: "Search now" })}</span>
             </button>
-
-            <p className={styles.search__notice}>
-              {t("hotelNotice", {
-                fallback:
-                  "Hotels search is disabled here because Travelpayouts closed the Hotellook program on October 20, 2025.",
-              })}
-            </p>
-          </div>
+          </form>
         )}
       </div>
     </div>

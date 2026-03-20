@@ -178,7 +178,7 @@ $footer-line: rgba(249, 250, 245, 0.12);
     font-weight: 500;
     line-height: 1.15;
 
-    p {
+    p, >div {
       color: inherit;
       display: flex;
       flex-direction: column;

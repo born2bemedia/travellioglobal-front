@@ -2,21 +2,24 @@
 
 .hero {
   position: relative;
-  padding-top: 140px;
+  margin-top: -132px;
+  padding-top: 232px;
   padding-bottom: 80px;
   min-height: 647px;
   overflow: hidden;
 
   @include tablet {
+    margin-top: -130px;
     min-height: 500px;
-    padding-top: 120px;
+    padding-top: 220px;
     padding-bottom: 60px;
   }
 
   @include mobile {
+    margin-top: -120px;
     min-height: auto;
-    padding-top: 180px;
-    padding-bottom: 80px;
+    padding-top: 200px;
+    padding-bottom: 60px;
   }
 
   &__bg {
@@ -40,7 +43,7 @@
     z-index: 1;
     display: flex;
     justify-content: center;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
 
     @include tablet {
       margin-bottom: 48px;

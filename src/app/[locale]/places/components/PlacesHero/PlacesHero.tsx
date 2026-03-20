@@ -7,20 +7,28 @@ import { useTranslations } from "next-intl";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 
-import styles from "./ToursHero.module.scss";
+import styles from "./PlacesHero.module.scss";
 
-export const ToursHero = () => {
-  const t = useTranslations("toursPage");
+export const PlacesHero = () => {
+  const t = useTranslations("placesPage");
 
   return (
     <section className={styles.hero}>
       <div className={styles.hero__bg}>
         <Image
-          src="/images/tours/hero-bg.webp"
+          src="/images/places/hero-bg-figma.png"
           alt=""
           fill
           sizes="100vw"
           priority
+        />
+        <Image
+          src="/images/places/hero-overlay-figma.png"
+          alt=""
+          fill
+          sizes="100vw"
+          priority
+          className={styles.hero__bgLayer}
         />
         <div className={styles.hero__overlay} />
       </div>
@@ -34,7 +42,7 @@ export const ToursHero = () => {
           variants={fadeInUp}
         >
           <h1 className={styles.hero__title}>
-            {t("heroTitle", { fallback: "Tours" })}
+            {t("heroTitle", { fallback: "Places" })}
           </h1>
         </motion.div>
 
@@ -47,21 +55,21 @@ export const ToursHero = () => {
         >
           <h2 className={styles.hero__subtitle}>
             {t("heroSubtitle", {
-              fallback: "Let's Go Have Some Fun",
+              fallback: "Discover the World's Most Exciting Places",
             })}
           </h2>
 
           <div className={styles.hero__text}>
             <p>
-              {t("heroDesc1", {
+              {t("heroDescriptionOne", {
                 fallback:
-                  "Pack your bags, we're about to take you on a journey you'll never forget! From hidden gems to iconic landmarks, our tours are crafted to spark excitement and create lasting memories.",
+                  "At Travellio Global, we take you to the heart of some of the world's most exciting, vibrant, and unique destinations.",
               })}
             </p>
             <p>
-              {t("heroDesc2", {
+              {t("heroDescriptionTwo", {
                 fallback:
-                  "Whether you're in it for adventure, relaxation, or cultural discovery, the world is yours to explore. Let's start your adventure now!",
+                  "From the bustling streets of Tokyo to the serene beauty of Bali, our expertly curated experiences will transport you to some of the most iconic and hidden gems on the planet.",
               })}
             </p>
           </div>
@@ -70,3 +78,4 @@ export const ToursHero = () => {
     </section>
   );
 };
+

@@ -1,0 +1,154 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.features {
+  padding-bottom: 93px;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 93px;
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__ctaButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-width: 331px;
+    height: 56px;
+    padding: 8px 52px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 27px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 480px;
+    padding: 24px;
+    border-radius: 24px;
+    background: #eb5e28;
+    color: #fffdf1;
+  }
+
+  &__cardTitle {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+  }
+
+  &__cardDescription {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.32;
+  }
+
+  &__cardList {
+    display: grid;
+    gap: 14px;
+    margin-top: auto;
+    padding-left: 30px;
+
+    li {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.32;
+
+      &::marker {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @include tablet {
+    padding-bottom: 72px;
+
+    &__inner {
+      gap: 64px;
+    }
+
+    &__grid {
+      gap: 20px;
+    }
+
+    &__card {
+      min-height: 0;
+    }
+
+    &__cardTitle {
+      font-size: 44px;
+    }
+
+    &__cardDescription,
+    &__cardList li {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    padding-bottom: 56px;
+
+    &__inner {
+      gap: 40px;
+    }
+
+    &__ctaButton {
+      min-width: 0;
+      width: 100%;
+      padding: 8px 28px;
+      font-size: 17px;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    &__card {
+      gap: 18px;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    &__cardTitle {
+      font-size: 36px;
+    }
+
+    &__cardDescription,
+    &__cardList li {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    &__cardList {
+      gap: 10px;
+      padding-left: 24px;
+    }
+  }
+}

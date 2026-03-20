@@ -36,6 +36,19 @@ $ink: #3c2718;
 
   &__topbar {
     padding: 24px 0 4px;
+    position: relative;
+    z-index: 100;
+
+    &.white {
+      a{
+        color: #fff;
+      }
+      svg{
+        path{
+          fill: #fff;
+        }
+      }
+    }
 
     &__inner {
       display: flex;
@@ -257,10 +270,24 @@ $ink: #3c2718;
     transition: transform 0.2s ease;
   }
 
-  &__dropdownMenu {
+  &__dropdownMenuWrapper {
     position: absolute;
-    top: calc(100% + 18px);
+    top: 100%;
     right: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    padding-top: 18px;
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
+  &__dropdownMenu {
     display: flex;
     flex-direction: column;
     min-width: 168px;
@@ -268,18 +295,7 @@ $ink: #3c2718;
     border-radius: 18px;
     background: $cream;
     box-shadow: 0 18px 38px rgba(60, 39, 24, 0.14);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-
-    &.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+    
   }
 
   &__dropdownItem {
@@ -299,6 +315,7 @@ $ink: #3c2718;
     text-decoration: none;
     text-align: left;
     transition: background-color 0.2s ease, color 0.2s ease;
+    box-sizing: border-box;
 
     &:hover {
       background: rgba(235, 94, 40, 0.08);

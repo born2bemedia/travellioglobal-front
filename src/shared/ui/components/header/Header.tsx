@@ -56,6 +56,7 @@ const normalizePath = (path: string) => {
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isWhiteTopbar, setIsWhiteTopbar] = useState(false);
   const [openDesktopDropdown, setOpenDesktopDropdown] = useState<
     HeaderDropdown["key"] | null
   >(null);
@@ -64,6 +65,17 @@ export const Header = () => {
   >(null);
   const pathname = usePathname();
   const locale = useLocale();
+
+  useEffect(() => {
+    const whiteTopbarPathnames = ["/tours", "/excursion", "/places"];
+    const isWhite = whiteTopbarPathnames.includes(pathname);
+    console.log(isWhite, isWhiteTopbar, pathname);
+    if (isWhite !== isWhiteTopbar) {
+      setTimeout(() => {
+        setIsWhiteTopbar(isWhite);
+      }, 0);
+    }
+  }, [pathname, isWhiteTopbar]);
 
   const t = useTranslations("header");
 
@@ -76,7 +88,11 @@ export const Header = () => {
       text: t("excursions", { fallback: "Excursions" }),
       href: "/excursion",
     },
-    { key: "places", text: t("places", { fallback: "Places" }) },
+    {
+      key: "places",
+      text: t("places", { fallback: "Places" }),
+      href: "/places",
+    },
     { key: "flights", text: t("flights", { fallback: "Flights" }) },
     { key: "cars", text: t("cars", { fallback: "Cars" }) },
     { key: "taxi", text: t("taxi", { fallback: "Taxi" }) },
@@ -108,12 +124,42 @@ export const Header = () => {
       key: "affiliates",
       text: t("affiliates", { fallback: "Affiliates" }),
       items: [
-        { key: "we-go-trip", text: t("weGoTrip", { fallback: "We Go Trip" }), href: "https://tp.media/r?marker=552524&trs=327401&p=4487&u=https%3A%2F%2Fwegotrip.com&campaign_id=150" },
-        { key: "tiqets", text: t("tiqets", { fallback: "Tiqets" }), href: "https://tp.media/r?marker=552524&trs=327401&p=2074&u=https%3A%2F%2Ftiqets.com&campaign_id=89" },
-        { key: "searadar", text: t("searadar", { fallback: "Searadar" }), href: "https://tp.media/r?marker=552524&trs=327401&p=5907&u=https%3A%2F%2Fsearadar.com&campaign_id=258" },
-        { key: "qeeq", text: t("qeeq", { fallback: "QEEQ" }), href: "https://tp.media/r?marker=552524&trs=327401&p=4845&u=https%3A%2F%2Fqeeq.com&campaign_id=172" },
-        { key: "iway", text: t("iway", { fallback: "I’way" }), href: "https://tp.media/click?shmarker=552524&promo_id=7544&source_type=link&type=click&campaign_id=142&trs=327401" },
-        { key: "drimsim", text: t("drimsim", { fallback: "Drimsim" }), href: "https://tp.media/r?marker=552524&trs=327401&p=2762&u=https%3A%2F%2Fw1.drimsim.com&campaign_id=102" },
+        {
+          key: "we-go-trip",
+          text: t("weGoTrip", { fallback: "We Go Trip" }),
+          href:
+            "https://tp.media/r?marker=552524&trs=327401&p=4487&u=https%3A%2F%2Fwegotrip.com&campaign_id=150",
+        },
+        {
+          key: "tiqets",
+          text: t("tiqets", { fallback: "Tiqets" }),
+          href:
+            "https://tp.media/r?marker=552524&trs=327401&p=2074&u=https%3A%2F%2Ftiqets.com&campaign_id=89",
+        },
+        {
+          key: "searadar",
+          text: t("searadar", { fallback: "Searadar" }),
+          href:
+            "https://tp.media/r?marker=552524&trs=327401&p=5907&u=https%3A%2F%2Fsearadar.com&campaign_id=258",
+        },
+        {
+          key: "qeeq",
+          text: t("qeeq", { fallback: "QEEQ" }),
+          href:
+            "https://tp.media/r?marker=552524&trs=327401&p=4845&u=https%3A%2F%2Fqeeq.com&campaign_id=172",
+        },
+        {
+          key: "iway",
+          text: t("iway", { fallback: "I’way" }),
+          href:
+            "https://tp.media/click?shmarker=552524&promo_id=7544&source_type=link&type=click&campaign_id=142&trs=327401",
+        },
+        {
+          key: "drimsim",
+          text: t("drimsim", { fallback: "Drimsim" }),
+          href:
+            "https://tp.media/r?marker=552524&trs=327401&p=2762&u=https%3A%2F%2Fw1.drimsim.com&campaign_id=102",
+        },
       ],
     },
   ] as const;
@@ -242,7 +288,11 @@ export const Header = () => {
 
   return (
     <>
-      <div className={styles.header__topbar}>
+      <div
+        className={`${styles.header__topbar} ${
+          isWhiteTopbar ? styles.white : ""
+        }`}
+      >
         <div className="container">
           <div className={styles.header__topbar__inner}>
             <div className={styles.header__topbar__contacts}>
@@ -376,11 +426,15 @@ export const Header = () => {
                       </button>
 
                       <div
-                        className={`${styles.header__dropdownMenu} ${
+                        className={`${styles.header__dropdownMenuWrapper} ${
                           isOpen ? styles.open : ""
                         }`}
                       >
-                        {dropdown.items.map((item) => renderDropdownItem(item))}
+                        <div className={styles.header__dropdownMenu}>
+                          {dropdown.items.map((item) =>
+                            renderDropdownItem(item),
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
