@@ -1,40 +1,29 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { useTranslations } from "next-intl";
-import Select, { type StylesConfig } from "react-select";
+import Select from "react-select";
 
 import type { AirportOption } from "@/features/flight-search/lib/airports";
 import { airports } from "@/features/flight-search/lib/airports";
-import { getFlightSelectStyles } from "@/features/flight-search/lib/selectStyles";
 
+import {
+  addDays,
+  formatDate,
+  formatDateDDMM,
+  formatDateDisplay,
+} from "../lib/date";
+import { getPlacesSearchSelectStyles } from "../lib/selectStyles";
 import styles from "./PlacesSearchForm.module.scss";
 
 const AVIASALES_BASE_URL = "https://www.aviasales.com/search";
 
-const formatDate = (date: Date) => date.toISOString().split("T")[0];
+const selectValueLabel = (option: AirportOption) =>
+  option.label.split(",")[0].trim();
 
-const formatDateDDMM = (dateStr: string) => {
-  const date = new Date(dateStr + "T00:00:00");
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  return `${day}${month}`;
-};
-
-const addDays = (date: Date, days: number) => {
-  const nextDate = new Date(date);
-  nextDate.setDate(nextDate.getDate() + days);
-  return nextDate;
-};
-
-const formatDateDisplay = (dateStr: string) => {
-  const date = new Date(dateStr + "T00:00:00");
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-};
-
-const selectValueLabel = (option: AirportOption) => option.label.split(",")[0].trim();
+const selectStyles = getPlacesSearchSelectStyles<AirportOption>();
 
 export const PlacesSearchForm = () => {
   const t = useTranslations("homeReadyChapter");
@@ -55,51 +44,6 @@ export const PlacesSearchForm = () => {
   const passengerLabelPlural = t("passengerLabelPlural", {
     fallback: "passengers",
   });
-
-  const selectStyles = useMemo(() => {
-    const baseStyles = getFlightSelectStyles<AirportOption>();
-    const baseTextStyles = {
-      color: "#FFFDF1",
-      fontFamily: "var(--font-plus-jakarta-sans), sans-serif",
-      fontSize: "20px",
-      fontWeight: 400,
-      lineHeight: 1,
-      margin: 0,
-    };
-
-    return {
-      ...baseStyles,
-      control: (provided, state) => ({
-        ...(baseStyles.control ? baseStyles.control(provided, state) : provided),
-        minHeight: "24px",
-      }),
-      placeholder: (provided) => ({
-        ...provided,
-        ...baseTextStyles,
-        opacity: 0.94,
-      }),
-      singleValue: (provided) => ({
-        ...provided,
-        ...baseTextStyles,
-      }),
-      input: (provided) => ({
-        ...provided,
-        ...baseTextStyles,
-        padding: 0,
-      }),
-      dropdownIndicator: () => ({ display: "none" }),
-      clearIndicator: () => ({ display: "none" }),
-      menu: (provided) => ({
-        ...provided,
-        backgroundColor: "rgba(20, 20, 20, 0.95)",
-        backdropFilter: "blur(24px)",
-        border: "1px solid rgba(215, 215, 215, 0.2)",
-        borderRadius: "12px",
-        overflow: "hidden",
-        zIndex: 20,
-      }),
-    } satisfies StylesConfig<AirportOption, false>;
-  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -247,7 +191,8 @@ export const PlacesSearchForm = () => {
                     height={24}
                   />
                   <span className={styles.search__counterText}>
-                    {passengers} {passengers > 1 ? passengerLabelPlural : passengerLabel}
+                    {passengers}{" "}
+                    {passengers > 1 ? passengerLabelPlural : passengerLabel}
                   </span>
                 </span>
 
@@ -255,22 +200,28 @@ export const PlacesSearchForm = () => {
                   <button
                     type="button"
                     className={styles.search__counterBtn}
-                    onClick={() => setPassengers((current) => Math.min(current + 1, 9))}
+                    onClick={() =>
+                      setPassengers((current) => Math.min(current + 1, 9))
+                    }
                     aria-label={t("increasePassengers", {
                       fallback: "Increase passengers",
                     })}
                   >
-                    +
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/images/plus.svg" alt="Increase passengers" width={10} height={10} />
                   </button>
                   <button
                     type="button"
                     className={styles.search__counterBtn}
-                    onClick={() => setPassengers((current) => Math.max(current - 1, 1))}
+                    onClick={() =>
+                      setPassengers((current) => Math.max(current - 1, 1))
+                    }
                     aria-label={t("decreasePassengers", {
                       fallback: "Decrease passengers",
                     })}
                   >
-                    -
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/images/minus.svg" alt="Decrease passengers" width={10} height={10} />
                   </button>
                 </div>
               </div>

@@ -52,8 +52,10 @@ export const FlightSearchForm = () => {
   const [departDate, setDepartDate] = useState(defaultDepart);
   const [returnDate, setReturnDate] = useState(defaultReturn);
   const [passengers, setPassengers] = useState(1);
-  const [hotelDestination, setHotelDestination] =
-    useState<AirportOption | null>(null);
+  const [
+    hotelDestination,
+    setHotelDestination,
+  ] = useState<AirportOption | null>(null);
   const [checkIn, setCheckIn] = useState(defaultDepart);
   const [checkOut, setCheckOut] = useState(defaultReturn);
   const [guests, setGuests] = useState(2);
@@ -86,10 +88,8 @@ export const FlightSearchForm = () => {
     setPassengers((current) => Math.min(current + 1, 9));
   const decreasePassengers = () =>
     setPassengers((current) => Math.max(current - 1, 1));
-  const increaseGuests = () =>
-    setGuests((current) => Math.min(current + 1, 8));
-  const decreaseGuests = () =>
-    setGuests((current) => Math.max(current - 1, 1));
+  const increaseGuests = () => setGuests((current) => Math.min(current + 1, 8));
+  const decreaseGuests = () => setGuests((current) => Math.max(current - 1, 1));
 
   const handleHotelSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -130,9 +130,7 @@ export const FlightSearchForm = () => {
             width={24}
             height={24}
           />
-          <span>
-            {t("tabFlights", { fallback: "Flights" })}
-          </span>
+          <span>{t("tabFlights", { fallback: "Flights" })}</span>
         </button>
 
         <button
@@ -149,9 +147,7 @@ export const FlightSearchForm = () => {
             width={24}
             height={24}
           />
-          <span>
-            {t("tabHotels", { fallback: "Hotels" })}
-          </span>
+          <span>{t("tabHotels", { fallback: "Hotels" })}</span>
         </button>
       </div>
 
@@ -291,7 +287,13 @@ export const FlightSearchForm = () => {
                           fallback: "Increase passengers",
                         })}
                       >
-                        +
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/plus.svg"
+                          alt="Increase passengers"
+                          width={10}
+                          height={10}
+                        />
                       </button>
                       <button
                         type="button"
@@ -301,7 +303,13 @@ export const FlightSearchForm = () => {
                           fallback: "Decrease passengers",
                         })}
                       >
-                        -
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/minus.svg"
+                          alt="Decrease passengers"
+                          width={10}
+                          height={10}
+                        />
                       </button>
                     </div>
                   </div>
@@ -412,8 +420,7 @@ export const FlightSearchForm = () => {
                         height={24}
                       />
                       <span className={styles.search__counterText}>
-                        {guests}{" "}
-                        {guests > 1 ? guestLabelPlural : guestLabel}
+                        {guests} {guests > 1 ? guestLabelPlural : guestLabel}
                       </span>
                     </span>
 
@@ -426,7 +433,8 @@ export const FlightSearchForm = () => {
                           fallback: "Increase guests",
                         })}
                       >
-                        +
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/images/plus.svg" alt="Increase guests" width={10} height={10} />
                       </button>
                       <button
                         type="button"
@@ -436,7 +444,8 @@ export const FlightSearchForm = () => {
                           fallback: "Decrease guests",
                         })}
                       >
-                        -
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/images/minus.svg" alt="Decrease guests" width={10} height={10} />
                       </button>
                     </div>
                   </div>

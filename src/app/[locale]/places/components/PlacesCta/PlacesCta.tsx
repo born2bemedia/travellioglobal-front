@@ -5,9 +5,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
+import { PlacesSearchForm } from "@/features/places-search";
+
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 
-import { PlacesSearchForm } from "../PlacesSearchForm";
 import styles from "./PlacesCta.module.scss";
 
 export const PlacesCta = () => {
