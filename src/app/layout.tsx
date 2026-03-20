@@ -1,5 +1,6 @@
 import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
@@ -47,6 +48,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <GoogleAnalytics gaId="G-8556Y8CBFX" />
       <body className={cn(plusJakartaSans.variable, syne.variable)}>
         <NextIntlClientProvider>
           <Header />
