@@ -108,12 +108,12 @@ export const Header = () => {
       key: "affiliates",
       text: t("affiliates", { fallback: "Affiliates" }),
       items: [
-        { key: "we-go-trip", text: t("weGoTrip", { fallback: "We Go Trip" }) },
-        { key: "tiqets", text: t("tiqets", { fallback: "Tiqets" }) },
-        { key: "searadar", text: t("searadar", { fallback: "Searadar" }) },
-        { key: "qeeq", text: t("qeeq", { fallback: "QEEQ" }) },
-        { key: "iway", text: t("iway", { fallback: "I’way" }) },
-        { key: "drimsim", text: t("drimsim", { fallback: "Drimsim" }) },
+        { key: "we-go-trip", text: t("weGoTrip", { fallback: "We Go Trip" }), href: "https://tp.media/r?marker=552524&trs=327401&p=4487&u=https%3A%2F%2Fwegotrip.com&campaign_id=150" },
+        { key: "tiqets", text: t("tiqets", { fallback: "Tiqets" }), href: "https://tp.media/r?marker=552524&trs=327401&p=2074&u=https%3A%2F%2Ftiqets.com&campaign_id=89" },
+        { key: "searadar", text: t("searadar", { fallback: "Searadar" }), href: "https://tp.media/r?marker=552524&trs=327401&p=5907&u=https%3A%2F%2Fsearadar.com&campaign_id=258" },
+        { key: "qeeq", text: t("qeeq", { fallback: "QEEQ" }), href: "https://tp.media/r?marker=552524&trs=327401&p=4845&u=https%3A%2F%2Fqeeq.com&campaign_id=172" },
+        { key: "iway", text: t("iway", { fallback: "I’way" }), href: "https://tp.media/click?shmarker=552524&promo_id=7544&source_type=link&type=click&campaign_id=142&trs=327401" },
+        { key: "drimsim", text: t("drimsim", { fallback: "Drimsim" }), href: "https://tp.media/r?marker=552524&trs=327401&p=2762&u=https%3A%2F%2Fw1.drimsim.com&campaign_id=102" },
       ],
     },
   ] as const;
