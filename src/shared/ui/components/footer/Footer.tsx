@@ -9,8 +9,10 @@ import {
   INSTAGRAM_URL,
   WEBSITE_EMAIL,
   WEBSITE_OFFICE_ADDRESS,
+  WEBSITE_OFFICE_ADDRESS_MAP,
   WEBSITE_PHONE,
   WEBSITE_REGISTERED_ADDRESS,
+  WEBSITE_REGISTERED_ADDRESS_MAP,
   X_URL,
 } from "@/shared/lib/constants/constants";
 
@@ -155,9 +157,7 @@ export const Footer = () => {
     },
   ] as const;
 
-  const phoneValue =
-    WEBSITE_PHONE ||
-    t("phone-number-placeholder", { fallback: "Phone number" });
+  const phoneValue = WEBSITE_PHONE;
   const registeredAddress =
     WEBSITE_REGISTERED_ADDRESS ||
     t("address-placeholder", { fallback: "Address" });
@@ -171,7 +171,13 @@ export const Footer = () => {
           <div className={styles.footer__top}>
             <div className={styles.footer__brand}>
               <Link href="/" className={styles.footer__wordmark}>
-                <Image src="/images/logo_footer.svg" alt="Travellio" width={168} height={28} unoptimized />
+                <Image
+                  src="/images/logo_footer.svg"
+                  alt="Travellio"
+                  width={168}
+                  height={28}
+                  unoptimized
+                />
               </Link>
 
               <div className={styles.footer__socials}>
@@ -182,7 +188,7 @@ export const Footer = () => {
                   aria-label="Instagram"
                   className={styles.footer__socialLink}
                 >
-                    <LinkedinIcon />
+                  <LinkedinIcon />
                 </a>
                 <a
                   href={X_URL}
@@ -227,12 +233,14 @@ export const Footer = () => {
                       {WEBSITE_EMAIL}
                     </Link>
                   </p>
-                  <p>
-                    <strong>
-                      {t("phone-number", { fallback: "Phone number" })}:
-                    </strong>{" "}
-                    {phoneValue}
-                  </p>
+                  {phoneValue && (
+                    <p>
+                      <strong>
+                        {t("phone-number", { fallback: "Phone number" })}:
+                      </strong>{" "}
+                      <Link href={`tel:${phoneValue}`}>{phoneValue}</Link>
+                    </p>
+                  )}
                   <p>
                     <strong>
                       {t("footer-registered-address", {
@@ -240,7 +248,13 @@ export const Footer = () => {
                       })}
                       :
                     </strong>{" "}
-                    {registeredAddress}
+                    <span>{registeredAddress}</span>
+                    <div
+                      className={styles.footer__addressMap}
+                      dangerouslySetInnerHTML={{
+                        __html: WEBSITE_REGISTERED_ADDRESS_MAP,
+                      }}
+                    />
                   </p>
                   <p>
                     <strong>
@@ -249,7 +263,13 @@ export const Footer = () => {
                       })}
                       :
                     </strong>{" "}
-                    {officeAddress}
+                    <span>{officeAddress}</span>
+                    <div
+                      className={styles.footer__addressMap}
+                      dangerouslySetInnerHTML={{
+                        __html: WEBSITE_OFFICE_ADDRESS_MAP,
+                      }}
+                    />
                   </p>
                 </div>
               </div>
@@ -309,9 +329,7 @@ export const Footer = () => {
 
       <div className="container">
         <div className={styles.footer__bottom}>
-          <p className={styles.footer__bottomText}>
-            © {year} Vellio Int Ltd.
-          </p>
+          <p className={styles.footer__bottomText}>© {year} Vellio Int Ltd.</p>
           <p className={styles.footer__bottomText}>
             {t("crafted-for-travellers", {
               fallback: "Crafted for global travellers. All rights reserved.",

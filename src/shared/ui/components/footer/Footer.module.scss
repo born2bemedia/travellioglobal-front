@@ -88,9 +88,7 @@ $footer-line: rgba(249, 250, 245, 0.12);
     justify-content: center;
     width: 24px;
     height: 24px;
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 
     &:hover {
       opacity: 0.72;
@@ -182,6 +180,25 @@ $footer-line: rgba(249, 250, 245, 0.12);
 
     p {
       color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      span {
+        color: #f9faf5;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      a{
+        font-weight: 500;
+        text-decoration: underline;
+      }
+
+      iframe {
+        border-radius: 14px;
+      }
     }
 
     strong {
@@ -213,7 +230,6 @@ $footer-line: rgba(249, 250, 245, 0.12);
     gap: 32px;
     padding: 55px 0 0;
     border-top: 1px solid $footer-line;
-    
 
     @include tablet {
       padding: 32px 0;
