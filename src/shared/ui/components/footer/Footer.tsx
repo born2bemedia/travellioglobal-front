@@ -310,7 +310,7 @@ export const Footer = () => {
       <div className="container">
         <div className={styles.footer__bottom}>
           <p className={styles.footer__bottomText}>
-            © {year} Travellio Limited UK.
+            © {year} Vellio Int Ltd.
           </p>
           <p className={styles.footer__bottomText}>
             {t("crafted-for-travellers", {
