@@ -1,0 +1,209 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.search {
+  position: relative;
+  z-index: 1;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px);
+
+  &__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: end;
+    padding: 16px 16px 24px;
+  }
+
+  &__fields {
+    display: grid;
+    gap: 8px;
+  }
+
+  &__rowTop {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  &__rowBottom {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 260px)) minmax(0, 1fr);
+    gap: 24px;
+    align-items: end;
+  }
+
+  &__field {
+    min-width: 0;
+    border-bottom: 1px solid rgba(215, 215, 215, 0.72);
+  }
+
+  &__fieldInner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 56px;
+    padding: 8px;
+    color: #fffdf1;
+
+    img {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__selectWrap {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__dateDisplay,
+  &__counterText {
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &__dateInput {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__passengers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__counterButtons {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  &__counterBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fff;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-width: 202px;
+    height: 56px;
+    padding: 8px 52px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffdf1;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    img {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  @include tablet {
+    &__form {
+      grid-template-columns: 1fr;
+    }
+
+    &__rowTop,
+    &__rowBottom {
+      gap: 16px;
+    }
+
+    &__rowBottom {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &__submit {
+      width: 100%;
+    }
+  }
+
+  @include mobile {
+    border-radius: 24px;
+
+    &__form {
+      gap: 14px;
+      padding: 16px;
+    }
+
+    &__rowTop,
+    &__rowBottom {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    &__dateDisplay,
+    &__counterText,
+    &__submit span {
+      font-size: 17px;
+    }
+
+    &__passengers {
+      gap: 8px;
+    }
+
+    &__submit {
+      min-width: 0;
+      height: 56px;
+      padding: 8px 28px;
+    }
+  }
+}

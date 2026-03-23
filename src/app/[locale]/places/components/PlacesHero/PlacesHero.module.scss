@@ -73,6 +73,9 @@
     font-size: 32px;
     font-weight: 600;
     line-height: 1;
+    @include mobile {
+      text-align: center;
+    }
   }
 
   &__text {
@@ -101,10 +104,12 @@
 
     &__subtitle {
       font-size: 28px;
+      text-align: center;
     }
 
     &__text p {
       font-size: 18px;
+      text-align: center;
     }
   }
 

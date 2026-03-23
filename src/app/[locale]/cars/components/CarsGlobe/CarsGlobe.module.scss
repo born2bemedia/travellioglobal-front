@@ -1,0 +1,186 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.globe {
+  padding: 60px 0;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    max-width: 627px;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+    color: #eb5e28;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #252422;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+
+  &__card {
+    position: relative;
+    height: 300px;
+    border-radius: 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  &__cardBg {
+    position: absolute;
+    inset: 0;
+    background-color: #eb5e28;
+    background-size: cover;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+  }
+
+  &__cardImage {
+    object-fit: cover;
+    object-position: right bottom;
+  }
+
+  &__cardContent {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__cardFlag {
+    font-size: 54px;
+    line-height: 1;
+  }
+
+  &__cardName {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    color: #fffdf1;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    max-width: 654px;
+    text-align: center;
+  }
+
+  &__footerTitle {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    color: #000;
+  }
+
+  &__footerText {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #252422;
+    max-width: 614px;
+  }
+
+  @include tablet {
+    padding: 48px 0;
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__subtitle {
+      font-size: 18px;
+    }
+
+    &__card {
+      height: 260px;
+      border-radius: 24px;
+    }
+
+    &__cardFlag {
+      font-size: 44px;
+    }
+
+    &__cardName {
+      font-size: 28px;
+    }
+
+    &__footerTitle {
+      font-size: 28px;
+    }
+  }
+
+  @include mobile {
+    padding: 40px 0;
+
+    &__header {
+      max-width: none;
+    }
+
+    &__title {
+      font-size: 36px;
+      text-align: center;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    &__card {
+      height: 220px;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    &__cardFlag {
+      font-size: 36px;
+    }
+
+    &__cardName {
+      font-size: 24px;
+    }
+
+    &__footerTitle {
+      font-size: 24px;
+    }
+
+    &__footerText {
+      font-size: 14px;
+    }
+  }
+}

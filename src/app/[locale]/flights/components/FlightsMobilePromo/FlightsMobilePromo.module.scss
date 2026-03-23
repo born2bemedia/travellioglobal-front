@@ -1,0 +1,58 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.promo {
+  display: none;
+  padding-bottom: 56px;
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 775px;
+    padding: 16px;
+    overflow: hidden;
+    border-radius: 24px;
+    isolation: isolate;
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 253, 241, 0.16) 0%, rgba(255, 253, 241, 0.02) 32%, rgba(0, 0, 0, 0.06) 100%);
+  }
+
+  &__copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 16px;
+
+    h2 {
+      color: #eb5e28;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      text-align: center;
+    }
+
+    p {
+      color: #252422;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+  }
+
+  @include mobile {
+    display: block;
+  }
+}

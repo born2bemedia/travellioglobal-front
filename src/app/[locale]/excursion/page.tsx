@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 import { ExcursionPage } from "./components";
 
 export const metadata: Metadata = {
-  title: "Excursions | Travellio Global",
+  title: "Global Excursions & Experiences | Travellio Global",
   description:
-    "Discover expertly crafted excursions across Europe, Asia, the Americas, and beyond. Experience the world with Travellio Global.",
+    "Book immersive excursions, cultural experiences, adventure activities, and iconic city highlights across the world.",
   openGraph: {
-    title: "Excursions | Travellio Global",
+    title: "Global Excursions & Experiences | Travellio Global",
     description:
-      "Discover expertly crafted excursions across Europe, Asia, the Americas, and beyond. Experience the world with Travellio Global.",
-    images: "https://travellioglobal.com/images/meta.png",
+      "Book immersive excursions, cultural experiences, adventure activities, and iconic city highlights across the world.",
+    //images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

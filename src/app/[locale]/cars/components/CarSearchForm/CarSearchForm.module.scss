@@ -1,0 +1,240 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.search {
+  position: relative;
+  z-index: 1;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px);
+
+  &__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: end;
+    padding: 16px 16px 24px;
+  }
+
+  &__fields {
+    display: grid;
+    gap: 8px;
+  }
+
+  &__rowTop {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  &__rowBottom {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: end;
+  }
+
+  &__field {
+    min-width: 0;
+    border-bottom: 1px solid rgba(215, 215, 215, 0.72);
+  }
+
+  &__fieldInner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 56px;
+    padding: 8px;
+    color: #fffdf1;
+
+    img,
+    svg {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__selectWrap {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    color: #fffdf1;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  &__checkboxInput {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__checkboxBox {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #fffdf1;
+    border-radius: 4px;
+    position: relative;
+    transition: background-color 0.2s ease;
+  }
+
+  &__checkboxInput:checked + &__checkboxBox {
+    background: #eb5e28;
+    border-color: #eb5e28;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 3px;
+      width: 6px;
+      height: 11px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__dateDisplay {
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &__dateInput {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__timeSelect {
+    background: transparent;
+    color: #fffcf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    option {
+      background: #252422;
+      color: #fffdf1;
+    }
+  }
+
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-width: 202px;
+    height: 56px;
+    padding: 8px 52px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffdf1;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    img {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  @include tablet {
+    &__form {
+      grid-template-columns: 1fr;
+    }
+
+    &__rowTop,
+    &__rowBottom {
+      gap: 16px;
+    }
+
+    &__rowBottom {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__submit {
+      width: 100%;
+    }
+
+    &__checkbox {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    border-radius: 20px;
+
+    &__form {
+      gap: 14px;
+      padding: 12px 12px 18px;
+    }
+
+    &__rowTop,
+    &__rowBottom {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    &__dateDisplay,
+    &__submit span {
+      font-size: 17px;
+    }
+
+    &__checkbox {
+      font-size: 16px;
+    }
+
+    &__timeSelect {
+      font-size: 17px;
+    }
+
+    &__submit {
+      min-width: 0;
+      height: 48px;
+      padding: 8px 28px;
+    }
+  }
+}

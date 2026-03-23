@@ -1,0 +1,150 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.why {
+  padding: 60px 0;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+    color: #eb5e28;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 315px;
+    padding: 16px;
+    border-radius: 24px;
+    background: #eb5e28;
+    color: #fffdf1;
+    overflow: hidden;
+  }
+
+  &__cardTop {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  &__cardTitle {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__cardDesc {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-top: auto;
+  }
+
+  &__cardBottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__cardNumber {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #fffdf1;
+  }
+
+  &__cardIcon {
+    flex-shrink: 0;
+  }
+
+  @include tablet {
+    padding: 48px 0;
+
+    &__inner {
+      gap: 40px;
+    }
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    &__card {
+      height: 280px;
+    }
+
+    &__cardTitle {
+      font-size: 28px;
+    }
+
+    &__cardDesc {
+      font-size: 18px;
+    }
+
+    &__cardNumber {
+      font-size: 52px;
+    }
+  }
+
+  @include mobile {
+    padding: 40px 0;
+
+    &__inner {
+      gap: 28px;
+    }
+
+    &__title {
+      font-size: 36px;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    &__card {
+      height: 260px;
+      padding: 14px;
+      border-radius: 20px;
+    }
+
+    &__cardTitle {
+      font-size: 24px;
+    }
+
+    &__cardDesc {
+      font-size: 16px;
+    }
+
+    &__cardNumber {
+      font-size: 44px;
+    }
+
+    &__cardIcon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}

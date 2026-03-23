@@ -1,0 +1,145 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.featured {
+  margin-top: -60px;
+  padding: 60px 0;
+  background: #f9faf5;
+  border-radius: 32px 32px 0 0;
+  position: relative;
+  z-index: 111;
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    min-height: 630px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    color: #fffdf1;
+    isolation: isolate;
+  }
+
+  &__imageDesktop,
+  &__imageMobile {
+    object-fit: cover;
+  }
+
+  &__imageDesktop {
+    display: block;
+    object-position: center 50%;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.58) 100%);
+  }
+
+  &__top {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) minmax(320px, 575px);
+    gap: 48px;
+    align-items: start;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__copy {
+    display: grid;
+    gap: 8px;
+  }
+
+  &__description {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  &__list {
+    padding-left: 18px;
+    display: grid;
+    gap: 2px;
+
+    li {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+  }
+
+  @include tablet {
+    margin-top: -24px;
+
+    &__card {
+      min-height: 0;
+    }
+
+    &__top {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__description {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    padding-bottom: 56px;
+
+    &__card {
+      gap: 24px;
+      padding: 24px 16px 20px;
+      min-height: auto;
+      border-radius: 24px;
+    }
+
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+      object-position: center;
+    }
+
+    &__top {
+      gap: 16px;
+    }
+
+    &__title {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      text-align: center;
+    }
+
+    &__description {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    &__list li {
+      font-size: 16px;
+      line-height: 1.18;
+    }
+  }
+}

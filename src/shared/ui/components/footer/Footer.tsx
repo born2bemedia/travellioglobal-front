@@ -58,16 +58,16 @@ export const Footer = () => {
   const year = new Date().getFullYear();
 
   const TRAVEL_HUB_ITEMS: readonly FooterLinkItem[] = [
-    { key: "tours", text: t("tours", { fallback: "Tours" }) },
-    { key: "excursions", text: t("excursions", { fallback: "Excursions" }) },
-    { key: "places", text: t("places", { fallback: "Places" }) },
-    { key: "flights", text: t("flights", { fallback: "Flights" }) },
-    { key: "cars", text: t("cars", { fallback: "Cars" }) },
-    { key: "taxi", text: t("taxi", { fallback: "Taxi" }) },
+    { key: "tours", text: t("tours", { fallback: "Tours" }), href: "/tours" },
+    { key: "excursions", text: t("excursions", { fallback: "Excursions" }), href: "/excursion" },
+    { key: "places", text: t("places", { fallback: "Places" }), href: "/places" },
+    { key: "flights", text: t("flights", { fallback: "Flights" }), href: "/flights" },
+    { key: "cars", text: t("cars", { fallback: "Cars" }), href: "/cars" },
+    { key: "taxi", text: t("taxi", { fallback: "Taxi" }), href: "/taxi" },
     {
       key: "journal",
       text: t("journal", { fallback: "Journal" }),
-      href: "/ideas",
+      href: "/journal",
     },
   ] as const;
 

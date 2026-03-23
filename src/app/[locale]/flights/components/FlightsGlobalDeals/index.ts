@@ -1,0 +1,1 @@
+export { FlightsGlobalDeals } from "./FlightsGlobalDeals";

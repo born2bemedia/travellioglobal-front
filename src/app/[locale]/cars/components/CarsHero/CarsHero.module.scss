@@ -1,0 +1,141 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  min-height: 647px;
+  padding: 232px 0 120px;
+  margin-top: -132px;
+  overflow: hidden;
+  color: #fffdf1;
+  background: #252422;
+
+  @include tablet {
+    margin-top: -130px;
+    padding: 220px 0 120px;
+  }
+
+  @include mobile {
+    margin-top: -120px;
+    padding: 200px 0 120px;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+
+    img {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: clamp(72px, 9vw, 128px);
+    font-weight: 500;
+    line-height: 0.78;
+    letter-spacing: -0.06em;
+    text-align: center;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: minmax(280px, 471px) minmax(0, 632px);
+    gap: 48px;
+    align-items: start;
+  }
+
+  &__subtitle {
+    max-width: 471px;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 0.9;
+  }
+
+  &__text {
+    display: grid;
+    gap: 16px;
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+  }
+
+  @include tablet {
+    min-height: 600px;
+    padding: 164px 0 76px;
+
+    &__inner {
+      margin-bottom: 72px;
+    }
+
+    &__content {
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 28px;
+    }
+
+    &__subtitle {
+      font-size: 44px;
+    }
+
+    &__text p {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    min-height: auto;
+    padding: 148px 0 120px;
+
+    &__inner {
+      margin-bottom: 44px;
+    }
+
+    &__title {
+      font-size: 72px;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    &__subtitle {
+      max-width: none;
+      font-size: 36px;
+      text-align: center;
+    }
+
+    &__text {
+      gap: 14px;
+
+      p {
+        font-size: 17px;
+        line-height: 1.25;
+        text-align: center;
+      }
+    }
+  }
+}

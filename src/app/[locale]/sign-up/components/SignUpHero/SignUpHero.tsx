@@ -26,12 +26,12 @@ export const SignUpHero = () => {
       <div className="container">
         <div className={styles.sign_up_hero__top}>
           <h1 className={`main-heading-title ${styles.sign_up_hero__title}`}>
-            {t('title', { fallback: 'Join Axelvior Today' })}
+            {t('title', { fallback: 'Join Travellio Global Today' })}
           </h1>
           <p className={`main-heading-subtitle ${styles.header_text}`}>
             {t('subtitle', {
               fallback:
-                'Register to manage your engagements and unlock exclusive strategic insights. Partner with Axelvior to scale your impact today.',
+                'Register to manage your engagements and unlock exclusive strategic insights. Partner with Travellio Global to scale your impact today.',
             })}
           </p>
         </div>

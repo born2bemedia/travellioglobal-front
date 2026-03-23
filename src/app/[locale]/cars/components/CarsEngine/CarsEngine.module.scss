@@ -1,0 +1,119 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.engine {
+  padding: 60px 0;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: minmax(280px, 627px) minmax(0, 575px);
+    gap: 78px;
+    align-items: start;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+    color: #eb5e28;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #252422;
+  }
+
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__step {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  &__stepNumber {
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #252422;
+  }
+
+  &__stepText {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #252422;
+  }
+
+  &__note {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.25;
+      color: #252422;
+    }
+  }
+
+  @include tablet {
+    padding: 48px 0;
+
+    &__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__subtitle,
+    &__stepText,
+    &__note p {
+      font-size: 18px;
+    }
+
+    &__stepNumber {
+      font-size: 28px;
+    }
+  }
+
+  @include mobile {
+    padding: 40px 0;
+
+    &__inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    &__title {
+      font-size: 36px;
+    }
+
+    &__subtitle,
+    &__stepText,
+    &__note p {
+      font-size: 16px;
+    }
+
+    &__stepNumber {
+      font-size: 24px;
+    }
+  }
+}

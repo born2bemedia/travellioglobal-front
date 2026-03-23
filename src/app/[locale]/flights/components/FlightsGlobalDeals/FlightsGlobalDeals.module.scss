@@ -1,0 +1,405 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.deals {
+  padding-bottom: 72px;
+
+  &__inner {
+    display: grid;
+    gap: 48px;
+  }
+
+  &__intro {
+    display: grid;
+    grid-template-columns: minmax(280px, 627px) minmax(0, 575px);
+    gap: 56px;
+    align-items: start;
+  }
+
+  &__title {
+    color: #eb5e28;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__copy {
+    display: grid;
+    gap: 16px;
+    color: #252422;
+  }
+
+  &__lead {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  &__description {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  &__points {
+    padding-left: 18px;
+    display: grid;
+    gap: 4px;
+    list-style: disc;
+
+    li {
+      font-size: 16px;
+      line-height: 1.25;
+    }
+  }
+
+  &__card {
+    display: grid;
+    grid-template-columns: 348px minmax(0, 1fr);
+    gap: 16px;
+    align-items: stretch;
+    padding: 16px;
+    border: 1px solid rgba(235, 94, 40, 0.2);
+    border-radius: 24px;
+    background: #fffdf1;
+  }
+
+  &__filters {
+    display: grid;
+    gap: 28px;
+    padding: 32px;
+    border-radius: 16px;
+    background: #eb5e28;
+    color: #fffdf1;
+  }
+
+  &__filterBlock {
+    display: grid;
+    gap: 16px;
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    padding: 16px 8px;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.52);
+  }
+
+  &__fieldMain {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    span {
+      font-size: 20px;
+      line-height: 1;
+    }
+  }
+
+  &__fieldCode {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  &__checks {
+    display: grid;
+    gap: 16px;
+  }
+
+  &__check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    span {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+  }
+
+  &__duration {
+    display: grid;
+    gap: 16px;
+
+    p {
+      font-size: 20px;
+      line-height: 1;
+    }
+  }
+
+  &__durationLabels {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    span {
+      font-size: 14px;
+      line-height: 1.1;
+    }
+  }
+
+  &__slider {
+    position: relative;
+    height: 24px;
+  }
+
+  &__sliderTrack,
+  &__sliderRange {
+    position: absolute;
+    top: 11px;
+    left: 0;
+    height: 2px;
+    border-radius: 999px;
+  }
+
+  &__sliderTrack {
+    right: 0;
+    background: rgba(255, 253, 241, 0.38);
+  }
+
+  &__sliderRange {
+    left: 17%;
+    width: 42%;
+    background: #fffdf1;
+  }
+
+  &__sliderThumbStart,
+  &__sliderThumbEnd {
+    position: absolute;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #fffdf1;
+    box-shadow: 0 0 0 2px rgba(255, 253, 241, 0.18);
+  }
+
+  &__sliderThumbStart {
+    left: 17%;
+  }
+
+  &__sliderThumbEnd {
+    left: 57%;
+  }
+
+  &__results {
+    display: grid;
+    gap: 24px;
+    padding: 16px 8px 8px;
+  }
+
+  &__summary {
+    padding: 16px 24px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffdf1;
+
+    div {
+      display: grid;
+      gap: 4px;
+    }
+
+    strong {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    span {
+      font-size: 14px;
+      line-height: 1;
+    }
+  }
+
+  &__desktopCalendar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  &__month {
+    min-height: 73px;
+    border: 1px solid rgba(235, 94, 40, 0.5);
+    border-radius: 12px;
+    background: transparent;
+    color: #eb5e28;
+    font-size: 16px;
+    line-height: 1.1;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  &__monthActive {
+    background: #eb5e28;
+    color: #fffdf1;
+  }
+
+  &__mobileCalendar {
+    display: none;
+  }
+
+  &__mobileCalendarTop {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &__mobileControl {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: #252422;
+    font-size: 20px;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  &__mobileArrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  &__mobileGrid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  &__mobileDay {
+    display: grid;
+    place-items: center;
+    gap: 4px;
+    min-height: 47px;
+    padding: 8px 2px;
+    border-radius: 12px;
+    background: transparent;
+    color: #252422;
+    cursor: pointer;
+
+    span {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    small {
+      font-size: 12px;
+      line-height: 1;
+    }
+  }
+
+  &__mobileDayActive {
+    background: rgba(235, 94, 40, 0.08);
+    color: #eb5e28;
+  }
+
+  @include tablet {
+    &__intro {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__description,
+    &__lead {
+      font-size: 18px;
+    }
+
+    &__card {
+      grid-template-columns: 1fr;
+    }
+
+    &__filters {
+      gap: 20px;
+    }
+  }
+
+  @include mobile {
+    padding-bottom: 56px;
+
+    &__inner {
+      gap: 32px;
+    }
+
+    &__title {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.06em;
+    }
+
+    &__lead,
+    &__description {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    &__points li {
+      font-size: 16px;
+    }
+
+    &__card {
+      padding: 8px;
+      border-radius: 24px;
+    }
+
+    &__filters {
+      gap: 20px;
+      padding: 16px;
+    }
+
+    &__fieldMain span,
+    &__fieldCode,
+    &__duration p {
+      font-size: 20px;
+    }
+
+    &__results {
+      gap: 8px;
+      padding: 0;
+    }
+
+    &__summary {
+      border-radius: 16px 16px 0 0;
+      padding: 16px;
+    }
+
+    &__desktopCalendar {
+      display: none;
+    }
+
+    &__mobileCalendar {
+      display: grid;
+      gap: 12px;
+      padding: 0 16px 16px;
+      background: #fffdf1;
+      border-radius: 0 0 16px 16px;
+    }
+
+    &__mobileControl {
+      font-size: 16px;
+    }
+
+    &__mobileGrid {
+      gap: 4px;
+    }
+
+    &__mobileDay {
+      min-height: 46px;
+      border-radius: 10px;
+
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+}

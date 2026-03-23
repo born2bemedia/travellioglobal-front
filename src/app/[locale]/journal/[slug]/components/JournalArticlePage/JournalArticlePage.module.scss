@@ -1,0 +1,99 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.page {
+  background: #f9faf5;
+}
+
+.hero {
+  position: relative;
+  min-height: 647px;
+  margin-top: -132px;
+  padding: 228px 0 94px;
+  overflow: hidden;
+  background: #252422;
+  color: #fffdf1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 78.57%),
+      var(--journal-hero-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scale(1.01);
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 325px;
+  }
+
+  &__title {
+    max-width: 1280px;
+    margin: 0;
+    color: #fffdf1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: clamp(64px, 6.7vw, 96px);
+    font-weight: 500;
+    line-height: 0.84;
+    letter-spacing: -0.06em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  @include tablet {
+    min-height: 560px;
+    margin-top: -128px;
+    padding: 208px 0 78px;
+
+    &__inner {
+      min-height: 260px;
+    }
+  }
+
+  @include mobile {
+    min-height: 418px;
+    margin-top: -120px;
+    padding: 174px 0 82px;
+
+    &::before {
+      transform: none;
+      background-position: center;
+    }
+
+    &__inner {
+      min-height: auto;
+    }
+
+    &__title {
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+  }
+}
+
+.surface {
+  position: relative;
+  margin-top: -47px;
+  padding: 60px 0 120px;
+  border-radius: 32px 32px 0 0;
+  background: #f9faf5;
+
+  @include mobile {
+    margin-top: -37px;
+    padding: 24px 0 72px;
+    border-radius: 32px 32px 0 0;
+  }
+}

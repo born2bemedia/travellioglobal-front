@@ -46,7 +46,7 @@ export const ThankYou = () => {
       <div className={styles.wrap}>
         <h1 className={styles.title}>
           {t('thankYou', {
-            fallback: 'Thank you for partnering with Axelvior!',
+            fallback: 'Thank you for partnering with Travellio Global!',
           })}
         </h1>
         <p className={styles.text}>

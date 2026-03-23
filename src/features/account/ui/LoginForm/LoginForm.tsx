@@ -53,7 +53,7 @@ export const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.header}>
-        <h1 className={styles.title}>{t('title', { fallback: 'Welcome Back to Axelvior' })}</h1>
+        <h1 className={styles.title}>{t('title', { fallback: 'Welcome Back to Travellio Global' })}</h1>
         <p className={styles.text}>
           {t('subtitle', {
             fallback:

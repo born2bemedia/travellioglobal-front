@@ -1,0 +1,106 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  padding: 300px 0 100px;
+  overflow: hidden;
+
+
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &__decoration {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__swirlImage {
+  }
+
+  &__title {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: clamp(72px, 9vw, 128px);
+    font-weight: 500;
+    line-height: 0.78;
+    letter-spacing: -0.06em;
+    color: #eb5e28;
+    text-align: center;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #000;
+    max-width: 1092px;
+  }
+
+  &__description {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #000;
+    max-width: 464px;
+  }
+
+  @include tablet {
+    padding: 100px 0 48px;
+
+    &__title {
+      font-size: 72px;
+    }
+
+    &__subtitle {
+      font-size: 24px;
+    }
+
+    &__description {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    padding: 80px 0 40px;
+
+    &__inner {
+      gap: 24px;
+    }
+
+    &__title {
+      font-size: 48px;
+      line-height: 0.9;
+    }
+
+    &__subtitle {
+      font-size: 20px;
+    }
+
+    &__description {
+      font-size: 16px;
+      max-width: none;
+    }
+  }
+}

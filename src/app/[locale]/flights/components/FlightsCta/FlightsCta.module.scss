@@ -1,0 +1,119 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.cta {
+  padding-bottom: 103px;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 630px;
+    gap: 48px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    isolation: isolate;
+  }
+
+  &__imageDesktop,
+  &__imageMobile {
+    object-fit: cover;
+  }
+
+  &__imageDesktop {
+    display: block;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &__copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 440px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+    color: #fffdf1;
+
+    h2 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+
+  &__text {
+    display: grid;
+    gap: 0;
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+  }
+
+  @include tablet {
+    padding-bottom: 80px;
+
+    &__inner {
+      min-height: 0;
+      gap: 40px;
+    }
+
+    &__copy {
+      grid-template-columns: 1fr;
+      gap: 24px;
+
+      h2 {
+        font-size: 44px;
+      }
+    }
+
+    &__text p {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    padding-bottom: 72px;
+
+    &__inner {
+      gap: 28px;
+      padding: 16px;
+      border-radius: 24px;
+    }
+
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+      object-position: center;
+    }
+
+    &__copy {
+      h2 {
+        font-size: 32px;
+        font-weight: 500;
+        letter-spacing: -0.06em;
+      }
+    }
+
+    &__text p {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+  }
+}

@@ -1,0 +1,150 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  margin-top: -132px;
+  overflow: hidden;
+  background: #f9faf5;
+  color: #fffdf1;
+  @include tablet {
+    padding-bottom: 24px;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 100%;
+    background: #252422;
+  }
+
+  &__mediaBase,
+  &__mediaOverlay {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__inner {
+    display: grid;
+    gap: 100px;
+    padding-top: 232px;
+    padding-bottom: 176px;
+  }
+
+  &__titleWrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: clamp(72px, 9vw, 128px);
+    font-weight: 500;
+    line-height: 0.78;
+    letter-spacing: -0.06em;
+    text-align: center;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: minmax(280px, 629px) minmax(0, 632px);
+    gap: 48px;
+    align-items: start;
+  }
+
+  &__headline {
+    font-family: var(--font-syne), sans-serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500;
+    line-height: 0.9;
+    @include mobile {
+      text-align: center;
+    }
+  }
+
+  &__text {
+    display: grid;
+    gap: 16px;
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: #fff;
+      @include mobile {
+        text-align: center;
+      }
+    }
+  }
+
+  @include tablet {
+    margin-top: -130px;
+
+    &__media {
+      height: 100%;
+    }
+
+    &__inner {
+      gap: 72px;
+      padding-top: 204px;
+      padding-bottom: 128px;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  @include mobile {
+    margin-top: -120px;
+    color: #252422;
+
+    &__media {
+      height: 100%;
+    }
+
+    &__inner {
+      gap: 52px;
+      padding-top: 148px;
+      padding-bottom: 40px;
+    }
+
+    &__title {
+      color: #fffdf1;
+      font-size: 72px;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+    }
+
+    &__content {
+      gap: 20px;
+    }
+
+    &__headline {
+      color: #eb5e28;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    &__text {
+      gap: 8px;
+
+      p {
+        font-size: 16px;
+        line-height: 1.25;
+      }
+    }
+  }
+}

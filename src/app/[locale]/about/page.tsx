@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 import { AboutPage } from "./components";
 
 export const metadata: Metadata = {
-  title: "About | Travellio Global",
+  title: "About Travellio Global | Our Story & Travel Philosophy",
   description:
-    "Learn more about Travellio Global, our vision, and the promise behind every journey we craft.",
+    "Learn how Travellio Global curates meaningful travel experiences, seamless services, and unforgettable global adventures.",
   openGraph: {
-    title: "About | Travellio Global",
+    title: "About Travellio Global | Our Story & Travel Philosophy",
     description:
-      "Learn more about Travellio Global, our vision, and the promise behind every journey we craft.",
-    images: "https://travellioglobal.com/images/meta.png",
+      "Learn how Travellio Global curates meaningful travel experiences, seamless services, and unforgettable global adventures.",
+    //images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

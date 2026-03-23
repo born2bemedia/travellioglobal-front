@@ -1,0 +1,9 @@
+export { TaxiPage } from "./TaxiPage";
+export { TaxiHero } from "./TaxiHero";
+export { TaxiCta } from "./TaxiCta";
+export { TaxiSearchForm } from "./TaxiSearchForm";
+export { TaxiSchedule } from "./TaxiSchedule";
+export { TaxiStyle } from "./TaxiStyle";
+export { TaxiGlobal } from "./TaxiGlobal";
+export { TaxiWhy } from "./TaxiWhy";
+export { TaxiBook } from "./TaxiBook";

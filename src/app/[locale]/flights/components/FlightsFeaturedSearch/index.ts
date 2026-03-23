@@ -1,0 +1,1 @@
+export { FlightsFeaturedSearch } from "./FlightsFeaturedSearch";

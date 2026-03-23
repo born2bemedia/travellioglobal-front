@@ -67,7 +67,7 @@ export const Header = () => {
   const locale = useLocale();
 
   useEffect(() => {
-    const whiteTopbarPathnames = ["/tours", "/excursion", "/places"];
+    const whiteTopbarPathnames = ["/tours", "/excursion", "/places", "/flights"];
     const isWhite = whiteTopbarPathnames.includes(pathname);
     console.log(isWhite, isWhiteTopbar, pathname);
     if (isWhite !== isWhiteTopbar) {
@@ -93,13 +93,17 @@ export const Header = () => {
       text: t("places", { fallback: "Places" }),
       href: "/places",
     },
-    { key: "flights", text: t("flights", { fallback: "Flights" }) },
-    { key: "cars", text: t("cars", { fallback: "Cars" }) },
-    { key: "taxi", text: t("taxi", { fallback: "Taxi" }) },
+    {
+      key: "flights",
+      text: t("flights", { fallback: "Flights" }),
+      href: "/flights",
+    },
+    { key: "cars", text: t("cars", { fallback: "Cars" }), href: "/cars" },
+    { key: "taxi", text: t("taxi", { fallback: "Taxi" }), href: "/taxi" },
     {
       key: "journal",
       text: t("journal", { fallback: "Journal" }),
-      href: "/ideas",
+      href: "/journal",
     },
     {
       key: "contacts",
