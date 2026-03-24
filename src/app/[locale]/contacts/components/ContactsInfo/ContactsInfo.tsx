@@ -67,7 +67,7 @@ export const ContactsInfo = () => {
             <p className={styles.info__addressText}>
               {t("officeAddress", {
                 fallback:
-                  "Suite 513, 5th Floor, Tuition House, 27-37 St. George\u2019s Road, London, SW19 4EU",
+                  "Suite 513, 5th Floor, Tuition House, 27-37 St. George's Road, London, SW19 4EU",
               })}
             </p>
           </div>
