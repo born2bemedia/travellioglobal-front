@@ -1,0 +1,1 @@
+export { ContactsConnected } from "./ContactsConnected";

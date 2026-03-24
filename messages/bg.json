@@ -480,6 +480,37 @@
     "description2": "Тази форма ни помага да видим какво изграждате, къде нещата изглеждат неясни и каква подкрепа обмисляте.\n",
     "title1": "Нека определим следващата стъпка"
   },
+  "contactsPage": {
+    "heroTitle": "Говорете за пътувания с нас",
+    "heroSubtitle": "Въпроси? Идеи? Мечти за пътуване, които чакат да се сбъднат? Ще се радваме да чуем от вас.",
+    "heroDescription": "Независимо дали имате нужда от помощ при резервация, искате насоки за следващото си приключение или просто имате нещо за споделяне, нашият екип е готов да помогне.",
+    "emailUsTitle": "Пишете ни",
+    "registeredAddressTitle": "Регистриран адрес",
+    "registeredAddress": "2nd Floor College House, 17 King Edwards Road, Ruislip, Лондон, Обединено кралство, HA4 7AE",
+    "officeAddressTitle": "Адрес на офиса",
+    "officeAddress": "Suite 513, 5-ти етаж, Tuition House, 27-37 St. George\u2019s Road, Лондон, SW19 4EU",
+    "stayConnectedTitle": "Останете свързани",
+    "stayConnectedSubtitle": "Следвайте Travellio Global в социалните мрежи за:",
+    "cardTravel": "Вдъхновение за пътуване",
+    "cardDestination": "Акценти за дестинации",
+    "cardOffers": "Ексклузивни оферти",
+    "cardTips": "Съвети от вътрешния човек",
+    "getInTouchTitle": "Свържете се с Travellio Global",
+    "getInTouchSubtitle": "Великите пътешествия започват с велики разговори.",
+    "closingTitle": "Тук сме за вас",
+    "closingLine1": "Голямо пътуване или малък въпрос — на едно съобщение разстояние сме.",
+    "closingLine2": "Нека планираме нещо незабравимо."
+  },
+  "contactsForm": {
+    "name": "Име",
+    "email": "Имейл",
+    "message": "Съобщение",
+    "required": "(задължително)",
+    "optional": "(по избор)",
+    "messagePlaceholder": "Оставете вашето съобщение тук",
+    "loading": "Зареждане...",
+    "submit": "Изпрати съобщение"
+  },
   "HomeRequestForm": {
     "attachments": "Прикачени файлове",
     "attachmentsExamples": "(напр. бележки, схеми, линкове, чернови)",

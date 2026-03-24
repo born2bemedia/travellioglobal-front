@@ -484,6 +484,37 @@
     "description2": "Questo modulo ci aiuta a vedere cosa stai costruendo, dove le cose sembrano poco chiare e che tipo di supporto stai considerando.\n",
     "title1": "Definiamo il prossimo passo"
   },
+  "contactsPage": {
+    "heroTitle": "Parliamo di Viaggi",
+    "heroSubtitle": "Domande? Idee? Sogni di viaggio che aspettano di realizzarsi? Ci piacerebbe sentirti.",
+    "heroDescription": "Che tu abbia bisogno di aiuto con una prenotazione, desideri una guida per la tua prossima avventura o semplicemente abbia qualcosa da condividere, il nostro team è pronto ad assisterti.",
+    "emailUsTitle": "Scrivici",
+    "registeredAddressTitle": "Indirizzo Registrato",
+    "registeredAddress": "2nd Floor College House, 17 King Edwards Road, Ruislip, Londra, Regno Unito, HA4 7AE",
+    "officeAddressTitle": "Indirizzo Ufficio",
+    "officeAddress": "Suite 513, 5° Piano, Tuition House, 27-37 St. George\u2019s Road, Londra, SW19 4EU",
+    "stayConnectedTitle": "Resta Connesso",
+    "stayConnectedSubtitle": "Segui Travellio Global sui social media per:",
+    "cardTravel": "Ispirazione di viaggio",
+    "cardDestination": "Destinazioni in evidenza",
+    "cardOffers": "Offerte esclusive",
+    "cardTips": "Consigli degli esperti",
+    "getInTouchTitle": "Contatta Travellio Global",
+    "getInTouchSubtitle": "I grandi viaggi iniziano con grandi conversazioni.",
+    "closingTitle": "Siamo Qui per Te",
+    "closingLine1": "Grande viaggio o piccola domanda — siamo a un messaggio di distanza.",
+    "closingLine2": "Pianifichiamo qualcosa di indimenticabile."
+  },
+  "contactsForm": {
+    "name": "Nome",
+    "email": "Email",
+    "message": "Messaggio",
+    "required": "(obbligatorio)",
+    "optional": "(opzionale)",
+    "messagePlaceholder": "Lascia qui il tuo messaggio",
+    "loading": "Caricamento...",
+    "submit": "Invia Messaggio"
+  },
   "HomeRequestForm": {
     "attachments": "Allegati",
     "attachmentsExamples": "(ad es., note, schemi, link, bozze)",

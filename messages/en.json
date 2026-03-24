@@ -262,6 +262,27 @@
     "whyFreedomDesc": "Discover hidden roads, secret beaches, and places tours can\\u2019t reach.",
     "whyTitle": "Why Rent with Travellio Global?"
   },
+  "contactsPage": {
+    "closingTitle": "We're Here for You",
+    "closingLine1": "Big trip or small question - we're just one message away.",
+    "closingLine2": "Let's plan something unforgettable.",
+    "cardTravel": "Travel inspiration",
+    "cardDestination": "Destination highlights",
+    "cardOffers": "Exclusive offers",
+    "cardTips": "Insider tips",
+    "stayConnectedTitle": "Stay Connected",
+    "stayConnectedSubtitle": "Follow Travellio Global on social media for:",
+    "getInTouchTitle": "Get in Touch with Travellio Global",
+    "getInTouchSubtitle": "Great journeys start with great conversations.",
+    "heroTitle": "Talk Travel to Us",
+    "heroSubtitle": "Questions? Ideas? Travel dreams waiting to happen? We'd love to hear from you.",
+    "heroDescription": "Whether you need help with a booking, want guidance on your next adventure, or simply have something to share, our team is ready to assist.",
+    "emailUsTitle": "Email Us",
+    "registeredAddressTitle": "Registered Address",
+    "registeredAddress": "2nd Floor College House, 17 King Edwards Road, Ruislip, London, United Kingdom, HA4 7AE",
+    "officeAddressTitle": "Office Address",
+    "officeAddress": "Suite 513, 5th Floor, Tuition House, 27-37 St. George\\u2019s Road, London, SW19 4EU"
+  },
   "excursionPage": {
     "ctaTitle": "Start Your Adventure Today",
     "ctaSubtitle": "Why wait for your dream vacation? Let's make it happen.",
@@ -354,9 +375,6 @@
     "heroDescription": "Whether you need help with a booking, want guidance on your next adventure, or simply have something to share, our team is ready to assist.",
     "noArticles": "No articles found",
     "articleContents": "Article contents"
-  },
-  "common": {
-    "back-to-ideas": "Back"
   },
   "placesPage": {
     "ctaTitle": "Your Next Destination Awaits",
@@ -707,6 +725,16 @@
     "submitted": "submitted successfully",
     "thankYou": "Our team will reach out within the next business day.",
     "close": "Continue"
+  },
+  "contactsForm": {
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "message": "Message",
+    "messagePlaceholder": "Leave your message here",
+    "loading": "Loading...",
+    "submit": "Send Message"
   },
   "contactFormNew": {
     "fullName": "Full name",

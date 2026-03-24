@@ -484,6 +484,37 @@
     "description2": "Dieses Formular hilft uns zu sehen, was Sie aufbauen, wo es unklar ist und welche Art von Unterstützung Sie in Betracht ziehen.\n",
     "title1": "Lassen Sie uns den nächsten Schritt definieren"
   },
+  "contactsPage": {
+    "heroTitle": "Sprechen Sie mit uns über Reisen",
+    "heroSubtitle": "Fragen? Ideen? Reiseträume, die darauf warten, wahr zu werden? Wir freuen uns, von Ihnen zu hören.",
+    "heroDescription": "Ob Sie Hilfe bei einer Buchung benötigen, Beratung für Ihr nächstes Abenteuer wünschen oder einfach etwas mitteilen möchten — unser Team steht bereit.",
+    "emailUsTitle": "E-Mail an uns",
+    "registeredAddressTitle": "Registrierte Adresse",
+    "registeredAddress": "2nd Floor College House, 17 King Edwards Road, Ruislip, London, Vereinigtes Königreich, HA4 7AE",
+    "officeAddressTitle": "Büroadresse",
+    "officeAddress": "Suite 513, 5. Etage, Tuition House, 27-37 St. George\u2019s Road, London, SW19 4EU",
+    "stayConnectedTitle": "Bleiben Sie verbunden",
+    "stayConnectedSubtitle": "Folgen Sie Travellio Global in den sozialen Medien für:",
+    "cardTravel": "Reiseinspiration",
+    "cardDestination": "Reiseziel-Highlights",
+    "cardOffers": "Exklusive Angebote",
+    "cardTips": "Insider-Tipps",
+    "getInTouchTitle": "Kontaktieren Sie Travellio Global",
+    "getInTouchSubtitle": "Großartige Reisen beginnen mit großartigen Gesprächen.",
+    "closingTitle": "Wir sind für Sie da",
+    "closingLine1": "Große Reise oder kleine Frage — wir sind nur eine Nachricht entfernt.",
+    "closingLine2": "Lassen Sie uns etwas Unvergessliches planen."
+  },
+  "contactsForm": {
+    "name": "Name",
+    "email": "E-Mail",
+    "message": "Nachricht",
+    "required": "(erforderlich)",
+    "optional": "(optional)",
+    "messagePlaceholder": "Hinterlassen Sie hier Ihre Nachricht",
+    "loading": "Laden...",
+    "submit": "Nachricht senden"
+  },
   "HomeRequestForm": {
     "attachments": "Anhänge",
     "attachmentsExamples": "(z. B. Notizen, Gliederungen, Links, Entwürfe)",

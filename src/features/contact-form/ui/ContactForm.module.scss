@@ -339,8 +339,8 @@
     gap: 12px;
     width: 507px;
     max-width: 100%;
-    border: 1px solid #222;
-    background: var(--color-blue-8, #000829);
+    border: 1px solid #fff;
+    background: #fff;
     position: relative;
     img {
       position: absolute;
@@ -362,7 +362,7 @@
       }
     }
     h2 {
-      color: #fff;
+      color: #eb5e28;
       font-size: 32px;
       font-style: normal;
       font-weight: 500;
@@ -371,12 +371,9 @@
       @include tablet {
         font-size: 24px;
       }
-      span {
-        color: #fff;
-      }
     }
     p {
-      color: #fff;
+      color: #000;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
