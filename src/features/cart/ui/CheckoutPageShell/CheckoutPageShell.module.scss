@@ -1,0 +1,53 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.page {
+  background: #f9faf5;
+}
+
+.hero {
+  position: relative;
+  padding: 48px 0 160px;
+
+  @include tablet {
+    padding-bottom: 136px;
+  }
+
+  @include mobile {
+    padding: 28px 0 96px;
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__decoration {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    transform: translateX(-50%);
+    opacity: 0.9;
+    pointer-events: none;
+
+    @include tablet {
+      top: -84px;
+      width: 136%;
+      max-width: none;
+    }
+
+    @include mobile {
+      top: -40px;
+      width: 205%;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    margin-top: 120px;
+  }
+}

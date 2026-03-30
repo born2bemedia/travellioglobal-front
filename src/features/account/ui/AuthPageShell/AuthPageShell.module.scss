@@ -1,0 +1,120 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.page {
+  background: #f9faf5;
+}
+
+.hero {
+  position: relative;
+  padding: 80px 0 160px;
+
+  @include mobile {
+    padding: 40px 0 96px;
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__decoration {
+    position: absolute;
+    top: -124px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    opacity: 0.9;
+
+    @include tablet {
+      top: -60px;
+    }
+
+    @include mobile {
+      top: -24px;
+      width: 180%;
+      max-width: none;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 96px;
+
+    @include tablet {
+      gap: 72px;
+    }
+
+    @include mobile {
+      gap: 40px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+
+    @include mobile {
+      gap: 24px;
+    }
+  }
+
+  &__title {
+    max-width: 1120px;
+    margin: 0;
+    color: #eb5e28;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 128px;
+    font-weight: 500;
+    line-height: 100px;
+    letter-spacing: -7.68px;
+    text-align: center;
+    text-wrap: balance;
+
+    @include tablet {
+      font-size: 80px;
+      line-height: 72px;
+      letter-spacing: -4.8px;
+    }
+
+    @include mobile {
+      font-size: 48px;
+      line-height: 44px;
+      letter-spacing: -2.88px;
+    }
+  }
+
+  &__subtitle {
+    max-width: 1092px;
+    margin: 0;
+    color: #000;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    text-wrap: balance;
+
+    @include tablet {
+      font-size: 24px;
+    }
+
+    @include mobile {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+  }
+
+  &__card {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}

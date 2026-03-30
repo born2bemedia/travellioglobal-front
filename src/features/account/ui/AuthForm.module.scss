@@ -1,0 +1,304 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.form {
+  width: min(100%, 631px);
+  border: 1px solid #eb5e28;
+  border-radius: 24px;
+  background: #f9faf5;
+  padding: 16px 16px 24px;
+
+  @include mobile {
+    padding: 16px 12px 20px;
+    border-radius: 20px;
+  }
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+
+  @include mobile {
+    gap: 28px;
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 8px;
+  border-bottom: 1px solid rgba(64, 61, 56, 0.25);
+
+  @include mobile {
+    padding: 14px 4px;
+  }
+}
+
+.fieldError {
+  border-bottom-color: #c90000;
+}
+
+.fieldHeader {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  color: #eb5e28;
+}
+
+.fieldIcon {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.label {
+  color: currentColor;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+
+  @include mobile {
+    font-size: 18px;
+  }
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #403d38;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  &::placeholder {
+    color: rgba(64, 61, 56, 0.5);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.errorText {
+  margin: 0;
+  color: #c90000;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.togglePassword {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #eb5e28;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #ae431b;
+  }
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkboxBox {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #eb5e28;
+  border-radius: 4px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.checkboxInput:checked + .checkboxBox {
+  background: #eb5e28;
+}
+
+.checkboxInput:checked + .checkboxBox::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
+  border: solid #fffdf1;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkboxText {
+  color: #eb5e28;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @include mobile {
+    font-size: 18px;
+  }
+}
+
+.checkboxTextCompact {
+  font-size: 14px;
+  line-height: 1.35;
+
+  @include mobile {
+    font-size: 13px;
+  }
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #eb5e28;
+  color: #fffcf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: #ae431b;
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.secondaryLink {
+  align-self: center;
+  color: #eb5e28;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #ae431b;
+  }
+
+  @include mobile {
+    font-size: 18px;
+  }
+}
+
+.rootError {
+  margin: 0;
+  color: #c90000;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(100%, 631px);
+  margin: 0 auto;
+  padding: 16px 16px 24px;
+  border: 1px solid #eb5e28;
+  border-radius: 24px;
+  background: #f9faf5;
+  text-align: center;
+}
+
+.successTitle {
+  margin: 0;
+  color: #eb5e28;
+  font-family: var(--font-syne), sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+
+  @include mobile {
+    font-size: 36px;
+  }
+}
+
+.successText {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}

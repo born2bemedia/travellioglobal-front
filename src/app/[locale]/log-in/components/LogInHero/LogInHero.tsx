@@ -1,40 +1,22 @@
 'use client';
 
-import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
-import { motion } from 'framer-motion';
-
+import { AuthPageShell } from '@/features/account/ui/AuthPageShell/AuthPageShell';
 import { LoginForm } from '@/features/account/ui/LoginForm/LoginForm';
 
-import { fadeInUp } from '@/shared/lib/helpers/animations';
-
-import styles from './LogInHero.module.scss';
-
 export const LogInHero = () => {
+  const t = useTranslations('account');
+
   return (
-    <motion.section
-      className={styles.log_in_form}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeInUp}
+    <AuthPageShell
+      title={t('heroTitle', { fallback: 'Welcome Back to Travellio Global' })}
+      subtitle={t('heroSubtitle', {
+        fallback:
+          'Enter your login details to access your account. If you can’t remember your password, select “Forgot Password?” and we’ll help you reset it.',
+      })}
     >
-      <div className="container">
-        <LoginForm />
-
-        <div className={styles.log_in_form__image_desktop}>
-          <Image
-            src="/images/logIn/log-in-image-desktop.png"
-            alt="Hero"
-            width={1312}
-            height={373}
-          />
-        </div>
-
-        <div className={styles.log_in_form__image_mobile}>
-          <Image src="/images/logIn/log-in-image-mobile.png" alt="Hero" width={740} height={678} />
-        </div>
-      </div>
-    </motion.section>
+      <LoginForm />
+    </AuthPageShell>
   );
 };

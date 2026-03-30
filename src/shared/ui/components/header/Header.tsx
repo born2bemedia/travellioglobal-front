@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 
 import { useLocale, useTranslations } from "next-intl";
 
+import { useAuthStore } from "@/features/account/store/auth";
+
 import {
   FACEBOOK_URL,
   INSTAGRAM_URL,
@@ -65,9 +67,20 @@ export const Header = () => {
   >(null);
   const pathname = usePathname();
   const locale = useLocale();
+  const user = useAuthStore((state) => state.user);
+  const fetchUser = useAuthStore((s) => s.fetchUser);
 
   useEffect(() => {
-    const whiteTopbarPathnames = ["/tours", "/excursion", "/places", "/flights"];
+    fetchUser();
+  }, [fetchUser]);
+
+  useEffect(() => {
+    const whiteTopbarPathnames = [
+      "/tours",
+      "/excursion",
+      "/places",
+      "/flights",
+    ];
     const isWhite = whiteTopbarPathnames.includes(pathname);
     console.log(isWhite, isWhiteTopbar, pathname);
     if (isWhite !== isWhiteTopbar) {
@@ -354,9 +367,24 @@ export const Header = () => {
                 </a>
               </div>
 
-              {/**<div className={styles.header__topbar_lang_wrapper}>
-                <LangSelector />
-              </div> */}
+              <div className={styles.header__actions}>
+                <Link
+                  href={user ? "/account" : "/log-in"}
+                  className={styles.header__login}
+                >
+                  <span>
+                    {user
+                      ? t("account", { fallback: "Account" })
+                      : t("login", { fallback: "Login" })}
+                  </span>
+                </Link>
+
+                {!user && (
+                  <Link href="/sign-up" className={styles.header__signin}>
+                    {t("sign-up", { fallback: "Sign up" })}
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -443,37 +471,6 @@ export const Header = () => {
                     </div>
                   );
                 })}
-
-                {/*
-                <div className={styles.header__actions}>
-                  {!user && (
-                    <Link href="/sign-up" className={styles.header__btn_signin}>
-                      {t('sign-up', { fallback: 'Sign up' })}
-                    </Link>
-                  )}
-
-                  <Link href={user ? '/account' : '/log-in'} className={styles.header__btn_login}>
-                    <span className={styles.header__actionIcon} aria-hidden="true">
-                      <AccountIcon />
-                    </span>
-                    <span>
-                      {user
-                        ? t('account', { fallback: 'Account' })
-                        : t('login', { fallback: 'Login' })}
-                    </span>
-                  </Link>
-
-                  <Link href="/checkout" className={styles.header__btn_cart}>
-                    <span className={styles.header__actionIcon} aria-hidden="true">
-                      <CartIcon />
-                    </span>
-                    <span>{t('cart', { fallback: 'Cart' })}</span>
-                    {totalItems > 0 && (
-                      <span className={styles.header__cart_badge}>{totalItems}</span>
-                    )}
-                  </Link>
-                </div>
-                */}
               </div>
 
               <div className={styles.header__mobile_controls}>
@@ -595,32 +592,23 @@ export const Header = () => {
           })}
         </div>
 
-        {/* 
-          <div className={styles.header__mobile_actions}>
-            {!user && (
-              <Link href="/sign-up" className={styles.header__btn_signin}>
-                {t('sign-up', { fallback: 'Sign up' })}
-              </Link>
-            )}
-
-            <Link href={user ? '/account' : '/log-in'} className={styles.header__btn_login}>
-              <span className={styles.header__actionIcon} aria-hidden="true">
-                <AccountIcon />
-              </span>
-              <span>
-                {user ? t('account', { fallback: 'Account' }) : t('login', { fallback: 'Login' })}
-              </span>
+        <div className={styles.header__mobile_actions}>
+          <Link
+            href={user ? "/account" : "/log-in"}
+            className={styles.header__btn_login}
+          >
+            <span>
+              {user
+                ? t("account", { fallback: "Account" })
+                : t("login", { fallback: "Login" })}
+            </span>
+          </Link>
+          {!user && (
+            <Link href="/sign-up" className={styles.header__btn_signin}>
+              {t("sign-up", { fallback: "Sign up" })}
             </Link>
-
-            <Link href="/checkout" className={styles.header__btn_cart}>
-              <span className={styles.header__actionIcon} aria-hidden="true">
-                <CartIcon />
-              </span>
-              <span>{t('cart', { fallback: 'Cart' })}</span>
-              {totalItems > 0 && <span className={styles.header__cart_badge}>{totalItems}</span>}
-            </Link>
-          </div>
-          */}
+          )}
+        </div>
       </div>
     </>
   );

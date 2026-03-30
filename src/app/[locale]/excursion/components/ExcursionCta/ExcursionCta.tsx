@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { Link } from "@/i18n/navigation";
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 
 import styles from "./ExcursionCta.module.scss";
+
+import { Link } from "@/i18n/navigation";
 
 export const ExcursionCta = () => {
   const t = useTranslations("excursionPage");

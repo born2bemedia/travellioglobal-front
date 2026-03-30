@@ -1,12 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-
 import Image from "next/image";
 
-import { cn } from "@/shared/lib/helpers/styles";
-
 import type { Children, Children2 } from "@/features/articles/model/types";
+
+import { cn } from "@/shared/lib/helpers/styles";
 
 import styles from "./JournalArticleBody.module.scss";
 

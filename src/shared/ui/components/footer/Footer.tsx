@@ -75,7 +75,7 @@ export const Footer = () => {
     {
       key: "terms",
       text: t("terms-and-conditions", { fallback: "Terms and Conditions" }),
-      href: "/legal/terms-of-use",
+      href: "/legal/terms-and-conditions",
     },
     {
       key: "privacy",
@@ -95,6 +95,7 @@ export const Footer = () => {
     {
       key: "affiliate",
       text: t("affiliate-disclaimer", { fallback: "Affiliate Disclaimer" }),
+      href: "/legal/affiliate-disclaimer",
     },
   ] as const;
 

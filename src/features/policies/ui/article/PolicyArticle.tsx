@@ -102,16 +102,26 @@ export const PolicyArticle = ({ content }: PolicyArticleProps) => {
   return (
     <div className={st.article}>
       <nav className={st.toc}>
-        {headings.map((h, i) => (
-          <button
-            key={h.id}
-            type="button"
-            className={`${st.toc__item} ${activeId === h.id ? st['toc__item--active'] : ''}`}
-            onClick={() => scrollTo(h.id)}
-          >
-            {i + 1}. {h.title}
-          </button>
-        ))}
+        {headings.map((h) => {
+          const isActive = activeId === h.id;
+          return (
+            <button
+              key={h.id}
+              type="button"
+              className={`${st.toc__item} ${isActive ? st['toc__item--active'] : ''}`}
+              onClick={() => scrollTo(h.id)}
+            >
+              {isActive && (
+                <span className={st.toc__icon} aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.75 9H14.25M14.25 9L10.5 5.25M14.25 9L10.5 12.75" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              )}
+              <span className={st.toc__label}>{h.title}</span>
+            </button>
+          );
+        })}
       </nav>
 
       <div className={st.content}>
@@ -120,7 +130,7 @@ export const PolicyArticle = ({ content }: PolicyArticleProps) => {
             key={section.id}
             ref={setSectionRef(section.id)}
             data-section-id={section.id}
-            className={st.card}
+            className={st.section}
           >
             {section.nodes.map((node, i) => (
               <PolicyContent key={`${section.id}-${i}`} node={node} type={node.type} />

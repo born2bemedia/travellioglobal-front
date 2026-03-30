@@ -40,11 +40,11 @@ $ink: #3c2718;
     z-index: 100;
 
     &.white {
-      a{
+      a {
         color: #fff;
       }
-      svg{
-        path{
+      svg {
+        path {
           fill: #fff;
         }
       }
@@ -295,7 +295,6 @@ $ink: #3c2718;
     border-radius: 18px;
     background: $cream;
     box-shadow: 0 18px 38px rgba(60, 39, 24, 0.14);
-    
   }
 
   &__dropdownItem {
@@ -327,10 +326,18 @@ $ink: #3c2718;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 8px;
+    gap: 20px;
 
     @include tablet {
       display: none;
+    }
+
+    a {
+      color: var(--Brand-color, #eb5e28);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 100%; /* 16px */
     }
   }
 
@@ -505,6 +512,7 @@ $ink: #3c2718;
       z-index: 999;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       gap: 0;
       width: 100%;
       padding: 16px 16px 16px;
@@ -603,8 +611,7 @@ $ink: #3c2718;
     display: flex;
     flex-direction: column;
     gap: 0;
-    margin-top: 56px;
-    padding-right: 16px;
+    //margin-top: 56px;
   }
 
   &__mobileDropdown {
@@ -662,37 +669,24 @@ $ink: #3c2718;
 
   &__mobile_actions {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 
-    .header__btn_signin,
-    .header__btn_login,
-    .header__btn_cart {
+    a {
+      display: flex;
+      padding: 12px 24px;
+      flex-direction: column;
       justify-content: center;
-      width: 100%;
-      min-height: 44px;
-      font-size: 14px;
-    }
-
-    .header__btn_login,
-    .header__btn_cart {
-      border-color: rgba(235, 94, 40, 0.14);
-    }
-
-    .header__btn_login {
-      background: rgba(235, 94, 40, 0.08);
-      color: $orange;
-    }
-
-    .header__btn_cart {
-      background: $orange;
-      border-color: $orange;
-      color: $cream;
-    }
-
-    .header__cart_badge {
-      background: $cream;
-      color: $orange;
+      align-items: center;
+      gap: 8px;
+      flex: 1 0 0;
+      color: #fffdf1;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 100%; /* 16px */
+      border-radius: 500px;
+      background: #eb5e28;
+      border: none;
     }
   }
 

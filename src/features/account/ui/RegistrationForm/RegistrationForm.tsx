@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -11,11 +11,11 @@ import {
   registrationSchema,
 } from '@/features/account/model/account-settings.schema';
 import { useAuthStore } from '@/features/account/store/auth';
+import { AuthFieldIcon } from '@/features/account/ui/AuthFieldIcon';
+import styles from '@/features/account/ui/AuthForm.module.scss';
 
-import { EyeIcon, EyeOffIcon } from '@/shared/ui/icons';
-import { Button } from '@/shared/ui/kit/button/Button';
-
-import styles from './RegistrationForm.module.scss';
+import { cn } from '@/shared/lib/helpers/styles';
+import { ArrowRightIcon, EyeIcon, EyeOffIcon } from '@/shared/ui/icons';
 
 import { Link, useRouter } from '@/i18n/navigation';
 
@@ -71,188 +71,249 @@ export const RegistrationForm = () => {
   if (isSuccess) {
     return (
       <div className={styles.successMessage}>
-        <h2>{t('successTitle', { fallback: 'Your account has been created successfully!' })}</h2>
-        <p>
+        <h2 className={styles.successTitle}>
+          {t('successTitle', { fallback: 'Your account has been created successfully!' })}
+        </h2>
+        <p className={styles.successText}>
           {t('successMessage', { fallback: 'You can now log in with your email and password.' })}
         </p>
-        <Button type="button" variant="white" onClick={() => router.push('/log-in')}>
+        <button
+          type="button"
+          className={styles.submitButton}
+          onClick={() => router.push('/log-in')}
+        >
+          <ArrowRightIcon />
           {t('goToLogin', { fallback: 'Go to Login' })}
-        </Button>
+        </button>
       </div>
     );
   }
 
+  const firstNameError = errors.firstName?.message;
+  const lastNameError = errors.lastName?.message;
+  const usernameError = errors.username?.message;
+  const emailError = errors.email?.message;
+  const phoneError = errors.phone?.message;
+  const passwordError = errors.password?.message;
+  const repeatPasswordError = errors.repeatPassword?.message;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.formWrapper}>
-        {/* ── First name ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="firstName">
-            {t('firstName', { fallback: 'FIRST NAME' })} <span className={styles.required}>*</span>
-          </label>
-          <input
-            id="firstName"
-            type="text"
-            {...registerField('firstName')}
-            autoComplete="given-name"
-            placeholder={t('firstNamePlaceholder', { fallback: 'Enter your name' })}
-            className={errors.firstName ? styles.errorInput : ''}
-          />
-          {errors.firstName && <span className={styles.error}>{errors.firstName.message}</span>}
-        </div>
-
-        {/* ── Last name ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="lastName">
-            {t('lastName', { fallback: 'LAST NAME' })} <span className={styles.required}>*</span>
-          </label>
-          <input
-            id="lastName"
-            type="text"
-            {...registerField('lastName')}
-            autoComplete="family-name"
-            placeholder={t('lastNamePlaceholder', { fallback: 'Enter your last name' })}
-            className={errors.lastName ? styles.errorInput : ''}
-          />
-          {errors.lastName && <span className={styles.error}>{errors.lastName.message}</span>}
-        </div>
-
-        {/* ── User name ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="username">{t('username', { fallback: 'USERNAME' })}</label>
-          <input
-            id="username"
-            type="text"
-            {...registerField('username')}
-            autoComplete="family-name"
-            placeholder={t('usernamePlaceholder', { fallback: 'Enter your username' })}
-            className={errors.lastName ? styles.errorInput : ''}
-          />
-          {errors.username && <span className={styles.error}>{errors.username.message}</span>}
-        </div>
-
-        {/* ── Email ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="email">
-            {t('email', { fallback: 'EMAIL' })} <span className={styles.required}>*</span>
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...registerField('email')}
-            autoComplete="email"
-            placeholder={t('emailPlaceholder', { fallback: 'Enter your email' })}
-            className={errors.email ? styles.errorInput : ''}
-          />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-        </div>
-
-        {/* ── Phone ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="phone">
-            {t('phone', { fallback: 'PHONE NUMBER' })} <span className={styles.required}>*</span>
-          </label>
-          <input
-            id="phone"
-            type="tel"
-            {...registerField('phone')}
-            placeholder="+1 23456789"
-            className={errors.phone ? styles.errorInput : ''}
-          />
-          {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
-        </div>
-
-        {/* ── Password ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="password">
-            {t('password', { fallback: 'PASSWORD' })} <span className={styles.required}>*</span>
-          </label>
-          <div className={styles.passwordWrapper}>
-            <input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              {...registerField('password')}
-              autoComplete="new-password"
-              placeholder={t('passwordPlaceholder', { fallback: 'Enter your password' })}
-              className={errors.password ? styles.errorInput : ''}
-            />
-            <button
-              type="button"
-              className={styles.togglePassword}
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-            >
-              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
+        <div className={styles.fields}>
+          <div className={cn(styles.field, firstNameError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="user" className={styles.fieldIcon} />
+              <label htmlFor="firstName" className={styles.label}>
+                {t('firstNameLabel', { fallback: 'First name' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="firstName"
+                type="text"
+                {...registerField('firstName')}
+                autoComplete="given-name"
+                aria-invalid={Boolean(firstNameError)}
+                placeholder={t('firstNamePlaceholderText', { fallback: 'Enter your first name' })}
+                className={styles.input}
+              />
+            </div>
+            {firstNameError && <p className={styles.errorText}>{firstNameError}</p>}
           </div>
-          {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-        </div>
 
-        {/* ── Repeat Password ───────────────────────── */}
-        <div className={styles.formGroup}>
-          <label htmlFor="repeatPassword">
-            {t('repeatPassword', { fallback: 'REPEAT PASSWORD' })}{' '}
-            <span className={styles.required}>*</span>
-          </label>
-          <div className={styles.passwordWrapper}>
-            <input
-              id="repeatPassword"
-              type={showRepeatPassword ? 'text' : 'password'}
-              {...registerField('repeatPassword')}
-              placeholder={t('repeatPasswordPlaceholder', { fallback: 'Repeat your password' })}
-              className={errors.repeatPassword ? styles.errorInput : ''}
-            />
-            <button
-              type="button"
-              className={styles.togglePassword}
-              onClick={() => setRepeatShowPassword(!showRepeatPassword)}
-              aria-label={showRepeatPassword ? 'Hide password' : 'Show password'}
-            >
-              {showRepeatPassword ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
+          <div className={cn(styles.field, lastNameError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="id-card" className={styles.fieldIcon} />
+              <label htmlFor="lastName" className={styles.label}>
+                {t('lastNameLabel', { fallback: 'Last name' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="lastName"
+                type="text"
+                {...registerField('lastName')}
+                autoComplete="family-name"
+                aria-invalid={Boolean(lastNameError)}
+                placeholder={t('lastNamePlaceholderText', { fallback: 'Enter your last name' })}
+                className={styles.input}
+              />
+            </div>
+            {lastNameError && <p className={styles.errorText}>{lastNameError}</p>}
           </div>
-          {errors.repeatPassword && (
-            <span className={styles.error}>{errors.repeatPassword.message}</span>
-          )}
+
+          <div className={cn(styles.field, usernameError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="user-circle" className={styles.fieldIcon} />
+              <label htmlFor="username" className={styles.label}>
+                {t('usernameLabel', { fallback: 'Username' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="username"
+                type="text"
+                {...registerField('username')}
+                autoComplete="username"
+                aria-invalid={Boolean(usernameError)}
+                placeholder={t('usernamePlaceholderText', { fallback: 'Enter your username' })}
+                className={styles.input}
+              />
+            </div>
+            {usernameError && <p className={styles.errorText}>{usernameError}</p>}
+          </div>
+
+          <div className={cn(styles.field, emailError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="email" className={styles.fieldIcon} />
+              <label htmlFor="email" className={styles.label}>
+                {t('emailLabel', { fallback: 'Email' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="email"
+                type="email"
+                {...registerField('email')}
+                autoComplete="email"
+                aria-invalid={Boolean(emailError)}
+                placeholder={t('emailPlaceholderText', { fallback: 'Enter your email' })}
+                className={styles.input}
+              />
+            </div>
+            {emailError && <p className={styles.errorText}>{emailError}</p>}
+          </div>
+
+          <div className={cn(styles.field, phoneError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="phone" className={styles.fieldIcon} />
+              <label htmlFor="phone" className={styles.label}>
+                {t('phoneLabel', { fallback: 'Phone number' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="phone"
+                type="tel"
+                {...registerField('phone')}
+                autoComplete="tel"
+                aria-invalid={Boolean(phoneError)}
+                placeholder={t('phonePlaceholderText', { fallback: 'Enter your phone number' })}
+                className={styles.input}
+              />
+            </div>
+            {phoneError && <p className={styles.errorText}>{phoneError}</p>}
+          </div>
+
+          <div className={cn(styles.field, passwordError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="key" className={styles.fieldIcon} />
+              <label htmlFor="password" className={styles.label}>
+                {t('passwordLabel', { fallback: 'Password' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                {...registerField('password')}
+                autoComplete="new-password"
+                aria-invalid={Boolean(passwordError)}
+                placeholder={t('passwordPlaceholderText', { fallback: 'Enter your password' })}
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={
+                  showPassword
+                    ? t('hidePassword', { fallback: 'Hide password' })
+                    : t('showPassword', { fallback: 'Show password' })
+                }
+              >
+                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+              </button>
+            </div>
+            {passwordError && <p className={styles.errorText}>{passwordError}</p>}
+          </div>
+
+          <div className={cn(styles.field, repeatPasswordError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="key" className={styles.fieldIcon} />
+              <label htmlFor="repeatPassword" className={styles.label}>
+                {t('repeatPasswordLabel', { fallback: 'Repeat password' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="repeatPassword"
+                type={showRepeatPassword ? 'text' : 'password'}
+                {...registerField('repeatPassword')}
+                autoComplete="new-password"
+                aria-invalid={Boolean(repeatPasswordError)}
+                placeholder={t('repeatPasswordPlaceholderText', {
+                  fallback: 'Repeat your password',
+                })}
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setRepeatShowPassword(!showRepeatPassword)}
+                aria-label={
+                  showRepeatPassword
+                    ? t('hidePassword', { fallback: 'Hide password' })
+                    : t('showPassword', { fallback: 'Show password' })
+                }
+              >
+                {showRepeatPassword ? <EyeOffIcon /> : <EyeIcon />}
+              </button>
+            </div>
+            {repeatPasswordError && <p className={styles.errorText}>{repeatPasswordError}</p>}
+          </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label className="custom_checkbox_label">
+        <div className={styles.checkboxGroup}>
+          <label className={styles.checkboxLabel}>
             <input
               type="checkbox"
-              className="custom_checkbox_input"
+              className={styles.checkboxInput}
               {...registerField('agreement')}
             />
-            <span className="custom_checkbox_element"></span>
-            <span className="custom_checkbox_label_title">
+            <span className={styles.checkboxBox}></span>
+            <span className={cn(styles.checkboxText, styles.checkboxTextCompact)}>
               {t('agreementPartOne', {
                 fallback:
-                  'By signing up, you confirm that you are over 18 years old and agree to our',
+                  'By registering, you confirm that you are at least 18 years old and agree to our',
               })}{' '}
-              <Link href={'/legal/terms-of-use'}>
+              <Link href="/legal/terms-of-use">
                 {t('agreementBoldOne', {
-                  fallback: 'Terms of Use',
+                  fallback: 'Terms and Conditions',
                 })}
               </Link>{' '}
               {t('agreementPartTwo', {
                 fallback: 'and',
               })}{' '}
-              <Link href={'/legal/privacy-policy'}>
+              <Link href="/legal/privacy-policy">
                 {t('agreementBoldTwo', {
                   fallback: 'Privacy Policy.',
                 })}
               </Link>
             </span>
           </label>
-          {errors.agreement && <div className={styles.error}>{errors.agreement.message}</div>}
+          {errors.agreement && <p className={styles.errorText}>{errors.agreement.message}</p>}
         </div>
 
-        {errors.root && <span className={styles.rootError}>{errors.root.message}</span>}
-        <Button type="submit" variant="blue" disabled={isLoading}>
+        {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
+
+        <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          <ArrowRightIcon />
           {isLoading
             ? t('registering', { fallback: 'Registering...' })
             : t('register', { fallback: 'Join Now' })}
-        </Button>
+        </button>
       </div>
     </form>
   );

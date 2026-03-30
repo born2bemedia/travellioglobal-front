@@ -1,2 +1,2 @@
-export { ToursHero } from "./ToursHero";
 export { ToursContent } from "./ToursContent";
+export { ToursHero } from "./ToursHero";

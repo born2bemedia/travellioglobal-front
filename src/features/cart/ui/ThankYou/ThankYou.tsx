@@ -1,16 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
-import type { CartItem } from '@/features/cart/store/cart';
+import type { CartItem } from "@/features/cart/store/cart";
+import { CheckoutPageShell } from "@/features/cart/ui/CheckoutPageShell/CheckoutPageShell";
 
-import { WEBSITE_EMAIL } from '@/shared/lib/constants/constants';
-import { Button } from '@/shared/ui/kit/button/Button';
-
-import styles from './ThankYou.module.scss';
+import { WEBSITE_EMAIL } from "@/shared/lib/constants/constants";
+import { SuccessPageCard } from "@/shared/ui/components/SuccessPageCard/SuccessPageCard";
 
 type LastOrder = {
   orderNumber: string;
@@ -18,99 +16,72 @@ type LastOrder = {
   total: number;
 };
 
-const formatPrice = (value: number) =>
-  `€${value.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
-
 export const ThankYou = () => {
-  const t = useTranslations('thankYou');
+  const t = useTranslations("thankYou");
   const [order, setOrder] = useState<LastOrder | null>(null);
 
   useEffect(() => {
-    if (typeof sessionStorage === 'undefined') return;
+    if (typeof sessionStorage === "undefined") return;
+
     try {
-      const raw = sessionStorage.getItem('lastOrder');
+      const raw = sessionStorage.getItem("lastOrder");
+
       if (raw) {
-        const parsed = JSON.parse(raw) as LastOrder;
-        queueMicrotask(() => setOrder(parsed));
+        setTimeout(() => {
+          setOrder(JSON.parse(raw) as LastOrder);
+        }, 100);
       }
     } catch {
-      // ignore
+      // ignore persisted session data failures
     }
   }, []);
 
   return (
-    <>
-      <div className={styles.wrap}>
-        <h1 className={styles.title}>
-          {t('thankYou', {
-            fallback: 'Thank you for partnering with Travellio Global!',
-          })}
-        </h1>
-        <p className={styles.text}>
-          {t('text1', {
-            fallback:
-              "We're thrilled to begin this journey with you and help turn your business vision into something impactful and sustainable.",
-          })}
-        </p>
-        <div className={styles.content}>
-          {order && order.items.length > 0 && (
-            <div className={styles.orderDetails}>
-              <h2 className={styles.orderTitle}>
-                {t('orderDetails', { fallback: 'Your Order Details:' })}
-              </h2>
-              <table className={styles.orderTable}>
-                <thead>
-                  <tr>
-                    <th>{t('service', { fallback: 'Service:' })}</th>
-                    <th>{t('quantity', { fallback: 'Quantity:' })}</th>
-                    <th>{t('orderId', { fallback: 'Order ID:' })}</th>
-                    <th>{t('totalAmount', { fallback: 'Total Amount' })}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {order.items.map((item) => (
-                    <tr key={item.id}>
-                      <td data-label={t('service', { fallback: 'Service:' })}>{item.title}</td>
-                      <td data-label={t('quantity', { fallback: 'Quantity:' })}>{item.quantity}</td>
-                      <td data-label={t('orderId', { fallback: 'Order ID:' })}>
-                        #{order.orderNumber}
-                      </td>
-                      <td
-                        data-label={t('totalAmount', {
-                          fallback: 'Total Amount',
-                        })}
-                      >
-                        {formatPrice(item.price * item.quantity)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-          <div className={styles.textWrapper}>
+    <CheckoutPageShell>
+      <SuccessPageCard
+        title={t("thankYou", {
+          fallback: "Booking Successfully Received",
+        })}
+        body={
+          <>
             <p>
-              {t('text2', {
-                fallback:
-                  "Your order is being processed, and you'll receive the payment details via email shortly. Make sure your contact info is up to date, so we can send everything right to you.",
+              {t("bookingIntro", {
+                fallback: "Thank you for choosing Travellio Global.",
               })}
-              <br />
-              {t('text3', {
-                fallback:
-                  'If you have any questions or just want to chat about next steps, feel free to reach out to us at',
-              })}{' '}
-              <a href={`mailto:${WEBSITE_EMAIL}`}>{WEBSITE_EMAIL}</a>. <br />
-              {t('text4', { fallback: "We're here for you!" })}
             </p>
-            <Button type="link" variant="white" url="/">
-              {t('backToHomePage', { fallback: 'Back to Home Page' })}
-            </Button>
-          </div>
-        </div>
-      </div>
-    </>
+            <p>
+              {order?.orderNumber
+                ? t("bookingProcessedWithOrder", {
+                    fallback: `Your reservation request has been received and is currently being processed. A confirmation email with your booking details will be sent to you shortly.`,
+                  })
+                : t("bookingProcessed", {
+                    fallback:
+                      "Your reservation request has been received and is currently being processed. A confirmation email with your booking details will be sent to you shortly.",
+                  })}
+            </p>
+            <p>
+              {t("bookingSupportPrefix", {
+                fallback: "If you need any assistance, please contact us at ",
+              })}
+              <a href={`mailto:${WEBSITE_EMAIL}`}>{WEBSITE_EMAIL}</a>.
+            </p>
+          </>
+        }
+        note={
+          <p>
+            {t("journeyCloser", {
+              fallback: "Your next journey is closer than you think.",
+            })}
+          </p>
+        }
+        prompt={t("prompt", {
+          fallback: "Return to the previous page or:",
+        })}
+        ctaLabel={t("backToHomePage", {
+          fallback: "Head Back Home",
+        })}
+        ctaHref="/"
+      />
+    </CheckoutPageShell>
   );
 };

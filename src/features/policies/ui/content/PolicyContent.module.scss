@@ -1,58 +1,117 @@
-.heading {
-  color: var(--color-black-solid, #000);
-  font-family: var(--font-cabinet-grotesk, sans-serif);
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 120%;
-  letter-spacing: var(--letter-spacing--0_25, -0.25px);
-  margin: 0 0 20px 0;
-}
+@use "@/shared/lib/styles/mixin.scss" as *;
 
-.heading2 {
-  color: var(--color-black-solid, #000);
-  font-family: var(--font-cabinet-grotesk, sans-serif);
-  font-size: 24px;
-  font-style: normal;
+/* ── Headings ──────────────────────────── */
+
+/* h2 — main section title: Syne SemiBold 54px */
+.heading {
+  color: #eb5e28;
+  font-family: var(--font-syne, sans-serif);
+  font-size: 54px;
   font-weight: 600;
-  line-height: 140%;
-  letter-spacing: var(--letter-spacing--0_25, -0.25px);
-  margin: 32px 0 12px 0;
-  &:first-child {
-    margin-top: 0;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  margin: 0 0 8px 0;
+
+  @include tablet {
+    font-size: 40px;
+  }
+
+  @include mobile {
+    font-size: 28px;
   }
 }
 
+/* h3 — sub-section title: Syne SemiBold 32px */
 .heading3 {
-  margin-top: 32px;
-  color: var(--color-black-solid, #000);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 25.2px */
-  letter-spacing: var(--letter-spacing--0_5, -0.5px);
+  color: #eb5e28;
+  font-family: var(--font-syne, sans-serif);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  margin: 0 0 8px 0;
+
+  @include tablet {
+    font-size: 26px;
+  }
+
+  @include mobile {
+    font-size: 22px;
+  }
 }
 
-.text {
+/* h4 */
+.heading2 {
   color: var(--color-black-solid, #000);
-  font-family: var(--font-cabinet-grotesk, sans-serif);
-  font-size: 16px;
-  font-style: normal;
+  font-family: var(--font-plus-jakarta-sans, sans-serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+}
+
+.heading4 {
+  color: var(--color-black-solid, #000);
+  font-family: var(--font-plus-jakarta-sans, sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 6px 0;
+}
+
+/* ── Body text ──────────────────────────── */
+
+.text {
+  color: #252422;
+  font-family: var(--font-plus-jakarta-sans, sans-serif);
+  font-size: 20px;
   font-weight: 400;
-  line-height: 140%;
-  letter-spacing: var(--letter-spacing--0_25, -0.25px);
-  margin: 5px 0;
+  line-height: normal;
+  margin: 0;
+
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .bold {
   font-weight: 700 !important;
 }
 
+/* ── Links ──────────────────────────── */
+
+.link {
+  color: #eb5e28;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+/* ── Lists ──────────────────────────── */
+
 .list {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 18px;
-  color: var(--color-black-solid, #000);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0 0 0 30px;
+  color: #252422;
+  font-family: var(--font-plus-jakarta-sans, sans-serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+
+  @include mobile {
+    font-size: 16px;
+    margin-left: 20px;
+  }
 }
 
 .listDisc {
@@ -68,19 +127,27 @@
 }
 
 .listItem {
-  color: var(--color-black-solid, #000);
-  font-family: var(--font-cabinet-grotesk, sans-serif);
-  font-size: 16px;
-  font-style: normal;
+  color: #252422;
+  font-family: var(--font-plus-jakarta-sans, sans-serif);
+  font-size: 20px;
   font-weight: 400;
-  line-height: 140%;
+  line-height: normal;
+
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .listUrl {
-  color: var(--color-black-solid, #000);
-  font-size: 16px;
-  font-style: normal;
+  color: #eb5e28;
+  font-size: 20px;
   font-weight: 400;
-  line-height: 140%;
-  text-decoration-line: underline;
+  line-height: normal;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+
+  @include mobile {
+    font-size: 16px;
+  }
 }

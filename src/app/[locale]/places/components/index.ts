@@ -1,5 +1,5 @@
-export { PlacesPage } from "./PlacesPage";
-export { PlacesHero } from "./PlacesHero";
-export { PlacesRegions } from "./PlacesRegions";
-export { PlacesFeatures } from "./PlacesFeatures";
 export { PlacesCta } from "./PlacesCta";
+export { PlacesFeatures } from "./PlacesFeatures";
+export { PlacesHero } from "./PlacesHero";
+export { PlacesPage } from "./PlacesPage";
+export { PlacesRegions } from "./PlacesRegions";

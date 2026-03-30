@@ -1,9 +1,11 @@
-import type { Metadata } from 'next';
+import Image from "next/image";
 
-import { getPolicy } from '@/features/policies/api/get-policy';
-import { PolicyArticle } from '@/features/policies/ui/article/PolicyArticle';
+import type { Metadata } from "next";
 
-import st from './page.module.scss';
+import { getPolicy } from "@/features/policies/api/get-policy";
+import { PolicyArticle } from "@/features/policies/ui/article/PolicyArticle";
+
+import st from "./page.module.scss";
 
 export async function generateMetadata({
   params,
@@ -20,7 +22,7 @@ export async function generateMetadata({
     openGraph: {
       title: pageTitle,
       description: policy.seo_description,
-      images: '',
+      images: "",
     },
   };
 }
@@ -35,21 +37,27 @@ export default async function PostPage({
   const policy = await getPolicy({ slug, locale });
 
   return (
-    <>
-      <section className={st.postTitle}>
+    <main className={st.page}>
+      <section className={st.hero}>
+        <Image
+          src="/images/legal/dashed-path.svg"
+          alt=""
+          width={1858}
+          height={513}
+          className={st.hero__globe}
+        />
         <div className="container">
-          <div className={st.postTitle__content}>
-            <h1>{policy.title}</h1>
-          </div>
+          <h1 className={st.hero__title}>{policy.title}</h1>
         </div>
       </section>
+
       {policy.content && (
-        <section className={st.postContent}>
+        <section className={st.surface}>
           <div className="container">
             <PolicyArticle content={policy.content.root.children} />
           </div>
         </section>
       )}
-    </>
+    </main>
   );
 }

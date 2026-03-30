@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 60vh;
   animation: loading 1s ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -13,7 +13,7 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-name: loading;
-  background: linear-gradient(180deg, var(--color-grey-97, #F1F6FD) 0%, #FFF 100%);
+  background: #f9faf5;
 }
 
 @keyframes loading {

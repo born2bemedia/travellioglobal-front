@@ -1,6 +1,6 @@
-export { ContactsPage } from "./ContactsPage";
-export { ContactsHero } from "./ContactsHero";
-export { ContactsInfo } from "./ContactsInfo";
+export { ContactsClosing } from "./ContactsClosing";
 export { ContactsConnected } from "./ContactsConnected";
 export { ContactsGetInTouch } from "./ContactsGetInTouch";
-export { ContactsClosing } from "./ContactsClosing";
+export { ContactsHero } from "./ContactsHero";
+export { ContactsInfo } from "./ContactsInfo";
+export { ContactsPage } from "./ContactsPage";

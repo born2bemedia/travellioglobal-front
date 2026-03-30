@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -8,10 +8,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useAuthStore } from '@/features/account/store/auth';
-import styles from '@/features/account/ui/LoginForm/LoginForm.module.scss';
+import { AuthFieldIcon } from '@/features/account/ui/AuthFieldIcon';
+import styles from '@/features/account/ui/AuthForm.module.scss';
 
-import { EyeIcon, EyeOffIcon } from '@/shared/ui/icons';
-import { Button } from '@/shared/ui/kit/button/Button';
+import { cn } from '@/shared/lib/helpers/styles';
+import { ArrowRightIcon, EyeIcon, EyeOffIcon } from '@/shared/ui/icons';
 
 import { useRouter } from '@/i18n/navigation';
 
@@ -56,75 +57,92 @@ export const SetPasswordForm = ({ token }: { token: string }) => {
     setError('root', { message: result.message ?? 'Reset password failed.' });
   };
 
+  const newPasswordError = errors.newPassword?.message;
+  const repeatPasswordError = errors.repeatNewPassword?.message;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>{t('title', { fallback: 'Set New Password' })}</h1>
-        <p className={styles.text}>
-          {t('subtitle', {
-            fallback: 'Enter your new password and repeat it to confirm.',
-          })}
-        </p>
-      </div>
-
       <div className={styles.formWrapper}>
-        <div className={styles.formGroup}>
-          <label htmlFor="newPassword">{t('newPassword', { fallback: 'NEW PASSWORD' })}</label>
-          <div className={styles.passwordWrapper}>
-            <input
-              id="newPassword"
-              type={showNewPassword ? 'text' : 'password'}
-              {...register('newPassword')}
-              autoComplete="new-password"
-              placeholder={t('newPasswordPlaceholder', { fallback: 'Enter new password' })}
-              className={errors.newPassword ? styles.errorInput : ''}
-            />
-            <button
-              type="button"
-              className={styles.togglePassword}
-              onClick={() => setShowNewPassword((prev) => !prev)}
-              aria-label={showNewPassword ? 'Hide password' : 'Show password'}
-            >
-              {showNewPassword ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
+        <div className={styles.fields}>
+          <div className={cn(styles.field, newPasswordError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="key" className={styles.fieldIcon} />
+              <label htmlFor="newPassword" className={styles.label}>
+                {t('newPasswordLabel', { fallback: 'New password' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="newPassword"
+                type={showNewPassword ? 'text' : 'password'}
+                {...register('newPassword')}
+                autoComplete="new-password"
+                aria-invalid={Boolean(newPasswordError)}
+                placeholder={t('newPasswordPlaceholderText', {
+                  fallback: 'Enter new password',
+                })}
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowNewPassword((prev) => !prev)}
+                aria-label={
+                  showNewPassword
+                    ? t('hidePassword', { fallback: 'Hide password' })
+                    : t('showPassword', { fallback: 'Show password' })
+                }
+              >
+                {showNewPassword ? <EyeOffIcon /> : <EyeIcon />}
+              </button>
+            </div>
+            {newPasswordError && <p className={styles.errorText}>{newPasswordError}</p>}
           </div>
-          {errors.newPassword && <span className={styles.error}>{errors.newPassword.message}</span>}
+
+          <div className={cn(styles.field, repeatPasswordError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="key" className={styles.fieldIcon} />
+              <label htmlFor="repeatNewPassword" className={styles.label}>
+                {t('repeatNewPasswordLabel', { fallback: 'Repeat new password' })}
+              </label>
+            </div>
+            <div className={styles.inputRow}>
+              <input
+                id="repeatNewPassword"
+                type={showRepeatPassword ? 'text' : 'password'}
+                {...register('repeatNewPassword')}
+                autoComplete="new-password"
+                aria-invalid={Boolean(repeatPasswordError)}
+                placeholder={t('repeatNewPasswordPlaceholderText', {
+                  fallback: 'Repeat new password',
+                })}
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowRepeatPassword((prev) => !prev)}
+                aria-label={
+                  showRepeatPassword
+                    ? t('hidePassword', { fallback: 'Hide password' })
+                    : t('showPassword', { fallback: 'Show password' })
+                }
+              >
+                {showRepeatPassword ? <EyeOffIcon /> : <EyeIcon />}
+              </button>
+            </div>
+            {repeatPasswordError && <p className={styles.errorText}>{repeatPasswordError}</p>}
+          </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="repeatNewPassword">
-            {t('repeatNewPassword', { fallback: 'REPEAT NEW PASSWORD' })}
-          </label>
-          <div className={styles.passwordWrapper}>
-            <input
-              id="repeatNewPassword"
-              type={showRepeatPassword ? 'text' : 'password'}
-              {...register('repeatNewPassword')}
-              autoComplete="new-password"
-              placeholder={t('repeatNewPasswordPlaceholder', { fallback: 'Repeat new password' })}
-              className={errors.repeatNewPassword ? styles.errorInput : ''}
-            />
-            <button
-              type="button"
-              className={styles.togglePassword}
-              onClick={() => setShowRepeatPassword((prev) => !prev)}
-              aria-label={showRepeatPassword ? 'Hide password' : 'Show password'}
-            >
-              {showRepeatPassword ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
-          </div>
-          {errors.repeatNewPassword && (
-            <span className={styles.error}>{errors.repeatNewPassword.message}</span>
-          )}
-        </div>
+        {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
 
-        {errors.root && <span className={styles.rootError}>{errors.root.message}</span>}
-
-        <Button type="submit" variant="blue" disabled={isLoading}>
+        <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          <ArrowRightIcon />
           {isLoading
             ? t('savingPassword', { fallback: 'Saving password...' })
             : t('savePassword', { fallback: 'Save Password' })}
-        </Button>
+        </button>
       </div>
     </form>
   );

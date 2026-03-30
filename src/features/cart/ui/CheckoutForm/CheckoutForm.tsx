@@ -5,33 +5,19 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Controller, useForm } from 'react-hook-form';
-import PhoneInput from 'react-phone-input-2';
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
+import { useForm } from 'react-hook-form';
 
 import { useAuthStore } from '@/features/account';
 import { createOrder } from '@/features/cart/api/createOrder';
 import { type CheckoutFormSchema, checkoutFormSchema } from '@/features/cart/model/checkout.schema';
 import { useCartStore } from '@/features/cart/store/cart';
-
-import { excludedCountries } from '@/shared/lib/helpers/excludedCountries';
-import { Button } from '@/shared/ui/kit/button/Button';
+import { CheckoutPageShell } from '@/features/cart/ui/CheckoutPageShell/CheckoutPageShell';
 
 import styles from './CheckoutForm.module.scss';
-
-import 'react-phone-input-2/lib/style.css';
 
 import { useRouter } from '@/i18n/navigation';
 
 const ENABLE_RECAPTCHA = true;
-
-type CountryOption = { value: string; label: string };
-
-const allCountries = countryList().getData() as CountryOption[];
-const countries = allCountries
-  .filter((country: CountryOption) => !excludedCountries.includes(country.value.toLowerCase()))
-  .sort((a: CountryOption, b: CountryOption) => a.label.localeCompare(b.label));
 
 const defaultValues: CheckoutFormSchema = {
   firstName: '',
@@ -55,14 +41,26 @@ const formatPrice = (value: number) =>
     maximumFractionDigits: 2,
   })}`;
 
+const ArrowIcon = () => (
+  <svg width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true">
+    <path
+      d="M2 10H21.5M21.5 10L13.75 2.25M21.5 10L13.75 17.75"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const CheckoutForm = () => {
   const t = useTranslations('checkoutForm');
   const router = useRouter();
   const [recaptchaKey, setRecaptchaKey] = useState(0);
 
-  const user = useAuthStore((s) => s.user);
-  const isInitialized = useAuthStore((s) => s.isInitialized);
-  const fetchUser = useAuthStore((s) => s.fetchUser);
+  const user = useAuthStore((state) => state.user);
+  const isInitialized = useAuthStore((state) => state.isInitialized);
+  const fetchUser = useAuthStore((state) => state.fetchUser);
 
   const items = useCartStore((state) => state.items);
   const getTotalPrice = useCartStore((state) => state.getTotalPrice);
@@ -76,7 +74,6 @@ export const CheckoutForm = () => {
     handleSubmit,
     reset,
     setValue,
-    control,
     formState: { errors, isSubmitting },
   } = useForm<CheckoutFormSchema>({
     resolver: zodResolver(checkoutFormSchema),
@@ -87,7 +84,7 @@ export const CheckoutForm = () => {
     if (!isInitialized) {
       fetchUser();
     }
-  }, [isInitialized, fetchUser]);
+  }, [fetchUser, isInitialized]);
 
   useEffect(() => {
     if (!user || !isInitialized) return;
@@ -99,7 +96,7 @@ export const CheckoutForm = () => {
       email: user.email ?? '',
       phone: (user.phone as string) ?? '',
     });
-  }, [user, isInitialized, reset]);
+  }, [isInitialized, reset, user]);
 
   const handleRecaptchaChange = (token: string | null) => {
     if (ENABLE_RECAPTCHA) {
@@ -138,555 +135,386 @@ export const CheckoutForm = () => {
       });
 
       const orderNumber = (result as { doc?: { orderNumber?: string } })?.doc?.orderNumber ?? '';
+
       if (typeof sessionStorage !== 'undefined') {
         sessionStorage.setItem('lastOrder', JSON.stringify({ orderNumber, items, total }));
       }
 
       clearCart();
-      setRecaptchaKey((k) => k + 1);
+      setRecaptchaKey((current) => current + 1);
       await fetchUser();
       router.push('/thank-you');
-    } catch (err) {
-      console.error(err);
-      setRecaptchaKey((k) => k + 1);
+    } catch (error) {
+      console.error(error);
+      setRecaptchaKey((current) => current + 1);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <div className="container">
+    <CheckoutPageShell>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.shell}>
-          <header className={styles.header}>
-            <h1>{t('checkoutTitle', { fallback: 'Checkout' })}</h1>
-          </header>
+          <div className={styles.content}>
+            <section className={styles.cartSection} aria-labelledby="checkout-cart-title">
+              <h1 id="checkout-cart-title" className={styles.cartTitle}>
+                {t('inYourCart', { fallback: 'In Your Cart' })}
+              </h1>
 
-          <div className={styles.columns}>
-            <section className={styles.cartPanel} aria-labelledby="checkout-cart-title">
-              <div className={styles.cartPanelInner}>
-                <h2 id="checkout-cart-title">{t('inYourCart', { fallback: 'In Your Cart' })}</h2>
-
-                <div className={styles.cartTableDesktop}>
-                  <div className={`${styles.cartRow} ${styles.cartHeadRow}`}>
-                    <div className={`${styles.cartCell} ${styles.nameCell}`}>
-                      {t('serviceName', { fallback: 'Service Name' })}
+              <div className={styles.cartDesktop}>
+                <div className={styles.cartTable}>
+                  <div className={`${styles.cartGrid} ${styles.cartGridHeader}`}>
+                    <div className={styles.nameColumn}>
+                      {t('tourName', { fallback: 'Tour Name' })}
                     </div>
-                    <div className={styles.cartCell}>
-                      {t('totalPriceLabel', { fallback: 'Total Price' })}
+                    <div className={`${styles.altColumn} ${styles.centerCell}`}>
+                      {t('tourDate', { fallback: 'Tour Date' })}
                     </div>
-                    <div className={`${styles.cartCell} ${styles.qtyCell}`}>
-                      {t('quantityLabel', { fallback: 'Quantity' })}
+                    <div className={styles.centerCell}>
+                      {t('pricePerPerson', { fallback: 'Price per person' })}
                     </div>
-                    <div className={styles.cartCell}>
+                    <div className={`${styles.altColumn} ${styles.centerCell}`}>
+                      {t('participants', { fallback: 'Participants' })}
+                    </div>
+                    <div className={styles.centerCell}>
                       {t('subtotalLabel', { fallback: 'Subtotal' })}
                     </div>
                   </div>
 
                   {items.map((item) => (
-                    <div key={item.id} className={styles.cartRow}>
-                      <div className={`${styles.cartCell} ${styles.nameCell}`}>{item.title}</div>
-                      <div className={styles.cartCell}>{formatPrice(item.price)}</div>
-                      <div className={`${styles.cartCell} ${styles.qtyCell}`}>
+                    <div key={item.id} className={styles.cartGrid}>
+                      <div className={styles.nameColumn}>{item.title}</div>
+                      <div className={`${styles.altColumn} ${styles.centerCell}`}>
+                        {item.description?.trim() ||
+                          t('tourDateFallback', { fallback: 'To be confirmed' })}
+                      </div>
+                      <div className={styles.centerCell}>{formatPrice(item.price)}</div>
+                      <div className={`${styles.altColumn} ${styles.centerCell}`}>
                         <div className={styles.quantityControl}>
                           <button
                             type="button"
                             onClick={() => handleQuantityStep(item.id, item.quantity, -1)}
-                            aria-label={t('decreaseQuantity', {
-                              fallback: 'Decrease quantity',
-                            })}
+                            aria-label={t('decreaseQuantity', { fallback: 'Decrease quantity' })}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                            >
-                              <path
-                                d="M4 8H12"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                            <span />
                           </button>
-                          <span>{String(item.quantity).padStart(2, '0')}</span>
+                          <strong>{item.quantity}</strong>
                           <button
                             type="button"
                             onClick={() => handleQuantityStep(item.id, item.quantity, 1)}
-                            aria-label={t('increaseQuantity', {
-                              fallback: 'Increase quantity',
-                            })}
+                            aria-label={t('increaseQuantity', { fallback: 'Increase quantity' })}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                            >
-                              <path
-                                d="M4 8H12"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M8 12V4"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                            <span />
+                            <span className={styles.vertical} />
                           </button>
                         </div>
                       </div>
-                      <div className={styles.cartCell}>
+                      <div className={styles.centerCell}>
                         {formatPrice(item.price * item.quantity)}
                       </div>
                     </div>
                   ))}
-                </div>
 
-                <div className={styles.cartListMobile}>
-                  {items.map((item) => (
-                    <article key={item.id} className={styles.cartItemCard}>
-                      <div className={styles.cartItemCardHeader}>{item.title}</div>
-                      <div className={styles.cartItemCardRow}>
-                        <span>{t('price', { fallback: 'Price, €' })}</span>
-                        <strong>{formatPrice(item.price)}</strong>
+                  <div className={styles.desktopTotal}>
+                    {t('total', { fallback: 'Total' })}: {formatPrice(total)}
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.cartMobile}>
+                {items.map((item, index) => (
+                  <div key={item.id} className={styles.mobileSummaryCard}>
+                    <div className={styles.mobileSummaryLabel}>
+                      {t('tourName', { fallback: 'Tour Name' })}
+                    </div>
+                    <div className={styles.mobileSummaryValue}>{item.title}</div>
+
+                    <div className={styles.mobileSummaryLabel}>
+                      {t('pricePerPerson', { fallback: 'Price per person' })}
+                    </div>
+                    <div className={styles.mobileSummaryValue}>{formatPrice(item.price)}</div>
+
+                    <div className={styles.mobileSummaryLabel}>
+                      {t('tourDate', { fallback: 'Tour Date' })}
+                    </div>
+                    <div className={styles.mobileSummaryValue}>
+                      {item.description?.trim() ||
+                        t('tourDateFallback', { fallback: 'To be confirmed' })}
+                    </div>
+
+                    <div className={styles.mobileSummaryLabel}>
+                      {t('participants', { fallback: 'Participants' })}
+                    </div>
+                    <div className={styles.mobileSummaryQuantity}>
+                      <div className={styles.quantityControl}>
+                        <button
+                          type="button"
+                          onClick={() => handleQuantityStep(item.id, item.quantity, -1)}
+                          aria-label={t('decreaseQuantity', { fallback: 'Decrease quantity' })}
+                        >
+                          <span />
+                        </button>
+                        <strong>{item.quantity}</strong>
+                        <button
+                          type="button"
+                          onClick={() => handleQuantityStep(item.id, item.quantity, 1)}
+                          aria-label={t('increaseQuantity', { fallback: 'Increase quantity' })}
+                        >
+                          <span />
+                          <span className={styles.vertical} />
+                        </button>
                       </div>
-                      <div className={styles.cartItemCardRow}>
-                        <span>{t('subtotal', { fallback: 'Subtotal, €' })}</span>
-                        <strong>{formatPrice(item.price * item.quantity)}</strong>
-                      </div>
-                      <div className={styles.cartItemCardRow}>
-                        <span>{t('quantityLabel', { fallback: 'Quantity' })}</span>
-                        <div className={styles.quantityControl}>
-                          <button
-                            type="button"
-                            onClick={() => handleQuantityStep(item.id, item.quantity, -1)}
-                            aria-label={t('decreaseQuantity', {
-                              fallback: 'Decrease quantity',
-                            })}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                            >
-                              <path
-                                d="M4 8H12"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </button>
-                          <span>{String(item.quantity).padStart(2, '0')}</span>
-                          <button
-                            type="button"
-                            onClick={() => handleQuantityStep(item.id, item.quantity, 1)}
-                            aria-label={t('increaseQuantity', {
-                              fallback: 'Increase quantity',
-                            })}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                            >
-                              <path
-                                d="M4 8H12"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M8 12V4"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </button>
+                    </div>
+
+                    <div className={styles.mobileSummaryLabel}>
+                      {t('subtotalLabel', { fallback: 'Subtotal' })}
+                    </div>
+                    <div className={styles.mobileSummaryValue}>
+                      {formatPrice(item.price * item.quantity)}
+                    </div>
+
+                    {index === items.length - 1 && (
+                      <>
+                        <div className={styles.mobileSummaryLabel}>
+                          {t('total', { fallback: 'Total' })}
                         </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-
-                <p className={styles.cartTotal}>
-                  {t('total', { fallback: 'Total' })}: {formatPrice(total)}
-                </p>
+                        <div
+                          className={`${styles.mobileSummaryValue} ${styles.mobileSummaryTotal}`}
+                        >
+                          {formatPrice(total)}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
               </div>
             </section>
 
-            <section className={styles.formPanel} aria-labelledby="checkout-billing-title">
-              <div className={styles.panelSection}>
-                <h2 id="checkout-billing-title">
-                  {t('billingDetails', { fallback: 'Billing Details' })}
-                </h2>
+            <section className={styles.infoCard} aria-labelledby="checkout-billing-title">
+              <h2 id="checkout-billing-title" className={styles.cardTitle}>
+                {t('billingDetails', { fallback: 'Billing Details' })}
+              </h2>
 
-                <div className={styles.formGrid}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="firstName">
-                      {t('firstName', { fallback: 'First Name' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <input
-                      id="firstName"
-                      placeholder={t('firstNamePlaceholder', {
-                        fallback: 'Enter your name',
-                      })}
-                      {...register('firstName')}
-                      className={errors.firstName ? styles.errorInput : ''}
-                    />
-                    {errors.firstName && (
-                      <span className={styles.error}>{errors.firstName.message}</span>
-                    )}
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="lastName">
-                      {t('lastName', { fallback: 'Last Name' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <input
-                      id="lastName"
-                      placeholder={t('lastNamePlaceholder', {
-                        fallback: 'Enter your last name',
-                      })}
-                      {...register('lastName')}
-                      className={errors.lastName ? styles.errorInput : ''}
-                    />
-                    {errors.lastName && (
-                      <span className={styles.error}>{errors.lastName.message}</span>
-                    )}
-                  </div>
-
-                  <div className={`${styles.formGroup} ${styles.fullSpan}`}>
-                    <label htmlFor="address1">
-                      {t('address1', { fallback: 'Address Line 1' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <input
-                      id="address1"
-                      placeholder={t('address1Placeholder', {
-                        fallback: 'Enter your street address',
-                      })}
-                      {...register('address1')}
-                      className={errors.address1 ? styles.errorInput : ''}
-                    />
-                    {errors.address1 && (
-                      <span className={styles.error}>{errors.address1.message}</span>
-                    )}
-                  </div>
-
-                  <div className={`${styles.formGroup} ${styles.fullSpan}`}>
-                    <label htmlFor="address2">
-                      {t('address2', { fallback: 'Address Line 2' })}
-                      <span className={styles.optional}>
-                        {t('optional', { fallback: '(Optional)' })}
-                      </span>
-                    </label>
-                    <input
-                      id="address2"
-                      placeholder={t('address2Placeholder', {
-                        fallback: 'Enter your street address',
-                      })}
-                      {...register('address2')}
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="city">
-                      {t('city', { fallback: 'City' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <input
-                      id="city"
-                      placeholder={t('cityPlaceholder', {
-                        fallback: 'Enter your city',
-                      })}
-                      {...register('city')}
-                      className={errors.city ? styles.errorInput : ''}
-                    />
-                    {errors.city && <span className={styles.error}>{errors.city.message}</span>}
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="zip">
-                      {t('zip', { fallback: 'Postal Code' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <input
-                      id="zip"
-                      placeholder={t('zipPlaceholder', {
-                        fallback: 'Enter your postal code',
-                      })}
-                      {...register('zip')}
-                      className={errors.zip ? styles.errorInput : ''}
-                    />
-                    {errors.zip && <span className={styles.error}>{errors.zip.message}</span>}
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="country">
-                      {t('country', { fallback: 'Country' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <Controller
-                      name="country"
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          inputId="country"
-                          options={countries}
-                          placeholder={t('countryPlaceholder', {
-                            fallback: 'Enter your country',
-                          })}
-                          isSearchable
-                          className={styles.select}
-                          classNamePrefix="checkout-country"
-                          styles={{
-                            control: (base, state) => ({
-                              ...base,
-                              minHeight: 50,
-                              borderRadius: 0,
-                              boxShadow: 'none',
-                              backgroundColor: 'rgba(255,255,255,0.10)',
-                              borderColor: errors.country
-                                ? 'rgba(255, 62, 71, 0.6)'
-                                : state.isFocused
-                                  ? 'rgba(255,255,255,0.55)'
-                                  : 'rgba(255,255,255,0.30)',
-                              '&:hover': {
-                                borderColor: errors.country
-                                  ? 'rgba(255, 62, 71, 0.6)'
-                                  : 'rgba(255,255,255,0.45)',
-                              },
-                            }),
-                            valueContainer: (base) => ({
-                              ...base,
-                              padding: '0 16px',
-                            }),
-                            placeholder: (base) => ({
-                              ...base,
-                              color: 'rgba(255,255,255,0.3)',
-                              fontSize: 18,
-                              fontWeight: 400,
-                              letterSpacing: '-0.5px',
-                            }),
-                            singleValue: (base) => ({
-                              ...base,
-                              color: '#fff',
-                              fontSize: 18,
-                              fontWeight: 400,
-                              letterSpacing: '-0.5px',
-                            }),
-                            input: (base) => ({
-                              ...base,
-                              color: '#fff',
-                              fontSize: 18,
-                              letterSpacing: '-0.5px',
-                            }),
-                            menu: (base) => ({
-                              ...base,
-                              marginTop: 6,
-                              borderRadius: 0,
-                              backgroundColor: '#000829',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              overflow: 'hidden',
-                              zIndex: 20,
-                            }),
-                            option: (base, state) => ({
-                              ...base,
-                              backgroundColor: state.isSelected
-                                ? 'rgba(255,255,255,0.14)'
-                                : state.isFocused
-                                  ? 'rgba(255,255,255,0.08)'
-                                  : 'transparent',
-                              color: '#fff',
-                              fontSize: 16,
-                              letterSpacing: '-0.25px',
-                              cursor: 'pointer',
-                            }),
-                            indicatorSeparator: () => ({ display: 'none' }),
-                            dropdownIndicator: (base) => ({
-                              ...base,
-                              color: 'rgba(255,255,255,0.6)',
-                              paddingRight: 12,
-                              '&:hover': { color: '#fff' },
-                            }),
-                          }}
-                          value={
-                            countries.find(
-                              (option) =>
-                                option.value.toLowerCase() === (field.value || '').toLowerCase()
-                            ) || null
-                          }
-                          onChange={(selectedOption) =>
-                            field.onChange(selectedOption ? selectedOption.value : '')
-                          }
-                        />
-                      )}
-                    />
-                    {errors.country && (
-                      <span className={styles.error}>{errors.country.message}</span>
-                    )}
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="phone">
-                      {t('phone', { fallback: 'Phone Number' })}
-                      <span className={styles.optional}>
-                        {t('optional', { fallback: '(Optional)' })}
-                      </span>
-                    </label>
-                    <Controller
-                      name="phone"
-                      control={control}
-                      render={({ field }) => (
-                        <PhoneInput
-                          country="gb"
-                          value={field.value}
-                          onChange={(value) => field.onChange(value)}
-                          excludeCountries={[...new Set(excludedCountries)]}
-                          inputProps={{
-                            id: 'phone',
-                            name: 'phone',
-                          }}
-                          containerClass={styles.phoneInputContainer}
-                          inputClass={
-                            errors.phone
-                              ? `${styles.phoneInput} ${styles.errorInput}`
-                              : styles.phoneInput
-                          }
-                          enableSearch
-                          preferredCountries={['gb']}
-                        />
-                      )}
-                    />
-                    {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
-                  </div>
-
-                  <div className={`${styles.formGroup} ${styles.fullSpan}`}>
-                    <label htmlFor="email">
-                      {t('email', { fallback: 'Email' })}
-                      <span className={styles.required}>*</span>
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      placeholder={t('emailPlaceholder', {
-                        fallback: 'Enter your email',
-                      })}
-                      {...register('email')}
-                      className={errors.email ? styles.errorInput : ''}
-                    />
-                    {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.divider} />
-
-              {/**<div className={styles.panelSection}>
-              <h2>{t("currencyTitle", { fallback: "Your Currency" })}</h2>
-              <div className={styles.staticField}>EUR</div>
-            </div> */}
-
-              <div className={styles.panelSection}>
-                <h2>{t('paymentMethod', { fallback: 'Payment Method' })}</h2>
-                <div className={styles.staticField}>
-                  {t('bankTransferShort', { fallback: 'Bank Transfer *' })}
-                </div>
-                <p className={styles.helperText}>
-                  {t('paymentMethodNote', {
-                    fallback:
-                      '* After finalizing your service request, check your inbox for a summary of your project and our bank transfer details.',
-                  })}
-                </p>
-              </div>
-
-              <div className={styles.panelSection}>
-                <h2>{t('anythingToAdd', { fallback: 'Anything to add?' })}</h2>
-                <div className={`${styles.formGroup} ${styles.fullSpan}`}>
-                  <textarea
-                    id="orderNotes"
-                    rows={4}
-                    placeholder={t('orderNotesPlaceholder', {
-                      fallback: 'Add any notes for our team (optional)',
-                    })}
-                    {...register('orderNotes')}
+              <div className={styles.fieldsList}>
+                <div className={styles.fieldRow}>
+                  <label htmlFor="firstName" className={styles.fieldLabel}>
+                    {t('firstName', { fallback: 'First name' })}
+                  </label>
+                  <input
+                    id="firstName"
+                    {...register('firstName')}
+                    className={errors.firstName ? styles.errorInput : ''}
                   />
-                </div>
-              </div>
-
-              <div className={styles.panelSection}>
-                <div className={styles.checkboxBlock}>
-                  <label className={styles.checkboxLabel}>
-                    <input type="checkbox" {...register('termsAccepted')} />
-                    <span>
-                      {t('termsOfUse', {
-                        fallback: "I have read and agree to the website's Terms of Use.",
-                      })}
-                    </span>
-                  </label>
-                  {errors.termsAccepted && (
-                    <span className={styles.error}>{errors.termsAccepted.message}</span>
+                  {errors.firstName && (
+                    <span className={styles.error}>{errors.firstName.message}</span>
                   )}
                 </div>
 
-                <div className={styles.checkboxBlock}>
-                  <label className={styles.checkboxLabel}>
-                    <input type="checkbox" {...register('refundPolicyAccepted')} />
-                    <span>
-                      {t('refundPolicy', {
-                        fallback: 'I have read and agree to the Refund Policy.',
-                      })}
-                    </span>
+                <div className={styles.fieldRow}>
+                  <label htmlFor="lastName" className={styles.fieldLabel}>
+                    {t('lastName', { fallback: 'Last name' })}
                   </label>
-                  {errors.refundPolicyAccepted && (
-                    <span className={styles.error}>{errors.refundPolicyAccepted.message}</span>
+                  <input
+                    id="lastName"
+                    {...register('lastName')}
+                    className={errors.lastName ? styles.errorInput : ''}
+                  />
+                  {errors.lastName && (
+                    <span className={styles.error}>{errors.lastName.message}</span>
                   )}
                 </div>
 
-                {ENABLE_RECAPTCHA && (
-                  <div className={styles.captchaWrap}>
-                    <ReCAPTCHA
-                      key={recaptchaKey}
-                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
-                      onChange={handleRecaptchaChange}
-                    />
-                    {errors.recaptcha && (
-                      <span className={styles.error}>{errors.recaptcha.message}</span>
-                    )}
+                <div className={styles.fieldRow}>
+                  <label htmlFor="address1" className={styles.fieldLabel}>
+                    {t('address1', { fallback: 'Address line 1' })}
+                  </label>
+                  <input
+                    id="address1"
+                    {...register('address1')}
+                    className={errors.address1 ? styles.errorInput : ''}
+                  />
+                  {errors.address1 && (
+                    <span className={styles.error}>{errors.address1.message}</span>
+                  )}
+                </div>
+
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldLabelStack}>
+                    <label htmlFor="address2" className={styles.fieldLabel}>
+                      {t('address2', { fallback: 'Address line 2' })}
+                    </label>
+                    <span className={styles.fieldHint}>
+                      {t('optional', { fallback: '(optional)' })}
+                    </span>
                   </div>
-                )}
+                  <input id="address2" {...register('address2')} />
+                </div>
 
-                <div className={styles.submitRow}>
-                  <Button type="submit" variant="white" disabled={isSubmitting}>
-                    {isSubmitting
-                      ? t('submitting', { fallback: 'Submitting...' })
-                      : t('submitOrder', { fallback: 'Submit Order' })}
-                  </Button>
+                <div className={styles.fieldRow}>
+                  <label htmlFor="city" className={styles.fieldLabel}>
+                    {t('city', { fallback: 'City' })}
+                  </label>
+                  <input
+                    id="city"
+                    {...register('city')}
+                    className={errors.city ? styles.errorInput : ''}
+                  />
+                  {errors.city && <span className={styles.error}>{errors.city.message}</span>}
+                </div>
+
+                <div className={styles.fieldRow}>
+                  <label htmlFor="country" className={styles.fieldLabel}>
+                    {t('country', { fallback: 'Country' })}
+                  </label>
+                  <input
+                    id="country"
+                    {...register('country')}
+                    className={errors.country ? styles.errorInput : ''}
+                  />
+                  {errors.country && <span className={styles.error}>{errors.country.message}</span>}
+                </div>
+
+                <div className={styles.fieldRow}>
+                  <label htmlFor="zip" className={styles.fieldLabel}>
+                    {t('zip', { fallback: 'Postal Code' })}
+                  </label>
+                  <input
+                    id="zip"
+                    {...register('zip')}
+                    className={errors.zip ? styles.errorInput : ''}
+                  />
+                  {errors.zip && <span className={styles.error}>{errors.zip.message}</span>}
+                </div>
+
+                <div className={styles.fieldRow}>
+                  <label htmlFor="phone" className={styles.fieldLabel}>
+                    {t('phone', { fallback: 'Phone number' })}
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    {...register('phone')}
+                    className={errors.phone ? styles.errorInput : ''}
+                  />
+                  {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
+                </div>
+
+                <div className={styles.fieldRow}>
+                  <label htmlFor="email" className={styles.fieldLabel}>
+                    {t('email', { fallback: 'Email' })}
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    {...register('email')}
+                    className={errors.email ? styles.errorInput : ''}
+                  />
+                  {errors.email && <span className={styles.error}>{errors.email.message}</span>}
                 </div>
               </div>
+            </section>
+
+            {/**<section
+              className={`${styles.infoCard} ${styles.centeredCard}`}
+              aria-labelledby="checkout-currency-title"
+            >
+              <div className={styles.narrowContent}>
+                <h2 id="checkout-currency-title" className={styles.cardTitle}>
+                  {t('currencyTitle', { fallback: 'Your Currency' })}
+                </h2>
+                <div className={styles.staticRow}>
+                  <span className={styles.fieldLabel}>
+                    {t('currencyValue', { fallback: 'EUR' })}
+                  </span>
+                  <svg width="24" height="19" viewBox="0 0 24 19" fill="none" aria-hidden="true">
+                    <path
+                      d="M5 7L12 14L19 7"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </section> */}
+
+            <section className={styles.infoCard} aria-labelledby="checkout-payment-title">
+              <h2 id="checkout-payment-title" className={styles.cardTitle}>
+                {t('paymentMethod', { fallback: 'Payment Method' })}
+              </h2>
+              <div className={styles.staticRow}>
+                <span className={styles.fieldLabel}>
+                  {t('bankTransferShort', { fallback: 'Bank Transfer *' })}
+                </span>
+              </div>
+              <p className={styles.paymentText}>
+                {t('paymentMethodNote', {
+                  fallback:
+                    '* Please check your inbox for a detailed overview of your selected experience along with our secure bank transfer instructions.',
+                })}
+              </p>
+              <p className={styles.paymentText}>
+                {t('paymentMethodFollowup', {
+                  fallback: 'Your journey is already taking shape.',
+                })}
+              </p>
+            </section>
+
+            <section
+              className={styles.complianceSection}
+              aria-label={t('orderRequirements', { fallback: 'Order requirements' })}
+            >
+              <label className={styles.checkboxRow}>
+                <input type="checkbox" {...register('termsAccepted')} />
+                <span>
+                  {t('termsOfUse', {
+                    fallback: "I have read and agree to the website's Terms of Use.",
+                  })}
+                </span>
+              </label>
+              {errors.termsAccepted && (
+                <span className={styles.error}>{errors.termsAccepted.message}</span>
+              )}
+
+              <label className={styles.checkboxRow}>
+                <input type="checkbox" {...register('refundPolicyAccepted')} />
+                <span>
+                  {t('refundPolicy', {
+                    fallback: 'I have read and agree to the Refund Policy.',
+                  })}
+                </span>
+              </label>
+              {errors.refundPolicyAccepted && (
+                <span className={styles.error}>{errors.refundPolicyAccepted.message}</span>
+              )}
+
+              {ENABLE_RECAPTCHA && (
+                <div className={styles.captchaWrap}>
+                  <ReCAPTCHA
+                    key={recaptchaKey}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
+                    onChange={handleRecaptchaChange}
+                  />
+                  {errors.recaptcha && (
+                    <span className={styles.error}>{errors.recaptcha.message}</span>
+                  )}
+                </div>
+              )}
             </section>
           </div>
+
+          <div className={styles.submitRow}>
+            <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+              <ArrowIcon />
+              <span>
+                {isSubmitting
+                  ? t('submitting', { fallback: 'Submitting...' })
+                  : t('submitOrder', { fallback: 'Submit Order' })}
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </CheckoutPageShell>
   );
 };

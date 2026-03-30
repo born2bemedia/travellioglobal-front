@@ -1,8 +1,8 @@
-export { TourCard } from "./ui/TourCard";
 export {
-  useTours,
-  TOURS_PER_PAGE,
   TOUR_REGIONS,
+  TOURS_PER_PAGE,
   useTourRegionLabels,
+  useTours,
 } from "./lib/tours";
-export type { Tour, TourRegion, SortOption } from "./model/types";
+export type { SortOption,Tour, TourRegion } from "./model/types";
+export { TourCard } from "./ui/TourCard";

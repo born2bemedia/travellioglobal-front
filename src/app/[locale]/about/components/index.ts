@@ -1,7 +1,7 @@
-export { AboutPage } from "./AboutPage";
+export { AboutCta } from "./AboutCta";
 export { AboutHero } from "./AboutHero";
 export { AboutJourney } from "./AboutJourney";
-export { AboutWhyChoose } from "./AboutWhyChoose";
-export { AboutVision } from "./AboutVision";
+export { AboutPage } from "./AboutPage";
 export { AboutPromise } from "./AboutPromise";
-export { AboutCta } from "./AboutCta";
+export { AboutVision } from "./AboutVision";
+export { AboutWhyChoose } from "./AboutWhyChoose";

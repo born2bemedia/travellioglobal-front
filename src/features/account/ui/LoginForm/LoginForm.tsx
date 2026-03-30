@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -8,11 +8,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useAuthStore } from '@/features/account/store/auth';
+import { AuthFieldIcon } from '@/features/account/ui/AuthFieldIcon';
+import styles from '@/features/account/ui/AuthForm.module.scss';
 
-import { EyeIcon, EyeOffIcon } from '@/shared/ui/icons';
-import { Button } from '@/shared/ui/kit/button/Button';
-
-import styles from './LoginForm.module.scss';
+import { cn } from '@/shared/lib/helpers/styles';
+import { ArrowRightIcon, EyeIcon, EyeOffIcon } from '@/shared/ui/icons';
 
 import { Link, useRouter } from '@/i18n/navigation';
 
@@ -43,81 +43,110 @@ export const LoginForm = () => {
 
   const onSubmit = async (data: LoginFormSchema) => {
     const result = await login(data.email, data.password, data.keepSigned);
+
     if (result.ok) {
       router.push('/account');
-    } else {
-      setError('root', { message: result.message ?? 'Login failed.' });
+      return;
     }
+
+    setError('email', {
+      message:
+        result.message ??
+        t('identifierError', { fallback: 'Oops! That email doesn’t match our records.' }),
+    });
   };
+
+  const identifierError = errors.email?.message;
+  const passwordError = errors.password?.message;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>{t('title', { fallback: 'Welcome Back to Travellio Global' })}</h1>
-        <p className={styles.text}>
-          {t('subtitle', {
-            fallback:
-              'Enter your credentials to log in. If you’ve forgotten your password, click “Forgot Password?” for assistance.',
-          })}
-        </p>
-      </div>
       <div className={styles.formWrapper}>
-        <div className={styles.formGroup}>
-          <label htmlFor="email">{t('email', { fallback: 'USERNAME OR EMAIL' })} </label>
-          <input
-            id="email"
-            type="text"
-            {...register('email')}
-            autoComplete="email"
-            placeholder={t('placeHolderEmail', { fallback: 'Enter your username' })}
-            className={errors.email ? styles.errorInput : ''}
-          />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-        </div>
+        <div className={styles.fields}>
+          <div className={cn(styles.field, identifierError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="user" className={styles.fieldIcon} />
+              <label htmlFor="email" className={styles.label}>
+                {t('identifierLabel', { fallback: 'Username or email' })}
+              </label>
+            </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="password">{t('password', { fallback: 'PASSWORD' })}</label>
-          <div className={styles.passwordWrapper}>
-            <input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              {...register('password')}
-              autoComplete="current-password"
-              placeholder={t('placeHolderPassword', { fallback: 'Enter your password' })}
-              className={errors.password ? styles.errorInput : ''}
-            />
-            <button
-              type="button"
-              className={styles.togglePassword}
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-            >
-              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
+            <div className={styles.inputRow}>
+              <input
+                id="email"
+                type="text"
+                {...register('email')}
+                autoComplete="username"
+                aria-invalid={Boolean(identifierError)}
+                placeholder={t('identifierPlaceholder', {
+                  fallback: 'Enter your username or email',
+                })}
+                className={styles.input}
+              />
+            </div>
+
+            {identifierError && <p className={styles.errorText}>{identifierError}</p>}
           </div>
-          {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+
+          <div className={cn(styles.field, passwordError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="key" className={styles.fieldIcon} />
+              <label htmlFor="password" className={styles.label}>
+                {t('passwordLabel', { fallback: 'Password' })}
+              </label>
+            </div>
+
+            <div className={styles.inputRow}>
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                {...register('password')}
+                autoComplete="current-password"
+                aria-invalid={Boolean(passwordError)}
+                placeholder={t('passwordPlaceholder', { fallback: 'Enter your password' })}
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={
+                  showPassword
+                    ? t('hidePassword', { fallback: 'Hide password' })
+                    : t('showPassword', { fallback: 'Show password' })
+                }
+              >
+                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+              </button>
+            </div>
+
+            {passwordError && <p className={styles.errorText}>{passwordError}</p>}
+          </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label className="custom_checkbox_label">
-            <input type="checkbox" className="custom_checkbox_input" {...register('keepSigned')} />
-            <span className="custom_checkbox_element"></span>
-            <span className="custom_checkbox_label_title">
+        <div className={styles.checkboxGroup}>
+          <label className={styles.checkboxLabel}>
+            <input type="checkbox" className={styles.checkboxInput} {...register('keepSigned')} />
+            <span className={styles.checkboxBox}></span>
+            <span className={styles.checkboxText}>
               {t('keepSigned', {
                 fallback: 'Keep me signed in on this device',
               })}
             </span>
           </label>
         </div>
-        {errors.root && <span className={styles.rootError}>{errors.root.message}</span>}
-        <Button type="submit" variant="blue" disabled={isLoading}>
+
+        {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
+
+        <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          <ArrowRightIcon />
           {isLoading
             ? t('loggingIn', { fallback: 'Logging in...' })
             : t('login', { fallback: 'Log in' })}
-        </Button>
+        </button>
 
-        <Link href="/forgot-password" className={styles.signupLink}>
-          {t('signupLink', { fallback: 'Forgot Password?' })}
+        <Link href="/forgot-password" className={styles.secondaryLink}>
+          {t('forgotPasswordLink', { fallback: 'Forgot Password?' })}
         </Link>
       </div>
     </form>

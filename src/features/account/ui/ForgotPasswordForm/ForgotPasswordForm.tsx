@@ -6,10 +6,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useAuthStore } from '@/features/account/store/auth';
+import { AuthFieldIcon } from '@/features/account/ui/AuthFieldIcon';
+import styles from '@/features/account/ui/AuthForm.module.scss';
 
-import { Button } from '@/shared/ui/kit/button/Button';
-
-import styles from './ForgotPasswordForm.module.scss';
+import { cn } from '@/shared/lib/helpers/styles';
+import { ArrowRightIcon } from '@/shared/ui/icons';
 
 import { useRouter } from '@/i18n/navigation';
 
@@ -37,47 +38,59 @@ export const ForgotPasswordForm = () => {
 
   const onSubmit = async (data: ForgotPasswordFormSchema) => {
     const result = await forgotPassword(data.email);
+
     if (result.ok) {
       router.push('/forgot-password/success');
-    } else {
-      setError('root', {
-        message: result.message ?? 'Forgot password failed.',
-      });
+      return;
     }
+
+    setError('email', {
+      message:
+        result.message ??
+        t('identifierError', { fallback: 'Oops! That email doesn’t match our records.' }),
+    });
   };
+
+  const identifierError = errors.email?.message;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>{t('title', { fallback: 'Forgot Password?' })}</h1>
-        <p className={styles.text}>
-          {t('subtitle', {
-            fallback: 'Enter your email to reset your password.',
-          })}
-        </p>
-      </div>
       <div className={styles.formWrapper}>
-        <div className={styles.formGroup}>
-          <label htmlFor="email">{t('email', { fallback: 'USERNAME OR EMAIL' })} </label>
-          <input
-            id="email"
-            type="text"
-            {...register('email')}
-            autoComplete="email"
-            placeholder={t('placeHolderEmail', {
-              fallback: 'Enter your username',
-            })}
-            className={errors.email ? styles.errorInput : ''}
-          />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+        <div className={styles.fields}>
+          <div className={cn(styles.field, identifierError && styles.fieldError)}>
+            <div className={styles.fieldHeader}>
+              <AuthFieldIcon name="user" className={styles.fieldIcon} />
+              <label htmlFor="email" className={styles.label}>
+                {t('identifierLabel', { fallback: 'Username or email' })}
+              </label>
+            </div>
+
+            <div className={styles.inputRow}>
+              <input
+                id="email"
+                type="text"
+                {...register('email')}
+                autoComplete="username"
+                aria-invalid={Boolean(identifierError)}
+                placeholder={t('identifierPlaceholder', {
+                  fallback: 'Enter your username or email address',
+                })}
+                className={styles.input}
+              />
+            </div>
+
+            {identifierError && <p className={styles.errorText}>{identifierError}</p>}
+          </div>
         </div>
 
-        {errors.root && <span className={styles.rootError}>{errors.root.message}</span>}
-        <Button type="submit" variant="blue" disabled={isLoading}>
+        {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
+
+        <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          <ArrowRightIcon />
           {isLoading
             ? t('resettingPassword', { fallback: 'Resetting password...' })
             : t('resetPassword', { fallback: 'Reset Password' })}
-        </Button>
+        </button>
       </div>
     </form>
   );
