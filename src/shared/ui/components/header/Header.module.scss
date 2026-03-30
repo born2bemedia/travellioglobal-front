@@ -687,6 +687,10 @@ $ink: #3c2718;
       border-radius: 500px;
       background: #eb5e28;
       border: none;
+      &:last-child{
+        background: #fffdf1;
+        color: #eb5e28;
+      }
     }
   }
 

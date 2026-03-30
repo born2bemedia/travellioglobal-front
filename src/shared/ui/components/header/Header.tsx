@@ -81,7 +81,9 @@ export const Header = () => {
       "/places",
       "/flights",
     ];
-    const isWhite = whiteTopbarPathnames.some(path => pathname.includes(path));
+    const isWhite = whiteTopbarPathnames.some((path) =>
+      pathname.includes(path),
+    );
     console.log(isWhite, isWhiteTopbar, pathname);
     if (isWhite !== isWhiteTopbar) {
       setTimeout(() => {
@@ -384,6 +386,9 @@ export const Header = () => {
                     {t("sign-up", { fallback: "Sign up" })}
                   </Link>
                 )}
+                <Link href="/checkout" className={styles.header__wishlist}>
+                  {t("cart", { fallback: "Cart" })}
+                </Link>
               </div>
             </div>
           </div>
@@ -608,6 +613,9 @@ export const Header = () => {
               {t("sign-up", { fallback: "Sign up" })}
             </Link>
           )}
+          <Link href="/checkout" className={styles.header__btn_cart}>
+            {t("cart", { fallback: "Cart" })}
+          </Link>
         </div>
       </div>
     </>
