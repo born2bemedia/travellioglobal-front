@@ -246,7 +246,7 @@ def main() -> int:
             "    image: TOUR_IMAGE,\n",
             "    popularity,\n",
             "    createdAt,\n",
-            '    detailContentKey: "ultimate-tenerife-sample",\n',
+            "    detailContentKey: slug,\n",
             "  }),\n",
             ");\n",
         ]

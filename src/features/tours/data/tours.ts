@@ -110,6 +110,7 @@ export const TOUR_CATALOG: Tour[] = TOUR_ROWS.map(
     image: TOUR_IMAGE,
     popularity,
     createdAt,
-    detailContentKey: "ultimate-tenerife-sample",
+    detailContentKey: slug,
   }),
 );
+

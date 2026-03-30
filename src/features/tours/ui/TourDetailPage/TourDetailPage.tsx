@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -512,7 +512,12 @@ export const TourDetailPage = ({
                       price: formatPrice(tour.price),
                     })}
                   </h2>
-                  <p className={styles.summaryText}>{content.reserveMessage}</p>
+                  <p className={styles.summaryText}>
+                    {t("summaryMessage", {
+                      fallback:
+                        "You can secure your spot. Reserve now and pay later, with no upfront payment required today.",
+                    })}
+                  </p>
                 </div>
 
                 <button
@@ -724,14 +729,22 @@ export const TourDetailPage = ({
                   >
                     {section.title ? <h3>{section.title}</h3> : null}
                     {section.body?.map((paragraph, paragraphIndex) => (
-                      <p key={`${section.title || "section"}-body-${paragraphIndex}`}>
+                      <p
+                        key={`${
+                          section.title || "section"
+                        }-body-${paragraphIndex}`}
+                      >
                         {paragraph}
                       </p>
                     ))}
                     {section.bullets ? (
                       <ul>
                         {section.bullets.map((item, itemIndex) => (
-                          <li key={`${section.title || "section"}-bullet-${itemIndex}`}>
+                          <li
+                            key={`${
+                              section.title || "section"
+                            }-bullet-${itemIndex}`}
+                          >
                             {item}
                           </li>
                         ))}
@@ -747,26 +760,41 @@ export const TourDetailPage = ({
             <section className={styles.policyCard}>
               <h2>{content.cancellationPolicy.heading}</h2>
               <div className={styles.policySections}>
-                {content.cancellationPolicy.sections.map((section) => (
-                  <div key={section.subtitle} className={styles.policySection}>
-                    <p className={styles.policyLead}>{section.subtitle}</p>
-                    {section.bullets ? (
-                      <ul className={styles.policyList}>
-                        {section.bullets.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                        {section.body?.map((paragraph, paragraphIndex) => (
-                          <p
-                            key={`${section.subtitle}-body-${paragraphIndex}`}
-                            className={styles.policyBody}
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                  </div>
-                ))}
+                {content.cancellationPolicy.sections.map(
+                  (section, sectionIndex) => (
+                    <div
+                      key={`${section.subtitle ?? "policy"}-${sectionIndex}`}
+                      className={styles.policySection}
+                    >
+                      {section.subtitle ? (
+                        <p className={styles.policyLead}>{section.subtitle}</p>
+                      ) : null}
+                      {section.bullets ? (
+                        <ul className={styles.policyList}>
+                          {section.bullets.map((item, itemIndex) => (
+                            <li
+                              key={`${
+                                section.subtitle ?? "policy"
+                              }-${itemIndex}`}
+                            >
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                      {section.body?.map((paragraph, paragraphIndex) => (
+                        <p
+                          key={`${
+                            section.subtitle ?? "policy"
+                          }-body-${paragraphIndex}`}
+                          className={styles.policyBody}
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  ),
+                )}
               </div>
             </section>
           ) : null}

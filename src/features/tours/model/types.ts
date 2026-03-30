@@ -58,7 +58,7 @@ export type TourDetailSection = {
 };
 
 export type TourCancellationPolicySection = {
-  subtitle: string;
+  subtitle?: string;
   bullets?: string[];
   body?: string[];
 };
@@ -73,7 +73,7 @@ export type TourMeta = {
   description: string;
 };
 
-export type TourDetailContentKey = "ultimate-tenerife-sample";
+export type TourDetailContentKey = string;
 
 export type TourDetailContent = {
   key: TourDetailContentKey;
@@ -86,10 +86,10 @@ export type TourDetailContent = {
   startTime: string;
   meetingPoint: string;
   reserveMessage: string;
-  bookingNote?: string;
+  bookingNote?: string | null;
   overviewTitle: string;
   overviewSections: TourDetailSection[];
-  cancellationPolicy?: TourCancellationPolicy;
+  cancellationPolicy?: TourCancellationPolicy | null;
   meta: TourMeta;
   reviews: TourReview[];
 };
