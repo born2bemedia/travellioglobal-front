@@ -1,8 +1,15 @@
 "use client";
 
-import Image from "next/image";
-
 import { useTranslations } from "next-intl";
+
+import {
+  WEBSITE_EMAIL,
+  WEBSITE_OFFICE_ADDRESS,
+  WEBSITE_OFFICE_ADDRESS_MAP,
+  WEBSITE_PHONE,
+  WEBSITE_REGISTERED_ADDRESS,
+  WEBSITE_REGISTERED_ADDRESS_MAP,
+} from "@/shared/lib/constants/constants";
 
 import styles from "./ContactsInfo.module.scss";
 
@@ -12,6 +19,19 @@ export const ContactsInfo = () => {
   return (
     <section className={styles.info}>
       <div className="container">
+        {/* Call Us */}
+        <div className={styles.info__address}>
+          <div className={styles.info__addressContent}>
+            <h2 className={styles.info__heading}>
+              {t("callUsTitle", { fallback: "Call Us" })}
+            </h2>
+          </div>
+          <div className={styles.info__email}>
+            <a href={`tel:${WEBSITE_PHONE}`} className={styles.info__emailLink}>
+              {WEBSITE_PHONE}
+            </a>
+          </div>
+        </div>
         {/* Email Us */}
         <div className={styles.info__address}>
           <div className={styles.info__addressContent}>
@@ -21,10 +41,10 @@ export const ContactsInfo = () => {
           </div>
           <div className={styles.info__email}>
             <a
-              href="mailto:info@travellioglobal.com"
+              href={`mailto:${WEBSITE_EMAIL}`}
               className={styles.info__emailLink}
             >
-              info@travellioglobal.com
+              {WEBSITE_EMAIL}
             </a>
           </div>
         </div>
@@ -36,26 +56,13 @@ export const ContactsInfo = () => {
               {t("registeredAddressTitle", { fallback: "Registered Address" })}
             </h2>
             <p className={styles.info__addressText}>
-              {t("registeredAddress", {
-                fallback:
-                  "2nd Floor College House, 17 King Edwards Road, Ruislip, London, United Kingdom, HA4 7AE",
-              })}
+              {WEBSITE_REGISTERED_ADDRESS}
             </p>
           </div>
-          <div className={styles.info__map}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2479.6!2d-0.4317!3d51.5756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876126f3d93e1b1%3A0x0!2s17%20King%20Edwards%20Road%2C%20Ruislip%2C%20London%20HA4%207AE!5e0!3m2!1sen!2suk!4v1"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={t("registeredAddressTitle", {
-                fallback: "Registered Address",
-              })}
-            />
-          </div>
+          <div
+            className={styles.info__map}
+            dangerouslySetInnerHTML={{ __html: WEBSITE_REGISTERED_ADDRESS_MAP }}
+          />
         </div>
 
         {/* Office Address */}
@@ -64,25 +71,12 @@ export const ContactsInfo = () => {
             <h2 className={styles.info__heading}>
               {t("officeAddressTitle", { fallback: "Office Address" })}
             </h2>
-            <p className={styles.info__addressText}>
-              {t("officeAddress", {
-                fallback:
-                  "Suite 513, 5th Floor, Tuition House, 27-37 St. George's Road, London, SW19 4EU",
-              })}
-            </p>
+            <p className={styles.info__addressText}>{WEBSITE_OFFICE_ADDRESS}</p>
           </div>
-          <div className={styles.info__map}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2488.8!2d-0.1857!3d51.4138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487608a9b1b1b1b1%3A0x0!2sTuition%20House%2C%2027-37%20St%20Georges%20Road%2C%20London%20SW19%204EU!5e0!3m2!1sen!2suk!4v1"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={t("officeAddressTitle", { fallback: "Office Address" })}
-            />
-          </div>
+          <div
+            className={styles.info__map}
+            dangerouslySetInnerHTML={{ __html: WEBSITE_OFFICE_ADDRESS_MAP }}
+          />
         </div>
       </div>
     </section>

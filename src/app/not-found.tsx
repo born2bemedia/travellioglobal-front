@@ -1,12 +1,7 @@
-
-import { NotFoundSection } from "@/features/not-found/ui/NotFoundSection/NotFoundSection";
-import { QuickLinks } from "@/features/not-found/ui/QuickLinks/QuickLinks";
+import { NotFoundPage } from '@/features/not-found/ui/NotFoundPage/NotFoundPage';
 
 const NotFound = () => {
-  return <>
-    <NotFoundSection />
-    <QuickLinks />
-  </>;
+  return <NotFoundPage />;
 };
 
 export default NotFound;

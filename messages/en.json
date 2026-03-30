@@ -277,6 +277,7 @@
     "heroTitle": "Talk Travel to Us",
     "heroSubtitle": "Questions? Ideas? Travel dreams waiting to happen? We'd love to hear from you.",
     "heroDescription": "Whether you need help with a booking, want guidance on your next adventure, or simply have something to share, our team is ready to assist.",
+    "callUsTitle": "Call Us",
     "emailUsTitle": "Email Us",
     "registeredAddressTitle": "Registered Address",
     "registeredAddress": "2nd Floor College House, 17 King Edwards Road, Ruislip, London, United Kingdom, HA4 7AE",
@@ -822,6 +823,13 @@
     "loading": "Sending…",
     "submit": "Submit"
   },
+  "notFoundPage": {
+    "title": "This Destination Doesn’t Exist",
+    "messagePrimary": "The page you’re looking for seems to have taken a different route.",
+    "messageSecondary": "It may have moved — or perhaps it never existed at all. Either way, your journey continues.",
+    "prompt": "Return to the previous page or:",
+    "cta": "Head Back Home"
+  },
   "notFound": {
     "title": "404 — Page Not Found",
     "description": "The page you tried to reach isn’t here.",
@@ -1034,10 +1042,9 @@
     "qeeq": "QEEQ",
     "iway": "I’way",
     "drimsim": "Drimsim",
-    "sign-up": "Sign up",
     "account": "Account",
     "login": "Login",
-    "cart": "Cart",
+    "sign-up": "Sign up",
     "close": "Close",
     "menu": "Menu"
   },
