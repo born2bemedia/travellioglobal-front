@@ -1,3 +1,5 @@
+import type { WishlistItem } from './wishlist.types';
+
 export type AuthUser = {
   id: string;
   email?: string;
@@ -9,4 +11,5 @@ export type AuthUser = {
   city?: string;
   country?: string;
   zip?: string;
+  wishlist?: WishlistItem[];
 };

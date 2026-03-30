@@ -81,7 +81,7 @@ export const Header = () => {
       "/places",
       "/flights",
     ];
-    const isWhite = whiteTopbarPathnames.includes(pathname);
+    const isWhite = whiteTopbarPathnames.some(path => pathname.includes(path));
     console.log(isWhite, isWhiteTopbar, pathname);
     if (isWhite !== isWhiteTopbar) {
       setTimeout(() => {

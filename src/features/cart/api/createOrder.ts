@@ -1,4 +1,4 @@
-'use server';
+﻿'use server';
 
 import { cookies } from 'next/headers';
 
@@ -51,6 +51,24 @@ export type CreateOrderPayload = {
   userId?: string;
 };
 
+const buildItemBookingNotes = (item: CartItem) => {
+  if (!item.bookingDetails) {
+    return `${item.title} x${item.quantity}`;
+  }
+
+  const { date, time, duration, meetingPoint } = item.bookingDetails;
+  const participants = item.bookingDetails.participants || item.quantity;
+
+  return [
+    `${item.title} x${participants}`,
+    `Date: ${date}`,
+    `Time: ${time}`,
+    `Participants: ${participants}`,
+    `Duration: ${duration}`,
+    `Meeting point: ${meetingPoint}`,
+  ].join(" | ");
+};
+
 const postOrder = async (
   data: CheckoutFormSchema,
   total: number,
@@ -84,6 +102,7 @@ const postOrder = async (
   const orderNotes = [
     `Contact: ${data.email}, ${data.phone ?? ''}`,
     `Billing name: ${data.firstName} ${data.lastName}`,
+    `Booked items: ${cart.map(buildItemBookingNotes).join('\n')}`,
     data.orderNotes ? `Notes: ${data.orderNotes}` : null,
   ]
     .filter(Boolean)
@@ -208,9 +227,15 @@ const postOrder = async (
 
       const safeFullName = escapeHtml(`${data.firstName} ${data.lastName}`.trim());
       const safeItems = cart
-        .map((item) => `${escapeHtml(item.title)} x${item.quantity}`)
+        .map((item) => {
+          const participants = item.bookingDetails?.participants ?? item.quantity;
+          return `${escapeHtml(item.title)} x${participants}`;
+        })
         .join(', ');
-      const guestCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const guestCount = cart.reduce(
+        (sum, item) => sum + (item.bookingDetails?.participants ?? item.quantity),
+        0
+      );
       const safeBillingAddress = escapeHtml(
         [data.address1, data.address2, data.city, data.zip, data.country].filter(Boolean).join(', ')
       );
@@ -230,7 +255,7 @@ const postOrder = async (
               { label: 'Reservation Name', value: safeFullName },
               { label: 'Tour Name', value: safeItems },
               { label: 'Order ID', value: escapeHtml(createdOrderNumber) },
-              { label: 'Number of Guests', value: escapeHtml(guestCount) },
+              { label: 'Number of Guests', value: escapeHtml(String(guestCount)) },
               { label: 'Total Paid', value: escapeHtml(`€${total.toFixed(2)}`) },
               { label: 'Contact Email', value: escapeHtml(data.email) },
               { label: 'Billing Address', value: safeBillingAddress },
@@ -287,3 +312,5 @@ export const createOrder = async (payload: CreateOrderPayload) => {
 
   return postOrder(formData, payload.total, payload.items, payload.userId);
 };
+
+

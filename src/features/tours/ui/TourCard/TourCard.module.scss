@@ -100,6 +100,35 @@
   }
 }
 
+.card__wishlist {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #403d38;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.55;
+  }
+}
+
+.card__wishlistActive {
+  color: #eb5e28;
+}
+
 .card__title {
   font-family: var(--font-plus-jakarta-sans);
   font-weight: 700;
@@ -115,12 +144,17 @@
   -webkit-box-orient: vertical;
 }
 
+.card__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
 .card__bottom {
   display: flex;
   flex-direction: column;
   gap: 10px;
 
-  button {
+  button, a {
     justify-content: space-between;
     span {
       font-family: var(--font-syne), sans-serif;
@@ -132,35 +166,19 @@
 
 }
 
+.card__priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .card__price {
   font-family: var(--font-plus-jakarta-sans);
   font-weight: 500;
   font-size: 24px;
   line-height: normal;
   color: #403d38;
-}
-
-
-
-.card__addToCart {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 8px 16px;
-  background: #f25a28;
-  border: none;
-  border-radius: 500px;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: 700;
-  color: #f9faf5;
-  line-height: normal;
-  transition: background 0.2s;
-
-  &:hover {
-    background: #ae431b;
-  }
 }
 
 .card__cartArrow {

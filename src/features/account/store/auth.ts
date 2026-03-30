@@ -3,6 +3,7 @@
 import { create } from 'zustand';
 
 import type { AuthUser } from '../model/auth.types';
+import type { WishlistItem } from '../model/wishlist.types';
 
 type AuthStore = {
   user: AuthUser | null;
@@ -27,6 +28,8 @@ type AuthStore = {
   resetPassword: (token: string, password: string) => Promise<{ ok: boolean; message?: string }>;
   logout: () => Promise<void>;
   setUser: (user: AuthUser | null) => void;
+  addToWishlist: (item: WishlistItem) => Promise<{ ok: boolean; message?: string }>;
+  removeFromWishlist: (product: string) => Promise<{ ok: boolean; message?: string }>;
 
   keepSigned: boolean;
   setKeepSigned: (value: boolean) => void;
@@ -172,4 +175,52 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   setUser: (user) => set({ user }),
+
+  addToWishlist: async (item) => {
+    try {
+      const response = await fetch('/api/account/wishlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(item),
+      });
+      const data = (await response.json()) as { user?: AuthUser; message?: string };
+
+      if (!response.ok) {
+        return { ok: false, message: data.message ?? 'Wishlist update failed.' };
+      }
+
+      set((state) => ({
+        user: state.user ? { ...state.user, wishlist: data.user?.wishlist ?? state.user.wishlist } : data.user ?? null,
+      }));
+
+      return { ok: true };
+    } catch {
+      return { ok: false, message: 'Wishlist update failed.' };
+    }
+  },
+
+  removeFromWishlist: async (product) => {
+    try {
+      const response = await fetch('/api/account/wishlist', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ product }),
+      });
+      const data = (await response.json()) as { user?: AuthUser; message?: string };
+
+      if (!response.ok) {
+        return { ok: false, message: data.message ?? 'Wishlist update failed.' };
+      }
+
+      set((state) => ({
+        user: state.user ? { ...state.user, wishlist: data.user?.wishlist ?? [] } : data.user ?? null,
+      }));
+
+      return { ok: true };
+    } catch {
+      return { ok: false, message: 'Wishlist update failed.' };
+    }
+  },
 }));

@@ -280,9 +280,7 @@
     "callUsTitle": "Call Us",
     "emailUsTitle": "Email Us",
     "registeredAddressTitle": "Registered Address",
-    "registeredAddress": "2nd Floor College House, 17 King Edwards Road, Ruislip, London, United Kingdom, HA4 7AE",
-    "officeAddressTitle": "Office Address",
-    "officeAddress": "Suite 513, 5th Floor, Tuition House, 27-37 St. George's Road, London, SW19 4EU"
+    "officeAddressTitle": "Office Address"
   },
   "excursionPage": {
     "ctaTitle": "Start Your Adventure Today",
@@ -552,19 +550,108 @@
     "hi": "Hi"
   },
   "accountPage": {
-    "tabTwoTitle": "Account Management",
-    "tabOneTitle": "Project History",
-    "loading": "Loading...",
-    "mainTitle": "Welcome",
+    "en-GB": "Order ID",
+    "bookings": {
+      "columns": {
+        "tourName": "Tour Name",
+        "quantity": "Quantity",
+        "purchaseDate": "Purchase Date",
+        "totalPrice": "Total Price",
+        "paymentMethod": "Payment Method",
+        "orderStatus": "Order Status",
+        "invoice": "Invoice",
+        "orderId": "Order ID"
+      },
+      "title": "Your Travel History & Upcoming Adventures",
+      "description": "Here you'll find a complete overview of your past and upcoming experiences. Review order details, download invoices, and track the status of your bookings — all with clarity and ease.",
+      "note": "Every trip tells a story. This is where yours are stored.",
+      "loading": "Loading your bookings...",
+      "emptyTitle": "No bookings just yet.",
+      "emptyBody": "When your first journey is booked, it will appear here with payment details and invoice access.",
+      "download": "Download"
+    },
+    "tabs": {
+      "bookings": "Bookings Info",
+      "account": "Your Account",
+      "wishlist": "Travel Wishlist",
+      "aria": "Account sections"
+    },
+    "loading": "Loading your account...",
+    "traveler": "Traveler",
     "logOutLinkTitle": "Log Out",
-    "contentTitle": "This is your strategic hub for managing engagements, refining your profile, and downloading strategic documents.",
-    "itemOneTitle": "Project History:",
-    "itemOneDescription": "Review past engagements, download invoices, and deliverables.",
-    "itemTwoTitle": "Account Management:",
-    "itemTwoDescription": "Update your professional details and preferences.",
-    "title": "My orders",
-    "noServices": "You have no orders yet.",
-    "allOrders": "Check all orders"
+    "mainTitle": "Welcome to Your Travellio Global Hub",
+    "greeting": "Hello,",
+    "introPrimary": "This is your personal travel command center — where plans take shape, memories are tracked, and future adventures begin.",
+    "introSecondary": "Manage your bookings, update your details, and keep your dream destinations all in one seamless space.",
+    "introEmphasis": "Your journeys, organised beautifully.",
+    "account": {
+      "validation": {
+        "currentPassword": "Current password is required.",
+        "newPassword": "New password is required.",
+        "repeatNewPassword": "Please confirm your new password.",
+        "passwordMismatch": "The passwords do not match.",
+        "lastName": "Last name is required.",
+        "email": "Email is required.",
+        "emailFormat": "Please enter a valid email address.",
+        "address1": "Street address is required.",
+        "address2": "Apartment or suite is required.",
+        "city": "City is required.",
+        "country": "Country is required.",
+        "zip": "Postal code is required."
+      },
+      "updateFailed": "We could not update your account details.",
+      "passwordPartialFailure": "Your details were saved, but the password could not be updated.",
+      "updatedWithPassword": "Your account details and password have been updated.",
+      "updated": "Your account details have been updated.",
+      "title": "Your Travel History & Upcoming Adventures",
+      "description": "Keep your personal information up to date to ensure smooth bookings and effortless travel support. From contact details to password management, everything you need to manage your account securely is right here.",
+      "personalInformation": "Personal Information",
+      "fields": {
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone number",
+        "address1": "Street Address",
+        "address2": "Apartment/Suite",
+        "city": "City",
+        "country": "Country",
+        "zip": "Postal Code",
+        "currentPassword": "Current password",
+        "passwordHint": "Leave blank to leave unchanged",
+        "newPassword": "New password",
+        "repeatNewPassword": "Confirm new password"
+      },
+      "placeholders": {
+        "lastName": "Enter your last name",
+        "email": "Enter your email address",
+        "phone": "Enter your phone number",
+        "address1": "Enter your street address",
+        "address2": "Enter your apartment or suite",
+        "city": "Enter your city",
+        "country": "Enter your country",
+        "zip": "Enter your postal code",
+        "currentPassword": "Enter your current password",
+        "newPassword": "Enter your new password",
+        "repeatNewPassword": "Enter your new password again"
+      },
+      "accountAccess": "Account Access",
+      "save": "Save"
+    },
+    "wishlist": {
+      "updateFailed": "Wishlist update failed.",
+      "saved": "Your wishlist is synced with your account.",
+      "title": "Dream Now. Travel Soon.",
+      "description": "Your saved escapes live here — the experiences that caught your eye and sparked inspiration. Review, manage, or remove items anytime, and turn today's ideas into tomorrow's adventures.",
+      "note": "As every great journey starts with a little wanderlust.",
+      "emptyTitle": "Your wishlist is empty.",
+      "emptyBody": "Save your favorite itineraries here so you can return to them whenever inspiration strikes.",
+      "columns": {
+        "tourName": "Tour Name",
+        "preview": "Tour Preview",
+        "manage": "Manage"
+      },
+      "delete": "Delete",
+      "save": "Save Wishlist"
+    }
   },
   "accountSettingsPage": {
     "loading": "Loading...",
@@ -977,16 +1064,31 @@
     "tourCentralSouthAmericaTitle": "Central & South America",
     "tourEuropeTitle": "Europe",
     "tourMiddleEastAfricaTitle": "Middle East & Africa",
-    "tourNorthAmericaTitle": "North America",
-    "tourSafariAmboseliTitle": "9 Days Safari to Amboseli, Lake Manyara, Ngorongoro, Serengeti and Maasai Mara",
-    "tourIcelandTitle": "Iceland Northern Lights & Volcano Expedition",
-    "tourMoroccoTitle": "Morocco Desert & Atlas Mountains Journey",
-    "tourKenyaTanzaniaTitle": "Ultimate Kenya, Tanzania, and Zanzibar Experience 2024",
-    "tourKenyaWildlifeTitle": "16-Day Kenya and Tanzania Wildlife Adventure",
-    "tourKyotoTeaTitle": "7-Day Tea Craftsmanship Journey Through Kyoto, Uji, and Aizu-Wakamatsu",
-    "tourJapanSakuraTitle": "Japan Spring Sakura Experience",
-    "tourPeruTitle": "Peru Machu Picchu & Sacred Valley Trek",
-    "tourItalyTitle": "Italy Culinary & Wine Discovery Tour"
+    "tourNorthAmericaTitle": "North America"
+  },
+  "tourDetailPage": {
+    "en-US": "Back",
+    "operatedBy": "Operated by",
+    "reviews": "reviews",
+    "wishlist1": "Remove from wishlist",
+    "wishlist2": "Add to wishlist",
+    "fromPrice": "From {price} per person",
+    "checkAvailability": "Check availability",
+    "participant": "participant",
+    "participants": "participants",
+    "increaseParticipants": "Increase participants",
+    "decreaseParticipants": "Decrease participants",
+    "whatYouCanExpect": "What you can expect",
+    "duration": "Duration",
+    "startsAt": "Starts at",
+    "meetingPoint": "Meeting point",
+    "priceBreakdown": "Price breakdown: {count} participants x {price}",
+    "totalLabel": "Total: {price}",
+    "totalNote": "The total price includes all taxes and fees",
+    "bookNow": "Book now",
+    "relatedTours": "Free your inner traveller, consider exploring...",
+    "previousAria": "Previous tours",
+    "nextAria": "Next tours"
   },
   "cookiePopup": {
     "title": "Cookie settings",

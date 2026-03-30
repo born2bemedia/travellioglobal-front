@@ -1,193 +1,210 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
-import { MyOrdersPage } from '@/features/account';
-import { useAuthStore } from '@/features/account/store/auth';
-import { ChangePasswordForm } from '@/features/account/ui/AccountSettingsPage/ChangePasswordForm/ChangePasswordForm';
-import { ContactDataForm } from '@/features/account/ui/AccountSettingsPage/ContactDataForm/ContactDataForm';
+import type { AuthUser } from "@/features/account/model/auth.types";
+import { useAuthStore } from "@/features/account/store/auth";
+import { AccountBookingsPanel } from "@/features/account/ui/AccountPage/AccountBookingsPanel";
+import { AccountProfilePanel } from "@/features/account/ui/AccountPage/AccountProfilePanel";
+import { AccountWishlistPanel } from "@/features/account/ui/AccountPage/AccountWishlistPanel";
 
-import { Button } from '@/shared/ui/kit/button/Button';
+import styles from "./AccountPage.module.scss";
 
-import styles from './AccountPage.module.scss';
+import { useRouter } from "@/i18n/navigation";
 
-import { useRouter } from '@/i18n/navigation';
+type AccountTabId = "bookings" | "account" | "wishlist";
+
+type AccountTab = {
+  id: AccountTabId;
+  title: string;
+};
+
+function getGreetingName(user: AuthUser, fallback: string) {
+  const fullName = [user.firstName, user.lastName]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+
+  if (fullName) {
+    return fullName;
+  }
+
+  if (user.email) {
+    return user.email.split("@")[0] || fallback;
+  }
+
+  return fallback;
+}
 
 export const AccountPage = () => {
-  const t = useTranslations('accountPage');
+  const t = useTranslations("accountPage");
   const router = useRouter();
-  const user = useAuthStore((s) => s.user);
-  const isInitialized = useAuthStore((s) => s.isInitialized);
-  const fetchUser = useAuthStore((s) => s.fetchUser);
-  const logout = useAuthStore((s) => s.logout);
-
-  const tabTwoTitle = t('tabTwoTitle', { fallback: 'Account Management' });
-
-  const tabs = [
-    {
-      id: 'tab1',
-      title: t('tabOneTitle', {
-        fallback: 'Project History',
-      }),
-    },
-    {
-      id: 'tab2',
-      title: tabTwoTitle,
-    },
-  ];
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const user = useAuthStore((state) => state.user);
+  const isInitialized = useAuthStore((state) => state.isInitialized);
+  const fetchUser = useAuthStore((state) => state.fetchUser);
+  const logout = useAuthStore((state) => state.logout);
+  const [activeTab, setActiveTab] = useState<AccountTabId>("bookings");
 
   useEffect(() => {
-    fetchUser();
+    void fetchUser();
   }, [fetchUser]);
 
   useEffect(() => {
     if (!isInitialized) return;
-    if (!user) {
-      router.replace('/log-in');
-    }
-  }, [isInitialized, user, router]);
 
-  if (!isInitialized || !user) {
-    return (
-      <section className={styles.section}>
-        <p className={styles.loadingText}>{t('loading', { fallback: 'Loading...' })}</p>
-      </section>
-    );
-  }
+    if (!user) {
+      router.replace("/log-in");
+    }
+  }, [isInitialized, router, user]);
+
+  const tabs: AccountTab[] = [
+    {
+      id: "bookings",
+      title: t("tabs.bookings", { fallback: "Bookings Info" }),
+    },
+    {
+      id: "account",
+      title: t("tabs.account", { fallback: "Your Account" }),
+    },
+    {
+      id: "wishlist",
+      title: t("tabs.wishlist", { fallback: "Travel Wishlist" }),
+    },
+  ];
 
   const handleLogout = async () => {
     await logout();
-    router.push('/log-in');
+    router.push("/log-in");
   };
 
-  return (
-    <section className={styles.account}>
-      <div className="container">
-        <div className={styles.account__top}>
-          <h1 className={styles.account__title}>
-            {t('mainTitle', { fallback: 'Welcome' })}, {user?.firstName} {user?.lastName}
-          </h1>
-          <Button type="button" variant="black" onClick={handleLogout}>
-            {t('logOutLinkTitle', { fallback: 'Log Out' })}
-          </Button>
-        </div>
-
-        <div className={styles.account__content}>
-          <div className={styles.account__left_column}>
-            <p className={styles.account__content_title}>
-              {t('contentTitle', {
-                fallback:
-                  'This is your strategic hub for managing engagements, refining your profile, and downloading strategic documents.',
-              })}
+  if (!isInitialized || !user) {
+    return (
+      <main className={styles.page}>
+        <section className={styles.account}>
+          <div className={styles.loadingCard}>
+            <p className={styles.loadingText}>
+              {t("loading", { fallback: "Loading your account..." })}
             </p>
-            <ul className={styles.account__content_list}>
-              <li className={styles.account__content_item}>
-                <p className={styles.account__content_item_info}>
-                  <strong>
-                    {t('itemOneTitle', {
-                      fallback: 'Project History:',
-                    })}
-                  </strong>{' '}
-                  {t('itemOneDescription', {
-                    fallback: 'Review past engagements, download invoices, and deliverables.',
-                  })}
-                </p>
-              </li>
-              <li className={styles.account__content_item}>
-                <p className={styles.account__content_item_info}>
-                  <strong>
-                    {t('itemTwoTitle', {
-                      fallback: 'Account Management:',
-                    })}
-                  </strong>{' '}
-                  {t('itemTwoDescription', {
-                    fallback: 'Update your professional details and preferences.',
-                  })}
-                </p>
-              </li>
-            </ul>
           </div>
+        </section>
+      </main>
+    );
+  }
 
-          <div className={styles.account__right_column}>
-            <div className={styles.account__right_column_image_wrapper}>
-              <Image
-                src="/images/clients/hero-icon.svg"
-                alt="Clients Hero"
-                width={132}
-                height={132}
-                className="adaptive-image"
+  const greetingName = getGreetingName(
+    user,
+    t("traveler", { fallback: "Traveler" }),
+  );
+
+  return (
+    <main className={styles.page}>
+      <Image
+        src="/images/legal/dashed-path.svg"
+        alt=""
+        width={1858}
+        height={513}
+        className={styles.decoration}
+        priority
+      />
+
+      <section className={styles.account}>
+        <div className={styles.topBar}>
+          <button
+            type="button"
+            className={styles.logoutButton}
+            onClick={handleLogout}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M9.375 16.875C9.375 17.0408 9.30915 17.1997 9.19194 17.3169C9.07473 17.4342 8.91576 17.5 8.75 17.5H3.75C3.58424 17.5 3.42527 17.4342 3.30806 17.3169C3.19085 17.1997 3.125 17.0408 3.125 16.875V3.125C3.125 2.95924 3.19085 2.80027 3.30806 2.68306C3.42527 2.56585 3.58424 2.5 3.75 2.5H8.75C8.91576 2.5 9.07473 2.56585 9.19194 2.68306C9.30915 2.80027 9.375 2.95924 9.375 3.125C9.375 3.29076 9.30915 3.44973 9.19194 3.56694C9.07473 3.68415 8.91576 3.75 8.75 3.75H4.375V16.25H8.75C8.91576 16.25 9.07473 16.3158 9.19194 16.4331C9.30915 16.5503 9.375 16.7092 9.375 16.875ZM17.9422 9.55781L14.8172 6.43281C14.6999 6.31554 14.5409 6.24965 14.375 6.24965C14.2091 6.24965 14.0501 6.31554 13.9328 6.43281C13.8155 6.55009 13.7497 6.70915 13.7497 6.875C13.7497 7.04085 13.8155 7.19991 13.9328 7.31719L15.9914 9.375H8.75C8.58424 9.375 8.42527 9.44085 8.30806 9.55806C8.19085 9.67527 8.125 9.83424 8.125 10C8.125 10.1658 8.19085 10.3247 8.30806 10.4419C8.42527 10.5592 8.58424 10.625 8.75 10.625H15.9914L13.9328 12.6828C13.8155 12.8001 13.7497 12.9591 13.7497 13.125C13.7497 13.2909 13.8155 13.4499 13.9328 13.5672C14.0501 13.6845 14.2091 13.7503 14.375 13.7503C14.5409 13.7503 14.6999 13.6845 14.8172 13.5672L17.9422 10.4422C18.0003 10.3841 18.0464 10.3152 18.0779 10.2393C18.1093 10.1635 18.1255 10.0821 18.1255 10C18.1255 9.91787 18.1093 9.83654 18.0779 9.76066C18.0464 9.68479 18.0003 9.61586 17.9422 9.55781Z"
+                fill="#EB5E28"
               />
-            </div>
-          </div>
+            </svg>
+            {t("logOutLinkTitle", { fallback: "Log Out" })}
+          </button>
         </div>
 
-        <div className={styles.account__info}>
-          <div className={styles.account__tabs}>
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                className={`${styles.account__tab} ${activeTab === tab.id ? styles.account__tab_active : ''}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.title}
-              </button>
-            ))}
+        <div className={styles.contentColumn}>
+          <header className={styles.hero}>
+            <h1 className={styles.heroTitle}>
+              {t("mainTitle", {
+                fallback: "Welcome to Your Travellio Global Hub",
+              })}
+            </h1>
+
+            <div className={styles.heroCopy}>
+              <p className={styles.heroGreeting}>
+                {t("greeting", {
+                  fallback: `Hello,`,
+                })}{" "}{greetingName}!
+              </p>
+
+              <div className={styles.heroBody}>
+                <p>
+                  {t("introPrimary", {
+                    fallback:
+                      "This is your personal travel command center — where plans take shape, memories are tracked, and future adventures begin.",
+                  })}
+                </p>
+                <p>
+                  {t("introSecondary", {
+                    fallback:
+                      "Manage your bookings, update your details, and keep your dream destinations all in one seamless space.",
+                  })}
+                </p>
+              </div>
+
+              <p className={styles.heroEmphasis}>
+                {t("introEmphasis", {
+                  fallback: "Your journeys, organised beautifully.",
+                })}
+              </p>
+            </div>
+          </header>
+
+          <div
+            className={styles.tabs}
+            role="tablist"
+            aria-label={t("tabs.aria", { fallback: "Account sections" })}
+          >
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={
+                    isActive ? `${styles.tab} ${styles.tabActive}` : styles.tab
+                  }
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  {tab.title}
+                </button>
+              );
+            })}
           </div>
 
-          {activeTab === 'tab1' && <MyOrdersPage />}
-
-          {activeTab === 'tab2' && (
-            <div className={styles.account__tab_inner}>
-              <h2 className={styles.account__tab_title}>{tabTwoTitle}</h2>
-              <div>
-                <ContactDataForm user={user} />
-
-                <div className={styles.account__tab_divider}></div>
-
-                <ChangePasswordForm />
-              </div>
-              <div className={styles.account__info_image}>
-                <Image
-                  src="/images/connect/form-image.png"
-                  alt="Image"
-                  width={948}
-                  height={1264}
-                  className="adaptive-image"
-                />
-              </div>
-            </div>
-          )}
+          <div className={styles.panelSurface}>
+            {activeTab === "bookings" ? <AccountBookingsPanel /> : null}
+            {activeTab === "account" ? (
+              <AccountProfilePanel user={user} />
+            ) : null}
+            {activeTab === "wishlist" ? <AccountWishlistPanel /> : null}
+          </div>
         </div>
-      </div>
-    </section>
-
-    // <section className={styles.section}>
-    //   <div className="container">
-    //     <h1 className={styles.title}>{t('title', { fallback: 'My orders' })}</h1>
-    //     {loading ? (
-    //       <p className={styles.loadingText}>{t('loading', { fallback: 'Loading...' })}</p>
-    //     ) : rows.length === 0 ? (
-    //       <p className={styles.empty}>{t('noServices', { fallback: 'You have no orders yet.' })}</p>
-    //     ) : (
-    //       <div className={styles.orders}>
-    //         {rows.slice(0, 2).map((row) => (
-    //           <div className={styles.order} key={`${row.orderId}-${row.itemIndex}`}>
-    //             <h3 className={styles.serviceName}>{row.service}</h3>
-    //             {row.description && <p className={styles.description}>{row.description}</p>}
-    //           </div>
-    //         ))}
-    //       </div>
-    //     )}
-    //     <p className={styles.back}>
-    //       <Button url="/account/my-orders" variant="white" type="link">
-    //         {t('allOrders', { fallback: 'Check all orders' })}
-    //       </Button>
-    //     </p>
-    //   </div>
-    // </section>
+      </section>
+    </main>
   );
 };

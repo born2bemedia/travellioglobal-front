@@ -41,6 +41,18 @@ const formatPrice = (value: number) =>
     maximumFractionDigits: 2,
   })}`;
 
+const getBookingDateLabel = (description?: string, bookingDetails?: { date: string; time: string }) => {
+  if (bookingDetails?.date && bookingDetails?.time) {
+    return `${bookingDetails.date} • ${bookingDetails.time}`;
+  }
+
+  if (bookingDetails?.date) {
+    return bookingDetails.date;
+  }
+
+  return description?.trim() || '';
+};
+
 const ArrowIcon = () => (
   <svg width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true">
     <path
@@ -184,7 +196,7 @@ export const CheckoutForm = () => {
                     <div key={item.id} className={styles.cartGrid}>
                       <div className={styles.nameColumn}>{item.title}</div>
                       <div className={`${styles.altColumn} ${styles.centerCell}`}>
-                        {item.description?.trim() ||
+                        {getBookingDateLabel(item.description, item.bookingDetails) ||
                           t('tourDateFallback', { fallback: 'To be confirmed' })}
                       </div>
                       <div className={styles.centerCell}>{formatPrice(item.price)}</div>
@@ -237,7 +249,7 @@ export const CheckoutForm = () => {
                       {t('tourDate', { fallback: 'Tour Date' })}
                     </div>
                     <div className={styles.mobileSummaryValue}>
-                      {item.description?.trim() ||
+                      {getBookingDateLabel(item.description, item.bookingDetails) ||
                         t('tourDateFallback', { fallback: 'To be confirmed' })}
                     </div>
 

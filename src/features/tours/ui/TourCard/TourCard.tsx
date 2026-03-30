@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import { useAuthStore } from "@/features/account/store/auth";
 import { useCartStore } from "@/features/cart/store/cart";
 
 import { Button } from "@/shared/ui/kit/button/Button";
@@ -10,15 +12,31 @@ import { useTourRegionLabels } from "../../lib/tours";
 import type { Tour } from "../../model/types";
 import styles from "./TourCard.module.scss";
 
+import { Link, useRouter } from "@/i18n/navigation";
+
 interface TourCardProps {
   tour: Tour;
 }
 
 export const TourCard = ({ tour }: TourCardProps) => {
+  const [isWishlisted, setIsWishlisted] = useState(false);
   const addToCart = useCartStore((state) => state.addToCart);
+  const user = useAuthStore((state) => state.user);
+  const addToWishlist = useAuthStore((state) => state.addToWishlist);
+  const removeFromWishlist = useAuthStore((state) => state.removeFromWishlist);
   const regionLabels = useTourRegionLabels();
+  const router = useRouter();
+  const [wishlistBusy, setWishlistBusy] = useState(false);
 
   const formattedPrice = `€${tour.price.toLocaleString("en-IE")}`;
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsWishlisted(user?.wishlist?.some(
+        (item) => item.product === tour.title || item.product === tour.id,
+      ) ?? false);
+    }, 0);
+  }, [user?.wishlist, tour.title, tour.id]);
 
   const handleAddToCart = () => {
     addToCart({
@@ -27,6 +45,24 @@ export const TourCard = ({ tour }: TourCardProps) => {
       price: tour.price,
       quantity: 1,
     });
+  };
+
+  const handleWishlistToggle = async () => {
+    if (!user) {
+      router.push("/log-in");
+      return;
+    }
+
+    setWishlistBusy(true);
+
+    if (isWishlisted) {
+      await removeFromWishlist(tour.title);
+    } else {
+      await addToWishlist({ product: tour.title });
+      setIsWishlisted(true);
+    }
+
+    setWishlistBusy(false);
   };
 
   const renderStars = () => {
@@ -63,8 +99,8 @@ export const TourCard = ({ tour }: TourCardProps) => {
             </div>
           </div>
 
-          <button
-            type="button"
+          <Link
+            href={`/tours/${tour.slug}`}
             className={styles.card__arrow}
             aria-label="View tour details"
           >
@@ -83,19 +119,46 @@ export const TourCard = ({ tour }: TourCardProps) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </button>
+          </Link>
         </div>
 
-        <h3 className={styles.card__title}>{tour.title}</h3>
+        <Link href={`/tours/${tour.slug}`} className={styles.card__titleLink}>
+          <h3 className={styles.card__title}>{tour.title}</h3>
+        </Link>
       </div>
 
       <div className={styles.card__bottom}>
-        <p className={styles.card__price}>{formattedPrice}</p>
+        <div className={styles.card__priceRow}>
+          <p className={styles.card__price}>{formattedPrice}</p>
+          <button
+            type="button"
+            className={`${styles.card__wishlist} ${isWishlisted ? styles.card__wishlistActive : ""}`}
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            aria-pressed={isWishlisted}
+            disabled={wishlistBusy}
+            onClick={handleWishlistToggle}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 4.75H17C17.1381 4.75 17.25 4.86193 17.25 5V20.2051C17.25 20.4115 17.0147 20.5292 16.8496 20.4054L12.15 16.8807C12.0611 16.8141 11.9389 16.8141 11.85 16.8807L7.15037 20.4054C6.98533 20.5292 6.75 20.4115 6.75 20.2051V5C6.75 4.86193 6.86193 4.75 7 4.75Z"
+                stroke={isWishlisted ? "#EB5E28" : "#403D38"}
+                strokeWidth="1.8"
+                fill={isWishlisted ? "#EB5E28" : "transparent"}
+              />
+            </svg>
+          </button>
+        </div>
 
         <Button
-          type="button"
+          type="link"
+          url={`/tours/${tour.slug}`}
           variant="orange"
-          onClick={handleAddToCart}
         >
           <span>Add to cart</span>
           <span className={styles.card__cartArrow} aria-hidden="true">

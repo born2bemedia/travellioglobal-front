@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+﻿import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -8,6 +8,13 @@ export type CartItem = {
   price: number;
   quantity: number;
   description?: string;
+  bookingDetails?: {
+    date: string;
+    time: string;
+    participants: number;
+    duration: string;
+    meetingPoint: string;
+  };
 };
 
 type CartStore = {
@@ -36,9 +43,30 @@ export const useCartStore = create<CartStore>()(
 
         if (existingItem) {
           set((state) => ({
-            items: state.items.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-            ),
+            items: state.items.map((i) => {
+              if (i.id !== item.id) {
+                return i;
+              }
+
+              const nextQuantity = i.quantity + item.quantity;
+
+              return {
+                ...i,
+                ...item,
+                quantity: nextQuantity,
+                bookingDetails: item.bookingDetails
+                  ? {
+                      ...item.bookingDetails,
+                      participants: nextQuantity,
+                    }
+                  : i.bookingDetails
+                    ? {
+                        ...i.bookingDetails,
+                        participants: nextQuantity,
+                      }
+                    : undefined,
+              };
+            }),
           }));
           toast.success(`${item.title} quantity updated!`, {
             position: 'bottom-right',
@@ -50,7 +78,19 @@ export const useCartStore = create<CartStore>()(
           });
         } else {
           set((state) => ({
-            items: [...state.items, { ...item, quantity: 1 }],
+            items: [
+              ...state.items,
+              {
+                ...item,
+                quantity: item.quantity,
+                bookingDetails: item.bookingDetails
+                  ? {
+                      ...item.bookingDetails,
+                      participants: item.quantity,
+                    }
+                  : undefined,
+              },
+            ],
           }));
           toast.success(`${item.title} added to cart!`, {
             position: 'bottom-right',
@@ -70,7 +110,20 @@ export const useCartStore = create<CartStore>()(
         }
 
         set((state) => ({
-          items: state.items.map((i) => (i.id === id ? { ...i, quantity } : i)),
+          items: state.items.map((i) =>
+            i.id === id
+              ? {
+                  ...i,
+                  quantity,
+                  bookingDetails: i.bookingDetails
+                    ? {
+                        ...i.bookingDetails,
+                        participants: quantity,
+                      }
+                    : undefined,
+                }
+              : i,
+          ),
         }));
       },
 
