@@ -59,7 +59,7 @@ const AccountField = ({
       <label htmlFor={id} className={styles.fieldLabel}>
         {hint ? (
           <span>
-            {label}
+            {label} <span className={styles.fieldHint}>({hint})</span>
           </span>
         ) : (
           <span>{label}</span>
