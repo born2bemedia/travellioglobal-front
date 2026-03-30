@@ -14,6 +14,8 @@ import { Button } from "@/shared/ui/kit/button/Button";
 
 import styles from "./HomeGatewayAdventures.module.scss";
 
+import { Link } from "@/i18n/navigation";
+
 const INACTIVE_WIDTH = 305;
 const GAP = 20;
 const AUTOPLAY_DELAY = 5000;
@@ -309,9 +311,12 @@ export const HomeGatewayAdventures = () => {
               <span style={{ width: progressWidth }} />
             </div>
 
-            <button type="button" className={styles.home_gateway__cta}>
+            <Link
+              href="/tours"
+              className={styles.home_gateway__cta}
+            >
               {t("cta", { fallback: "Let's Go Touring" })}
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>

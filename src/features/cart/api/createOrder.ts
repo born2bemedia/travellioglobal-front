@@ -4,6 +4,13 @@ import { cookies } from 'next/headers';
 
 import sgMail from '@sendgrid/mail';
 
+import {
+  createBrandedEmailHtml,
+  escapeHtml,
+  renderEmailDetailsList,
+  renderEmailLink,
+  renderEmailParagraph,
+} from '@/shared/lib/email/brandedEmail';
 import { verifyRecaptcha } from '@/shared/lib/recaptcha';
 
 import type { CheckoutFormSchema } from '../model/checkout.schema';
@@ -199,107 +206,44 @@ const postOrder = async (
         `,
       };
 
-      // Escape HTML to prevent XSS
-      const escapeHtml = (text: string) => {
-        return text
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      };
-
-      const safeFirstName = escapeHtml(data.firstName);
+      const safeFullName = escapeHtml(`${data.firstName} ${data.lastName}`.trim());
+      const safeItems = cart
+        .map((item) => `${escapeHtml(item.title)} x${item.quantity}`)
+        .join(', ');
+      const guestCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const safeBillingAddress = escapeHtml(
+        [data.address1, data.address2, data.city, data.zip, data.country].filter(Boolean).join(', ')
+      );
 
       const userMsg = {
         to: data.email,
         from: FROM_EMAIL,
         subject: "We've received your Travellio Global order",
-        html: `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Received - Travellio Global</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #fff; color: #333;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #fff;">
-    <tr>
-      <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" style="max-width: 640px; width: 100%; border-collapse: collapse; background-color: #fff; overflow: hidden;">
-          <tr>
-            <td style="padding: 0; height: 100px;">
-              <img style="width: 100%; height: auto;" src="https://travellioglobal.com/images/email-header.png" alt="Travellio Global Logo">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 32px; background: #fff;">
-              <p style="margin: 0 0 32px; color: #333;font-size: 24px;font-style: normal;font-weight: 400;line-height: 140%;">
-                Dear ${safeFirstName},
-              </p>
-              <p style="margin: 0 0 24px; color: #333;font-size: 16px;font-style: normal;font-weight: 400;line-height: 140%;">
-                Thank you for choosing Travellio Global as your strategic partner. We have successfully received your request and are pleased to confirm your engagement.<br>
-                Our team is currently reviewing your requirements to ensure our resources align with your business objectives.
-              </p>
-              <span style="display: block;padding: 20px;background:#384CE3;margin: 32px 0;color: #FFF;font-size: 14px;font-style: normal;font-weight: 400;line-height: 140%;">
-                Engagement Summary:<br><br>
-
-                ${cart
-                  .map(
-                    (item) => `
-                  <ul>
-                    <li>
-                      Service: <strong>${escapeHtml(item.title)}</strong>
-                    </li>
-                    <li>
-                      Quantity: <strong>${item.quantity}</strong>
-                    </li>
-                    <li>
-                      Order ID: <strong>${createdOrderNumber}</strong>
-                    </li>
-                    <li>
-                      Date: <strong>${new Date().toLocaleDateString()}</strong>
-                    </li>
-                    <li>
-                      Total Amount: <strong>${escapeHtml(
-                        (item.price * item.quantity).toFixed(2)
-                      )}</strong>
-                    </li>
-                  </ul>
-                  `
-                  )
-                  .join('')}
-              </span>
-              <p style="margin: 0 0 24px; color: #333;font-size: 16px;font-style: normal;font-weight: 400;line-height: 140%;">
-                <b>What Happens Next?</b><br>
-                You will receive an email shortly containing payment instructions. Once those details are finalized, we will move forward with the next phase of your project.<br>
-                We look forward to a successful collaboration.
-              </p>
-              <p style="margin: 0 0 24px; color: #333;font-size: 16px;font-style: normal;font-weight: 400;line-height: 140%;">
-                Best regards,<br>
-                <strong style="color: #333;">The Travellio Global Team</strong><br>
-                <span style="font-size:16px;">
-                  Strategic Solutions for Modern Business
-                </span>
-              </p>
-              <p style="margin: 0; color: #333;font-size: 18px;font-style: normal;font-weight: 400;line-height: 140%;">
-                <a href="https://travellioglobal.com" target="_blank" style="color: #333;font-weight: 400;text-decoration: underline;">travellioglobal.com</a>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0; height: 100px;">
-              <img style="width: 100%; height: auto;" src="https://travellioglobal.com/images/email-footer.png" alt="Travellio Global Logo">
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-        `,
+        html: createBrandedEmailHtml({
+          previewTitle: 'Booking Confirmation - Travellio Global',
+          title: `Dear ${safeFullName},`,
+          bodyHtml: [
+            renderEmailParagraph(
+              'We’re delighted to confirm that your reservation has been successfully finalised.'
+            ),
+            renderEmailDetailsList('Here are your confirmed details:', [
+              { label: 'Reservation Name', value: safeFullName },
+              { label: 'Tour Name', value: safeItems },
+              { label: 'Order ID', value: escapeHtml(createdOrderNumber) },
+              { label: 'Number of Guests', value: escapeHtml(guestCount) },
+              { label: 'Total Paid', value: escapeHtml(`€${total.toFixed(2)}`) },
+              { label: 'Contact Email', value: escapeHtml(data.email) },
+              { label: 'Billing Address', value: safeBillingAddress },
+            ]),
+            renderEmailParagraph('This email serves as your official booking confirmation.'),
+            renderEmailParagraph(
+              `If you require any additional information before your experience begins, please contact us at ${renderEmailLink('mailto:info@travellioglobal.com', 'info@travellioglobal.com')}.`
+            ),
+            renderEmailParagraph(
+              'We can’t wait for you to explore, discover, and create unforgettable memories.'
+            ),
+          ].join('<div style="height: 24px; line-height: 24px;">&nbsp;</div>'),
+        }),
       };
 
       await sgMail.send(adminMsg);
