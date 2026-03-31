@@ -1,9 +1,68 @@
+import countryList from "react-select-country-list";
+
+import { excludedCountries } from "@/shared/lib/countries";
+
 export type AirportOption = { value: string; label: string };
+
+const normalizeCountryName = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const countryCodeByName = new Map(
+  countryList()
+    .getData()
+    .map((country) => [normalizeCountryName(country.label), country.value.toLowerCase()]),
+);
+
+const countryAliases: Record<string, string> = {
+  [normalizeCountryName("USA")]: "us",
+  [normalizeCountryName("United States of America")]: "us",
+  [normalizeCountryName("UAE")]: "ae",
+  [normalizeCountryName("UK")]: "gb",
+  [normalizeCountryName("South Korea")]: "kr",
+  [normalizeCountryName("North Korea")]: "kp",
+  [normalizeCountryName("North Macedonia")]: "mk",
+  [normalizeCountryName("Russia")]: "ru",
+  [normalizeCountryName("Moldova")]: "md",
+  [normalizeCountryName("Hong Kong")]: "hk",
+  [normalizeCountryName("Taiwan")]: "tw",
+  [normalizeCountryName("Bahrain")]: "bh",
+  [normalizeCountryName("Luxembourg")]: "lu",
+  [normalizeCountryName("Malta")]: "mt",
+  [normalizeCountryName("Mauritius")]: "mu",
+  [normalizeCountryName("Seychelles")]: "sc",
+  [normalizeCountryName("Maldives")]: "mv",
+};
+
+const getCountryCodeFromAirportLabel = (label: string) => {
+  const segments = label.split(",").map((segment) => segment.trim()).filter(Boolean);
+  const countryName = segments.at(-1) ?? label;
+  const normalizedCountryName = normalizeCountryName(countryName);
+
+  return (
+    countryAliases[normalizedCountryName] ??
+    countryCodeByName.get(normalizedCountryName) ??
+    null
+  );
+};
+
+const shouldIncludeAirport = (airport: AirportOption) => {
+  const countryCode = getCountryCodeFromAirportLabel(airport.label);
+
+  if (!countryCode) {
+    return true;
+  }
+
+  return !excludedCountries.includes(countryCode);
+};
 
 /**
  * Popular airports worldwide — value is the IATA code, label is "City, Country".
  */
-export const airports: AirportOption[] = [
+const rawAirports: AirportOption[] = [
   // Europe
   { value: "LHR", label: "London, United Kingdom" },
   { value: "LGW", label: "London Gatwick, United Kingdom" },
@@ -199,4 +258,8 @@ export const airports: AirportOption[] = [
   { value: "AKL", label: "Auckland, New Zealand" },
   { value: "CHC", label: "Christchurch, New Zealand" },
   { value: "NAN", label: "Nadi, Fiji" },
-].sort((a, b) => a.label.localeCompare(b.label));
+];
+
+export const airports: AirportOption[] = rawAirports
+  .filter(shouldIncludeAirport)
+  .sort((a, b) => a.label.localeCompare(b.label));

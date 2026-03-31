@@ -1,6 +1,6 @@
 import countryList from "react-select-country-list";
 
-import { excludedCountries } from "@/shared/lib/helpers/excludedCountries";
+import { excludedCountries } from "@/shared/lib/countries";
 
 export type CountryOption = { value: string; label: string };
 

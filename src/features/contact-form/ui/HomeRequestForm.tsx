@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 
-import { excludedCountries } from '@/shared/lib/helpers/excludedCountries';
+import { excludedCountries } from '@/shared/lib/countries';
 
 import { submitHomeRequestForm } from '../api/submitHomeRequestForm';
 import {

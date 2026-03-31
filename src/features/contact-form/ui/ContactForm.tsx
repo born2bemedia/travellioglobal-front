@@ -10,7 +10,7 @@ import { Controller, useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import Select from 'react-select';
 
-import { excludedCountries } from '@/shared/lib/helpers/excludedCountries';
+import { excludedCountries } from '@/shared/lib/countries';
 import { FileIcon } from '@/shared/ui/icons/file';
 import { Button } from '@/shared/ui/kit/button/Button';
 

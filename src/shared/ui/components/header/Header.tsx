@@ -81,6 +81,8 @@ export const Header = () => {
       "/places",
       "/flights",
       "/visas",
+      "/insurance",
+      "/refunds",
     ];
     const isWhite = whiteTopbarPathnames.some((path) =>
       pathname.includes(path),

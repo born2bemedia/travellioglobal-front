@@ -11,7 +11,7 @@ import PhoneInput from 'react-phone-input-2';
 import { submitRequestForm } from '@/features/forms/api/submitForm';
 import { type RequestFormSchema, requestFormSchema } from '@/features/forms/model/schemas';
 
-import { excludedCountries } from '@/shared/lib/helpers/excludedCountries';
+import { excludedCountries } from '@/shared/lib/countries';
 
 import { FormPopup } from '../FormPopup/FormPopup';
 import styles from './RequestPopup.module.scss';

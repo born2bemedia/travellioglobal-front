@@ -8,7 +8,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { Controller, useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 
-import { excludedCountries } from '@/shared/lib/helpers/excludedCountries';
+import { excludedCountries } from '@/shared/lib/countries';
 import { Button } from '@/shared/ui/kit/button/Button';
 
 import { submitContactFormNew } from '../api/submitContactFormNew';
