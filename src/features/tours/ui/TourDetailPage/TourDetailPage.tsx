@@ -1036,26 +1036,7 @@ export const TourDetailPage = ({
                 ))}
               </article>
 
-              {galleryImages.length ? (
-                <section className={styles.gallerySection}>
-                  <h2>{t("galleryTitle", { fallback: "Gallery" })}</h2>
-                  <div className={styles.galleryGrid}>
-                    {galleryImages.map((imageSrc, index) => (
-                      <div key={imageSrc} className={styles.galleryItem}>
-                        <Image
-                          src={imageSrc}
-                          alt={`${tour.title} ${t("galleryImageAlt", {
-                            fallback: "gallery image",
-                          })} ${index + 1}`}
-                          fill
-                          className={styles.galleryImage}
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              ) : null}
+
             </div>
           </div>
 
