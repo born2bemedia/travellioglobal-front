@@ -1,0 +1,72 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.support {
+  padding: 40px 0;
+
+  &__card {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #eb5e28;
+    border-radius: 24px;
+    background: #fffdf1;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1;
+    color: #eb5e28;
+    max-width: 520px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    p,
+    li {
+      font-size: 20px;
+      line-height: 1.25;
+      color: #252422;
+    }
+  }
+
+  &__list {
+    padding-left: 24px;
+    display: grid;
+    gap: 3px;
+    list-style: disc;
+  }
+
+  @include tablet {
+    &__card {
+      grid-template-columns: 1fr;
+    }
+
+    &__title {
+      font-size: 48px;
+    }
+  }
+
+  @include mobile {
+    &__title {
+      font-size: 40px;
+      letter-spacing: -0.06em;
+    }
+
+    &__content {
+      p,
+      li {
+        font-size: 14px;
+      }
+    }
+
+    &__list {
+      padding-left: 18px;
+    }
+  }
+}

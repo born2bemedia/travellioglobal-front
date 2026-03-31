@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
+import { Button } from "@/shared/ui/kit/button/Button";
 
 import styles from "./HomeNextStory.module.scss";
 
@@ -159,7 +160,7 @@ export const HomeNextStory = () => {
               </span>
             </div>
 
-            <button type="button" className={styles.next_story__cta}>
+            <Button type="link" url="/tours" variant="orange">
               <Image
                 src="/images/home/section-story/arrow-right.svg"
                 alt=""
@@ -167,7 +168,7 @@ export const HomeNextStory = () => {
                 height={20}
               />
               <span>{t("cta", { fallback: "Uncover New Destinations" })}</span>
-            </button>
+            </Button>
           </div>
 
           <div className={styles.next_story__sliderSection}>

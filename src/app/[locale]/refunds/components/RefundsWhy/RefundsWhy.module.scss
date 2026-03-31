@@ -1,0 +1,106 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.why {
+  padding: 40px 0;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 500;
+    line-height: 1;
+    color: #eb5e28;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  @include mobile {
+    &__title {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.06em;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.card {
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  overflow: hidden;
+  border-radius: 32px;
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__imageDesktop {
+    display: block;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 42%, rgba(0,0,0,0.56) 100%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 4px;
+    width: 100%;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1;
+    color: #f9faf5;
+  }
+
+  &__description {
+    font-size: 20px;
+    line-height: 1.25;
+    color: #fffdf1;
+  }
+
+  @include mobile {
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__description {
+      font-size: 16px;
+    }
+  }
+}

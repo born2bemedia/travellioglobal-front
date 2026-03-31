@@ -1,0 +1,111 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.cta {
+  padding: 40px 0 80px;
+
+  &__card {
+    position: relative;
+    min-height: 692px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    color: #fffdf1;
+  }
+
+  &__imageDesktop,
+  &__imageMobile {
+    object-fit: cover;
+  }
+
+  &__imageDesktop {
+    display: block;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.82) 14%, rgba(0, 0, 0, 0) 40%, rgba(0,0,0,0.65) 100%);
+  }
+
+  &__top,
+  &__formWrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: minmax(280px, 589px) minmax(220px, 1fr);
+    gap: clamp(48px, 14vw, 184px);
+    align-items: start;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__copy {
+    display: grid;
+    gap: 4px;
+
+    p {
+      font-size: 20px;
+      line-height: 1.25;
+    }
+  }
+
+  &__formWrap {
+    padding: 16px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(24px);
+  }
+
+  @include tablet {
+    &__top {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  @include mobile {
+    &__card {
+      min-height: 1010px;
+    }
+
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+    }
+
+    &__title {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      text-align: center;
+    }
+
+    &__copy p {
+      font-size: 16px;
+      text-align: center;
+    }
+
+    &__formWrap {
+      padding: 16px 12px;
+    }
+  }
+}

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { useCartStore } from "@/features/cart";
-import { useTourRegionLabels, useTours } from "@/features/tours";
+import { getTourGallery, useTourRegionLabels, useTours } from "@/features/tours";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 import { Button } from "@/shared/ui/kit/button/Button";
@@ -29,7 +29,7 @@ export const HomeGatewayAdventures = () => {
 
   const tours = useMemo(
     () =>
-      allTours.map((tour) => ({
+      allTours.slice(0, 10).map((tour) => ({
         key: tour.id,
         title: tour.title,
         price: `€${tour.price.toLocaleString("en-IE")}`,
@@ -38,6 +38,8 @@ export const HomeGatewayAdventures = () => {
         area: regionLabels[tour.region],
         rating: `${tour.rating}/5`,
         alt: tour.title,
+        slug: tour.slug,
+        galleryImages: getTourGallery(tour.slug),
       })),
     [allTours, regionLabels],
   );
@@ -115,17 +117,6 @@ export const HomeGatewayAdventures = () => {
     [slideNext, slidePrev],
   );
 
-  const handleAddToCart = useCallback(
-    (tour: typeof tours[number]) => {
-      addToCart({
-        id: tour.key,
-        title: String(tour.title),
-        price: tour.numericPrice,
-        quantity: 1,
-      });
-    },
-    [addToCart],
-  );
 
   const trackOffset = -(displayIndex * (INACTIVE_WIDTH + GAP));
   const progressWidth = `${((realIndex + 1) / tours.length) * 100}%`;
@@ -223,7 +214,7 @@ export const HomeGatewayAdventures = () => {
                     <article className={styles.home_gateway__card}>
                       <div className={styles.home_gateway__cardMedia}>
                         <Image
-                          src={tour.image}
+                          src={tour.galleryImages[0]}
                           alt={tour.alt}
                           fill
                           sizes="(max-width: 768px) 78vw, (max-width: 1024px) 48vw, 24vw"
@@ -273,9 +264,9 @@ export const HomeGatewayAdventures = () => {
                         </p>
 
                         <Button
-                          type="button"
+                          type="link"
                           variant="orange"
-                          onClick={() => handleAddToCart(tour)}
+                          url={`/tours/${tour.slug}`}
                         >
                           <span>
                             {t("addToCart", { fallback: "Add to cart" })}
