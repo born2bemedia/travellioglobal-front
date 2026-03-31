@@ -11,6 +11,8 @@ import Select, {
   type StylesConfig,
 } from "react-select";
 
+import type { AirportOption } from "@/features/flight-search/lib/airports";
+import { airports } from "@/features/flight-search/lib/airports";
 import { getPlacesSearchSelectStyles } from "@/features/places-search/lib/selectStyles";
 
 import styles from "./RefundsClaimForm.module.scss";
@@ -34,7 +36,19 @@ type RefundsClaimFormProps = {
   compact?: boolean;
 };
 
+const selectValueLabel = (option: AirportOption) =>
+  option.label.split(",")[0].trim();
+
+const baseAirportSelectStyles = getPlacesSearchSelectStyles<AirportOption>();
 const baseSelectStyles = getPlacesSearchSelectStyles<IssueOption>();
+
+const airportSelectStyles: StylesConfig<AirportOption, false> = {
+  ...baseAirportSelectStyles,
+  menuPortal: (provided) => ({
+    ...provided,
+    zIndex: 9999,
+  }),
+};
 
 const issueSelectStyles: StylesConfig<IssueOption, false> = {
   ...baseSelectStyles,
@@ -87,18 +101,6 @@ const formatDepartureDate = (value: string, locale: string) => {
   }).format(date);
 };
 
-const normalizeAirportValue = (value: string) => {
-  const normalized = value.trim().toLowerCase();
-  if (!normalized) return "";
-
-  const firstToken = normalized.split(/[\s,;/]+/).find(Boolean) ?? "";
-  const lettersOnly = firstToken.replace(/[^a-z]/g, "");
-
-  if (!lettersOnly) return "";
-
-  return lettersOnly.length <= 3 ? lettersOnly : lettersOnly.slice(0, 3);
-};
-
 const IssueDropdownIndicator = (
   props: DropdownIndicatorProps<IssueOption, false>,
 ) => (
@@ -115,8 +117,8 @@ const IssueDropdownIndicator = (
 export const RefundsClaimForm = ({ compact = false }: RefundsClaimFormProps) => {
   const t = useTranslations("refundsPage");
   const locale = useLocale();
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [from, setFrom] = useState<AirportOption | null>(null);
+  const [to, setTo] = useState<AirportOption | null>(null);
   const [issue, setIssue] = useState("delayed");
   const [departureDate, setDepartureDate] = useState("");
 
@@ -154,8 +156,8 @@ export const RefundsClaimForm = ({ compact = false }: RefundsClaimFormProps) => 
     url.searchParams.set("utm_source", "travelpayouts");
 
     const hashParams = new URLSearchParams();
-    const departure = normalizeAirportValue(from);
-    const arrival = normalizeAirportValue(to);
+    const departure = from?.value.toLowerCase() ?? "";
+    const arrival = to?.value.toLowerCase() ?? "";
 
     if (departureDate) hashParams.set("date", departureDate);
     if (departure) hashParams.set("departure", departure);
@@ -185,21 +187,28 @@ export const RefundsClaimForm = ({ compact = false }: RefundsClaimFormProps) => 
                 height={24}
               />
             </span>
-            <span className={styles.form__textGroup}>
-              <span className={styles.form__prefix}>
-                {t("formFromLabel", { fallback: "From" })}
-              </span>
-              <input
-                type="text"
+            <div className={styles.form__selectWrap}>
+              <Select<AirportOption>
+                options={airports}
                 value={from}
-                onChange={(event) => setFrom(event.target.value)}
+                onChange={setFrom}
                 placeholder={t("formFromPlaceholder", {
-                  fallback: "(e.g. London or LHR)",
+                  fallback: "From (e.g. London or LHR)",
                 })}
                 aria-label={t("formFromLabel", { fallback: "From" })}
-                className={styles.form__textInput}
+                styles={airportSelectStyles}
+                formatOptionLabel={(option, meta) =>
+                  meta.context === "value"
+                    ? selectValueLabel(option)
+                    : option.label
+                }
+                isSearchable
+                isClearable={false}
+                menuPlacement="top"
+                menuPosition="fixed"
+                menuPortalTarget={menuPortalTarget}
               />
-            </span>
+            </div>
           </span>
         </label>
 
@@ -213,21 +222,28 @@ export const RefundsClaimForm = ({ compact = false }: RefundsClaimFormProps) => 
                 height={24}
               />
             </span>
-            <span className={styles.form__textGroup}>
-              <span className={styles.form__prefix}>
-                {t("formToLabel", { fallback: "To" })}
-              </span>
-              <input
-                type="text"
+            <div className={styles.form__selectWrap}>
+              <Select<AirportOption>
+                options={airports}
                 value={to}
-                onChange={(event) => setTo(event.target.value)}
+                onChange={setTo}
                 placeholder={t("formToPlaceholder", {
-                  fallback: "(e.g. Paris or CDG)",
+                  fallback: "To (e.g. Paris or CDG)",
                 })}
                 aria-label={t("formToLabel", { fallback: "To" })}
-                className={styles.form__textInput}
+                styles={airportSelectStyles}
+                formatOptionLabel={(option, meta) =>
+                  meta.context === "value"
+                    ? selectValueLabel(option)
+                    : option.label
+                }
+                isSearchable
+                isClearable={false}
+                menuPlacement="top"
+                menuPosition="fixed"
+                menuPortalTarget={menuPortalTarget}
               />
-            </span>
+            </div>
           </span>
         </label>
       </div>
