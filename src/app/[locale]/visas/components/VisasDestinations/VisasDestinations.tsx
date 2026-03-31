@@ -125,10 +125,6 @@ export const VisasDestinations = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.card}
-                aria-label={t("destinationLinkLabel", {
-                  destination: destination.title,
-                  fallback: `Open ${destination.title} on iVisa`,
-                })}
               >
                 <div className={styles.card__media}>
                   <Image

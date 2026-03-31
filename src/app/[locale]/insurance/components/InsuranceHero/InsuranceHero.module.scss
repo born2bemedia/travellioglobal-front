@@ -1,0 +1,114 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  min-height: 647px;
+  margin-top: -132px;
+  padding: 240px 0 96px;
+  overflow: hidden;
+  color: #fffdf1;
+  background: #252422;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__bgDesktop,
+  &__bgMobile {
+    object-fit: cover;
+  }
+
+  &__bgDesktop {
+    display: block;
+  }
+
+  &__bgMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.46);
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: clamp(56px, 7vw, 82px);
+    font-weight: 500;
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+    max-width: 760px;
+  }
+
+  &__text {
+    max-width: 748px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    p {
+      font-size: 16px;
+      line-height: 1.25;
+    }
+  }
+
+  @include tablet {
+    min-height: 600px;
+    padding: 212px 0 88px;
+
+    &__title {
+      font-size: clamp(52px, 9vw, 72px);
+      max-width: 700px;
+    }
+  }
+
+  @include mobile {
+    min-height: 516px;
+    margin-top: -120px;
+    padding: 176px 0 80px;
+
+    &__bgDesktop {
+      display: none;
+    }
+
+    &__bgMobile {
+      display: block;
+    }
+
+    &__content {
+      max-width: 340px;
+      gap: 20px;
+    }
+
+    &__title {
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    &__text {
+      max-width: 324px;
+
+      p {
+        font-size: 12px;
+        line-height: 1.25;
+      }
+    }
+  }
+}

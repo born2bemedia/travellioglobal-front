@@ -138,7 +138,11 @@ export const Header = () => {
           text: t("visas", { fallback: "Visas" }),
           href: "/visas",
         },
-        { key: "insurance", text: t("insurance", { fallback: "Insurance" }) },
+        {
+          key: "insurance",
+          text: t("insurance", { fallback: "Insurance" }),
+          href: "/insurance",
+        },
         { key: "refunds", text: t("refunds", { fallback: "Refunds" }) },
         { key: "bikes", text: t("bikes", { fallback: "Bikes" }) },
         { key: "events", text: t("events", { fallback: "Events" }) },

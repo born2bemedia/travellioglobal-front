@@ -2,6 +2,11 @@
 
 .intro {
   padding: 60px 0 40px;
+  background: #fffdf1;
+  margin-top: -32px;
+  border-radius: 32px 32px 0 0;
+  z-index: 1;
+  position: relative;
 
   &__card {
     display: grid;
