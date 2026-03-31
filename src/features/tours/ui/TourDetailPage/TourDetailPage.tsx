@@ -457,9 +457,9 @@ export const TourDetailPage = ({
     setWishlistBusy(true);
 
     if (isWishlisted) {
-      await removeFromWishlist(wishlistedEntry?.product ?? tour.title);
+      await removeFromWishlist(wishlistedEntry?.product ?? tour.id);
     } else {
-      await addToWishlist({ product: tour.title });
+      await addToWishlist({ product: tour.id });
     }
 
     setWishlistBusy(false);

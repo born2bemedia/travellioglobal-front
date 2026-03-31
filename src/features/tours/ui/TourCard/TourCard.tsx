@@ -57,9 +57,9 @@ export const TourCard = ({ tour, galleryImages }: TourCardProps) => {
     setWishlistBusy(true);
 
     if (isWishlisted) {
-      await removeFromWishlist(tour.title);
+      await removeFromWishlist(tour.id);
     } else {
-      await addToWishlist({ product: tour.title });
+      await addToWishlist({ product: tour.id });
       setIsWishlisted(true);
     }
 

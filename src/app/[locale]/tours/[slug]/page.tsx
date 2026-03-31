@@ -1,4 +1,4 @@
-﻿import { notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 
 import type { Metadata } from "next";
 
@@ -16,8 +16,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const tour = getTourBySlug(slug);
+  const { locale, slug } = await params;
+  const tour = getTourBySlug(slug, locale);
 
   if (!tour) {
     return {
@@ -25,7 +25,7 @@ export async function generateMetadata({
     };
   }
 
-  const content = getTourContent(tour.detailContentKey);
+  const content = getTourContent(tour.detailContentKey, locale);
 
   return {
     title: content?.meta.title ?? `${tour.title} | Travellio Global`,
@@ -46,14 +46,14 @@ export default async function TourPage({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const tour = getTourBySlug(slug);
+  const { locale, slug } = await params;
+  const tour = getTourBySlug(slug, locale);
 
   if (!tour) {
     notFound();
   }
 
-  const content = getTourContent(tour.detailContentKey);
+  const content = getTourContent(tour.detailContentKey, locale);
 
   if (!content) {
     notFound();
@@ -64,7 +64,7 @@ export default async function TourPage({
       tour={tour}
       content={content}
       galleryImages={getTourGallery(tour.slug)}
-      relatedTours={getRelatedTours(tour.slug, 8)}
+      relatedTours={getRelatedTours(tour.slug, locale, 8)}
     />
   );
 }
