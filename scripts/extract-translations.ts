@@ -40,13 +40,15 @@ function extractFromFile(filePath: string): void {
   const namespaceParts = namespace.split('.');
 
   // Match t("key", { fallback: "value" }) pattern
+  // Use \b before t so DateTimeFormat("en-US", { ... }) is not parsed as t("en-US", { ... })
+  // (the final "t" of "Format" + "(" would incorrectly satisfy t\( otherwise).
   // This regex properly handles quotes inside strings by:
   // 1. Capturing the quote type used for the key
   // 2. Capturing the quote type used for the fallback value
   // 3. Matching content until the matching closing quote (handling escaped quotes)
   // The pattern matches: anything that's not the closing quote and not a backslash, OR an escaped sequence
   const regex =
-    /t\(\s*(['"`])([\w.-]+)\1\s*,\s*\{[\s\S]*?fallback:\s*(['"`])((?:(?!\3)[^\\]|\\.)*?)\3[\s\S]*?\}\s*\)/g;
+    /\bt\(\s*(['"`])([\w.-]+)\1\s*,\s*\{[\s\S]*?fallback:\s*(['"`])((?:(?!\3)[^\\]|\\.)*?)\3[\s\S]*?\}\s*\)/g;
 
   let match;
   while ((match = regex.exec(content))) {

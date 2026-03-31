@@ -1,0 +1,280 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.destinations {
+  padding: 40px 0;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+    color: #eb5e28;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    line-height: 1.25;
+    color: #252422;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 21px;
+  }
+
+  @include mobile {
+    &__title {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+}
+
+.card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 412px;
+  padding: 8px;
+  border-radius: 24px;
+  background: #ccc6ba;
+
+  &__media {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 16px;
+    padding: 8px;
+  }
+
+  &__image {
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  &__imageDesktop {
+    display: block;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 11.731%,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(0, 0, 0, 0.5) 84.423%
+    );
+  }
+
+  &__top,
+  &__description {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__flag {
+    flex-shrink: 0;
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  &__flagImage {
+    flex-shrink: 0;
+    width: 40px;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  &__title {
+    flex: 1;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    color: #fffdf1;
+  }
+
+  &__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 80px;
+    background: #eb5e28;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__description {
+    margin-top: auto;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fffdf1;
+  }
+
+  &__bookmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 16px;
+    border-radius: 500px;
+    background: #f25a28;
+    color: #f9faf5;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
+    span {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    img{
+      transform: rotate(-90deg);
+    }
+
+  }
+
+  @include tablet {
+    &__flag {
+      font-size: 40px;
+    }
+
+    &__flagImage {
+      width: 34px;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__description {
+      font-size: 18px;
+    }
+
+    &__cta span {
+      font-size: 28px;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+    }
+
+    &__flag {
+      font-size: 40px;
+    }
+
+    &__flagImage {
+      width: 32px;
+    }
+
+    &__title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    &__arrow {
+      width: 32px;
+      height: 32px;
+    }
+
+    &__description {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    &__cta {
+      min-height: 40px;
+
+      span {
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ export {
   getRelatedTours,
   getTourBySlug,
   getTourContent,
+  getTourGallery,
   TOUR_REGIONS,
   TOURS_PER_PAGE,
   useTourRegionLabels,

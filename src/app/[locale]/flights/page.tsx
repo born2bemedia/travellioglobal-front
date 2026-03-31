@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Affordable Flights Worldwide | Travellio Global",
     description:
       "Search and compare global flight options with flexible booking tools. Travel smarter and fly effortlessly with Travellio Global.",
-    //images: "https://travellioglobal.com/images/meta.png",
+    images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Contact Us | Travellio Global",
     description:
       "Get in touch with Travellio Global. Questions, ideas, or travel dreams — we'd love to hear from you. Reach out today.",
-    //images: "https://travellioglobal.com/images/meta.png",
+    images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

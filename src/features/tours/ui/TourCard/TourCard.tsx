@@ -16,9 +16,10 @@ import { Link, useRouter } from "@/i18n/navigation";
 
 interface TourCardProps {
   tour: Tour;
+  galleryImages: string[];
 }
 
-export const TourCard = ({ tour }: TourCardProps) => {
+export const TourCard = ({ tour, galleryImages }: TourCardProps) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const addToCart = useCartStore((state) => state.addToCart);
   const user = useAuthStore((state) => state.user);
@@ -80,7 +81,7 @@ export const TourCard = ({ tour }: TourCardProps) => {
     <article className={styles.card}>
       <div className={styles.card__media}>
         <Image
-          src={tour.image}
+          src={galleryImages[0]}
           alt={tour.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 305px"

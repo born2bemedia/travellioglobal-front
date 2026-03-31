@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 
 import type { SortOption, TourRegion } from "@/features/tours";
 import {
+  getTourGallery,
   TOUR_REGIONS,
   TourCard,
   TOURS_PER_PAGE,
@@ -361,7 +362,7 @@ export const ToursContent = () => {
               {paginatedTours.length > 0 ? (
                 <div className={styles.content__grid}>
                   {paginatedTours.map((tour) => (
-                    <TourCard key={tour.id} tour={tour} />
+                    <TourCard key={tour.id} tour={tour} galleryImages={getTourGallery(tour.slug)} />
                   ))}
                 </div>
               ) : (

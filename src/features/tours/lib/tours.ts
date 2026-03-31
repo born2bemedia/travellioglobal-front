@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { TOUR_DETAIL_CONTENT } from "../data/tour-content";
+import { TOUR_GALLERIES } from "../data/tour-galleries";
 import { TOUR_CATALOG } from "../data/tours";
 import type { Tour, TourRegion } from "../model/types";
 
@@ -38,6 +39,8 @@ export const getTourBySlug = (slug: string) =>
   TOUR_CATALOG.find((tour) => tour.slug === slug);
 
 export const getTourContent = (key: string) => TOUR_DETAIL_CONTENT[key];
+
+export const getTourGallery = (slug: string) => TOUR_GALLERIES[slug] ?? [];
 
 export const getRelatedTours = (slug: string, limit = 10) =>
   TOUR_CATALOG.filter((tour) => tour.slug !== slug).slice(0, limit);

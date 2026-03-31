@@ -29,6 +29,7 @@ export function getPlacesSearchSelectStyles<
     singleValue: (provided) => ({
       ...provided,
       ...baseTextStyles,
+      lineHeight: 1.3,
     }),
     input: (provided) => ({
       ...provided,

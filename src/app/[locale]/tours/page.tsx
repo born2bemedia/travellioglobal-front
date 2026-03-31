@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Guided Tours Worldwide | Handpicked Adventures by Travellio Global",
     description: "Explore premium guided tours across Europe, Asia, the Americas, and beyond. Discover unforgettable experiences curated by Travellio Global.",
-    //images: "https://travellioglobal.com/images/meta.png",
+    images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

@@ -80,6 +80,7 @@ export const Header = () => {
       "/excursion",
       "/places",
       "/flights",
+      "/visas",
     ];
     const isWhite = whiteTopbarPathnames.some((path) =>
       pathname.includes(path),
@@ -132,7 +133,11 @@ export const Header = () => {
       key: "addons",
       text: t("addons", { fallback: "Add-Ons" }),
       items: [
-        { key: "visas", text: t("visas", { fallback: "Visas" }) },
+        {
+          key: "visas",
+          text: t("visas", { fallback: "Visas" }),
+          href: "/visas",
+        },
         { key: "insurance", text: t("insurance", { fallback: "Insurance" }) },
         { key: "refunds", text: t("refunds", { fallback: "Refunds" }) },
         { key: "bikes", text: t("bikes", { fallback: "Bikes" }) },

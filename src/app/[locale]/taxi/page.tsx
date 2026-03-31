@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Airport Transfers & Taxi Services | Travellio Global",
     description:
       "Reliable airport transfers and private taxi services worldwide. Travel comfortably and arrive on time with Travellio Global.",
-    //images: "https://travellioglobal.com/images/meta.png",
+    images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

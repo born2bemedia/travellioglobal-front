@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Global Excursions & Experiences | Travellio Global",
     description:
       "Book immersive excursions, cultural experiences, adventure activities, and iconic city highlights across the world.",
-    //images: "https://travellioglobal.com/images/meta.png",
+    images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

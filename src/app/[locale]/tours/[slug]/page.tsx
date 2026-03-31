@@ -6,6 +6,7 @@ import {
   getRelatedTours,
   getTourBySlug,
   getTourContent,
+  getTourGallery,
   TOUR_CATALOG,
 } from "@/features/tours";
 import { TourDetailPage } from "@/features/tours/ui/TourDetailPage";
@@ -62,6 +63,7 @@ export default async function TourPage({
     <TourDetailPage
       tour={tour}
       content={content}
+      galleryImages={getTourGallery(tour.slug)}
       relatedTours={getRelatedTours(tour.slug, 8)}
     />
   );

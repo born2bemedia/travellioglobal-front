@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Car Rentals Worldwide | Drive Your Journey with Travellio Global",
     description:
       "Book reliable car rentals worldwide with flexible pick-up and drop-off options. Explore destinations at your own pace.",
-    //images: "https://travellioglobal.com/images/meta.png",
+    images: "https://travellioglobal.com/images/meta.png",
   },
 };
 

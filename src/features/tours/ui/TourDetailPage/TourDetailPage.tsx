@@ -4,10 +4,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 
 import { useTranslations } from "next-intl";
+import Select from "react-select";
 
 import { useAuthStore } from "@/features/account/store/auth";
 import { useCartStore } from "@/features/cart/store/cart";
 
+import { getTourGallery } from "../../lib/tours";
 import type { Tour, TourDetailContent } from "../../model/types";
 import { TourCard } from "../TourCard";
 import styles from "./TourDetailPage.module.scss";
@@ -17,6 +19,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 type TourDetailPageProps = {
   tour: Tour;
   content: TourDetailContent;
+  galleryImages: string[];
   relatedTours: Tour[];
 };
 
@@ -183,6 +186,43 @@ const TimerIcon = () => (
   </svg>
 );
 
+const ChevronDownIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M3 5.5L8 10.5L13 5.5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const CalendarNavIcon = ({ direction }: { direction: "prev" | "next" }) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+    style={direction === "next" ? { transform: "rotate(180deg)" } : undefined}
+  >
+    <path
+      d="M10 3L5 8L10 13"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const BookmarkIcon = ({ active }: { active: boolean }) => (
   <svg
     width="24"
@@ -218,6 +258,7 @@ const FeatureIcon = ({
 export const TourDetailPage = ({
   tour,
   content,
+  galleryImages,
   relatedTours,
 }: TourDetailPageProps) => {
   const t = useTranslations("tourDetailPage");
@@ -230,11 +271,11 @@ export const TourDetailPage = ({
 
   const bookingRef = useRef<HTMLFormElement | null>(null);
   const expectationRef = useRef<HTMLElement | null>(null);
+  const calendarRef = useRef<HTMLDivElement | null>(null);
   const touchStartX = useRef(0);
   const hasLooped = useRef(false);
-  const [selectedDate, setSelectedDate] = useState(
-    content.availabilityDates[0] ?? "",
-  );
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState(
     content.availabilityTimes[0] ?? "",
   );
@@ -248,6 +289,100 @@ export const TourDetailPage = ({
     () => parseMaxParticipants(tour.maxCapacityLabel),
     [tour.maxCapacityLabel],
   );
+
+  const calendarMinDate = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
+
+  const calendarMaxDate = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setMonth(d.getMonth() + 3);
+    return d;
+  }, []);
+
+  const isDateAvailable = useCallback(
+    (dateStr: string) => {
+      const d = new Date(`${dateStr}T00:00:00`);
+      return d >= calendarMinDate && d <= calendarMaxDate;
+    },
+    [calendarMinDate, calendarMaxDate],
+  );
+
+  const [calendarYear, setCalendarYear] = useState(
+    () => new Date().getFullYear(),
+  );
+  const [calendarMonth, setCalendarMonth] = useState(
+    () => new Date().getMonth(),
+  );
+
+  const canCalendarGoPrev =
+    calendarYear > calendarMinDate.getFullYear() ||
+    calendarMonth > calendarMinDate.getMonth();
+
+  const canCalendarGoNext =
+    calendarYear < calendarMaxDate.getFullYear() ||
+    calendarMonth < calendarMaxDate.getMonth();
+
+  const calendarDays = useMemo(() => {
+    const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
+    const startOffset = (firstDay + 6) % 7;
+    const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+    const cells: Array<{ day: number | null; dateStr: string | null }> = [];
+    for (let i = 0; i < startOffset; i++) {
+      cells.push({ day: null, dateStr: null });
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const mm = String(calendarMonth + 1).padStart(2, "0");
+      const dd = String(d).padStart(2, "0");
+      cells.push({ day: d, dateStr: `${calendarYear}-${mm}-${dd}` });
+    }
+    return cells;
+  }, [calendarYear, calendarMonth]);
+
+  const handleCalendarPrev = () => {
+    if (!canCalendarGoPrev) return;
+    if (calendarMonth === 0) {
+      setCalendarMonth(11);
+      setCalendarYear((y) => y - 1);
+    } else {
+      setCalendarMonth((m) => m - 1);
+    }
+  };
+
+  const handleCalendarNext = () => {
+    if (!canCalendarGoNext) return;
+    if (calendarMonth === 11) {
+      setCalendarMonth(0);
+      setCalendarYear((y) => y + 1);
+    } else {
+      setCalendarMonth((m) => m + 1);
+    }
+  };
+
+  const timeOptions = useMemo(
+    () =>
+      content.availabilityTimes.map((value) => ({
+        value,
+        label: formatDisplayTime(value),
+      })),
+    [content.availabilityTimes],
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(e.target as Node)
+      ) {
+        setCalendarOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     fetchUser();
@@ -417,7 +552,7 @@ export const TourDetailPage = ({
     <main className={styles.page}>
       <section className={styles.hero}>
         <Image
-          src={tour.image}
+          src={galleryImages[0]}
           alt={tour.title}
           fill
           priority
@@ -442,7 +577,7 @@ export const TourDetailPage = ({
                   />
                 </svg>
               </span>
-              <span>{t("en-US", { fallback: "Back" })}</span>
+              <span>{t("back", { fallback: "Back" })}</span>
             </Link>
           </div>
         </div>
@@ -467,7 +602,7 @@ export const TourDetailPage = ({
           <div className={styles.mediaCard}>
             <div className={styles.mediaVisual}>
               <Image
-                src={tour.image}
+                src={galleryImages[1]}
                 alt={tour.title}
                 fill
                 className={styles.mediaImage}
@@ -565,37 +700,184 @@ export const TourDetailPage = ({
                 </h2>
 
                 <div className={styles.bookingFields}>
-                  <label className={styles.bookingField}>
-                    <span className={styles.bookingIcon}>
-                      <CalendarIcon />
-                    </span>
-                    <select
-                      value={selectedDate}
-                      onChange={(event) => setSelectedDate(event.target.value)}
+                  <div
+                    className={styles.calendarDropdown}
+                    ref={calendarRef}
+                  >
+                    <button
+                      type="button"
+                      className={`${styles.bookingField} ${styles.calendarTrigger}`}
+                      onClick={() => setCalendarOpen((o) => !o)}
+                      aria-expanded={calendarOpen}
                     >
-                      {content.availabilityDates.map((value) => (
-                        <option key={value} value={value}>
-                          {formatShortDate(value)}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                      <span className={styles.bookingIcon}>
+                        <CalendarIcon />
+                      </span>
+                      <span className={styles.bookingLabel}>
+                        {selectedDate
+                          ? formatShortDate(selectedDate)
+                          : t("selectDate", { fallback: "Select date" })}
+                      </span>
+                      <span
+                        className={`${styles.calendarChevron} ${calendarOpen ? styles.calendarChevronOpen : ""}`}
+                      >
+                        <ChevronDownIcon />
+                      </span>
+                    </button>
 
-                  <label className={styles.bookingField}>
+                    {calendarOpen && (
+                      <div className={styles.calendarDropdownPanel}>
+                        <div className={styles.calendarHeader}>
+                          <button
+                            type="button"
+                            className={styles.calendarNavBtn}
+                            onClick={handleCalendarPrev}
+                            disabled={!canCalendarGoPrev}
+                            aria-label="Previous month"
+                          >
+                            <CalendarNavIcon direction="prev" />
+                          </button>
+                          <span className={styles.calendarMonthLabel}>
+                            {new Intl.DateTimeFormat("en-US", {
+                              month: "long",
+                              year: "numeric",
+                            }).format(new Date(calendarYear, calendarMonth))}
+                          </span>
+                          <button
+                            type="button"
+                            className={styles.calendarNavBtn}
+                            onClick={handleCalendarNext}
+                            disabled={!canCalendarGoNext}
+                            aria-label="Next month"
+                          >
+                            <CalendarNavIcon direction="next" />
+                          </button>
+                        </div>
+                        <div className={styles.calendarGrid}>
+                          {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map(
+                            (d) => (
+                              <span key={d} className={styles.calendarDayName}>
+                                {d}
+                              </span>
+                            ),
+                          )}
+                          {calendarDays.map((cell, i) => {
+                            if (!cell.day) {
+                              return <span key={`empty-${i}`} />;
+                            }
+                            const isAvailable = cell.dateStr
+                              ? isDateAvailable(cell.dateStr)
+                              : false;
+                            const isSelected = cell.dateStr === selectedDate;
+                            return (
+                              <button
+                                key={cell.dateStr ?? i}
+                                type="button"
+                                disabled={!isAvailable}
+                                className={`${styles.calendarDay} ${
+                                  isAvailable
+                                    ? styles.calendarDayAvailable
+                                    : styles.calendarDayDisabled
+                                } ${isSelected ? styles.calendarDaySelected : ""}`}
+                                onClick={() => {
+                                  if (cell.dateStr) {
+                                    setSelectedDate(cell.dateStr);
+                                    setCalendarOpen(false);
+                                  }
+                                }}
+                              >
+                                {cell.day}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={styles.bookingField}>
                     <span className={styles.bookingIcon}>
                       <ClockIcon />
                     </span>
-                    <select
-                      value={selectedTime}
-                      onChange={(event) => setSelectedTime(event.target.value)}
-                    >
-                      {content.availabilityTimes.map((value) => (
-                        <option key={value} value={value}>
-                          {formatDisplayTime(value)}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                    <Select
+                      options={timeOptions}
+                      value={
+                        timeOptions.find((o) => o.value === selectedTime) ??
+                        null
+                      }
+                      onChange={(option) =>
+                        option && setSelectedTime(option.value)
+                      }
+                      isSearchable={false}
+                      menuPortalTarget={
+                        typeof document !== "undefined" ? document.body : null
+                      }
+                      menuPosition="fixed"
+                      styles={{
+                        container: (base) => ({
+                          ...base,
+                          flex: 1,
+                        }),
+                        control: (base) => ({
+                          ...base,
+                          backgroundColor: "transparent",
+                          border: 0,
+                          boxShadow: "none",
+                          minHeight: "unset",
+                          cursor: "pointer",
+                          "&:hover": { border: 0 },
+                        }),
+                        valueContainer: (base) => ({
+                          ...base,
+                          padding: 0,
+                        }),
+                        singleValue: (base) => ({
+                          ...base,
+                          color: "#fffdf1",
+                          fontSize: "20px",
+                          fontFamily: "inherit",
+                          margin: 0,
+                        }),
+                        indicatorSeparator: () => ({ display: "none" }),
+                        dropdownIndicator: (base) => ({
+                          ...base,
+                          color: "#fffdf1",
+                          padding: "0 4px",
+                          "&:hover": { color: "#fffdf1" },
+                          svg: { width: "16px", height: "16px" },
+                        }),
+                        menu: (base) => ({
+                          ...base,
+                          backgroundColor: "#fffdf1",
+                          borderRadius: "12px",
+                          overflow: "hidden",
+                          zIndex: 9999,
+                          boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+                        }),
+                        menuList: (base) => ({
+                          ...base,
+                          padding: "4px 0",
+                        }),
+                        option: (base, state) => ({
+                          ...base,
+                          backgroundColor: state.isSelected
+                            ? "rgba(235, 94, 40, 0.15)"
+                            : state.isFocused
+                              ? "rgba(235, 94, 40, 0.07)"
+                              : "transparent",
+                          color: state.isSelected ? "#eb5e28" : "#252422",
+                          fontSize: "16px",
+                          fontFamily: "inherit",
+                          fontWeight: state.isSelected ? 600 : 400,
+                          cursor: "pointer",
+                          padding: "10px 16px",
+                          "&:active": {
+                            backgroundColor: "rgba(235, 94, 40, 0.2)",
+                          },
+                        }),
+                      }}
+                    />
+                  </div>
 
                   <div className={styles.bookingField}>
                     <span className={styles.bookingIcon}>
@@ -753,6 +1035,27 @@ export const TourDetailPage = ({
                   </section>
                 ))}
               </article>
+
+              {galleryImages.length ? (
+                <section className={styles.gallerySection}>
+                  <h2>{t("galleryTitle", { fallback: "Gallery" })}</h2>
+                  <div className={styles.galleryGrid}>
+                    {galleryImages.map((imageSrc, index) => (
+                      <div key={imageSrc} className={styles.galleryItem}>
+                        <Image
+                          src={imageSrc}
+                          alt={`${tour.title} ${t("galleryImageAlt", {
+                            fallback: "gallery image",
+                          })} ${index + 1}`}
+                          fill
+                          className={styles.galleryImage}
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
             </div>
           </div>
 
@@ -865,7 +1168,7 @@ export const TourDetailPage = ({
                           isActive ? styles.relatedSlideActive : ""
                         }`}
                       >
-                        <TourCard tour={item} />
+                        <TourCard tour={item} galleryImages={getTourGallery(item.slug)} />
                       </div>
                     );
                   })}
