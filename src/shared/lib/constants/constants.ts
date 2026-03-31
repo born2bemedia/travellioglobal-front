@@ -2,9 +2,9 @@ export const WEBSITE_EMAIL = 'info@travellioglobal.com';
 export const WEBSITE_PHONE = '+447366905227';
 
 export const LINKEDIN_URL = '#';
-export const FACEBOOK_URL = '#';
-export const INSTAGRAM_URL = '#';
-export const X_URL = '#';
+export const FACEBOOK_URL = 'https://www.facebook.com/travellio/';
+export const INSTAGRAM_URL = 'https://www.instagram.com/travellioglobal/';
+export const X_URL = 'https://x.com/travellioglobal';
 
 export const WEBSITE_REGISTERED_ADDRESS =
   '2nd Floor College House, 17 King Edwards Road, Ruislip, London, United Kingdom, HA4 7AE';

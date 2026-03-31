@@ -16,8 +16,8 @@ import {
   X_URL,
 } from "@/shared/lib/constants/constants";
 
+import { InstagramIcon } from "../../icons";
 import { FacebookIcon } from "../../icons/socials/facebook";
-import { LinkedinIcon } from "../../icons/socials/linkedin";
 import { XIcon } from "../../icons/socials/x";
 import styles from "./Footer.module.scss";
 
@@ -186,7 +186,7 @@ export const Footer = () => {
                   aria-label="Instagram"
                   className={styles.footer__socialLink}
                 >
-                  <LinkedinIcon />
+                  <InstagramIcon   />
                 </a>
                 <a
                   href={X_URL}
