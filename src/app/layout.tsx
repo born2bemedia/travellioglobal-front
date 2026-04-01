@@ -2,14 +2,8 @@ import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale } from 'next-intl/server';
-import { ToastContainer } from 'react-toastify';
-
-import { FormsPopupRenderer } from '@/features/forms';
 
 import { cn } from '@/shared/lib/helpers/styles';
-import { CookiePopup, Footer, Header } from '@/shared/ui/components';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '@/shared/lib/styles/null.scss';
@@ -44,20 +38,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-
   return (
-    <html lang={locale}>
+    <html lang="en">
       <GoogleAnalytics gaId="G-8556Y8CBFX" />
       <body className={cn(plusJakartaSans.variable, syne.variable)}>
-        <NextIntlClientProvider>
-          <Header />
-          {children}
-          <Footer />
-          <ToastContainer />
-          <CookiePopup />
-          <FormsPopupRenderer />
-        </NextIntlClientProvider>
+        {children}
       </body>
     </html>
   );

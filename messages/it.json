@@ -1320,7 +1320,7 @@
     "reviews": "recensioni",
     "wishlist1": "Rimuovi dalla lista dei desideri",
     "wishlist2": "Aggiungi alla lista dei desideri",
-    "fromPrice": "A partire da {prezzo} a persona",
+    "fromPrice": "A partire da {price} a persona",
     "summaryMessage": "Puoi assicurarti il tuo posto. Prenota ora e paga più tardi, senza che sia richiesto alcun pagamento anticipato oggi.",
     "checkAvailability": "Verifica la disponibilità",
     "selectDate": "Seleziona la data",
@@ -1333,7 +1333,7 @@
     "startsAt": "Inizia alle",
     "meetingPoint": "Punto d'incontro",
     "priceBreakdown": "Ripartizione dei prezzi: {count} partecipanti x {price}",
-    "totalLabel": "Totale: {prezzo}",
+    "totalLabel": "Totale: {price}",
     "totalNote": "Il prezzo totale include tutte le tasse e le commissioni",
     "bookNow": "Prenota ora",
     "relatedTours": "Libera il tuo viaggiatore interiore, considera l'idea di esplorare...",
@@ -1408,3 +1408,4 @@
     "button": "Scarica"
   }
 }
+
