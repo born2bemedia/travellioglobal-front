@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: 'Travellio Global | Tours, Excursions & Seamless Travel Services',
     description:
       'Discover curated tours, global excursions, flights, transfers, and travel services worldwide. Explore smarter and travel effortlessly with Travellio Global.',
-    //images: 'https://travellioglobal.com/images/meta.png',
+    images: 'https://travellioglobal.com/images/meta.png',
   },
 };
 
