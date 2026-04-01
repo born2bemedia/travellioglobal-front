@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';

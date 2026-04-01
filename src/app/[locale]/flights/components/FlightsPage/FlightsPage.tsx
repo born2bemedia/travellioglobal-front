@@ -3,7 +3,6 @@ import { FlightsFeaturedSearch } from "../FlightsFeaturedSearch";
 import { FlightsGlobalDeals } from "../FlightsGlobalDeals";
 import { FlightsHero } from "../FlightsHero";
 import { FlightsJourney } from "../FlightsJourney";
-import { FlightsMobilePromo } from "../FlightsMobilePromo";
 
 export const FlightsPage = () => {
   return (

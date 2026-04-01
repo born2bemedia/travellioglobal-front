@@ -1,20 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
+import { formatDateDDMM } from "@/features/flights-search/lib/date";
+
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 import { Button } from "@/shared/ui/kit/button/Button";
-import { formatDateDDMM } from "@/features/flights-search/lib/date";
 
 import styles from "./HomeNextStory.module.scss";
 
 const INACTIVE_WIDTH = 305;
 const GAP = 20;
-const AUTOPLAY_DELAY = 5000;
 const AVIASALES_SEARCH_BASE_URL = "https://www.aviasales.com/search";
 const AVIASALES_DEFAULT_ORIGIN_IATA = "BUD";
 const AVIASALES_DEFAULT_DEPART_DATE = "2026-06-15";
@@ -88,10 +88,8 @@ export const HomeNextStory = () => {
 
   const [displayIndex, setDisplayIndex] = useState(0);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
   const hasLooped = useRef(false);
 
-  const realIndex = displayIndex % destinations.length;
 
   const slideNext = useCallback(() => {
     setTransitionEnabled(true);
@@ -124,11 +122,6 @@ export const HomeNextStory = () => {
     }
   }, [displayIndex, destinations.length]);
 
-  /*useEffect(() => {
-    if (isPaused) return;
-    const id = setInterval(slideNext, AUTOPLAY_DELAY);
-    return () => clearInterval(id);
-  }, [isPaused, slideNext]);*/
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -236,8 +229,6 @@ export const HomeNextStory = () => {
 
             <div
               className={styles.next_story__slider}
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >

@@ -1,1 +1,0 @@
-export { FlightsMobilePromo } from "./FlightsMobilePromo";

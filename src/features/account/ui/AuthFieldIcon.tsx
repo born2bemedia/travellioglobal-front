@@ -11,15 +11,8 @@ type AuthFieldIconProps = {
   className?: string;
 };
 
-const commonProps = {
-  fill: "none",
-  stroke: "currentColor",
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  strokeWidth: 1.6,
-};
 
-export const AuthFieldIcon = ({ name, className }: AuthFieldIconProps) => {
+export const AuthFieldIcon = ({ name }: AuthFieldIconProps) => {
   switch (name) {
     case "email":
       return (

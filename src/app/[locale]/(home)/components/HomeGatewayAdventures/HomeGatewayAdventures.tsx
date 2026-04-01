@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { useCartStore } from "@/features/cart";
 import { getTourGallery, useTourRegionLabels, useTours } from "@/features/tours";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
@@ -18,11 +17,9 @@ import { Link } from "@/i18n/navigation";
 
 const INACTIVE_WIDTH = 305;
 const GAP = 20;
-const AUTOPLAY_DELAY = 5000;
 
 export const HomeGatewayAdventures = () => {
   const t = useTranslations("homeGatewayAdventures");
-  const addToCart = useCartStore((state) => state.addToCart);
   const regionLabels = useTourRegionLabels();
   const allTours = useTours();
   const touchStartX = useRef(0);
@@ -55,7 +52,6 @@ export const HomeGatewayAdventures = () => {
 
   const [displayIndex, setDisplayIndex] = useState(0);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
   const hasLooped = useRef(false);
 
   const realIndex = displayIndex % tours.length;
@@ -94,12 +90,6 @@ export const HomeGatewayAdventures = () => {
     }
   }, [displayIndex, tours.length]);
 
-  // Autoplay
-  /**useEffect(() => {
-    if (isPaused) return;
-    const id = setInterval(slideNext, AUTOPLAY_DELAY);
-    return () => clearInterval(id);
-  }, [isPaused, slideNext]); */
 
   // Touch handling
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -187,8 +177,6 @@ export const HomeGatewayAdventures = () => {
 
           <div
             className={styles.home_gateway__slider}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >

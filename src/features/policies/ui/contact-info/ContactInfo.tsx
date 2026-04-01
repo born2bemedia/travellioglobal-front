@@ -2,7 +2,6 @@
 
 import { Link } from "@/i18n/navigation";
 
-import { useTranslations } from "next-intl";
 
 import { WEBSITE_EMAIL, WEBSITE_PHONE } from "@/shared/lib/constants/constants";
 import { EmailIcon, PhoneIcon, WebIcon } from "@/shared/ui/icons";
@@ -10,7 +9,6 @@ import { EmailIcon, PhoneIcon, WebIcon } from "@/shared/ui/icons";
 import st from "./ContactInfo.module.scss";
 
 export const ContactInfo = () => {
-  const t = useTranslations("contactInfoPolicy");
 
   return (
     <section className={st.layout}>

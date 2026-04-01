@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
@@ -56,17 +56,6 @@ export const HomeEmbarkExtraordinary = () => {
   const [autoIndex, setAutoIndex] = useState(0);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
 
-  /*useEffect(() => {
-    if (hoveredCardIndex !== null) {
-      return;
-    }
-
-    const interval = window.setInterval(() => {
-      //setAutoIndex((current) => (current + 1) % THEMES.length);
-    }, 2600);
-
-    return () => window.clearInterval(interval);
-  }, [hoveredCardIndex, THEMES.length]);*/
 
   const activeCardIndex = hoveredCardIndex ?? autoIndex;
   const activeCard = THEMES[activeCardIndex];

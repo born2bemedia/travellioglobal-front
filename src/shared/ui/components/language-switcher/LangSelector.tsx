@@ -8,7 +8,6 @@ import { useLocale } from 'next-intl';
 import { LangArrowIcon } from '@/shared/ui/icons/header/LangArrowIcon';
 import { LangArrowIconMobile } from '@/shared/ui/icons/header/LangArrowIconMobile';
 
-// import { LangIcon } from '@/shared/ui/icons/header/LangIcon';
 import styles from './LangSelector.module.scss';
 
 import { routing } from '@/i18n/routing';
@@ -102,7 +101,6 @@ export const LangSelector = ({ compact = false }: LangSelectorProps) => {
         aria-haspopup="listbox"
         aria-label={currentLabel}
       >
-        {/*<LangIcon />*/}
         {currentLabel}
         <div className={styles.langSelector__icon_desktop}>
           <LangArrowIcon />

@@ -1,4 +1,4 @@
-@import "@/shared/lib/styles/mixin";
+@use '@/shared/lib/styles/mixin.scss' as *;
 
 .content {
   background: #f9faf5;

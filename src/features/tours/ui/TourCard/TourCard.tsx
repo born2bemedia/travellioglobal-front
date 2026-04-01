@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { useAuthStore } from "@/features/account/store/auth";
-import { useCartStore } from "@/features/cart/store/cart";
 
 import { Button } from "@/shared/ui/kit/button/Button";
 
@@ -21,7 +20,6 @@ interface TourCardProps {
 
 export const TourCard = ({ tour, galleryImages }: TourCardProps) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const addToCart = useCartStore((state) => state.addToCart);
   const user = useAuthStore((state) => state.user);
   const addToWishlist = useAuthStore((state) => state.addToWishlist);
   const removeFromWishlist = useAuthStore((state) => state.removeFromWishlist);
@@ -39,14 +37,6 @@ export const TourCard = ({ tour, galleryImages }: TourCardProps) => {
     }, 0);
   }, [user?.wishlist, tour.title, tour.id]);
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: tour.id,
-      title: tour.title,
-      price: tour.price,
-      quantity: 1,
-    });
-  };
 
   const handleWishlistToggle = async () => {
     if (!user) {

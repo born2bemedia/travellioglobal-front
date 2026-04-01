@@ -10,4 +10,5 @@ export type WishlistImage =
 export type WishlistItem = {
   product: string;
   image?: WishlistImage;
+  slug?: string;
 };

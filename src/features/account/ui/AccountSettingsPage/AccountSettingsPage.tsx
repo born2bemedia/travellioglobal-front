@@ -9,10 +9,10 @@ import { useAuthStore } from "@/features/account/store/auth";
 import { Button } from "@/shared/ui/kit/button/Button";
 
 import styles from "./AccountSettingsPage.module.scss";
+import { useRouter } from "@/i18n/navigation";
 import { ChangePasswordForm } from "./ChangePasswordForm/ChangePasswordForm";
 import { ContactDataForm } from "./ContactDataForm/ContactDataForm";
 
-import { Link, useRouter } from "@/i18n/navigation";
 
 export const AccountSettingsPage = () => {
   const router = useRouter();

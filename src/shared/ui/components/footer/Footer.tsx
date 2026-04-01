@@ -299,7 +299,7 @@ export const Footer = () => {
       <div className={styles.footer__partnersTrack} aria-hidden="true">
         {PARTNER_LOGOS.map((item) => (
           <div
-            key={`${item.key}-duplicate`}
+            key={`${item.key}-loop-1`}
             className={styles.footer__partnerLogo}
           >
             <Image
@@ -312,7 +312,7 @@ export const Footer = () => {
         ))}
         {PARTNER_LOGOS.map((item) => (
           <div
-            key={`${item.key}-duplicate`}
+            key={`${item.key}-loop-2`}
             className={styles.footer__partnerLogo}
           >
             <Image

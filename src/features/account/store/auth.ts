@@ -35,7 +35,7 @@ type AuthStore = {
   setKeepSigned: (value: boolean) => void;
 };
 
-export const useAuthStore = create<AuthStore>((set, get) => ({
+export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   isLoading: false,
   isInitialized: false,
@@ -106,7 +106,6 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         body: JSON.stringify({ firstName, lastName, email, password, username, phone }),
         credentials: 'include',
       });
-      console.log(res);
       const data = (await res.json()) as { user?: AuthUser; message?: string };
       if (!res.ok) {
         set({ isLoading: false });
@@ -215,7 +214,15 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       }
 
       set((state) => ({
-        user: state.user ? { ...state.user, wishlist: data.user?.wishlist ?? [] } : data.user ?? null,
+        user: state.user
+          ? {
+              ...state.user,
+              wishlist:
+                data.user?.wishlist ??
+                state.user.wishlist?.filter((item) => item.product !== product) ??
+                [],
+            }
+          : data.user ?? null,
       }));
 
       return { ok: true };
