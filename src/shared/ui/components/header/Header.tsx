@@ -23,7 +23,7 @@ import {
   XIcon,
 } from "@/shared/ui/icons";
 
-//import { LangSelector } from "../language-switcher/LangSelector";
+import { LangSelector } from "../language-switcher/LangSelector";
 import styles from "./Header.module.scss";
 
 import { Link } from "@/i18n/navigation";
@@ -39,12 +39,14 @@ type HeaderDropdownItem = {
   key: string;
   text: string;
   href?: string;
+  target?: string;
 };
 
 type HeaderDropdown = {
   key: "addons" | "affiliates";
   text: string;
   items: readonly HeaderDropdownItem[];
+  target?: string;
 };
 
 const normalizePath = (path: string) => {
@@ -83,11 +85,16 @@ export const Header = () => {
       "/visas",
       "/insurance",
       "/refunds",
+      "/bikes",
+      "/events",
+      "/journal/beyond-the-postcard-experiencing-cities-like-a-local",
+      "/journal/from-takeoff-to-touchdown-how-to-travel-smarter-in-2026",
+      "/journal/slow-travel-vs-fast-adventures-what-type-of-explorer-are-you",
+      "/journal/the-power-of-experiences-why-events-excursions-and-local-moments-matter"
     ];
     const isWhite = whiteTopbarPathnames.some((path) =>
       pathname.includes(path),
     );
-    console.log(isWhite, isWhiteTopbar, pathname);
     if (isWhite !== isWhiteTopbar) {
       setTimeout(() => {
         setIsWhiteTopbar(isWhite);
@@ -150,8 +157,16 @@ export const Header = () => {
           text: t("refunds", { fallback: "Refunds" }),
           href: "/refunds",
         },
-        { key: "bikes", text: t("bikes", { fallback: "Bikes" }) },
-        { key: "events", text: t("events", { fallback: "Events" }) },
+        {
+          key: "bikes",
+          text: t("bikes", { fallback: "Bikes" }),
+          href: "/bikes",
+        },
+        {
+          key: "events",
+          text: t("events", { fallback: "Events" }),
+          href: "/events",
+        },
       ],
     },
     {
@@ -162,37 +177,43 @@ export const Header = () => {
           key: "we-go-trip",
           text: t("weGoTrip", { fallback: "We Go Trip" }),
           href:
-            "https://tp.media/r?marker=552524&trs=327401&p=4487&u=https%3A%2F%2Fwegotrip.com&campaign_id=150",
+            "https://wegotrip.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
+            target: "_blank",
         },
         {
           key: "tiqets",
           text: t("tiqets", { fallback: "Tiqets" }),
           href:
-            "https://tp.media/r?marker=552524&trs=327401&p=2074&u=https%3A%2F%2Ftiqets.com&campaign_id=89",
+            "https://tiqets.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
+            target: "_blank",
         },
         {
           key: "searadar",
           text: t("searadar", { fallback: "Searadar" }),
           href:
-            "https://tp.media/r?marker=552524&trs=327401&p=5907&u=https%3A%2F%2Fsearadar.com&campaign_id=258",
+            "https://searadar.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
+            target: "_blank",
         },
         {
           key: "qeeq",
           text: t("qeeq", { fallback: "QEEQ" }),
           href:
-            "https://tp.media/r?marker=552524&trs=327401&p=4845&u=https%3A%2F%2Fqeeq.com&campaign_id=172",
+            "https://qeeq.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
+            target: "_blank",
         },
         {
           key: "iway",
           text: t("iway", { fallback: "I’way" }),
           href:
-            "https://tp.media/click?shmarker=552524&promo_id=7544&source_type=link&type=click&campaign_id=142&trs=327401",
+            "https://iway.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
+            target: "_blank",
         },
         {
           key: "drimsim",
           text: t("drimsim", { fallback: "Drimsim" }),
           href:
-            "https://tp.media/r?marker=552524&trs=327401&p=2762&u=https%3A%2F%2Fw1.drimsim.com&campaign_id=102",
+            "https://drimsim.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
+            target: "_blank",
         },
       ],
     },
@@ -271,6 +292,7 @@ export const Header = () => {
         <Link
           key={item.key}
           href={item.href}
+          target={item.target}
           className={styles.header__dropdownItem}
         >
           {item.text}
@@ -357,6 +379,10 @@ export const Header = () => {
             </div>
 
             <div className={styles.header__topbar_right_column}>
+              <div className={styles.header__topbar_lang_wrapper}>
+                <LangSelector compact />
+              </div>
+
               <div className={styles.header__topbar__socials}>
                 <a
                   href={INSTAGRAM_URL}

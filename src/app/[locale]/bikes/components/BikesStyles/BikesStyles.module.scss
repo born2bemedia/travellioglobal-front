@@ -1,0 +1,126 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.styles {
+  padding: 60px 0 40px;
+  background: #fffdf1;
+
+  &__title {
+    margin-bottom: 32px;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    text-align: center;
+    color: #eb5e28;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  &__card {
+    position: relative;
+    min-height: 381px;
+    overflow: hidden;
+    border-radius: 32px;
+    isolation: isolate;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.08) 34%,
+        rgba(0, 0, 0, 0.08) 56%,
+        rgba(0, 0, 0, 0.62) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 381px;
+    padding: 24px;
+
+    h3 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 0.95;
+      color: #f9faf5;
+    }
+
+    p {
+      max-width: 334px;
+      color: #fffdf1;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+
+  @include tablet {
+    padding: 4px 0 36px;
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__content {
+      min-height: 340px;
+    }
+
+    &__content h3 {
+      font-size: 32px;
+    }
+  }
+
+  @include mobile {
+    padding: 0 0 32px;
+
+    &__title {
+      margin-bottom: 20px;
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    &__card {
+      min-height: 244px;
+      border-radius: 20px;
+    }
+
+    &__content {
+      min-height: 244px;
+      padding: 12px;
+
+      h3 {
+        font-size: 32px;
+        line-height: 1.1;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.2;
+      }
+    }
+  }
+}

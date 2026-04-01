@@ -1,0 +1,221 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.search {
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px);
+
+  &.compact {
+    .search__form {
+      padding: 16px;
+    }
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0;
+    align-items: center;
+    padding: 16px 16px 24px;
+  }
+
+  &__fields {
+    display: grid;
+    gap: 8px;
+  }
+
+  &__rowTop {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  &__rowBottom {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 79px;
+  }
+
+  &__field {
+    min-width: 0;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.32);
+  }
+
+  &__fieldInner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 56px;
+    padding: 8px;
+
+    img {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__selectWrap {
+    width: 100%;
+  }
+
+  &__dateDisplay {
+    width: 100%;
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &__dateInput {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 0 8px;
+    color: #fffdf1;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  &__checkboxInput {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__checkboxBox {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 253, 241, 0.4);
+    background: center / cover no-repeat
+      url("/images/bikes/form-checkbox-empty.svg");
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  &__checkboxInput:checked + &__checkboxBox {
+    border-color: #eb5e28;
+    background-color: #eb5e28;
+    background-image: none;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid #fffdf1;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 322px;
+    min-height: 56px;
+    margin-left: 32px;
+    padding: 8px 52px;
+    border-radius: 999px;
+    background: #eb5e28;
+    color: #fffdf1;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
+    span {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  @include tablet {
+    &__form {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    &__rowTop,
+    &__rowBottom {
+      gap: 16px;
+    }
+
+    &__rowBottom {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__submit {
+      width: 100%;
+    }
+  }
+
+  @include mobile {
+    border-radius: 24px;
+
+    &__form {
+      gap: 14px;
+      padding: 12px 12px 18px;
+    }
+
+    &__rowTop,
+    &__rowBottom {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    &__dateDisplay {
+      font-size: 17px;
+    }
+
+    &__checkbox {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    &__submit {
+      min-width: 0;
+      min-height: 48px;
+      margin-left: 0;
+      padding: 8px 28px;
+
+      span {
+        font-size: 17px;
+      }
+    }
+  }
+}

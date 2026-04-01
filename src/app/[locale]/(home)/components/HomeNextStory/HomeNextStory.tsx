@@ -8,12 +8,28 @@ import { useTranslations } from "next-intl";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 import { Button } from "@/shared/ui/kit/button/Button";
+import { formatDateDDMM } from "@/features/flights-search/lib/date";
 
 import styles from "./HomeNextStory.module.scss";
 
 const INACTIVE_WIDTH = 305;
 const GAP = 20;
 const AUTOPLAY_DELAY = 5000;
+const AVIASALES_SEARCH_BASE_URL = "https://www.aviasales.com/search";
+const AVIASALES_DEFAULT_ORIGIN_IATA = "BUD";
+const AVIASALES_DEFAULT_DEPART_DATE = "2026-06-15";
+const AVIASALES_DEFAULT_RETURN_DATE = "2026-06-22";
+
+const buildAviasalesDestinationUrl = ({
+  destinationIata,
+}: {
+  destinationIata: string;
+}) => {
+  const departDate = formatDateDDMM(AVIASALES_DEFAULT_DEPART_DATE);
+  const returnDate = formatDateDDMM(AVIASALES_DEFAULT_RETURN_DATE);
+
+  return `${AVIASALES_SEARCH_BASE_URL}/${AVIASALES_DEFAULT_ORIGIN_IATA}${departDate}${destinationIata}${returnDate}Y1`;
+};
 
 export const HomeNextStory = () => {
   const t = useTranslations("homeNextStory");
@@ -27,6 +43,9 @@ export const HomeNextStory = () => {
         country: t("countrySpain", { fallback: "Spain" }),
         image: "/images/home/section-story/madrid.webp",
         alt: t("altMadrid", { fallback: "Madrid city architecture" }),
+        url: buildAviasalesDestinationUrl({
+          destinationIata: "MAD",
+        }),
       },
       {
         key: "paris",
@@ -34,6 +53,9 @@ export const HomeNextStory = () => {
         country: t("countryFrance", { fallback: "France" }),
         image: "/images/home/section-story/paris.webp",
         alt: t("altParis", { fallback: "Paris golden bridge statue" }),
+        url: buildAviasalesDestinationUrl({
+          destinationIata: "CDG",
+        }),
       },
       {
         key: "newyork",
@@ -41,6 +63,9 @@ export const HomeNextStory = () => {
         country: t("countryUSA", { fallback: "USA" }),
         image: "/images/home/section-story/newyork.webp",
         alt: t("altNewYork", { fallback: "New York skyscrapers" }),
+        url: buildAviasalesDestinationUrl({
+          destinationIata: "JFK",
+        }),
       },
       {
         key: "cairo",
@@ -48,6 +73,9 @@ export const HomeNextStory = () => {
         country: t("countryEgypt", { fallback: "Egypt" }),
         image: "/images/home/section-story/cairo.webp",
         alt: t("altCairo", { fallback: "Cairo desert landscape" }),
+        url: buildAviasalesDestinationUrl({
+          destinationIata: "CAI",
+        }),
       },
     ],
     [t],
@@ -232,7 +260,15 @@ export const HomeNextStory = () => {
                         isActive ? styles.next_story__slideActive : ""
                       }`}
                     >
-                      <article className={styles.next_story__card}>
+                      <a
+                        href={dest.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.next_story__card}
+                        aria-label={`${t("viewAria", {
+                          fallback: "View destination",
+                        })}: ${dest.city}`}
+                      >
                         <div className={styles.next_story__cardMedia}>
                           <Image
                             src={dest.image}
@@ -248,12 +284,9 @@ export const HomeNextStory = () => {
                               {dest.country}
                             </span>
 
-                            <button
-                              type="button"
+                            <span
                               className={styles.next_story__cardArrow}
-                              aria-label={t("viewAria", {
-                                fallback: "View destination",
-                              })}
+                              aria-hidden="true"
                             >
                               <Image
                                 src="/images/home/section-story/arrow-right.svg"
@@ -261,14 +294,14 @@ export const HomeNextStory = () => {
                                 width={31}
                                 height={30}
                               />
-                            </button>
+                            </span>
                           </div>
 
                           <h3 className={styles.next_story__cityName}>
                             {dest.city}
                           </h3>
                         </div>
-                      </article>
+                      </a>
                     </div>
                   );
                 })}

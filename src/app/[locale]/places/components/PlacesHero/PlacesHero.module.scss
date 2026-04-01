@@ -10,13 +10,12 @@
   background: #252422;
 
   @include tablet {
-    margin-top: -130px;
+    margin-top: -150px;
     padding: 220px 0 60px;
   }
 
   @include mobile {
-    margin-top: -120px;
-    padding: 200px 0 60px;
+    padding: 220px 0 60px;
   }
 
   &__bg {
@@ -91,7 +90,6 @@
 
   @include tablet {
     min-height: 600px;
-    padding: 164px 0 76px;
 
     &__inner {
       margin-bottom: 72px;
@@ -115,7 +113,6 @@
 
   @include mobile {
     min-height: auto;
-    padding: 148px 0 56px;
 
     &__inner {
       margin-bottom: 44px;

@@ -63,6 +63,8 @@ export const Footer = () => {
     { key: "places", text: t("places", { fallback: "Places" }), href: "/places" },
     { key: "flights", text: t("flights", { fallback: "Flights" }), href: "/flights" },
     { key: "cars", text: t("cars", { fallback: "Cars" }), href: "/cars" },
+    { key: "bikes", text: t("bikes", { fallback: "Bikes" }), href: "/bikes" },
+    { key: "events", text: t("events", { fallback: "Events" }), href: "/events" },
     { key: "taxi", text: t("taxi", { fallback: "Taxi" }), href: "/taxi" },
     {
       key: "journal",

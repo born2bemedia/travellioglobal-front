@@ -47,7 +47,11 @@ function getLocalePath(pathWithoutLocale: string, newLocale: string): string {
   return `/${newLocale}${path}`;
 }
 
-export const LangSelector = () => {
+type LangSelectorProps = {
+  compact?: boolean;
+};
+
+export const LangSelector = ({ compact = false }: LangSelectorProps) => {
   const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -86,7 +90,10 @@ export const LangSelector = () => {
   }, [isOpen]);
 
   return (
-    <div ref={containerRef} className={styles.langSelector}>
+    <div
+      ref={containerRef}
+      className={`${styles.langSelector} ${compact ? styles.compact : ""}`}
+    >
       <button
         type="button"
         onClick={handleToggle}

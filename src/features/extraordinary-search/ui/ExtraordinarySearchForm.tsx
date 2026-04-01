@@ -275,6 +275,8 @@ export const ExtraordinarySearchForm = ({
                   <Select<AirportOption>
                     aria-label={t("originLabel", { fallback: "Origin" })}
                     classNamePrefix="extraordinary-origin"
+                    instanceId="extraordinary-origin"
+                    inputId="extraordinary-origin-input"
                     formatOptionLabel={(option, meta) =>
                       meta.context === "menu" ? option.label : getDisplayCity(option.label)
                     }
@@ -302,6 +304,8 @@ export const ExtraordinarySearchForm = ({
                       fallback: "Destination city",
                     })}
                     classNamePrefix="extraordinary-destination"
+                    instanceId="extraordinary-destination"
+                    inputId="extraordinary-destination-input"
                     formatOptionLabel={(option, meta) =>
                       meta.context === "menu" ? option.label : getDisplayCity(option.label)
                     }
@@ -406,3 +410,4 @@ export const ExtraordinarySearchForm = ({
     </div>
   );
 };
+

@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import { ContactsPage } from "./components";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Travellio Global",
+  title: "Contact Travellio Global | Get in Touch",
   description:
-    "Get in touch with Travellio Global. Questions, ideas, or travel dreams — we'd love to hear from you. Reach out today.",
+    "Reach out to Travellio Global for booking assistance, travel inquiries, or personalised support.",
   openGraph: {
-    title: "Contact Us | Travellio Global",
+    title: "Contact Travellio Global | Get in Touch",
     description:
-      "Get in touch with Travellio Global. Questions, ideas, or travel dreams — we'd love to hear from you. Reach out today.",
+      "Reach out to Travellio Global for booking assistance, travel inquiries, or personalised support.",
     images: "https://travellioglobal.com/images/meta.png",
   },
 };

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
@@ -13,6 +12,8 @@ import type { Article } from "@/features/articles/model/types";
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 
 import styles from "./JournalCards.module.scss";
+
+import { Link } from "@/i18n/navigation";
 
 export const JournalCards = () => {
   const [articles, setArticles] = useState<Article[]>([]);

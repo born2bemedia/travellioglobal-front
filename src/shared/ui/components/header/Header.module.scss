@@ -37,10 +37,13 @@ $ink: #3c2718;
   &__topbar {
     padding: 24px 0 4px;
     position: relative;
-    z-index: 100;
+    z-index: 999;
 
     &.white {
       a {
+        color: #fff;
+      }
+      .header__topbar_lang_wrapper > div > button {
         color: #fff;
       }
       svg {
@@ -107,6 +110,9 @@ $ink: #3c2718;
     }
 
     &_lang_wrapper {
+      @include tablet {
+        display: none;
+      }
       > div {
         position: relative;
       }

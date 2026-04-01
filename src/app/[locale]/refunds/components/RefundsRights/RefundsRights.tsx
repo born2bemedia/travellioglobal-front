@@ -67,20 +67,6 @@ export const RefundsRights = () => {
                 fallback: "If your flight was:",
               })}
             </p>
-            <div className={styles.rights__copy}>
-              <p>
-                {t("rightsDescriptionOne", {
-                  fallback:
-                    "You may be entitled to compensation, depending on the airline’s policies and applicable regulations.",
-                })}
-              </p>
-              <p>
-                {t("rightsDescriptionTwo", {
-                  fallback:
-                    "Simply enter your flight details, and our system will assess your case and guide you through the next steps.",
-                })}
-              </p>
-            </div>
           </div>
 
           <div className={styles.rights__grid}>
@@ -104,6 +90,21 @@ export const RefundsRights = () => {
                 <h3 className={styles.card__title}>{card.title}</h3>
               </article>
             ))}
+          </div>
+
+          <div className={styles.rights__copy}>
+            <p>
+              {t("rightsDescriptionOne", {
+                fallback:
+                  "You may be entitled to compensation, depending on the airline’s policies and applicable regulations.",
+              })}
+            </p>
+            <p>
+              {t("rightsDescriptionTwo", {
+                fallback:
+                  "Simply enter your flight details, and our system will assess your case and guide you through the next steps.",
+              })}
+            </p>
           </div>
         </motion.div>
       </div>

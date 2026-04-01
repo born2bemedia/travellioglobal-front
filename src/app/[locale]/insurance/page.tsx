@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import { InsurancePage } from "./components";
 
 export const metadata: Metadata = {
-  title: "Travel Insurance & Protection | Travellio Global",
+  title: "Travel Insurance Coverage | Safe Journeys with Travellio Global",
   description:
-    "Stay protected on the move with travel insurance designed for real adventures, unexpected moments, and greater peace of mind.",
+    "Protect your journey with comprehensive travel insurance solutions for global travellers.",
   openGraph: {
-    title: "Travel Insurance & Protection | Travellio Global",
+    title: "Travel Insurance Coverage | Safe Journeys with Travellio Global",
     description:
-      "Stay protected on the move with travel insurance designed for real adventures, unexpected moments, and greater peace of mind.",
+      "Protect your journey with comprehensive travel insurance solutions for global travellers.",
     images: "https://travellioglobal.com/images/meta.png",
   },
 };

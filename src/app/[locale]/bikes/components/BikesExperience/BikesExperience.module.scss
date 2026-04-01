@@ -1,0 +1,102 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.experience {
+  padding: 60px 0 32px;
+  background: #fffdf1;
+
+  &__table {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 16px;
+    border: 1px solid rgba(235, 94, 40, 0.36);
+    border-radius: 24px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 16px;
+    min-height: 255px;
+  }
+
+  &__heading,
+  &__body {
+    padding: 0;
+  }
+
+  &__heading {
+    width: 619px;
+    flex-shrink: 0;
+
+    h2 {
+      font-family: var(--font-syne), sans-serif;
+      font-size: 64px;
+      font-weight: 500;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      color: #eb5e28;
+    }
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    display: grid;
+    gap: 16px;
+    align-content: start;
+
+    p,
+    li {
+      color: #252422;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    ul {
+      display: grid;
+      gap: 0;
+      padding-left: 30px;
+      list-style: disc;
+    }
+  }
+
+  @include tablet {
+    padding-bottom: 28px;
+
+    &__row {
+      flex-direction: column;
+      min-height: 0;
+    }
+  }
+
+  @include mobile {
+    padding-bottom: 24px;
+
+    &__table {
+      gap: 16px;
+      padding: 16px;
+      border-radius: 20px;
+    }
+
+    &__heading {
+      width: 100%;
+
+      h2 {
+        font-size: 32px;
+        line-height: 1;
+      }
+    }
+
+    &__body {
+      gap: 14px;
+
+      p,
+      li {
+        font-size: 16px;
+      }
+
+      ul {
+        padding-left: 24px;
+      }
+    }
+  }
+}

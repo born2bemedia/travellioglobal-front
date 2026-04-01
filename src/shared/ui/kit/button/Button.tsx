@@ -1,3 +1,5 @@
+import { useLocale } from "next-intl";
+
 import { cn } from "@/shared/lib/helpers/styles";
 
 import styles from "./Button.module.scss";
@@ -23,12 +25,14 @@ export const Button = ({
   disabled?: boolean;
   target?: string;
 }) => {
+  const locale = useLocale();
+  const localeClass = locale === "en" ? "en" : locale === "de" ? "de" : "it";
   const buttonUrl = service ? `/service-request-form?service=${service}` : url;
 
   return type === "link" ? (
     <Link
       href={buttonUrl ?? ""}
-      className={cn(styles.button, styles[variant], styles.link)}
+      className={cn(styles.button, styles[variant], styles.link, styles[localeClass])}
       target={target}
     >
       {children}
@@ -36,7 +40,7 @@ export const Button = ({
   ) : (
     <button
       type={type}
-      className={cn(styles.button, styles[variant])}
+      className={cn(styles.button, styles[variant], styles[localeClass])}
       onClick={onClick ? onClick : undefined}
       disabled={disabled}
     >

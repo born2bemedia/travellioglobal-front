@@ -109,4 +109,61 @@
       display: block;
     }
   }
+
+  &.compact {
+    @include tablet {
+      border-top: 0;
+    }
+
+    > button {
+      @include tablet {
+        width: auto;
+        justify-content: flex-start;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+
+    .langSelectorDropdown {
+      @include tablet {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        width: 170px;
+        padding: 10px;
+        background: #ffffff;
+      }
+
+      > button {
+        @include tablet {
+          gap: 20px;
+          padding: 12px 8px;
+          color: #000;
+          font-size: 18px;
+          font-weight: 700;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .langSelectorItemLabelText {
+      @include tablet {
+        display: none;
+      }
+    }
+
+    .langSelector__icon_desktop {
+      @include tablet {
+        display: block;
+      }
+    }
+
+    .langSelector__icon_mobile {
+      @include tablet {
+        display: none;
+      }
+    }
+  }
 }

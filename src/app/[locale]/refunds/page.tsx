@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import { RefundsPage } from "./components";
 
 export const metadata: Metadata = {
-  title: "Flight Refunds & Compensation Support | Travellio Global",
+  title: "Flight Refund & Compensation Support | Travellio Global",
   description:
-    "Get clear support for disrupted flights, passenger rights, refund guidance, and compensation claims with Travellio Global.",
+    "Check eligibility for flight refunds and compensation quickly and easily with Travellio Global support.",
   openGraph: {
-    title: "Flight Refunds & Compensation Support | Travellio Global",
+    title: "Flight Refund & Compensation Support | Travellio Global",
     description:
-      "Get clear support for disrupted flights, passenger rights, refund guidance, and compensation claims with Travellio Global.",
+      "Check eligibility for flight refunds and compensation quickly and easily with Travellio Global support.",
     images: "https://travellioglobal.com/images/meta.png",
   },
 };

@@ -1,0 +1,99 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.interests {
+  &__title {
+    margin-bottom: 32px;
+    color: #eb5e28;
+    font-family: var(--font-syne), sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  &__card {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 50px;
+    isolation: isolate;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__imageDesktop,
+  &__imageMobile {
+    object-fit: cover;
+  }
+
+  &__imageDesktop {
+    display: block;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 56%,
+      rgba(0, 0, 0, 0.5) 79%
+    );
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    padding: 24px;
+
+    h3 {
+      color: #efeeea;
+      font-family: var(--font-syne), sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+
+  @include tablet {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include mobile {
+    &__title {
+      margin-bottom: 32px;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+    }
+  }
+}

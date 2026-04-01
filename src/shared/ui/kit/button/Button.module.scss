@@ -19,6 +19,15 @@
     padding: 10px;
   }
 
+  &.de,
+  &.it {
+    font-size: 16px!important;
+    padding: 16px 32px!important;
+    span{
+      font-size: 16px!important;
+    }
+  }
+
   &.white {
     background: #fff;
     color: #000829;
@@ -29,7 +38,6 @@
     background: #eb5e28;
     color: #fff;
     border-color: #eb5e28;
-    
   }
   &.bordered {
     background: transparent;
@@ -42,10 +50,9 @@
     border-color: var(--color-blue-8, #000829);
   }
 
-  &:hover{
-    background: #AE431B;
-    border-color: #AE431B;
+  &:hover {
+    background: #ae431b;
+    border-color: #ae431b;
     color: #fff;
   }
-
 }

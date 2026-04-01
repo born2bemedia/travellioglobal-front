@@ -54,8 +54,8 @@
 
   @include tablet {
     min-height: 560px;
-    margin-top: -128px;
-    padding: 208px 0 78px;
+    margin-top: -150px;
+    padding: 220px 0 78px;
 
     &__inner {
       min-height: 260px;
@@ -64,8 +64,8 @@
 
   @include mobile {
     min-height: 418px;
-    margin-top: -120px;
-    padding: 174px 0 82px;
+    margin-top: -150px;
+    padding: 220px 0 82px;
 
     &::before {
       transform: none;

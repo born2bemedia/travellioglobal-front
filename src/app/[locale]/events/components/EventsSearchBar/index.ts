@@ -1,0 +1,1 @@
+export { EventsSearchBar } from "./EventsSearchBar";

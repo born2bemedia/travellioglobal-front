@@ -166,6 +166,8 @@ export const FlightSearchForm = () => {
                     />
                     <div className={styles.search__selectWrap}>
                       <Select<AirportOption>
+                        instanceId="home-flight-origin"
+                        inputId="home-flight-origin-input"
                         options={airports}
                         value={origin}
                         onChange={setOrigin}
@@ -194,6 +196,8 @@ export const FlightSearchForm = () => {
                     />
                     <div className={styles.search__selectWrap}>
                       <Select<AirportOption>
+                        instanceId="home-flight-destination"
+                        inputId="home-flight-destination-input"
                         options={airports}
                         value={destination}
                         onChange={setDestination}
@@ -341,6 +345,8 @@ export const FlightSearchForm = () => {
                     />
                     <div className={styles.search__selectWrap}>
                       <Select<AirportOption>
+                        instanceId="home-hotel-destination"
+                        inputId="home-hotel-destination-input"
                         options={airports}
                         value={hotelDestination}
                         onChange={setHotelDestination}

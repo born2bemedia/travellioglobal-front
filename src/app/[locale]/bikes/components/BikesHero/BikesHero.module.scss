@@ -1,0 +1,132 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+.hero {
+  position: relative;
+  min-height: 647px;
+  margin-top: -132px;
+  padding: 208px 0 56px;
+  overflow: hidden;
+  background: #252422;
+  color: #fffdf1;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__imageDesktop,
+  &__imageMobile {
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  &__imageDesktop {
+    display: block;
+  }
+
+  &__imageMobile {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.35) 1.5%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: var(--font-syne), sans-serif;
+    max-width: 1100px;
+    font-size: 128px;
+    font-weight: 500;
+    line-height: 0.78125;
+    letter-spacing: -0.06em;
+  }
+
+  &__text {
+    width: 952px;
+    max-width: 100%;
+    display: grid;
+    gap: 8px;
+
+    p {
+      font-family: var(--font-plus-jakarta-sans), sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+  }
+
+  @include tablet {
+    min-height: 560px;
+    margin-top: -150px;
+    padding: 220px 0 60px;
+
+    &__title {
+      max-width: 940px;
+      font-size: 88px;
+      line-height: 0.86;
+    }
+
+    &__text {
+      width: 100%;
+
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+
+  @include mobile {
+    min-height: 292px;
+    margin-top: -150px;
+    padding: 220px 0 40px;
+
+    &__imageDesktop {
+      display: none;
+    }
+
+    &__imageMobile {
+      display: block;
+    }
+
+    &__content {
+      max-width: 100%;
+      gap: 8px;
+    }
+
+    &__title {
+      font-size: 40px;
+      line-height: 1.1;
+    }
+
+    &__text {
+      gap: 2px;
+
+      p {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+    }
+  }
+}
