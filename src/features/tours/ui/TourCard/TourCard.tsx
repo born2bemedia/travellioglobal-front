@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import { useTranslations } from "next-intl";
+
 import { useAuthStore } from "@/features/account/store/auth";
 
 import { Button } from "@/shared/ui/kit/button/Button";
@@ -19,6 +21,7 @@ interface TourCardProps {
 }
 
 export const TourCard = ({ tour, galleryImages }: TourCardProps) => {
+  const t = useTranslations("tourCard");
   const [isWishlisted, setIsWishlisted] = useState(false);
   const user = useAuthStore((state) => state.user);
   const addToWishlist = useAuthStore((state) => state.addToWishlist);
@@ -151,7 +154,7 @@ export const TourCard = ({ tour, galleryImages }: TourCardProps) => {
           url={`/tours/${tour.slug}`}
           variant="orange"
         >
-          <span>Add to cart</span>
+          <span>{t("add_to_cart", { fallback: "Add to cart" })}</span>
           <span className={styles.card__cartArrow} aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"

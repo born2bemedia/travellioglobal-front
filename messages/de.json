@@ -1406,5 +1406,8 @@
   "priceList": {
     "title": "Schauen Sie sich unsere vollständige Preisliste an",
     "button": "Herunterladen"
+  },
+  "tourCard": {
+    "add_to_cart": "In den Warenkorb"
   }
 }

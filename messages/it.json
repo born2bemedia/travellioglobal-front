@@ -1406,6 +1406,9 @@
   "priceList": {
     "title": "Controlla il nostro listino prezzi completo",
     "button": "Scarica"
+  },
+  "tourCard": {
+    "add_to_cart": "Aggiungi al carrello"
   }
 }
 
