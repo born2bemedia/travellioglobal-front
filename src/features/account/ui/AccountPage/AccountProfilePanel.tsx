@@ -3,14 +3,19 @@
 import { useEffect, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
+import Select, { type StylesConfig } from 'react-select';
+import { Controller, useForm } from 'react-hook-form';
 
 import type { AuthUser } from '@/features/account/model/auth.types';
 import { useAuthStore } from '@/features/account/store/auth';
+import { formCountries } from '@/features/forms/lib/countries';
 
+import { excludedCountries } from '@/shared/lib/countries';
 import { ArrowRightIcon } from '@/shared/ui/icons/arrow-right';
 
 import styles from './AccountPage.module.scss';
+import 'react-phone-input-2/lib/style.css';
 
 type AccountProfilePanelProps = {
   user: AuthUser;
@@ -32,6 +37,7 @@ type AccountProfileValues = {
 };
 
 const WRONG_PASSWORD_MESSAGE = 'The wrong password. Try again.';
+type CountryOption = (typeof formCountries)[number];
 
 type AccountFieldProps = {
   id: keyof AccountProfileValues;
@@ -76,6 +82,104 @@ const AccountField = ({
     </div>
   );
 };
+
+const getCountryOption = (value: string) =>
+  formCountries.find(
+    (option) =>
+      option.label.toLowerCase() === value.toLowerCase() ||
+      option.value.toLowerCase() === value.toLowerCase(),
+  ) ?? null;
+
+const getCountrySelectStyles = (
+  hasError: boolean,
+): StylesConfig<CountryOption, false> => ({
+  container: (base) => ({
+    ...base,
+    width: '100%',
+  }),
+  control: (base) => ({
+    ...base,
+    minHeight: '20px',
+    border: 0,
+    borderRadius: 0,
+    backgroundColor: 'transparent',
+    boxShadow: 'none',
+    '&:hover': {
+      border: 0,
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: 0,
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+    color: hasError ? '#cc3e0d' : '#000',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 'normal',
+  }),
+  placeholder: (base) => ({
+    ...base,
+    margin: 0,
+    color: 'rgba(64, 61, 56, 0.5)',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 'normal',
+  }),
+  singleValue: (base) => ({
+    ...base,
+    margin: 0,
+    color: hasError ? '#cc3e0d' : '#000',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 'normal',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    padding: 0,
+    color: '#403d38',
+    '&:hover': {
+      color: '#403d38',
+    },
+  }),
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 9999,
+  }),
+  menu: (base) => ({
+    ...base,
+    marginTop: 8,
+    border: '1px solid rgba(64, 61, 56, 0.15)',
+    borderRadius: 16,
+    backgroundColor: '#fffdf1',
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
+    overflow: 'hidden',
+  }),
+  menuList: (base) => ({
+    ...base,
+    padding: 8,
+  }),
+  option: (base, state) => ({
+    ...base,
+    borderRadius: 10,
+    backgroundColor: state.isSelected
+      ? 'rgba(235, 94, 40, 0.14)'
+      : state.isFocused
+        ? 'rgba(235, 94, 40, 0.08)'
+        : 'transparent',
+    color: '#000',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 'normal',
+    cursor: 'pointer',
+  }),
+});
 
 export const AccountProfilePanel = ({ user }: AccountProfilePanelProps) => {
   const t = useTranslations('accountPage');
@@ -346,14 +450,36 @@ export const AccountProfilePanel = ({ user }: AccountProfilePanelProps) => {
                 error={form.formState.errors.email?.message}
               />
 
-              <AccountField
-                id="phone"
-                type="tel"
-                label={t('account.fields.phone', { fallback: 'Phone number' })}
-                placeholder={t('account.placeholders.phone', { fallback: 'Enter your phone number' })}
-                registerReturn={form.register('phone')}
-                error={form.formState.errors.phone?.message}
-              />
+              <div className={styles.field}>
+                <label htmlFor="phone" className={styles.fieldLabel}>
+                  {t('account.fields.phone', { fallback: 'Phone number' })}
+                </label>
+                <Controller
+                  name="phone"
+                  control={form.control}
+                  render={({ field }) => (
+                    <PhoneInput
+                      country="gb"
+                      value={field.value ?? ''}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      excludeCountries={[...new Set(excludedCountries)]}
+                      enableSearch
+                      preferredCountries={['gb']}
+                      containerClass={`${styles.phoneInput} ${
+                        form.formState.errors.phone ? styles.phoneInputError : ''
+                      }`}
+                      inputProps={{
+                        id: 'phone',
+                        name: field.name,
+                      }}
+                    />
+                  )}
+                />
+                {form.formState.errors.phone?.message ? (
+                  <p className={styles.fieldError}>{form.formState.errors.phone.message}</p>
+                ) : null}
+              </div>
 
               <AccountField
                 id="address1"
@@ -393,15 +519,41 @@ export const AccountProfilePanel = ({ user }: AccountProfilePanelProps) => {
                 error={form.formState.errors.city?.message}
               />
 
-              <AccountField
-                id="country"
-                label={t('account.fields.country', { fallback: 'Country' })}
-                placeholder={t('account.placeholders.country', { fallback: 'Enter your country' })}
-                registerReturn={form.register('country', {
-                  required: t('account.validation.country', { fallback: 'Country is required.' }),
-                })}
-                error={form.formState.errors.country?.message}
-              />
+              <div className={styles.field}>
+                <label htmlFor="country" className={styles.fieldLabel}>
+                  {t('account.fields.country', { fallback: 'Country' })}
+                </label>
+                <Controller
+                  name="country"
+                  control={form.control}
+                  rules={{
+                    required: t('account.validation.country', {
+                      fallback: 'Country is required.',
+                    }),
+                  }}
+                  render={({ field }) => (
+                    <Select<CountryOption>
+                      instanceId="account-profile-country"
+                      inputId="country"
+                      options={formCountries}
+                      value={getCountryOption(field.value)}
+                      onChange={(option) => field.onChange(option?.label ?? '')}
+                      onBlur={field.onBlur}
+                      placeholder={t('account.placeholders.country', {
+                        fallback: 'Enter your country',
+                      })}
+                      menuPortalTarget={
+                        typeof document !== 'undefined' ? document.body : undefined
+                      }
+                      menuPosition="fixed"
+                      styles={getCountrySelectStyles(Boolean(form.formState.errors.country))}
+                    />
+                  )}
+                />
+                {form.formState.errors.country?.message ? (
+                  <p className={styles.fieldError}>{form.formState.errors.country.message}</p>
+                ) : null}
+              </div>
 
               <AccountField
                 id="zip"

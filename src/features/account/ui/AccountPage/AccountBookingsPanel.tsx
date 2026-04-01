@@ -55,6 +55,7 @@ function formatTitle(value: string) {
 }
 
 function mapOrdersToRows(orders: Order[]): OrderRow[] {
+  console.log(orders);
   return orders.map((order) => {
     const orderId = order.orderNumber ?? order.id;
     const tourName =
@@ -63,6 +64,9 @@ function mapOrdersToRows(orders: Order[]): OrderRow[] {
         .filter(Boolean)
         .join(', ') || '—';
     const quantity = order.items?.reduce((total, item) => total + (item.quantity ?? 0), 0) ?? 0;
+
+    console.log(order.status);
+    console.log(isOrderCompleted(order.status) ? order.invoiceDownloadUrl : null);
 
     return {
       id: order.id,

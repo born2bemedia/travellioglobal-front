@@ -130,11 +130,11 @@ img {
     }
 
     &::-webkit-scrollbar-track {
-      background: #000;
+      background: #fff;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #fff;
+      background-color: #eb5e28;
       border-radius: 100px;
     }
     li {
@@ -146,7 +146,7 @@ img {
       }
     }
     .search {
-      background-color: #000 !important;
+      background-color: #fff !important;
       border: 1px solid rgba(255, 255, 255, 0.05) !important;
       border-radius: 0 !important;
       box-shadow: none !important;
@@ -157,13 +157,14 @@ img {
         display: none !important;
       }
       input {
-        background-color: #000 !important;
+        background-color: #fff !important;
         border: 1px solid rgba(255, 255, 255, 0.05) !important;
         border-radius: 0 !important;
         box-shadow: none !important;
         padding: 0 !important;
         margin: 0 !important;
         list-style: none !important;
+        color: #000 !important;
       }
     }
   }

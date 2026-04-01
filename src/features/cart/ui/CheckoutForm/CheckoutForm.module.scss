@@ -300,6 +300,10 @@
   }
 }
 
+.fieldControl {
+  width: 100%;
+}
+
 .fieldLabel {
   color: #eb5e28;
   font-family: var(--font-plus-jakarta-sans), sans-serif;
@@ -432,5 +436,93 @@
 }
 
 .errorInput {
+  color: #d14b25 !important;
+}
+
+.phoneInput {
+  width: 100%;
+
+  :global(.react-tel-input) {
+    width: 100%;
+  }
+
+  :global(.form-control) {
+    width: 100% !important;
+    height: 20px !important;
+    min-height: 20px !important;
+    padding: 0 0 0 56px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #000 !important;
+    font-family: var(--font-plus-jakarta-sans), sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+
+    &::placeholder {
+      color: rgba(64, 61, 56, 0.5) !important;
+    }
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  :global(.flag-dropdown) {
+    border: none !important;
+    border-right: 1px solid rgba(64, 61, 56, 0.25) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+
+  :global(.selected-flag) {
+    padding-left: 8px !important;
+    background: transparent !important;
+
+    &:hover,
+    &:focus {
+      background: transparent !important;
+    }
+  }
+
+  :global(.selected-flag .arrow) {
+    border-top-color: #403d38 !important;
+  }
+
+  :global(.country-list) {
+    background: #fffdf1 !important;
+    border: 1px solid rgba(64, 61, 56, 0.15) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  :global(.country-list .search) {
+    background: #fffdf1 !important;
+    padding: 8px !important;
+  }
+
+  :global(.country-list .search-box) {
+    width: 100% !important;
+    height: 36px !important;
+    margin: 0 !important;
+    border: 1px solid rgba(64, 61, 56, 0.15) !important;
+    border-radius: 10px !important;
+    background: #fffdf1 !important;
+    color: #000 !important;
+  }
+
+  :global(.country-list .country) {
+    color: #000 !important;
+    border-radius: 10px !important;
+  }
+
+  :global(.country-list .country.highlight),
+  :global(.country-list .country:hover) {
+    background: rgba(235, 94, 40, 0.08) !important;
+  }
+}
+
+.phoneInputError :global(.form-control) {
   color: #d14b25 !important;
 }

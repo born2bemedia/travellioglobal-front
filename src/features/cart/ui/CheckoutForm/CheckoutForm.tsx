@@ -5,19 +5,27 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
+import Select, { type StylesConfig } from 'react-select';
 
 import { useAuthStore } from '@/features/account';
 import { createOrder } from '@/features/cart/api/createOrder';
 import { type CheckoutFormSchema, checkoutFormSchema } from '@/features/cart/model/checkout.schema';
 import { useCartStore } from '@/features/cart/store/cart';
 import { CheckoutPageShell } from '@/features/cart/ui/CheckoutPageShell/CheckoutPageShell';
+import { formCountries } from '@/features/forms/lib/countries';
+
+import { excludedCountries } from '@/shared/lib/countries';
 
 import styles from './CheckoutForm.module.scss';
+
+import 'react-phone-input-2/lib/style.css';
 
 import { useRouter } from '@/i18n/navigation';
 
 const ENABLE_RECAPTCHA = true;
+type CountryOption = (typeof formCountries)[number];
 
 const defaultValues: CheckoutFormSchema = {
   firstName: '',
@@ -65,6 +73,104 @@ const ArrowIcon = () => (
   </svg>
 );
 
+const getCountryOption = (value: string) =>
+  formCountries.find(
+    (option) =>
+      option.label.toLowerCase() === value.toLowerCase() ||
+      option.value.toLowerCase() === value.toLowerCase(),
+  ) ?? null;
+
+const getCountrySelectStyles = (
+  hasError: boolean,
+): StylesConfig<CountryOption, false> => ({
+  container: (base) => ({
+    ...base,
+    width: '100%',
+  }),
+  control: (base) => ({
+    ...base,
+    minHeight: '20px',
+    border: 0,
+    borderRadius: 0,
+    backgroundColor: 'transparent',
+    boxShadow: 'none',
+    '&:hover': {
+      border: 0,
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: 0,
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+    color: hasError ? '#d14b25' : '#000',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 1.35,
+  }),
+  placeholder: (base) => ({
+    ...base,
+    margin: 0,
+    color: 'rgba(64, 61, 56, 0.5)',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 1.35,
+  }),
+  singleValue: (base) => ({
+    ...base,
+    margin: 0,
+    color: hasError ? '#d14b25' : '#000',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 1.35,
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    padding: 0,
+    color: '#403d38',
+    '&:hover': {
+      color: '#403d38',
+    },
+  }),
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 9999,
+  }),
+  menu: (base) => ({
+    ...base,
+    marginTop: 8,
+    border: '1px solid rgba(64, 61, 56, 0.15)',
+    borderRadius: 16,
+    backgroundColor: '#fffdf1',
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
+    overflow: 'hidden',
+  }),
+  menuList: (base) => ({
+    ...base,
+    padding: 8,
+  }),
+  option: (base, state) => ({
+    ...base,
+    borderRadius: 10,
+    backgroundColor: state.isSelected
+      ? 'rgba(235, 94, 40, 0.14)'
+      : state.isFocused
+        ? 'rgba(235, 94, 40, 0.08)'
+        : 'transparent',
+    color: '#000',
+    fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
+    fontSize: '16px',
+    lineHeight: 1.35,
+    cursor: 'pointer',
+  }),
+});
+
 export const CheckoutForm = () => {
   const t = useTranslations('checkoutForm');
   const router = useRouter();
@@ -82,6 +188,7 @@ export const CheckoutForm = () => {
   const total = getTotalPrice();
 
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -105,6 +212,11 @@ export const CheckoutForm = () => {
       ...defaultValues,
       firstName: user.firstName ?? '',
       lastName: user.lastName ?? '',
+      address1: user.address1 ?? '',
+      address2: user.address2 ?? '',
+      city: user.city ?? '',
+      country: user.country ?? '',
+      zip: user.zip ?? '',
       email: user.email ?? '',
       phone: (user.phone as string) ?? '',
     });
@@ -377,11 +489,28 @@ export const CheckoutForm = () => {
                   <label htmlFor="country" className={styles.fieldLabel}>
                     {t('country', { fallback: 'Country' })}
                   </label>
-                  <input
-                    id="country"
-                    {...register('country')}
-                    className={errors.country ? styles.errorInput : ''}
-                  />
+                  <div className={styles.fieldControl}>
+                    <Controller
+                      name="country"
+                      control={control}
+                      render={({ field }) => (
+                        <Select<CountryOption>
+                          instanceId="checkout-country"
+                          inputId="country"
+                          options={formCountries}
+                          value={getCountryOption(field.value)}
+                          onChange={(option) => field.onChange(option?.label ?? '')}
+                          onBlur={field.onBlur}
+                          placeholder={t('country', { fallback: 'Country' })}
+                          menuPortalTarget={
+                            typeof document !== 'undefined' ? document.body : undefined
+                          }
+                          menuPosition="fixed"
+                          styles={getCountrySelectStyles(Boolean(errors.country))}
+                        />
+                      )}
+                    />
+                  </div>
                   {errors.country && <span className={styles.error}>{errors.country.message}</span>}
                 </div>
 
@@ -401,11 +530,27 @@ export const CheckoutForm = () => {
                   <label htmlFor="phone" className={styles.fieldLabel}>
                     {t('phone', { fallback: 'Phone number' })}
                   </label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    {...register('phone')}
-                    className={errors.phone ? styles.errorInput : ''}
+                  <Controller
+                    name="phone"
+                    control={control}
+                    render={({ field }) => (
+                      <PhoneInput
+                        country="gb"
+                        value={field.value ?? ''}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        excludeCountries={[...new Set(excludedCountries)]}
+                        enableSearch
+                        preferredCountries={['gb']}
+                        containerClass={`${styles.phoneInput} ${
+                          errors.phone ? styles.phoneInputError : ''
+                        }`}
+                        inputProps={{
+                          id: 'phone',
+                          name: field.name,
+                        }}
+                      />
+                    )}
                   />
                   {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
                 </div>
