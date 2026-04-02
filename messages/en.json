@@ -39,7 +39,10 @@
     "duratioFrom": "from ",
     "duratioTo": "to ",
     "durationMinControl": "Minimum trip duration",
-    "durationMaxControl": "Maximum trip duration"
+    "durationMaxControl": "Maximum trip duration",
+    "selectDestinationPrompt": "Select a destination to see prices",
+    "bestPrice": "Best price",
+    "allMonth": "All month"
   },
   "homeExperiences": {
     "guidedToursTitle": "Guided Tours",
@@ -869,7 +872,6 @@
       "placeholders": {
         "lastName": "Enter your last name",
         "email": "Enter your email address",
-        "phone": "Enter your phone number",
         "address1": "Enter your street address",
         "address2": "Enter your apartment or suite",
         "city": "Enter your city",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
@@ -18,7 +18,11 @@ type ThemeCard = {
   destinationIata: string;
 };
 
-export const HomeEmbarkExtraordinary = () => {
+export const HomeEmbarkExtraordinary = ({
+  formSlot,
+}: {
+  formSlot?: ReactNode;
+}) => {
   const t = useTranslations("homeEmbarkExtraordinary");
   const formRef = useRef<HTMLDivElement | null>(null);
 
@@ -180,9 +184,7 @@ export const HomeEmbarkExtraordinary = () => {
           </p>
 
           <div ref={formRef}>
-            <ExtraordinarySearchForm
-              suggestedDestinationIata={activeCard.destinationIata}
-            />
+            {formSlot}
           </div>
         </motion.div>
       </div>

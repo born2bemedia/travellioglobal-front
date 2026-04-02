@@ -1,3 +1,5 @@
+import { CustomExtraordinarySearchFormLoader } from "@/features/extraordinary-search";
+
 import {
   HomeAboutTravellio,
   HomeEmbarkExtraordinary,
@@ -16,12 +18,16 @@ export default async function Home() {
     <>
       <HomeHero />
       <HomeReadyChapter />
-      <HomeEmbarkExtraordinary />
       <HomeWhatWeDo />
       <HomeAboutTravellio />
       <HomeGatewayAdventures />
       <HomeTravellersChoose />
       <HomeWhyExplore />
+      <HomeEmbarkExtraordinary
+        formSlot={
+          <CustomExtraordinarySearchFormLoader suggestedDestinationIata="BKK" />
+        }
+      />
       <HomeExperiences />
       <HomeNextStory />
     </>

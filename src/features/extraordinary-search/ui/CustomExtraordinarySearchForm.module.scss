@@ -1,0 +1,738 @@
+@use "@/shared/lib/styles/mixin.scss" as *;
+
+// ─── Outer wrapper ────────────────────────────────────────────────────────────
+
+.custom {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  padding: 32px;
+  border: 1px solid #eb5e28;
+  border-radius: 32px;
+
+  @include tablet {
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  @include mobile {
+    gap: 14px;
+    padding: 16px;
+    border-radius: 24px;
+  }
+}
+
+// ─── Left: Filter panel ───────────────────────────────────────────────────────
+
+.custom__filters {
+  flex: 0 0 345px;
+  min-width: 0;
+  border-radius: 32px;
+  background: #eb5e28;
+
+  @include tablet {
+    flex: none;
+    width: 100%;
+    border-radius: 24px;
+  }
+
+  @include mobile {
+    border-radius: 20px;
+  }
+}
+
+.custom__filtersInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  height: 100%;
+  padding: 32px;
+
+  @include mobile {
+    gap: 24px;
+    padding: 20px;
+  }
+}
+
+.custom__topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+// Fields (origin / destination)
+
+.custom__field {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 16px 8px;
+  border-bottom: 1px solid rgba(255, 253, 241, 0.92);
+}
+
+.custom__fieldMain {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.custom__fieldIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #fffdf1;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.custom__fieldCode {
+  flex-shrink: 0;
+  color: rgba(255, 253, 241, 0.5);
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.custom__selectWrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// Toggles
+
+.custom__toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.custom__toggle {
+  display: inline-flex;
+  gap: 8px;
+  align-items: flex-end;
+  width: fit-content;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fffdf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+}
+
+.custom__checkbox {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fffdf1;
+  border-radius: 4px;
+}
+
+.custom__toggle--active {
+  .custom__checkbox::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    width: 6px;
+    height: 11px;
+    border-right: 2px solid #fffdf1;
+    border-bottom: 2px solid #fffdf1;
+    transform: rotate(45deg);
+  }
+}
+
+// Duration slider
+
+.custom__duration {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.custom__durationTitle {
+  color: #fffdf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.custom__durationLabels {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  color: #fffdf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.custom__rangeSlider {
+  position: relative;
+  height: 49px;
+
+  input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 49px;
+    background: transparent;
+    appearance: none;
+    pointer-events: none;
+    top: 50%;
+
+    &::-webkit-slider-runnable-track {
+      height: 49px;
+      background: transparent;
+      appearance: none;
+    }
+
+    &::-moz-range-track {
+      height: 49px;
+      background: transparent;
+      appearance: none;
+    }
+
+    &::-webkit-slider-thumb {
+      width: 24px;
+      height: 24px;
+      margin-top: -10px;
+      border: 0;
+      border-radius: 999px;
+      background: #fffdf1;
+      appearance: none;
+      pointer-events: auto;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(60, 39, 24, 0.16);
+    }
+
+    &::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border: 0;
+      border-radius: 999px;
+      background: #fffdf1;
+      appearance: none;
+      pointer-events: auto;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(60, 39, 24, 0.16);
+    }
+  }
+}
+
+.custom__rangeTrack,
+.custom__rangeProgress {
+  position: absolute;
+  top: 24px;
+  height: 4px;
+  border-radius: 999px;
+}
+
+.custom__rangeTrack {
+  left: 0;
+  right: 0;
+  background: rgba(255, 253, 241, 0.6);
+}
+
+.custom__rangeProgress {
+  background: #fffdf1;
+}
+
+// ─── Right: Results panel ─────────────────────────────────────────────────────
+
+.custom__results {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 0 8px;
+
+  @include tablet {
+    padding: 0;
+  }
+}
+
+// Summary pill
+
+.custom__summary {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  min-height: 72px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  background: #eb5e28;
+  color: #fffdf1;
+
+  @include mobile {
+    min-height: 60px;
+    padding: 14px 20px;
+  }
+}
+
+.custom__summaryTitle {
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+
+  @include mobile {
+    font-size: 22px;
+  }
+}
+
+.custom__summaryMeta {
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+// Calendar shell
+
+.custom__shell {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 365px;
+  overflow: hidden;
+  border-radius: 24px;
+
+  @include mobile {
+    min-height: 300px;
+  }
+}
+
+// Empty state
+
+.custom__empty {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: rgba(64, 61, 56, 0.45);
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+// ─── Year view ────────────────────────────────────────────────────────────────
+
+.custom__yearView {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+
+  @include mobile {
+    padding: 16px;
+  }
+}
+
+.custom__yearGrid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 8px;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 6px;
+  }
+}
+
+.custom__monthCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid #eb5e28;
+  background: transparent;
+  cursor: pointer;
+}
+
+// ── Best price: solid orange fill + white text ──
+.custom__monthCard--best {
+  background: transparent;
+
+  &:hover {
+  }
+
+  .custom__monthCardName,
+  .custom__monthCardPrice,
+  .custom__monthCardBestLabel {
+    color: #eb5e28;
+  }
+}
+
+// ── Has a price but not the best ──
+.custom__monthCard--hasPrice {
+ 
+
+  .custom__monthCardName {
+    color: #eb5e28;
+    font-size: 13px;
+  }
+
+  .custom__monthCardPrice {
+    color: #eb5e28;
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+// ── No price data: same tint + search icon ──
+.custom__monthCard--noPrice {
+  background: transparent;
+  .custom__monthCardName {
+    color: #eb5e28;
+  }
+}
+
+// ── Skeleton (loading) ──
+.custom__monthCard--skeleton {
+  pointer-events: none;
+  animation: pulse 1.4s ease-in-out infinite;
+
+  .custom__monthCardName {
+    color: #403d38;
+  }
+}
+
+.custom__monthCardName {
+  color: #fffdf1; // overridden in hasPrice/noPrice/skeleton states above
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.custom__monthCardPrice {
+  color: #fffdf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.custom__monthCardBestLabel {
+  color: #fffdf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.custom__monthCardSearch {
+  display: none;
+  color: rgba(64, 61, 56, 0.35);
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// ─── Month view ───────────────────────────────────────────────────────────────
+
+.custom__monthView {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+
+  @include mobile {
+    gap: 10px;
+    padding: 14px;
+  }
+}
+
+// Calendar header
+
+.custom__calendarHeader {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.custom__calendarNav {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.custom__navBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #eb5e28;
+  cursor: pointer;
+  transition: background 0.12s ease;
+
+  &:hover {
+    background: rgba(235, 94, 40, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #eb5e28;
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.custom__calendarMonthLabel {
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #eb5e28;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.12s ease;
+
+  &:hover {
+    background: rgba(235, 94, 40, 0.08);
+  }
+}
+
+.custom__allMonthBtn {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #eb5e28;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.custom__calendarIcon {
+  display: inline-flex;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Weekday headers (Mo Tu We Th Fr Sa Su)
+
+.custom__weekdayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+
+  @include mobile {
+    gap: 3px;
+  }
+}
+
+.custom__weekdayHeader {
+  color: rgba(64, 61, 56, 0.4);
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  padding: 2px 0;
+}
+
+// Day grid
+
+.custom__dayGrid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 4px;
+
+  @include mobile {
+    gap: 3px;
+  }
+}
+
+// Disabled cell (past date or other-month overflow)
+
+.custom__dayCellDisabled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  border-radius: 16px;
+  border: 0.5px solid #ccc6ba;
+  background: #ccc6ba;
+  opacity: 0.5;
+  .custom__dayCellDate {
+    color: #403d38;
+  }
+}
+
+// Skeleton (loading)
+
+.custom__dayCellSkeleton {
+  border-radius: 12px;
+  background: transparent;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+// Base day cell
+
+.custom__dayCell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid #eb5e28;
+}
+
+// Has price (not best)
+.custom__dayCell--hasPrice {
+  background: transparent;
+
+  &:hover {
+    background: rgba(235, 94, 40, 0.14);
+  }
+}
+
+// No price — show search icon
+.custom__dayCell--noPrice {
+  background: transparent;
+
+  &:hover {
+    background: rgba(235, 94, 40, 0.13);
+  }
+}
+
+// Best (cheapest) day — solid orange fill + white text
+.custom__dayCell--best {
+  background: #eb5e28;
+
+  &:hover {
+    background: #d45524;
+  }
+
+  .custom__dayCellDate,
+  .custom__dayCellPrice {
+    color: #fffdf1;
+  }
+}
+
+.custom__dayCellDate {
+  color: #eb5e28;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+
+  @include mobile {
+    font-size: 12px;
+  }
+}
+
+.custom__dayCellPrice {
+  color: #eb5e28;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+
+  @include mobile {
+    font-size: 9px;
+  }
+}
+
+.custom__dayCellSearch {
+  display: none;
+  color: #eb5e28;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// ─── Animation ────────────────────────────────────────────────────────────────
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
