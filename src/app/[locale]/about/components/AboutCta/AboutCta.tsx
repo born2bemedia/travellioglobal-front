@@ -38,17 +38,19 @@ export const AboutCta = () => {
             <h2>{t("ctaTitle", { fallback: "Join Us on Your Next Adventure!" })}</h2>
 
             <div className={styles.cta__text}>
-              <p>
-                {t("ctaLineOne", {
-                  fallback: "Ready to discover your next adventure?",
-                })}
-              </p>
-              <p>
-                {t("ctaLineTwo", {
-                  fallback:
-                    "Travellio Global offers customized travel experiences for every type of explorer.",
-                })}
-              </p>
+              <div className={styles.cta__lead}>
+                <p>
+                  {t("ctaLineOne", {
+                    fallback: "Ready to discover your next adventure?",
+                  })}
+                </p>
+                <p>
+                  {t("ctaLineTwo", {
+                    fallback:
+                      "Travellio Global offers customized travel experiences for every type of explorer.",
+                  })}
+                </p>
+              </div>
               <span>
                 {t("ctaNote", {
                   fallback: "Let's make your travel dreams come true!",

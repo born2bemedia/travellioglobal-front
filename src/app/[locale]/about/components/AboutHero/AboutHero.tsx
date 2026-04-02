@@ -16,7 +16,7 @@ export const AboutHero = () => {
     <section className={styles.hero}>
       <div className={styles.hero__decor} aria-hidden="true">
         <Image
-          src="/images/about/decor-top.svg"
+          src="/images/home/hero-figma/dashed-path.svg"
           alt=""
           width={1858}
           height={513}

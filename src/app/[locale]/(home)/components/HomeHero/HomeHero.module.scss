@@ -3,6 +3,7 @@
 .home_hero {
   overflow: hidden;
   background: #fffdf7;
+  position: relative;
 
   &__content {
     position: relative;
@@ -131,9 +132,9 @@
 
   &__trail {
     position: absolute;
-    left: -18%;
-    bottom: -20px;
-    width: 136%;
+    left: 0;
+    top: 40%;
+    width: 100%;
     z-index: 0;
     pointer-events: none;
 
@@ -198,10 +199,10 @@
   }
 
   &__card--maldives {
-    left: 223px;
-    top: 220px;
-    width: 341px;
-    height: 341px;
+    left: 320px;
+    top: 250px;
+    width: 331px;
+    height: 331px;
 
     .home_hero__card_label {
       right: -58px;

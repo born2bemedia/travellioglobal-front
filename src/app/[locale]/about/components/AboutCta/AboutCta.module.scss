@@ -2,6 +2,7 @@
 
 .cta {
   position: relative;
+  overflow: clip;
   padding-top: 100px;
   padding-bottom: 20px;
 
@@ -10,13 +11,13 @@
   }
 
   @include mobile {
-    padding-top: 56px;
+    padding-top: 80px;
   }
 
   &__decor {
     position: absolute;
-    inset: 188px 50% auto auto;
-    width: 100%;
+    inset: 155px 50% auto auto;
+    width: 1444px;
     aspect-ratio: 1444 / 513;
     transform: translateX(50%);
     pointer-events: none;
@@ -27,13 +28,13 @@
     }
 
     @include tablet {
-      inset: 194px 50% auto auto;
-      width: min(1020px, 134vw);
+      inset: 170px 50% auto auto;
+      width: min(1200px, 140vw);
     }
 
     @include mobile {
-      inset: 120px 50% auto auto;
-      width: min(760px, 195vw);
+      inset: 124px 50% auto auto;
+      width: 760px;
     }
   }
 
@@ -43,11 +44,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 24px;
     text-align: center;
 
     @include mobile {
-      gap: 24px;
+      gap: 40px;
     }
   }
 
@@ -92,11 +93,6 @@
     font-family: var(--font-plus-jakarta-sans), sans-serif;
     line-height: 1.35;
 
-    p {
-      font-size: 20px;
-      font-weight: 400;
-    }
-
     span {
       font-size: 16px;
       font-weight: 400;
@@ -105,12 +101,27 @@
     @include mobile {
       max-width: 376px;
 
-      p {
-        font-size: 16px;
-      }
-
       span {
         font-size: 14px;
+      }
+    }
+  }
+
+  &__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    @include mobile {
+      gap: 24px;
+
+      p {
+        font-size: 16px;
       }
     }
   }
@@ -121,6 +132,7 @@
     justify-content: center;
     gap: 16px;
     min-height: 56px;
+    width: 305px;
     padding: 8px 52px;
     border-radius: 999px;
     background: #eb5e28;

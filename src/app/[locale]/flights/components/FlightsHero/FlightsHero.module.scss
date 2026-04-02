@@ -7,14 +7,12 @@
   background: #f9faf5;
   color: #fffdf1;
   padding-top: 232px;
-  padding-bottom: 176px;
+  padding-bottom: 147px;
   @include tablet {
     padding-top: 220px;
-    padding-bottom: 60px;
+    padding-bottom: 128px;
     margin-top: -150px;
   }
-
-
 
   &__media {
     position: absolute;
@@ -43,7 +41,6 @@
   &__inner {
     display: grid;
     gap: 100px;
-   
   }
 
   &__titleWrap {
@@ -55,14 +52,21 @@
     font-family: var(--font-syne), sans-serif;
     font-size: clamp(72px, 9vw, 128px);
     font-weight: 500;
-    line-height: 0.78;
+    line-height: 1;
     letter-spacing: -0.06em;
     text-align: center;
+    color: #fffdf1;
+    @include tablet {
+      font-size: 64px;
+    }
+    @include mobile {
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
   }
 
   &__content {
-    display: grid;
-    grid-template-columns: minmax(280px, 629px) minmax(0, 632px);
     gap: 48px;
     align-items: start;
   }
@@ -80,7 +84,10 @@
   &__text {
     display: grid;
     gap: 16px;
-
+    max-width: 949px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
     p {
       font-size: 20px;
       font-weight: 400;
@@ -93,7 +100,6 @@
   }
 
   @include tablet {
-
     &__media {
       height: 100%;
     }
@@ -117,13 +123,6 @@
 
     &__inner {
       gap: 52px;
-    }
-
-    &__title {
-      color: #fffdf1;
-      font-size: 72px;
-      line-height: 0.9;
-      letter-spacing: -0.05em;
     }
 
     &__content {

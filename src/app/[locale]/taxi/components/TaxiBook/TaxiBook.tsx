@@ -49,7 +49,7 @@ export const TaxiBook = () => {
               <p>
                 {t("bookSubtitleTwo", {
                   fallback:
-                    "As the best journeys don\u2019t begin with stress \u2014 they begin with confidence.",
+                    "As the best journeys don't begin with stress \u2014 they begin with confidence.",
                 })}
               </p>
             </div>

@@ -10,15 +10,15 @@
   }
 
   @include mobile {
-    padding-top: 56px;
+    padding-top: 32px;
   }
 
   &__card {
     display: grid;
-    grid-template-columns: minmax(0, 598px) minmax(0, 496px);
+    grid-template-columns: minmax(0, 598px) minmax(0, 591px);
     justify-content: space-between;
-    align-items: end;
-    gap: 32px;
+    align-items: center;
+    gap: 27px;
     padding: 32px;
     border-radius: 24px;
     background: #eb5e28;
@@ -61,9 +61,9 @@
 
   &__title {
     position: absolute;
-    right: 24px;
-    bottom: 24px;
+    top: 24px;
     left: 24px;
+    right: 24px;
     z-index: 1;
     color: #fffdf1;
     font-family: var(--font-syne), sans-serif;
@@ -78,7 +78,7 @@
 
     @include mobile {
       font-size: 32px;
-      line-height: 1;
+      line-height: 32px;
       letter-spacing: -0.06em;
     }
   }
@@ -86,16 +86,20 @@
   &__copy {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
     color: #fffdf1;
     font-family: var(--font-plus-jakarta-sans), sans-serif;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 400;
     line-height: 1.35;
 
+    @include tablet {
+      font-size: 24px;
+    }
+
     @include mobile {
       gap: 16px;
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 }

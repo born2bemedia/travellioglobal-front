@@ -2,35 +2,33 @@
 
 .hero {
   position: relative;
-  padding-top: 60px;
+  padding-top: 100px;
 
   @include tablet {
-    padding-top: 48px;
+    padding-top: 80px;
   }
 
   @include mobile {
-    padding-top: 36px;
+    padding-top: 44px;
   }
 
   &__decor {
     position: absolute;
-    top: -80px;
-    left: 0;
+    top: -97px;
+    left: 50%;
     width: 100%;
-    aspect-ratio: 1858 / 1858;
+    transform: translateX(-50%);
     pointer-events: none;
     z-index: 0;
 
-    
-
     @include tablet {
-      top: -116px;
-      width: min(1200px, 180vw);
+      top: -112px;
+      width: min(1280px, calc(100vw + 120px));
     }
 
     @include mobile {
-      top: -74px;
-      width: min(712px, 182vw);
+      top: -164px;
+      width: 390px;
     }
   }
 
@@ -46,17 +44,18 @@
     font-family: var(--font-syne), sans-serif;
     font-size: 128px;
     font-weight: 500;
-    line-height: 0.82;
+    line-height: 100px;
     letter-spacing: -0.06em;
     text-align: center;
 
     @include tablet {
       font-size: 92px;
+      line-height: 0.9;
     }
 
     @include mobile {
       font-size: 65px;
-      line-height: 0.92;
+      line-height: 40px;
     }
   }
 }

@@ -144,7 +144,7 @@ export const HomeNextStory = () => {
     <section className={styles.next_story}>
       <div className={styles.next_story__bg} aria-hidden="true">
         <Image
-          src="/images/home/hero-figma/dashed-path.svg"
+          src="/images/home/section-story/dashed-path.svg"
           alt=""
           width={1858}
           height={513}

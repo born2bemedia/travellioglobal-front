@@ -25,7 +25,7 @@ BODY_SECTION_HEADINGS = {
 }
 
 REPLACEMENTS = {
-    "\u2019": "'",
+    "'": "'",
     "\u2018": "'",
     "\u2013": "-",
     "\u2014": "-",

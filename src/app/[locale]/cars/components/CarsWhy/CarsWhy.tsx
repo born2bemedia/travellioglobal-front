@@ -55,7 +55,7 @@ export const CarsWhy = () => {
       title: t("whyFreedomTitle", { fallback: "Freedom to Explore" }),
       description: t("whyFreedomDesc", {
         fallback:
-          "Discover hidden roads, secret beaches, and places tours can\u2019t reach.",
+          "Discover hidden roads, secret beaches, and places tours can't reach.",
       }),
       icon: "/images/cars/jeep.svg",
     },

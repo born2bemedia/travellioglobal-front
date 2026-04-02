@@ -42,7 +42,7 @@ export const PlacesHero = () => {
           variants={fadeInUp}
         >
           <h1 className={styles.hero__title}>
-            {t("heroTitle", { fallback: "Places" })}
+            {t("heroSubtitle", { fallback: "Discover the World's Most Exciting Places" })}
           </h1>
         </motion.div>
 
@@ -53,12 +53,6 @@ export const PlacesHero = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          <h2 className={styles.hero__subtitle}>
-            {t("heroSubtitle", {
-              fallback: "Discover the World's Most Exciting Places",
-            })}
-          </h2>
-
           <div className={styles.hero__text}>
             <p>
               {t("heroDescriptionOne", {

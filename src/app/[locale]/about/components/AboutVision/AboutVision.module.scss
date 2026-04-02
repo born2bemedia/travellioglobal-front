@@ -8,25 +8,25 @@
   }
 
   @include mobile {
-    padding-top: 56px;
+    padding-top: 80px;
   }
 
   &__card {
     display: grid;
-    grid-template-columns: minmax(0, 598px) minmax(0, 1fr);
+    grid-template-columns: 444px minmax(0, 1fr);
     gap: 20px;
     align-items: end;
-    padding: 32px;
+    padding: 24px;
     border: 1px solid #eb5e28;
-    border-radius: 32px;
+    border-radius: 24px;
 
     @include tablet {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       padding: 16px;
-      border-radius: 24px;
     }
 
     @include mobile {
+      grid-template-columns: 171px minmax(0, 1fr);
       gap: 16px;
       padding: 8px;
     }
@@ -34,17 +34,18 @@
 
   &__media {
     position: relative;
-    min-height: 597px;
+    min-height: 332px;
     overflow: hidden;
     border-radius: 32px;
 
     @include tablet {
-      min-height: 420px;
+      min-height: 320px;
       border-radius: 24px;
     }
 
     @include mobile {
-      min-height: 228px;
+      min-height: 177px;
+      border-radius: 16px;
     }
   }
 
@@ -58,7 +59,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
-    min-height: 597px;
+    min-height: 332px;
     color: #eb5e28;
 
     h2 {
@@ -77,7 +78,7 @@
     }
 
     @include tablet {
-      min-height: 420px;
+      min-height: 320px;
 
       h2 {
         font-size: 64px;
@@ -89,13 +90,14 @@
     }
 
     @include mobile {
-      min-height: 228px;
-      gap: 12px;
+      min-height: 177px;
+      gap: 8px;
 
       h2 {
         font-size: 32px;
-        line-height: 1;
+        line-height: 32px;
         letter-spacing: -0.06em;
+        text-align: left;
       }
 
       p {

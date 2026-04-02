@@ -16,7 +16,7 @@ export const ArticlesHero = () => {
     <section className={styles.hero}>
       <div className={styles.hero__decoration}>
         <Image
-          src="/images/home/hero-figma/dashed-path.svg"
+          src="/images/home/section-story/dashed-path.svg"
           alt=""
           width={1858}
           height={513}

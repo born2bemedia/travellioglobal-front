@@ -48,6 +48,14 @@ export const HomeHero = () => {
 
   return (
     <section className={styles.home_hero}>
+      <div className={styles.home_hero__trail} aria-hidden="true">
+        <Image
+          src="/images/home/hero-figma/dashed-path-new.svg"
+          alt=""
+          width={1858}
+          height={513}
+        />
+      </div>
       <div className="container">
         <div className={styles.home_hero__content}>
           <motion.div
@@ -85,15 +93,6 @@ export const HomeHero = () => {
           </motion.div>
 
           <div className={styles.home_hero__gallery}>
-            <div className={styles.home_hero__trail} aria-hidden="true">
-              <Image
-                src="/images/home/hero-figma/dashed-path.svg"
-                alt=""
-                width={1858}
-                height={513}
-              />
-            </div>
-
             {DESTINATIONS.map((destination, index) => (
               <motion.div
                 key={destination.key}
@@ -122,9 +121,7 @@ export const HomeHero = () => {
                     width={24}
                     height={24}
                   />
-                  <span>
-                    {destination.label}
-                  </span>
+                  <span>{destination.label}</span>
                 </div>
               </motion.div>
             ))}

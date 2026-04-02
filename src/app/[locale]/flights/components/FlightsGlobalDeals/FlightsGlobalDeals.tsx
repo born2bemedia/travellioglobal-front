@@ -4,7 +4,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { ExtraordinarySearchForm } from "@/features/extraordinary-search";
+import { CustomExtraordinarySearchForm } from "@/features/extraordinary-search";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
 
@@ -77,7 +77,7 @@ export const FlightsGlobalDeals = () => {
             </div>
           </div>
 
-          <ExtraordinarySearchForm suggestedDestinationIata="DXB" />
+          <CustomExtraordinarySearchForm suggestedDestinationIata="DXB" />
         </motion.div>
       </div>
     </section>

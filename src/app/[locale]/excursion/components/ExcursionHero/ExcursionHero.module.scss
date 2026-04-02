@@ -4,7 +4,7 @@
   position: relative;
   margin-top: -132px;
   padding-top: 232px;
-  padding-bottom: 80px;
+  padding-bottom: 147px;
   min-height: 647px;
   overflow: hidden;
 
@@ -12,13 +12,13 @@
     margin-top: -150px;
     min-height: 500px;
     padding-top: 220px;
-    padding-bottom: 60px;
+    padding-bottom: 128px;
   }
 
   @include mobile {
     min-height: auto;
     padding-top: 200px;
-    padding-bottom: 60px;
+    padding-bottom: 128px;
   }
 
   &__bg {
@@ -58,17 +58,17 @@
     font-family: var(--font-syne), sans-serif;
     font-size: 128px;
     font-weight: 500;
-    line-height: 0.625;
+    line-height: 1;
     letter-spacing: -0.06em;
     text-align: center;
 
     @include tablet {
-      font-size: 92px;
+      font-size: 64px;
     }
 
     @include mobile {
-      font-size: 65px;
-      line-height: 0.615;
+      font-size: 40px;
+      line-height: 1;
       letter-spacing: -0.06em;
     }
   }
@@ -113,12 +113,15 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    max-width: 791px;
+    max-width: 949px;
+    width: 100%;
+    margin: 0 auto;
     color: #fffdf1;
     font-family: var(--font-plus-jakarta-sans), sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 1.35;
+    text-align: center;
 
     @include mobile {
       font-size: 16px;

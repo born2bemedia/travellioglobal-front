@@ -34,7 +34,7 @@ export const TaxiHero = () => {
           variants={fadeInUp}
         >
           <h1 className={styles.hero__title}>
-            {t("heroTitle", { fallback: "Taxi" })}
+            {t("heroSubtitle", { fallback: "Arrive in Style" })}
           </h1>
         </motion.div>
 
@@ -45,12 +45,6 @@ export const TaxiHero = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          <h2 className={styles.hero__subtitle}>
-            {t("heroSubtitle", {
-              fallback: "Arrive in Style",
-            })}
-          </h2>
-
           <div className={styles.hero__text}>
             <p>
               {t("heroDescriptionOne", {

@@ -83,6 +83,8 @@ export const Header = () => {
       "/places",
       "/flights",
       "/visas",
+      "/cars",
+      "/taxi",
       "/insurance",
       "/refunds",
       "/bikes",

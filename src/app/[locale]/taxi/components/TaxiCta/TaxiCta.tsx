@@ -49,7 +49,7 @@ export const TaxiCta = () => {
               <p>
                 {t("ctaSubtitleTwo", {
                   fallback:
-                    "Simply enter your pickup location, destination, and schedule, and we\u2019ll match you with the perfect transfer option. Whether it\u2019s an early morning airport run or a late-night city arrival, we\u2019ve got you covered.",
+                    "Simply enter your pickup location, destination, and schedule, and we'll match you with the perfect transfer option. Whether it's an early morning airport run or a late-night city arrival, we've got you covered.",
                 })}
               </p>
             </div>

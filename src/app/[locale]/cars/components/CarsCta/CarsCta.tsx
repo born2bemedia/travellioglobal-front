@@ -49,7 +49,7 @@ export const CarsCta = () => {
               <p>
                 {t("ctaSubtitleTwo", {
                   fallback:
-                    "Enjoy competitive rates on a wide selection of vehicles \u2014 from compact city cars to luxury sedans and spacious SUVs. Whether it\u2019s a weekend escape or a long road adventure, we help you save without compromising comfort.",
+                    "Enjoy competitive rates on a wide selection of vehicles \u2014 from compact city cars to luxury sedans and spacious SUVs. Whether it's a weekend escape or a long road adventure, we help you save without compromising comfort.",
                 })}
               </p>
             </div>

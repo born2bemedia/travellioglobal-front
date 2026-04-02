@@ -75,7 +75,7 @@ export const CarsGlobe = () => {
             <p className={styles.globe__subtitle}>
               {t("globeSubtitle", {
                 fallback:
-                  "Wherever you land, we\u2019ll help you roll. Find your perfect car in:",
+                  "Wherever you land, we'll help you roll. Find your perfect car in:",
               })}
             </p>
           </div>

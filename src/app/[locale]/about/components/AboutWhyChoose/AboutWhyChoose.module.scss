@@ -8,7 +8,7 @@
   }
 
   @include mobile {
-    padding-top: 56px;
+    padding-top: 80px;
   }
 
   &__inner {
@@ -50,7 +50,7 @@
     position: relative;
     min-height: 381px;
     overflow: hidden;
-    padding: 24px;
+    padding: 24px 250px 24px 24px;
     border-radius: 32px;
 
     @include mobile {
@@ -139,6 +139,7 @@
         font-size: 20px;
         font-weight: 400;
         line-height: 1.2;
+        white-space: normal;
       }
 
       p {
