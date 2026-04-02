@@ -1,6 +1,7 @@
 import type { Tour } from "../model/types";
+import { TOUR_RATINGS } from "./tours";
 
-export const TOUR_CATALOG_DE: Tour[] = [
+const TOUR_CATALOG_DE_RAW: Tour[] = [
   {
     "id": "nordic-legends-voyage-private-modalen-fjord-cruise-from-bergen",
     "slug": "nordic-legends-voyage-private-modalen-fjord-cruise-from-bergen",
@@ -1047,3 +1048,9 @@ export const TOUR_CATALOG_DE: Tour[] = [
     "detailContentKey": "old-tokyo-uncovered-asakusa-to-akihabara"
   }
 ];
+
+export const TOUR_CATALOG_DE: Tour[] = TOUR_CATALOG_DE_RAW.map((tour) => ({
+  ...tour,
+  rating: TOUR_RATINGS[tour.slug] ?? tour.rating,
+}));
+

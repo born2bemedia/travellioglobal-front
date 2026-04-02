@@ -1,7 +1,7 @@
 import { useLocale, useTranslations } from "next-intl";
 
-import { TOUR_GALLERIES } from "../data/tour-galleries";
 import { getTourContentMap } from "../data/tour-content.locales";
+import { TOUR_GALLERIES } from "../data/tour-galleries";
 import { getTourCatalog } from "../data/tours.locales";
 import type { Tour, TourRegion } from "../model/types";
 
