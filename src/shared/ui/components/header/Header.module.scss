@@ -780,6 +780,11 @@ $ink: #3c2718;
       display: inline;
       font-size: 20px;
     }
+
+    &__mobile_menu {
+      width: 50%;
+    }
+
   }
 
   @include mobile {

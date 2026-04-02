@@ -46,6 +46,12 @@
     gap: 2px;
     list-style: disc;
   }
+  @include tablet {
+    &__card {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
 
   @include mobile {
     &__card {

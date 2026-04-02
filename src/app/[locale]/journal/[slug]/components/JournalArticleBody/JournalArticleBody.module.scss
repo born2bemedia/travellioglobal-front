@@ -175,8 +175,12 @@
   }
 
   .layout {
-    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+    grid-template-columns: 1fr;
     gap: 36px;
+  }
+
+  .toc {
+    display: none;
   }
 
   .toc__label {

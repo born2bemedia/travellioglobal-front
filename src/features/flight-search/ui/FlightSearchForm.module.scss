@@ -50,7 +50,6 @@
     }
 
     @include tablet {
-      width: 50%;
     }
 
     @include mobile {
@@ -109,6 +108,7 @@
 
     @include tablet {
       gap: 16px;
+      flex-direction: column;
     }
 
     @include mobile {
@@ -278,7 +278,7 @@
     }
 
     &:hover {
-      background: #AE431B;
+      background: #ae431b;
       transform: translateY(-1px);
     }
 

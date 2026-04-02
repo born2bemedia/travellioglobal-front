@@ -9,6 +9,8 @@
   background: #252422;
   color: #fffdf1;
 
+  
+
   &__media {
     position: absolute;
     inset: 0;
@@ -77,6 +79,7 @@
   @include tablet {
     min-height: 620px;
     padding-bottom: 64px;
+    margin-top: -150px;
 
     &__title {
       font-size: 96px;

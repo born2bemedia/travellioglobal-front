@@ -35,6 +35,13 @@
     }
   }
 
+  @include tablet {
+    &__card {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
   @include mobile {
     padding-bottom: 80px;
 

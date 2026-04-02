@@ -165,10 +165,11 @@
     &__rowTop,
     &__rowBottom {
       gap: 16px;
+      grid-template-columns: 1fr;
     }
 
     &__rowBottom {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
     }
 
     &__submit {

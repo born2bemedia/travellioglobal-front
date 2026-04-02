@@ -24,6 +24,12 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
   }
 
   &__rowBottom {
@@ -31,6 +37,16 @@
     grid-template-columns: repeat(2, minmax(0, 260px)) minmax(0, 1fr);
     gap: 24px;
     align-items: center;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
   }
 
   &__field {
@@ -167,9 +183,6 @@
       gap: 16px;
     }
 
-    &__rowBottom {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
 
     &__submit {
       width: 100%;

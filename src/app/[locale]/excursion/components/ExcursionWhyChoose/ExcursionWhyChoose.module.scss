@@ -46,7 +46,7 @@
     display: flex;
     gap: 20px;
 
-    @include mobile {
+    @include tablet {
       flex-direction: column;
     }
   }
