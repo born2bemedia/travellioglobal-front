@@ -958,7 +958,7 @@
   "registration": {
     "successTitle": "Ihr Konto wurde erfolgreich erstellt!",
     "successMessage": "Sie können sich jetzt mit Ihrer E-Mail-Adresse und Ihrem Passwort anmelden.",
-    "goToLogin": "Gehen Sie zu Anmelden",
+    "goToAccount": "Gehen Sie zu Ihrem Konto",
     "firstNameLabel": "Vorname",
     "firstNamePlaceholderText": "Geben Sie Ihren Vornamen ein",
     "lastNameLabel": "Nachname",

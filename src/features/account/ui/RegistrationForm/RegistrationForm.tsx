@@ -62,6 +62,8 @@ export const RegistrationForm = () => {
     } else {
       if (result.message?.toLowerCase().includes('email')) {
         setError('email', { message: result.message });
+      } else if (result.message?.toLowerCase().includes('username')) {
+        setError('username', { message: result.message });
       } else {
         setError('root', { message: result.message ?? 'Registration failed.' });
       }
@@ -80,10 +82,10 @@ export const RegistrationForm = () => {
         <button
           type="button"
           className={styles.submitButton}
-          onClick={() => router.push('/log-in')}
+          onClick={() => router.push('/account')}
         >
           <ArrowRightIcon />
-          {t('goToLogin', { fallback: 'Go to Login' })}
+          {t('goToAccount', { fallback: 'Go to Account' })}
         </button>
       </div>
     );
@@ -288,7 +290,7 @@ export const RegistrationForm = () => {
                 fallback:
                   'By registering, you confirm that you are at least 18 years old and agree to our',
               })}{' '}
-              <Link href="/legal/terms-of-use">
+              <Link href="/legal/terms-and-conditions">
                 {t('agreementBoldOne', {
                   fallback: 'Terms and Conditions',
                 })}

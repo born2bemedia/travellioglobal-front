@@ -958,7 +958,7 @@
   "registration": {
     "successTitle": "Il tuo account è stato creato con successo!",
     "successMessage": "Ora puoi accedere con la tua email e password.",
-    "goToLogin": "Vai su Accedi",
+    "goToAccount": "Vai al tuo account",
     "firstNameLabel": "Nome",
     "firstNamePlaceholderText": "Inserisci il tuo nome",
     "lastNameLabel": "Cognome",

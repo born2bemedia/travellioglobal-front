@@ -33,19 +33,53 @@ export async function POST(request: Request): Promise<NextResponse> {
       phone?: string;
     };
     const { firstName, lastName, email, password, username, phone } = body;
+    const normalizedEmail = email?.trim();
+    const normalizedUsername = username?.trim();
+    const normalizedFirstName = firstName?.trim();
+    const normalizedLastName = lastName?.trim();
+    const normalizedPhone = phone?.trim();
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!normalizedFirstName || !normalizedLastName || !normalizedEmail || !password) {
       return NextResponse.json({ message: 'Please fill in all required fields.' }, { status: 400 });
     }
 
+    if (normalizedUsername) {
+      const existingUsernameRes = await fetch(
+        `${SERVER_URL}/api/users?where[username][equals]=${encodeURIComponent(normalizedUsername)}&limit=1`,
+        {
+          headers: {
+            Accept: 'application/json',
+          },
+        }
+      );
+
+      if (!existingUsernameRes.ok) {
+        return NextResponse.json(
+          { message: 'Unable to validate username uniqueness.' },
+          { status: 500 }
+        );
+      }
+
+      const existingUsernameData = (await existingUsernameRes.json()) as {
+        docs?: Array<{ id?: string }>;
+      };
+
+      if ((existingUsernameData.docs?.length ?? 0) > 0) {
+        return NextResponse.json(
+          { message: 'This username is already taken.' },
+          { status: 409 }
+        );
+      }
+    }
+
     const userPayload: Record<string, unknown> = {
-      firstName,
-      lastName,
-      email,
+      firstName: normalizedFirstName,
+      lastName: normalizedLastName,
+      email: normalizedEmail,
       password,
     };
-    if (username != null && username !== '') userPayload.username = username;
-    if (phone != null && phone !== '') userPayload.phone = phone;
+    if (normalizedUsername) userPayload.username = normalizedUsername;
+    if (normalizedPhone) userPayload.phone = normalizedPhone;
 
     const res = await fetch(`${SERVER_URL}/api/users`, {
       method: 'POST',
@@ -80,10 +114,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     };
 
     // Send welcome email to the user
-    if (SENDGRID_API_KEY && FROM_EMAIL && email) {
+    if (SENDGRID_API_KEY && FROM_EMAIL && normalizedEmail) {
       try {
-        const safeFirstName = escapeHtml(firstName);
-        const safeEmail = escapeHtml(email);
+        const safeFirstName = escapeHtml(normalizedFirstName);
+        const safeEmail = escapeHtml(normalizedEmail);
         const safePassword = escapeHtml(password);
 
         const welcomeEmailHtml = createBrandedEmailHtml({
@@ -109,14 +143,14 @@ export async function POST(request: Request): Promise<NextResponse> {
         });
 
         const welcomeMsg = {
-          to: email,
+          to: normalizedEmail,
           from: FROM_EMAIL,
           subject: 'Welcome to Travellio Global - Your Account is Ready',
           html: welcomeEmailHtml,
         };
 
         await sgMail.send(welcomeMsg);
-        console.log(`Registration email sent to ${email}`);
+        console.log(`Registration email sent to ${normalizedEmail}`);
       } catch (emailError) {
         console.error('Error sending registration email:', emailError);
         // Не зупиняємо процес, якщо email не відправився
@@ -130,7 +164,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: normalizedEmail, password }),
     });
 
     if (!loginRes.ok) {

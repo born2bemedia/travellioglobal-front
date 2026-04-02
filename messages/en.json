@@ -953,7 +953,7 @@
   "registration": {
     "successTitle": "Your account has been created successfully!",
     "successMessage": "You can now log in with your email and password.",
-    "goToLogin": "Go to Login",
+    "goToAccount": "Go to Account",
     "firstNameLabel": "First name",
     "firstNamePlaceholderText": "Enter your first name",
     "lastNameLabel": "Last name",
