@@ -19,7 +19,7 @@ $footer-line: rgba(249, 250, 245, 0.12);
   margin-top: 96px;
   background: $footer-bg;
   border-radius: 32px 32px 0 0;
-  overflow: hidden;
+  //overflow: hidden;
   position: relative;
   z-index: 1;
 
@@ -27,12 +27,17 @@ $footer-line: rgba(249, 250, 245, 0.12);
     margin-top: 72px;
   }
 
+  @include mobile {
+    border-radius: 24px 24px 0 0;
+  }
+
   &__inner {
     display: flex;
     flex-direction: column;
     padding: 32px 0;
 
-    @include tablet {
+    @include mobile {
+      padding: 16px 0;
     }
   }
 
@@ -49,9 +54,16 @@ $footer-line: rgba(249, 250, 245, 0.12);
     }
 
     @include tablet {
-      grid-template-columns: 1fr;
-      gap: 36px;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
       padding-bottom: 32px;
+    }
+
+    @include mobile {
+      grid-template-columns: 155px 179px;
+      justify-content: space-between;
+      gap: 0;
+      padding-bottom: 24px;
     }
   }
 
@@ -60,6 +72,14 @@ $footer-line: rgba(249, 250, 245, 0.12);
     flex-direction: column;
     gap: 6px;
     align-items: flex-start;
+
+    @include mobile {
+      position: sticky;
+      top: 85px;
+      flex-shrink: 0;
+      gap: 8px;
+      width: 143.6px;
+    }
   }
 
   &__wordmark {
@@ -73,12 +93,30 @@ $footer-line: rgba(249, 250, 245, 0.12);
     @include tablet {
       font-size: 28px;
     }
+
+    @include mobile {
+      display: block;
+      width: 143.6px;
+      font-size: 24px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__socials {
     display: inline-flex;
     align-items: center;
     gap: 13px;
+
+    @include mobile {
+      width: 117px;
+      justify-content: space-between;
+      gap: 0;
+    }
   }
 
   &__socialLink {
@@ -92,6 +130,16 @@ $footer-line: rgba(249, 250, 245, 0.12);
     &:hover {
       opacity: 0.72;
       transform: translateY(-1px);
+    }
+
+    @include mobile {
+      width: 32px;
+      height: 32px;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 
@@ -114,6 +162,10 @@ $footer-line: rgba(249, 250, 245, 0.12);
 
     @include mobile {
       grid-template-columns: 1fr;
+      gap: 32px;
+      justify-self: end;
+      flex-shrink: 0;
+      width: 179px;
     }
   }
 
@@ -124,6 +176,10 @@ $footer-line: rgba(249, 250, 245, 0.12);
 
     @include tablet {
       gap: 12px;
+    }
+
+    @include mobile {
+      gap: 8px;
     }
 
     h3 {
@@ -142,6 +198,24 @@ $footer-line: rgba(249, 250, 245, 0.12);
 
     @include tablet {
       gap: 12px;
+    }
+
+    @include mobile {
+      gap: 16px;
+    }
+  }
+
+  &__linkList--desktop {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__linkList--mobile {
+    display: none;
+
+    @include mobile {
+      display: flex;
     }
   }
 
@@ -177,7 +251,8 @@ $footer-line: rgba(249, 250, 245, 0.12);
     font-weight: 500;
     line-height: 1.15;
 
-    p, >div {
+    p,
+    > div {
       color: inherit;
       display: flex;
       flex-direction: column;
@@ -190,7 +265,7 @@ $footer-line: rgba(249, 250, 245, 0.12);
         line-height: normal;
       }
 
-      a{
+      a {
         font-weight: 500;
         text-decoration: underline;
       }
@@ -219,7 +294,66 @@ $footer-line: rgba(249, 250, 245, 0.12);
     }
 
     @include mobile {
+      gap: 16px;
       font-size: 12px;
+
+      p,
+      > div {
+        gap: 4px;
+
+        span {
+          font-size: 12px;
+          font-weight: 400;
+        }
+
+        a {
+          font-size: 12px;
+          font-weight: 400;
+        }
+
+        iframe {
+          border-radius: 6.5px;
+        }
+      }
+    }
+  }
+
+  &__addressMap {
+    width: 274px;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 13.366px;
+
+    iframe {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    @include mobile {
+      width: 179px;
+      border-radius: 6.474px;
+
+      iframe {
+        min-height: 100px;
+      }
+    }
+  }
+
+  &__addressMap--embed {
+  }
+
+  &__addressMap--image {
+    display: none;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @include mobile {
+      display: none;
     }
   }
 
@@ -233,6 +367,11 @@ $footer-line: rgba(249, 250, 245, 0.12);
     @include tablet {
       padding: 32px 0;
       gap: 24px;
+    }
+
+    @include mobile {
+      padding: 24px 0 0;
+      gap: 28px;
     }
   }
 
@@ -250,6 +389,22 @@ $footer-line: rgba(249, 250, 245, 0.12);
 
     @include mobile {
       font-size: 18px;
+      line-height: 1.25;
+      max-width: 330px;
+      margin: 0 auto;
+    }
+  }
+
+  &__partnersMobileGrid {
+    display: none;
+
+    @include mobile {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 150px));
+      justify-content: space-between;
+      row-gap: 24px;
+      column-gap: 16px;
+      width: 100%;
     }
   }
 
@@ -275,6 +430,11 @@ $footer-line: rgba(249, 250, 245, 0.12);
     );
   }
 
+  &__partnersMarquee {
+    overflow: hidden;
+    width: 100%;
+  }
+
   &__partnersTrack {
     display: flex;
     flex: 0 0 auto;
@@ -286,6 +446,12 @@ $footer-line: rgba(249, 250, 245, 0.12);
 
     @include mobile {
       gap: 18px;
+    }
+  }
+
+  @include mobile {
+    &__partnersTrack {
+      display: none;
     }
   }
 
@@ -316,6 +482,22 @@ $footer-line: rgba(249, 250, 245, 0.12);
     }
   }
 
+  &__partnerLogoMobile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 63px;
+
+    img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 74px;
+      object-fit: contain;
+      opacity: 0.92;
+    }
+  }
+
   &__bottom {
     display: flex;
     align-items: center;
@@ -332,6 +514,13 @@ $footer-line: rgba(249, 250, 245, 0.12);
       gap: 10px;
       padding-top: 24px;
     }
+
+    @include mobile {
+      gap: 8px;
+      padding-top: 16px;
+      padding-bottom: 24px;
+      margin-top: 16px;
+    }
   }
 
   &__bottomText {
@@ -340,5 +529,9 @@ $footer-line: rgba(249, 250, 245, 0.12);
     font-size: 14px;
     font-weight: 400;
     line-height: 1.2;
+
+    @include mobile {
+      white-space: normal;
+    }
   }
 }
