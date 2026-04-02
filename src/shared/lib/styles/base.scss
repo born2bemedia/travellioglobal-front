@@ -312,3 +312,13 @@ img {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+
+
+html[lang="de"]{
+  @include tablet {
+    a{
+      font-size-adjust: 0.45;
+    }
+  }
+  
+}

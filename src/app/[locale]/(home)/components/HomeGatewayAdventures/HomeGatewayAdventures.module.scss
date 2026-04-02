@@ -81,6 +81,7 @@
 
     @include tablet {
       font-size: 17px;
+      text-align: center;
     }
 
     @include mobile {
@@ -92,12 +93,16 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
+
+    @include mobile {
+      display: none;
+    }
   }
 
   &__navButton {
     display: inline-flex;
-    align-items: center!important;
-    justify-content: center!important;
+    align-items: center !important;
+    justify-content: center !important;
     width: 58px;
     height: 58px;
     border: 1px solid #eb5e28;
@@ -134,12 +139,27 @@
   &__slider {
     width: 100%;
     overflow: visible;
+
+    @include mobile {
+      display: none;
+    }
   }
 
   &__track {
     display: flex;
     gap: 20px;
     align-items: stretch;
+  }
+
+  &__mobileList {
+    display: none;
+
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
   }
 
   &__slide {
@@ -166,6 +186,13 @@
 
     @include mobile {
       width: min(88vw, 340px);
+    }
+  }
+
+  &__mobileList &__slide,
+  &__mobileList &__slideActive {
+    @include mobile {
+      width: 100%;
     }
   }
 
@@ -328,8 +355,10 @@
     }
   }
 
-  button, a {
+  button,
+  a {
     justify-content: space-between;
+
     span {
       font-family: var(--font-syne), sans-serif;
       font-size: 20px;
@@ -395,6 +424,11 @@
 
     @include tablet {
       justify-self: auto;
+      position: relative;
+    }
+
+    @include mobile {
+      display: none;
     }
   }
 
@@ -410,6 +444,10 @@
     cursor: pointer;
     justify-self: flex-end;
     margin-left: auto;
+
+    @include mobile {
+      margin: 0 auto;
+    }
 
     &::before {
       content: "→ ";

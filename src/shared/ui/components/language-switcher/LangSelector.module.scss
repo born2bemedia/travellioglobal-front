@@ -2,168 +2,166 @@
 
 .langSelector {
   position: relative;
-  @include tablet {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
+  width: 140px;
 
   > button {
     display: flex;
     align-items: center;
-    gap: 4px;
-    color: #fff;
+    justify-content: center;
+    width: 100%;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    color: #eb5e28;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
     font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 140%;
-
-    &.open {
-      svg {
-        transition: transform 0.3s ease-in-out;
-        transform: rotate(-180deg);
-
-        @include tablet {
-          transform: rotate(90deg);
-        }
-      }
-    }
-
-    @include tablet {
-      font-size: 18px;
-      font-weight: 700;
-      color: #000;
-      width: 100%;
-      justify-content: space-between;
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }
+    font-weight: 500;
+    line-height: 1;
+    text-align: left;
   }
 
-  .langSelectorItemLabelText {
-    color: #fff;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%; /* 20.8px */
-    //text-transform: uppercase;
-    display: none;
-    @include tablet {
+  &__current {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 95px;
+
+    img {
       display: block;
+      width: 24px;
+      height: 18px;
+      flex-shrink: 0;
     }
+
+    span {
+      white-space: nowrap;
+    }
+  }
+}
+
+.langSelectorButtonOpen {
+  border-radius: 16px 16px 0 0;
+  background: #252422 !important;
+  color: rgba(255, 253, 241, 0.2) !important;
+  
+}
+
+.langSelectorDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  overflow: hidden;
+  border-radius: 0 0 16px 16px;
+  background: #252422;
+  z-index: 1001;
+}
+
+.langSelectorDropdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 32px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 253, 241, 0.5);
+  background: transparent;
+  color: #fffdf1;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: #403d38;
+  }
+}
+
+.langSelectorDropdownItemInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 95px;
+
+  img {
+    display: block;
+    width: 24px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  span {
+    display: block;
+    min-width: 63px;
+    white-space: nowrap;
+  }
+}
+
+.compact {
+  @include tablet {
+    width: 140px;
+  }
+}
+
+.mobileMenu {
+  width: 100%;
+
+  > button {
+    justify-content: flex-start;
+    min-height: 43px;
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.5);
+    color: #fffdf1;
+  }
+
+  .langSelector__current {
+    width: 95px;
   }
 
   .langSelectorDropdown {
-    position: absolute;
-    top: calc(100% + 6px);
-    right: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    //gap: 12px;
-    align-self: stretch;
-    display: flex;
-    width: 170px;
-    padding: 10px;
-    z-index: 99999;
-    background: #ffffff;
+    position: static;
+    width: 100%;
+    margin-top: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.5);
+  }
 
-    @include tablet {
-      position: static;
-      width: 100%;
-      padding: 0;
-      background: #f1f6fd;
+  .langSelectorDropdownItem {
+    justify-content: flex-start;
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(255, 253, 241, 0.5);
+    background: transparent;
+
+    &:last-child {
+      border-bottom: 0;
     }
 
-    > button {
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 20px;
-      padding: 12px 8px;
-      color: #000;
-      text-align: center;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 140%;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      &:hover {
-        background: rgba(0, 0, 0, 0.1);
-      }
+    &:hover {
+      background: transparent;
+    }
 
-      &.active {
-        background: rgba(255, 255, 255, 0.08);
-        font-weight: 500;
-      }
+    span {
+      min-width: auto;
     }
   }
 
-  &__icon_desktop {
-    @include tablet {
-      display: none;
-    }
+  .langSelectorDropdownItemInner {
+    width: auto;
   }
 
-  &__icon_mobile {
-    display: none;
-    @include tablet {
-      display: block;
-    }
-  }
-
-  &.compact {
-    @include tablet {
-      border-top: 0;
-    }
-
-    > button {
-      @include tablet {
-        width: auto;
-        justify-content: flex-start;
-        padding-top: 0;
-        padding-bottom: 0;
-        font-size: 12px;
-        font-weight: 500;
-      }
-    }
-
-    .langSelectorDropdown {
-      @include tablet {
-        position: absolute;
-        top: calc(100% + 6px);
-        right: 0;
-        width: 170px;
-        padding: 10px;
-        background: #ffffff;
-      }
-
-      > button {
-        @include tablet {
-          gap: 20px;
-          padding: 12px 8px;
-          color: #000;
-          font-size: 18px;
-          font-weight: 700;
-          border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-      }
-    }
-
-    .langSelectorItemLabelText {
-      @include tablet {
-        display: none;
-      }
-    }
-
-    .langSelector__icon_desktop {
-      @include tablet {
-        display: block;
-      }
-    }
-
-    .langSelector__icon_mobile {
-      @include tablet {
-        display: none;
-      }
-    }
+  .langSelectorButtonOpen {
+    border-radius: 0;
+    background: transparent !important;
+    color: #fffdf1 !important;
   }
 }

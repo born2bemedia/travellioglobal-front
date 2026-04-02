@@ -2,6 +2,7 @@ import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
 
 import { cn } from '@/shared/lib/helpers/styles';
 
@@ -38,8 +39,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
-    <html lang="en">
+
+    <html lang={locale}>
       <GoogleAnalytics gaId="G-8556Y8CBFX" />
       <body className={cn(plusJakartaSans.variable, syne.variable)}>
         {children}

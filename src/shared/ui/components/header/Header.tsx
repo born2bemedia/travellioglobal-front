@@ -640,6 +640,13 @@ export const Header = () => {
           })}
         </div>
 
+        <div className={styles.header__mobileLang}>
+          <LangSelector
+            key={isMobileMenuOpen ? "mobile-lang-open" : "mobile-lang-closed"}
+            inMobileMenu
+          />
+        </div>
+
         <div className={styles.header__mobile_actions}>
           <Link
             href={user ? "/account" : "/log-in"}

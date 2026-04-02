@@ -781,6 +781,18 @@
       border: 1px solid #fffdf1;
       border-radius: 4px;
     }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5.5px;
+      width: 5px;
+      height: 8px;
+      border-right: 2px solid #fffdf1;
+      border-bottom: 2px solid #fffdf1;
+      transform: rotate(45deg);
+    }
   }
 }
 
@@ -858,6 +870,10 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .relatedNavButton {
@@ -900,12 +916,27 @@
 .relatedSlider {
   width: 100%;
   overflow: visible;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .relatedTrack {
   display: flex;
   gap: 20px;
   align-items: stretch;
+}
+
+.relatedMobileList {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
 }
 
 .relatedSlide {
@@ -934,12 +965,23 @@
   }
 }
 
+.relatedMobileList .relatedSlide,
+.relatedMobileList .relatedSlideActive {
+  @include mobile {
+    width: 100%;
+  }
+}
+
 .relatedFooter {
   position: relative;
   display: flex;
   justify-content: center;
   margin-top: 24px;
   min-height: 3px;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .relatedProgress {

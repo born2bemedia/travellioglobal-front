@@ -90,7 +90,6 @@ export const HomeNextStory = () => {
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const hasLooped = useRef(false);
 
-
   const slideNext = useCallback(() => {
     setTransitionEnabled(true);
     setDisplayIndex((prev) => prev + 1);
@@ -122,7 +121,6 @@ export const HomeNextStory = () => {
     }
   }, [displayIndex, destinations.length]);
 
-
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   }, []);
@@ -139,6 +137,57 @@ export const HomeNextStory = () => {
   );
 
   const trackOffset = -(displayIndex * (INACTIVE_WIDTH + GAP));
+
+  const renderDestinationCard = useCallback(
+    (dest: (typeof destinations)[number], key: string, isExpanded = false) => (
+      <div
+        key={key}
+        className={`${styles.next_story__slide} ${
+          isExpanded ? styles.next_story__slideActive : ""
+        }`}
+      >
+        <a
+          href={dest.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.next_story__card}
+          aria-label={`${t("viewAria", {
+            fallback: "View destination",
+          })}: ${dest.city}`}
+        >
+          <div className={styles.next_story__cardMedia}>
+            <Image
+              src={dest.image}
+              alt={dest.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 48vw, 24vw"
+            />
+
+            <div className={styles.next_story__cardOverlay} />
+
+            <div className={styles.next_story__cardTop}>
+              <span className={styles.next_story__country}>{dest.country}</span>
+
+              <span
+                className={styles.next_story__cardArrow}
+                aria-hidden="true"
+              >
+                <Image
+                  src="/images/home/section-story/arrow-right.svg"
+                  alt=""
+                  width={31}
+                  height={30}
+                />
+              </span>
+            </div>
+
+            <h3 className={styles.next_story__cityName}>{dest.city}</h3>
+          </div>
+        </a>
+      </div>
+    ),
+    [t],
+  );
 
   return (
     <section className={styles.next_story}>
@@ -242,61 +291,20 @@ export const HomeNextStory = () => {
                 }}
                 onTransitionEnd={handleTransitionEnd}
               >
-                {slides.map((dest, index) => {
-                  const isActive = index === displayIndex;
-                  return (
-                    <div
-                      key={`${dest.key}-${index}`}
-                      className={`${styles.next_story__slide} ${
-                        isActive ? styles.next_story__slideActive : ""
-                      }`}
-                    >
-                      <a
-                        href={dest.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.next_story__card}
-                        aria-label={`${t("viewAria", {
-                          fallback: "View destination",
-                        })}: ${dest.city}`}
-                      >
-                        <div className={styles.next_story__cardMedia}>
-                          <Image
-                            src={dest.image}
-                            alt={dest.alt}
-                            fill
-                            sizes="(max-width: 768px) 78vw, (max-width: 1024px) 48vw, 24vw"
-                          />
-
-                          <div className={styles.next_story__cardOverlay} />
-
-                          <div className={styles.next_story__cardTop}>
-                            <span className={styles.next_story__country}>
-                              {dest.country}
-                            </span>
-
-                            <span
-                              className={styles.next_story__cardArrow}
-                              aria-hidden="true"
-                            >
-                              <Image
-                                src="/images/home/section-story/arrow-right.svg"
-                                alt=""
-                                width={31}
-                                height={30}
-                              />
-                            </span>
-                          </div>
-
-                          <h3 className={styles.next_story__cityName}>
-                            {dest.city}
-                          </h3>
-                        </div>
-                      </a>
-                    </div>
-                  );
-                })}
+                {slides.map((dest, index) =>
+                  renderDestinationCard(
+                    dest,
+                    `${dest.key}-${index}`,
+                    index === displayIndex,
+                  ),
+                )}
               </div>
+            </div>
+
+            <div className={styles.next_story__mobileList}>
+              {destinations.map((dest) =>
+                renderDestinationCard(dest, dest.key, true),
+              )}
             </div>
           </div>
         </motion.div>

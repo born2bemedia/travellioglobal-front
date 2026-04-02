@@ -68,14 +68,12 @@
 
   @include tablet {
     flex-wrap: wrap;
+    flex-direction: column;
     gap: 16px;
   }
 
   @include mobile {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 6px;
-    scrollbar-width: none;
+    
 
     &::-webkit-scrollbar {
       display: none;
@@ -148,6 +146,12 @@
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.25s ease, transform 0.25s ease;
+
+  @include tablet {
+    max-width: 100%;
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   h3,
   p {

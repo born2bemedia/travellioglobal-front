@@ -395,6 +395,10 @@ export const TourDetailPage = ({
         : [],
     [relatedTours],
   );
+  const mobileRelatedTours = useMemo(
+    () => relatedTours.slice(0, 3),
+    [relatedTours],
+  );
 
   const wishlistedEntry =
     user?.wishlist?.find(
@@ -546,6 +550,20 @@ export const TourDetailPage = ({
       }
     },
     [slideNext, slidePrev],
+  );
+
+  const renderRelatedCard = useCallback(
+    (item: Tour, key: string, isExpanded = false) => (
+      <div
+        key={key}
+        className={`${styles.relatedSlide} ${
+          isExpanded ? styles.relatedSlideActive : ""
+        }`}
+      >
+        <TourCard tour={item} galleryImages={getTourGallery(item.slug)} />
+      </div>
+    ),
+    [],
   );
 
   return (
@@ -1140,20 +1158,20 @@ export const TourDetailPage = ({
                   }}
                   onTransitionEnd={handleTransitionEnd}
                 >
-                  {slides.map((item, index) => {
-                    const isActive = index === displayIndex;
-                    return (
-                      <div
-                        key={`${item.slug}-${index}`}
-                        className={`${styles.relatedSlide} ${
-                          isActive ? styles.relatedSlideActive : ""
-                        }`}
-                      >
-                        <TourCard tour={item} galleryImages={getTourGallery(item.slug)} />
-                      </div>
-                    );
-                  })}
+                  {slides.map((item, index) =>
+                    renderRelatedCard(
+                      item,
+                      `${item.slug}-${index}`,
+                      index === displayIndex,
+                    ),
+                  )}
                 </div>
+              </div>
+
+              <div className={styles.relatedMobileList}>
+                {mobileRelatedTours.map((item) =>
+                  renderRelatedCard(item, item.slug, true),
+                )}
               </div>
 
               <div className={styles.relatedFooter}>

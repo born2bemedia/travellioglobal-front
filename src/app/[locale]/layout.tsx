@@ -1,14 +1,15 @@
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import { NextIntlClientProvider } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
-import { ToastContainer } from 'react-toastify';
+import { NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import { ToastContainer } from "react-toastify";
 
-import { FormsPopupRenderer } from '@/features/forms';
+import { FormsPopupRenderer } from "@/features/forms";
 
-import { CookiePopup, Footer, Header } from '@/shared/ui/components';
+import { CookiePopup, Footer, Header } from "@/shared/ui/components";
+import { Preloader } from "@/shared/ui/components/preloader/Preloader";
 
-import { routing } from '@/i18n/routing';
+import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -23,7 +24,7 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
+  if (!routing.locales.includes(locale as typeof routing.locales[number])) {
     notFound();
   }
 
@@ -31,6 +32,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider>
+      <Preloader />
       <Header />
       {children}
       <Footer />

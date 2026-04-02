@@ -35,7 +35,7 @@ $ink: #3c2718;
   }
 
   &__topbar {
-    padding: 24px 0 4px;
+    padding: 20px 0 0;
     position: relative;
     z-index: 999;
 
@@ -73,7 +73,7 @@ $ink: #3c2718;
     &__socials {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 13px;
       flex-shrink: 0;
 
       a {
@@ -105,30 +105,13 @@ $ink: #3c2718;
     &_right_column {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 40px;
       flex-shrink: 0;
     }
 
     &_lang_wrapper {
       @include tablet {
         display: none;
-      }
-      > div {
-        position: relative;
-      }
-
-      > div > button {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        color: $orange;
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 1;
-      }
-
-      > div > button svg path {
-        fill: currentColor;
       }
     }
   }
@@ -518,9 +501,10 @@ $ink: #3c2718;
       z-index: 999;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 0;
-      width: 100%;
+      width: 262px;
+      max-width: calc(100vw - 16px);
       padding: 16px 16px 16px;
       overflow-y: auto;
       border-radius: 32px 0 0 32px;
@@ -586,7 +570,6 @@ $ink: #3c2718;
   &__mobile_nav {
     display: flex;
     flex-direction: column;
-    padding-right: 16px;
   }
 
   &__mobileNavItem {
@@ -617,7 +600,7 @@ $ink: #3c2718;
     display: flex;
     flex-direction: column;
     gap: 0;
-    //margin-top: 56px;
+    margin-top: 56px;
   }
 
   &__mobileDropdown {
@@ -673,27 +656,36 @@ $ink: #3c2718;
     }
   }
 
+  &__mobileLang {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+
   &__mobile_actions {
     display: flex;
-    gap: 8px;
+    gap: 2px;
+    margin-top: 42px;
 
     a {
       display: flex;
-      padding: 12px 24px;
+      min-width: 0;
+      min-height: 42px;
+      padding: 12px 0;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      gap: 0;
       flex: 1 0 0;
       color: #fffdf1;
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
-      font-weight: 500;
-      line-height: 100%; /* 16px */
+      font-weight: 400;
+      line-height: 100%;
       border-radius: 500px;
       background: #eb5e28;
       border: none;
-      &:last-child{
+
+      &:last-child {
         background: #fffdf1;
         color: #eb5e28;
       }
