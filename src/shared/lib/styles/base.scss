@@ -79,6 +79,9 @@ img {
   @include largeDesktop {
     max-width: 1440px;
   }
+  @include largeDesktopPlus {
+    max-width: 1728px;
+  }
   @include tablet {
   }
 }
