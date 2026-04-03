@@ -52,13 +52,13 @@ export const InsuranceHero = () => {
             <p>
               {t("heroDescriptionOne", {
                 fallback:
-                  "With Travellio Global, travel insurance is simple, dependable, and made for the unexpected.",
+                  "Adventure is exciting. Unexpected surprises? Not so much.",
               })}
             </p>
             <p>
               {t("heroDescriptionTwo", {
                 fallback:
-                  "From sudden illness abroad to emergency transport, we’re here to help protect your plans, your health, and your peace of mind.",
+                  "With Travellio Global Travel Insurance, you explore the world knowing you’re covered. From quick city breaks to long-haul journeys, we help protect what matters most — your health, your plans, and your peace of mind.",
               })}
             </p>
           </div>

@@ -12,22 +12,16 @@ export const InsuranceIntro = () => {
 
   const bullets = [
     t("introBullet1", {
-      fallback: "Battling sudden illness abroad",
+      fallback: "Planning a relaxing getaway",
     }),
     t("introBullet2", {
-      fallback: "Needing emergency transport",
+      fallback: "Embarking on an international adventure",
     }),
     t("introBullet3", {
-      fallback: "Travelling with family",
+      fallback: "Travelling for business",
     }),
     t("introBullet4", {
-      fallback: "Exploring with confidence",
-    }),
-    t("introBullet5", {
-      fallback: "Taking extended trips or multi-country journeys",
-    }),
-    t("introBullet6", {
-      fallback: "Flying while pregnant (subject to policy terms)",
+      fallback: "Exploring with family",
     }),
   ] as const;
 
@@ -69,7 +63,7 @@ export const InsuranceIntro = () => {
             <p>
               {t("introClosing", {
                 fallback:
-                  "you deserve cover that gives you a secure backup no matter the destination.",
+                  "We provide coverage designed to support you along the way. Suitable for travellers aged 3 to 85, across multiple destinations worldwide.",
               })}
             </p>
           </div>

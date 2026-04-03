@@ -10,7 +10,7 @@
 
   &__card {
     display: grid;
-    grid-template-columns: minmax(280px, 1.02fr) minmax(0, 1.98fr);
+    grid-template-columns: 1fr 1fr;
     gap: 28px;
     padding: 16px;
     border: 1px solid #eb5e28;
@@ -24,7 +24,6 @@
     font-weight: 600;
     line-height: 1;
     color: #eb5e28;
-    max-width: 390px;
   }
 
   &__content {

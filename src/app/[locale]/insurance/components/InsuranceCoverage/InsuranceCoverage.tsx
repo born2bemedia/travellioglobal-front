@@ -23,7 +23,7 @@ export const InsuranceCoverage = () => {
     {
       key: "medical",
       title: t("coverage1Title", {
-        fallback: "Emergency medical expenses.",
+        fallback: "Emergency medical expenses",
       }),
       imageDesktop: "/images/insurance/coverage-1-desktop.png",
       imageMobile: "/images/insurance/coverage-1-mobile.png",
@@ -31,7 +31,7 @@ export const InsuranceCoverage = () => {
     {
       key: "transport",
       title: t("coverage2Title", {
-        fallback: "Transport to medical facilities.",
+        fallback: "Transport to medical facilities",
       }),
       imageDesktop: "/images/insurance/coverage-2-desktop.png",
       imageMobile: "/images/insurance/coverage-2-mobile.png",
@@ -39,7 +39,7 @@ export const InsuranceCoverage = () => {
     {
       key: "disruption",
       title: t("coverage3Title", {
-        fallback: "Trip disruption.",
+        fallback: "Trip disruption",
       }),
       imageDesktop: "/images/insurance/coverage-3-desktop.png",
       imageMobile: "/images/insurance/coverage-3-mobile.png",
@@ -47,7 +47,7 @@ export const InsuranceCoverage = () => {
     {
       key: "interruptions",
       title: t("coverage4Title", {
-        fallback: "Travel interruptions.",
+        fallback: "Travel interruptions",
       }),
       imageDesktop: "/images/insurance/coverage-4-desktop.png",
       imageMobile: "/images/insurance/coverage-4-mobile.png",
@@ -55,7 +55,7 @@ export const InsuranceCoverage = () => {
     {
       key: "families",
       title: t("coverage5Title", {
-        fallback: "Families travelling together.",
+        fallback: "Families travelling together",
       }),
       imageDesktop: "/images/insurance/coverage-5-desktop.png",
       imageMobile: "/images/insurance/coverage-5-mobile.png",
@@ -63,7 +63,7 @@ export const InsuranceCoverage = () => {
     {
       key: "pregnant",
       title: t("coverage6Title", {
-        fallback: "Pregnant travellers (subject to policy terms)",
+        fallback: "Pregnant travellers (subject to policy terms)", // TODO: check this
       }),
       imageDesktop: "/images/insurance/coverage-6-desktop.png",
       imageMobile: "/images/insurance/coverage-6-mobile.png",
@@ -89,7 +89,11 @@ export const InsuranceCoverage = () => {
             <p className={styles.coverage__subtitle}>
               {t("coverageSubtitle", {
                 fallback:
-                  "Travel with protection that supports your journey when the unexpected tries to rewrite it.",
+                  "Travel isn’t one-size-fits-all — and your insurance shouldn’t be either. From visa-required trips to spontaneous escapes, we help you travel smarter.",
+              })}
+              <br /><br />
+              {t("coverageSubtitleTwo", {
+                fallback: "Our plans can include protection for:",
               })}
             </p>
           </div>
