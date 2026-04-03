@@ -31,23 +31,19 @@ export const ArticlesHero = () => {
           variants={fadeInUp}
         >
           <h1 className={styles.hero__title}>
-            {t("heroTitle", { fallback: "Talk Travel to Us" })}
+            {t("heroTitle", { fallback: "Travel, Told Differently" })}
           </h1>
 
           <div className={styles.hero__text}>
             <p className={styles.hero__subtitle}>
               {t("heroSubtitleOne", {
-                fallback: "Questions? Ideas? Travel dreams waiting to happen?",
-              })}
-              <br />
-              {t("heroSubtitleTwo", {
-                fallback: "We'd love to hear from you.",
+                fallback: "Less scrolling. More discovering.",
               })}
             </p>
             <p className={styles.hero__description}>
               {t("heroDescription", {
                 fallback:
-                  "Whether you need help with a booking, want guidance on your next adventure, or simply have something to share, our team is ready to assist.",
+                  "From exploring hidden corners of iconic cities to understanding how to plan your journey more efficiently, each article is created to support both inspiration and decision-making.",
               })}
             </p>
           </div>
