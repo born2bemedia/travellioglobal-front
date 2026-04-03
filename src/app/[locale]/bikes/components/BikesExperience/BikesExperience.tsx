@@ -7,8 +7,6 @@ import { fadeInUp } from "@/shared/lib/helpers/animations";
 
 import styles from "./BikesExperience.module.scss";
 
-
-
 export const BikesExperience = () => {
   const t = useTranslations("bikesPage");
 
@@ -19,8 +17,10 @@ export const BikesExperience = () => {
         fallback: "Customised Riding Experience",
       }),
       lead: t("experienceCustomisedLead", {
-        fallback:
-          "Your trip is unique — your ride should be too.",
+        fallback: "Your trip is unique — your ride should be too.",
+      }),
+      subtitle: t("experienceCustomisedSubtitle", {
+        fallback: "Choose from:",
       }),
       list: [
         t("experienceCustomisedList1", {
@@ -47,8 +47,10 @@ export const BikesExperience = () => {
         fallback: "Explore at Your Own Speed",
       }),
       lead: t("experienceSpeedLead", {
-        fallback:
-          "Forget schedules. Forget crowded tours.",
+        fallback: "Forget schedules. Forget crowded tours.",
+      }),
+      subtitle: t("experienceSpeedSubtitle", {
+        fallback: "With a bike, you decide:",
       }),
       list: [
         t("experienceSpeedList1", {

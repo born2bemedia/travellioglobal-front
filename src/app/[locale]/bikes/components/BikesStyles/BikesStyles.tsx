@@ -23,7 +23,7 @@ export const BikesStyles = () => {
       }),
       description: t("styleBicycleDescription", {
         fallback:
-          "Perfect for scenic city routes, coastal rides, and discovering hidden streets at your own pace.",
+          "Perfect for scenic city routes, coastal rides, and discovering hidden streets at your own pace. ",
       }),
     },
     {
@@ -33,7 +33,7 @@ export const BikesStyles = () => {
         fallback: "Motorcycle Rentals",
       }),
       description: t("styleMotorcycleDescription", {
-        fallback: "Built for longer stretches, mountain curves, and the kind of ride that turns travel into memory.",
+        fallback: "From classic cruisers to sport bikes — built for thrill-seekers and long-distance explorers.",
       }),
     },
     {
