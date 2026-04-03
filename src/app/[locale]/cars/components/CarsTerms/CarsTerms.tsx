@@ -62,9 +62,16 @@ export const CarsTerms = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={fadeInUp}
         >
-          <h2 className={styles.terms__title}>
-            {t("termsTitle", { fallback: "Travel on Your Terms" })}
-          </h2>
+          <div className={styles.terms__header}>
+            <h2 className={styles.terms__title}>
+              {t("termsTitle", { fallback: "Travel on Your Terms" })}
+            </h2>
+            <p className={styles.terms__subtitle}>
+              {t("termsSubtitle", {
+                fallback: "Your trip. Your rhythm. Your ride.",
+              })}
+            </p>
+          </div>
 
           <div className={styles.terms__grid}>
             {carTypes.map((car) => (
