@@ -30,7 +30,7 @@ export const CarsTerms = () => {
       key: "suv",
       title: t("termsSuvTitle", { fallback: "SUVs & 4x4s" }),
       subtitle: t("termsSuvSubtitle", {
-        fallback: "or mountain roads and wild landscapes",
+        fallback: "for mountain roads and wild landscapes",
       }),
       image: "/images/cars/suvs.png",
     },
