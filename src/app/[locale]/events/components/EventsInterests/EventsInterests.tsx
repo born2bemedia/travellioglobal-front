@@ -55,11 +55,23 @@ export const EventsInterests = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={fadeInUp}
     >
-      <h2 className={styles.interests__title}>
-        {t("interestsTitle", {
-          fallback: "Whether you’re into:",
-        })}
-      </h2>
+      <div className={styles.interests__heading}>
+        <h2 className={styles.interests__title}>
+          {t("interestsTitle", {
+            fallback: "Something for Every Passion",
+          })}
+        </h2>
+        <p className={styles.interests__subtitle}>
+          {t("interestsSubtitle1", {
+            fallback:
+              "We curate events designed to elevate your travel experience.",
+          })}
+          <br />
+          {t("interestsSubtitle2", {
+            fallback: "Whether you’re into:",
+          })}
+        </p>
+      </div>
 
       <div className={styles.interests__grid}>
         {INTEREST_ITEMS.map((item) => (
