@@ -55,10 +55,10 @@ export const FlightSearchForm = () => {
   const [
     hotelDestination,
     setHotelDestination,
-  ] = useState<AirportOption | null>(null);
+  ] = useState<AirportOption | null>(airports.find((c) => c.value === "BUD") ?? null);
   const [checkIn, setCheckIn] = useState(defaultDepart);
   const [checkOut, setCheckOut] = useState(defaultReturn);
-  const [guests, setGuests] = useState(2);
+  const [guests, setGuests] = useState(1);
 
   const passengerLabel = t("passengerLabel", { fallback: "passenger" });
   const passengerLabelPlural = t("passengerLabelPlural", {
