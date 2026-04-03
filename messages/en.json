@@ -427,7 +427,8 @@
     "whyLocalDescription": "Our guides are locals with insider knowledge, ready to take you beyond the usual tourist spots and show you the places that make each destination unforgettable.",
     "whyTailoredTitle": "Tailored to You",
     "whyTailoredDescription": "Whether you're after a high-octane adventure or a chilled-out cultural journey, our excursions are designed to fit your vibe and bring you closer to what makes each place special.",
-    "whyTitle": "Why Choose Our Excursions?"
+    "whyTitle": "Why Choose Our Excursions?",
+    "packYourBags": "Pack Your Bags!"
   },
   "flightsPage": {
     "ctaTitle": "Book Your Next Flight Today",
@@ -1121,7 +1122,7 @@
     "totalLabel": "Total: {price}",
     "totalNote": "The total price includes all taxes and fees",
     "bookNow": "Book now",
-    "relatedTours": "Free your inner traveller, consider exploring...",
+    "relatedTours": "Unlock your sense of adventure: discover journeys worth taking",
     "previousAria": "Previous tours",
     "nextAria": "Next tours"
   },

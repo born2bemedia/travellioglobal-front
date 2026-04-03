@@ -15,6 +15,12 @@
     border-radius: 32px 32px 0 0;
   }
 
+  &__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
   &__inner {
     display: flex;
     flex-direction: column;

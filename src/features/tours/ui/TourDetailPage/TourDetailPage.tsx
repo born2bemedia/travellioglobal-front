@@ -1107,7 +1107,7 @@ export const TourDetailPage = ({
                 <h2>
                   {t("relatedTours", {
                     fallback:
-                      "Free your inner traveller, consider exploring...",
+                      "Unlock your sense of adventure: discover journeys worth taking",
                   })}
                 </h2>
                 <div className={styles.relatedActions}>

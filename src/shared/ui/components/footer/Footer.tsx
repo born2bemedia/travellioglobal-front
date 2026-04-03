@@ -62,7 +62,7 @@ export const Footer = () => {
     {
       key: "excursions",
       text: t("excursions", { fallback: "Excursions" }),
-      href: "/excursion",
+      href: "/excursions",
     },
     {
       key: "places",
@@ -94,7 +94,7 @@ export const Footer = () => {
     {
       key: "excursions",
       text: t("excursions", { fallback: "Excursions" }),
-      href: "/excursion",
+      href: "/excursions",
     },
     {
       key: "places",

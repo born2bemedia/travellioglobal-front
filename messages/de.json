@@ -427,7 +427,8 @@
     "whyLocalDescription": "Unsere Guides sind Einheimische mit Insiderwissen, die bereit sind, Sie über die üblichen Touristenattraktionen hinauszuführen und Ihnen die Orte zu zeigen, die jedes Reiseziel unvergesslich machen.",
     "whyTailoredTitle": "Maßgeschneidert für Sie",
     "whyTailoredDescription": "Egal, ob Sie auf der Suche nach einem aufregenden Abenteuer oder einer entspannten Kulturreise sind, unsere Ausflüge sind so gestaltet, dass sie zu Ihrer Stimmung passen und Ihnen näher bringen, was jeden Ort zu etwas Besonderem macht.",
-    "whyTitle": "Warum sollten Sie sich für unsere Ausflüge entscheiden?"
+    "whyTitle": "Warum sollten Sie sich für unsere Ausflüge entscheiden?",
+    "packYourBags": "Packen Sie Ihre Koffer!"
   },
   "flightsPage": {
     "ctaTitle": "Buchen Sie noch heute Ihren nächsten Flug",
@@ -1339,7 +1340,7 @@
     "totalLabel": "Gesamt: {price}",
     "totalNote": "Im Gesamtpreis sind alle Steuern und Gebühren enthalten",
     "bookNow": "Buchen Sie jetzt",
-    "relatedTours": "Befreien Sie Ihren inneren Reisenden und erkunden Sie ...",
+    "relatedTours": "Entdecken Sie Reisen, die es wert sind, erkundet zu werden",
     "previousAria": "Frühere Touren",
     "nextAria": "Nächste Touren"
   },

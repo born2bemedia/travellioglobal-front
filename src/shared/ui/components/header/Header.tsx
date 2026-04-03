@@ -79,7 +79,7 @@ export const Header = () => {
   useEffect(() => {
     const whiteTopbarPathnames = [
       "/tours",
-      "/excursion",
+      "/excursions",
       "/places",
       "/flights",
       "/visas",
@@ -113,7 +113,7 @@ export const Header = () => {
     {
       key: "excursions",
       text: t("excursions", { fallback: "Excursions" }),
-      href: "/excursion",
+      href: "/excursions",
     },
     {
       key: "places",

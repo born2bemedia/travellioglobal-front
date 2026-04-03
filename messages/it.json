@@ -427,7 +427,8 @@
     "whyLocalDescription": "Le nostre guide sono persone del posto con conoscenze privilegiate, pronte a portarti oltre i soliti luoghi turistici e mostrarti i luoghi che rendono ogni destinazione indimenticabile.",
     "whyTailoredTitle": "Su misura per te",
     "whyTailoredDescription": "Che tu sia alla ricerca di un'avventura adrenalinica o di un rilassante viaggio culturale, le nostre escursioni sono progettate per adattarsi alla tua atmosfera e avvicinarti a ciò che rende speciale ogni luogo.",
-    "whyTitle": "Perché scegliere le nostre escursioni?"
+    "whyTitle": "Perché scegliere le nostre escursioni?",
+    "packYourBags": "Pack Your Bags!"
   },
   "flightsPage": {
     "ctaTitle": "Prenota oggi il tuo prossimo volo",
@@ -1339,7 +1340,7 @@
     "totalLabel": "Totale: {price}",
     "totalNote": "Il prezzo totale include tutte le tasse e le commissioni",
     "bookNow": "Prenota ora",
-    "relatedTours": "Libera il tuo viaggiatore interiore, considera l'idea di esplorare...",
+    "relatedTours": "Sblocca il tuo senso di avventura: scopri viaggi degni di essere esplorati",
     "previousAria": "Tour precedenti",
     "nextAria": "Prossimi tour"
   },

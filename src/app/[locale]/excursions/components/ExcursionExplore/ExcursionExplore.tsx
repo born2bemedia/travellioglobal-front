@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { fadeInUp } from "@/shared/lib/helpers/animations";
+import { Button } from "@/shared/ui/kit/button/Button";
 
 import styles from "./ExcursionExplore.module.scss";
 
@@ -53,8 +54,7 @@ export const ExcursionExplore = () => {
         {
           name: t("destUK", { fallback: "United Kingdom" }),
           description: t("destUKDesc", {
-            fallback:
-              "Scottish highlands and cinematic adventures in the UK.",
+            fallback: "Scottish highlands and cinematic adventures in the UK.",
           }),
         },
       ],
@@ -74,8 +74,7 @@ export const ExcursionExplore = () => {
         {
           name: t("destJapan", { fallback: "Japan" }),
           description: t("destJapanDesc", {
-            fallback:
-              "From the temples of Kyoto to the neon lights of Osaka.",
+            fallback: "From the temples of Kyoto to the neon lights of Osaka.",
           }),
         },
         {
@@ -95,8 +94,7 @@ export const ExcursionExplore = () => {
         {
           name: t("destUSA", { fallback: "USA" }),
           description: t("destUSADesc", {
-            fallback:
-              "Snorkeling in Oahu, exploring New York City, and more!",
+            fallback: "Snorkeling in Oahu, exploring New York City, and more!",
           }),
         },
         {
@@ -109,8 +107,7 @@ export const ExcursionExplore = () => {
         {
           name: t("destPeru", { fallback: "Peru" }),
           description: t("destPeruDesc", {
-            fallback:
-              "Journey through sacred valleys and ancient wonders.",
+            fallback: "Journey through sacred valleys and ancient wonders.",
           }),
         },
         {
@@ -130,8 +127,7 @@ export const ExcursionExplore = () => {
         {
           name: t("destUAE", { fallback: "United Arab Emirates" }),
           description: t("destUAEDesc", {
-            fallback:
-              "Soak in the luxury of Dubai and its iconic skyline.",
+            fallback: "Soak in the luxury of Dubai and its iconic skyline.",
           }),
         },
       ],
@@ -212,6 +208,28 @@ export const ExcursionExplore = () => {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className={styles.explore__cta}>
+            <Button variant="orange" url="/tours" type="link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="23"
+                height="20"
+                viewBox="0 0 23 20"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 10H22M22 10L13.3333 1M22 10L13.3333 19"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>{t("packYourBags", { fallback: "Pack Your Bags!" })}</span>
+            </Button>
           </div>
         </motion.div>
       </div>
