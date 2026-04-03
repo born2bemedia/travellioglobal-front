@@ -40,7 +40,7 @@ export const TaxiSchedule = () => {
       key: "airport",
       number: "03.",
       title: t("scheduleAirport", {
-        fallback: "Airport transfers made seamless",
+        fallback: "Enjoy seamless airport transfers",
       }),
       icon: "/images/taxi/airplane-tilt.svg",
     },
@@ -48,7 +48,7 @@ export const TaxiSchedule = () => {
       key: "hotel",
       number: "04.",
       title: t("scheduleHotel", {
-        fallback: "Hotel pickups without the hassle",
+        fallback: "Book hassle-free hotel pickups",
       }),
       icon: "/images/taxi/bed.svg",
     },
