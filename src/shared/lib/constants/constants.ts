@@ -3,7 +3,7 @@ export const WEBSITE_PHONE = '+447366905227';
 
 export const LINKEDIN_URL = '#';
 export const FACEBOOK_URL = 'https://www.facebook.com/travellio/';
-export const INSTAGRAM_URL = 'https://www.instagram.com/travellioglobal/';
+export const INSTAGRAM_URL = '';
 export const X_URL = 'https://x.com/travellioglobal';
 
 export const WEBSITE_REGISTERED_ADDRESS =

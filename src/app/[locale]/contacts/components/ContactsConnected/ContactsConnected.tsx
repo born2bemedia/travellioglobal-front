@@ -13,23 +13,31 @@ import { FacebookIcon, InstagramIcon, XIcon } from "@/shared/ui/icons";
 
 import styles from "./ContactsConnected.module.scss";
 
+type SocialLink = {
+  name: string;
+  url: string;
+  icon: React.ReactNode;
+};
+
 const SOCIAL_LINKS = [
-  {
+  INSTAGRAM_URL ? {
     name: "Instagram",
     url: INSTAGRAM_URL,
     icon: <InstagramIcon />,
-  },
-  {
+  } : null,
+  X_URL ? {
     name: "X",
     url: X_URL,
     icon: <XIcon />,
-  },
-  {
+  } : null,
+  FACEBOOK_URL ? {
     name: "Facebook",
     url: FACEBOOK_URL,
     icon: <FacebookIcon />,
-  },
-];
+  } : null,
+] as const satisfies (SocialLink | null)[];
+
+
 
 export const ContactsConnected = () => {
   const t = useTranslations("contactsPage");
@@ -67,16 +75,18 @@ export const ContactsConnected = () => {
           </h2>
           <div className={styles.connected__socials}>
             {SOCIAL_LINKS.map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
+              social && (
+                <a
+                  key={social.name}
+                  href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.connected__socialLink}
                 aria-label={social.name}
               >
-                {social.icon}
-              </a>
+                  {social.icon}
+                </a>
+              )
             ))}
           </div>
         </div>

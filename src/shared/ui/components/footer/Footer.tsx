@@ -324,6 +324,7 @@ export const Footer = () => {
               </Link>
 
               <div className={styles.footer__socials}>
+                {INSTAGRAM_URL && (
                 <a
                   href={INSTAGRAM_URL}
                   target="_blank"
@@ -333,6 +334,8 @@ export const Footer = () => {
                 >
                   <InstagramIcon />
                 </a>
+                )}
+                {X_URL && (
                 <a
                   href={X_URL}
                   target="_blank"
@@ -342,6 +345,8 @@ export const Footer = () => {
                 >
                   <XIcon />
                 </a>
+                )}
+                {FACEBOOK_URL && (
                 <a
                   href={FACEBOOK_URL}
                   target="_blank"
@@ -351,6 +356,7 @@ export const Footer = () => {
                 >
                   <FacebookIcon />
                 </a>
+                )}
               </div>
             </div>
 

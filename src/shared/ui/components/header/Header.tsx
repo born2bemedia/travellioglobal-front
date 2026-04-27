@@ -92,7 +92,7 @@ export const Header = () => {
       "/journal/beyond-the-postcard-experiencing-cities-like-a-local",
       "/journal/from-takeoff-to-touchdown-how-to-travel-smarter-in-2026",
       "/journal/slow-travel-vs-fast-adventures-what-type-of-explorer-are-you",
-      "/journal/the-power-of-experiences-why-events-excursions-and-local-moments-matter"
+      "/journal/the-power-of-experiences-why-events-excursions-and-local-moments-matter",
     ];
     const isWhite = whiteTopbarPathnames.some((path) =>
       pathname.includes(path),
@@ -180,42 +180,42 @@ export const Header = () => {
           text: t("weGoTrip", { fallback: "We Go Trip" }),
           href:
             "https://wegotrip.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
-            target: "_blank",
+          target: "_blank",
         },
         {
           key: "tiqets",
           text: t("tiqets", { fallback: "Tiqets" }),
           href:
             "https://tiqets.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
-            target: "_blank",
+          target: "_blank",
         },
         {
           key: "searadar",
           text: t("searadar", { fallback: "Searadar" }),
           href:
             "https://searadar.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
-            target: "_blank",
+          target: "_blank",
         },
         {
           key: "qeeq",
           text: t("qeeq", { fallback: "QEEQ" }),
           href:
             "https://qeeq.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
-            target: "_blank",
+          target: "_blank",
         },
         {
           key: "iway",
           text: t("iway", { fallback: "I’way" }),
           href:
             "https://iway.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
-            target: "_blank",
+          target: "_blank",
         },
         {
           key: "drimsim",
           text: t("drimsim", { fallback: "Drimsim" }),
           href:
             "https://drimsim.com?utm_source=travellioglobal&utm_medium=referral&utm_campaign=header",
-            target: "_blank",
+          target: "_blank",
         },
       ],
     },
@@ -386,30 +386,36 @@ export const Header = () => {
               </div>
 
               <div className={styles.header__topbar__socials}>
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                >
-                  <InstagramIcon />
-                </a>
-                <a
-                  href={X_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="X"
-                >
-                  <XIcon />
-                </a>
-                <a
-                  href={FACEBOOK_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                >
-                  <FacebookIcon />
-                </a>
+                {INSTAGRAM_URL && (
+                  <a
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                  >
+                    <InstagramIcon />
+                  </a>
+                )}
+                {X_URL && (
+                  <a
+                    href={X_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X"
+                  >
+                    <XIcon />
+                  </a>
+                )}
+                {FACEBOOK_URL && (
+                  <a
+                    href={FACEBOOK_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                  >
+                    <FacebookIcon />
+                  </a>
+                )}
               </div>
 
               <div className={styles.header__actions}>
